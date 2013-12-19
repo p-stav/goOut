@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 	'places',
 	'django.contrib.staticfiles',
+	'django.contrib.contenttypes',
 )
 
 MIDDLEWARE_CLASSES = (
