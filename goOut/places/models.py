@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-class Places(models.Model):
+class Place(models.Model):
 	placeId = models.CharField(max_length = 100)
 	tag = models.CharField(max_length = 50)
 	freq = models.IntegerField()
@@ -10,28 +10,34 @@ class Places(models.Model):
 	score = models.FloatField()
 	
 	def __unicode__(self):
-		return self.placeId,self.tag
+		return self.placeId
 
-class UserActivity (models.Model):
+class UserAction (models.Model):
 	uid = models.ForeignKey(User)
 	placeId = models.CharField(max_length=100)
 	tag = models.CharField(max_length = 50)
 	time = models.DateTimeField()
 	
 	def __unicode__(self):
-		return self.placeId,self.tag
+		return self.uid.username
 		
-class favoritePlaces(models.Model):
+class FavoritePlace(models.Model):
 	uid = models.ForeignKey(User)
 	placeId = models.CharField(max_length = 100)
 	
 	def  __unicode__(self):
-		return self.uid.firstName,self.placeId
+		return self.placeId
 		
 
-class placeNames(models.Model):
+class PlaceName(models.Model):
 	placeId = models.CharField(max_length = 100)
 	placeName = models.CharField(max_length = 50)
 	
 	def __unicode__(self):
-		return self.placeId
+		return self.placeName
+		
+class Hashtag(models.Model):
+	tag=models.CharField(max_length=50)
+	
+	def __unicode__(self):
+		return self.tag
