@@ -26,4 +26,4 @@ urlpatterns = patterns('places.views',
 	#url(r'^feedback/submit$', 'feedback_submit', name='feedback_submit'),
 	#url(r'^(?P<joke_id>\d+)/up/$', 'up', name='up'),
 	#url(r'^(?P<joke_id>\d+)/down/$', 'down', name='down'),
-)
+) 

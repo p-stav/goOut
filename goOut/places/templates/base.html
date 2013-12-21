@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -9,29 +10,21 @@
 	<meta name="author" content="">
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<!--<script src="{{STATIC_URL}}jquery.js"> </script>-->
-	<script src="./dist/js/bootstrap.js"></script>
-	
 	<!--Google Maps-->
-	 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
+	<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>-->
 	
 	<!-- bootstrap -->
-	<!--{% load staticfiles %}
+	{% load staticfiles %}
+	<!--<script src="{% static "jquery.js" %}"> </script>-->
 	<link type="text/css" href="{{STATIC_URL}}bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet"/>
 	<link href="{{STATIC_URL}}bootstrap-3.0.0/dist/css/bootstrap-theme.css" rel="stylesheet"/>
-	<script src="{{STATIC_URL}}bootstrap-3.0.0/dist/js/bootstrap.js"> </script> -->
-	
-	<!-- css -->
-	<!--<link type="text/css" href="{{STATIC_URL}}css/base.css" rel="stylesheet"/>-->
-	<link href="./dist/css/bootstrap.css" rel="stylesheet">
-	
-	<!--<title>{% block title %}{% endblock %}</title>-->
-	<title>goOut</title>
+	<script src="{{STATIC_URL}}bootstrap-3.0.0/dist/js/bootstrap.js"> </script>
 	
 	
+	<title>{% block title %}{% endblock %}</title>
 	
 </head>
-
+	
 <body>
 	<!-- Docs master nav -->
     <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
@@ -61,131 +54,10 @@
 	  </div>
 	</header>
 	
-	<div class="maps">
+	<div id='content'>
+	 {% block content %}{% endblock %} 
+    </div>
 
-		<div id = "georesults">
-			<!--this is where google maps will go-->
-			
-		</div>
-	</div>
-	
-	<script type = "text/javascript">
-		// This is just to show the Google Map - not related to the HTML5 geolocation API
-		function googleMapShow(lat,long) {
-			var latlng = new google.maps.LatLng(lat, long);
-			var myOptions = {
-				zoom: 14,
-				center: latlng,
-				mapTypeId: google.maps.MapTypeId.ROADMAP
-			};
-			var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
-		}
-	
-		// Use jQuery to display useful information about our position.
-		function exportPosition(position) {
-			$('#georesults').html('<div id="map-canvas" style="width: 100%; height:200px;"></div>'/* +
-				'<p>' 
-						+ 'Latitude: ' + position.coords.latitude + '<br />'
-						+ 'Longitude: ' + position.coords.longitude + '<br />'
-						+ 'Accuracy: ' + position.coords.accuracy + '<br />'
-						+ 'Altitude: ' + position.coords.altitude + '<br />'
-						+ 'Altitude accuracy: ' + position.coords.altitudeAccuracy + '<br />'
-						+ 'Heading: ' + position.coords.heading + '<br />'
-						+ 'Speed: ' + position.coords.speed + '<br />'
-				+ '</p>'*/
-			);
-			googleMapShow(position.coords.latitude, position.coords.longitude, {maximumAge:600000});
-		}
-    				
-		function errorPosition() {
-			$('#georesults').html('<p>The page could not get your location.</p>');
-		}
-		
-		/*
-		*	The following logic runs when the page loads:
-		*/
-
-		// We need to check if the browser has the correct capabilities.
-		if (navigator.geolocation) {
-			// If so, get the current position and feed it to exportPosition (or errorPosition if there was a problem)
-				navigator.geolocation.getCurrentPosition(exportPosition);
-		} 
-		
-		else {
-			// If the browser isn't geo-capable, tell the user.
-		  	$('#georesults').html('<p>Your browser does not support geolocation.</p>');
-	    }
-
-	
-	/*
-	// Note: This example requires that you consent to location sharing when
-		// prompted by your browser. If you see a blank space instead of the map, this
-		// is probably because you have denied permission for location sharing.
-		console.log('entered jscript');
-		
-		var map;
-
-		function initialize() {
-		  var mapOptions = {
-			zoom: 11,
-			
-		  };
-		
-		map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-		console.log('created new map');
-		
-		// Try HTML5 geolocation
-		if(navigator.geolocation) {
-			console.log('you have geolocation');
-			navigator.geolocation.getCurrentPosition(function(position) {
-				console.log('enetered function to find current position');
-				var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-				var infowindow = new google.maps.InfoWindow({
-					map: map,
-					position: pos,
-					content: 'Location found using HTML5.'
-				});
-
-				map.setCenter(pos);
-				console.log('exiting navigator.geolocation.getCurrentPosition');
-			}, function() {
-				handleNoGeolocation(true);
-			});
-		}
-
-		else {
-			// Browser doesn't support Geolocation
-			console.log("Browser doesn't support Geolocation");
-			
-			handleNoGeolocation(false);
-		  }
-		}
-
-	function handleNoGeolocation(errorFlag) {
-		if (errorFlag) {
-			var content = 'Error: The Geolocation service failed.';
-			console.log("Browser doesn't support Geolocation");
-			console.log(errorFlag);
-		  }
-		
-		else {
-			var content = 'Error: Your browser doesn\'t support geolocation.';
-			console.log("Browser doesn't support Geolocation");
-		}
-
-		var options = {
-			map: map,
-			position: new google.maps.LatLng(60, 105),
-			content: content
-		};
-
-		var infowindow = new google.maps.InfoWindow(options);
-		map.setCenter(options.position);
-	}
-
-	google.maps.event.addDomListener(window, 'load', initialize);
-	*/
-	</script>
 </body>
 </html>
+	
