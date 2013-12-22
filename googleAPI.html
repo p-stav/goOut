@@ -8,19 +8,19 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	
-	<!--Google Maps-->
-	<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>-->
+	<!--Google Maps and Google Places APIs-->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true_or_false"></script>
 	
 	<!-- bootstrap -->
-	{% load staticfiles %}
 	<link type="text/css" href="dist/css/bootstrap.css" rel="stylesheet"/>
 	<link href="dist/css/bootstrap-theme.css" rel="stylesheet"/>
 	<script src="dist/js/bootstrap.js"> </script> -->
 	
 	
-	<title>{% block title %}{% endblock %}</title>
+	<title>hi</title>
 	
 </head>
 
@@ -61,16 +61,38 @@
 		</div>
 	</div>
 	
+	<div class='placesList'>
+		<!--format for places call:
+		https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.798509,-122.422363&radius=500&types=bar|casino|night_club&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0
+		-->
+		<ul id='unorderedList'>
+		
+		</ul>
+	</div>
+	
 	<script type = "text/javascript">
 		// This is just to show the Google Map - not related to the HTML5 geolocation API
+		var map;
+		var service;
+		var infowindow;	
+		
 		function googleMapShow(lat,long) {
 			var latlng = new google.maps.LatLng(lat, long);
 			var myOptions = {
 				zoom: 14,
 				center: latlng,
-				mapTypeId: google.maps.MapTypeId.ROADMAP
+				sensor: 'true',
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
 			};
-			var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+			map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+			
+			var marker = new google.maps.Marker({
+				map: map,
+				position: latlng,
+			});
+
+			//list places
+			listPlaces(lat,long);
 		}
 	
 		// Use jQuery to display useful information about our position.
@@ -87,11 +109,41 @@
 				+ '</p>'*/
 			);
 			googleMapShow(position.coords.latitude, position.coords.longitude, {maximumAge:600000});
-		}
-    				
+			console.log('hi '+ position.coords.latitude + ', ' + position.coords.longitude);
+    	}
+		
 		function errorPosition() {
 			$('#georesults').html('<p>The page could not get your location.</p>');
 		}
+		
+		
+		/*
+		*  Places API
+		*/
+		//list the places in this function
+		
+		function listPlaces(curLat, curLong){
+			//call for ALL venue types; CHANGE for current position
+			apiCall = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+curLat+","+curLong+"&radius=500&types=bar|casino|night_club&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0";
+			
+			var callAPI= $.getJSON(apiCall, function(json){
+				console.log('grabbed json');
+			})
+				.done(function(json){
+					$.each(json.results, function(index, data){
+						$('#unorderedList').append("<li id='"+index+"'>"+data.name+" has a rating of: "+data.rating+"</li>");
+						});
+					console.log('call complete!');
+				})
+				
+				.fail(function(){
+					console.log('WHAT');
+				});
+			callAPI.complete(function(){
+				console.log('second complete');
+			});
+		}
+	
 		
 		/*
 		*	The following logic runs when the page loads:
