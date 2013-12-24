@@ -3,7 +3,7 @@ from urllib import urlopen
 import json, pprint
 
 #pip install googlemaps
-import googlemaps
+#import googlemaps
 
 # home/index page. 
 def index(request):
