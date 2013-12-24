@@ -1,9 +1,119 @@
 {% extends "base.html" %}
 
-{% block title %}Fast Joke{% endblock %}
+{% block title %}GoOut{% endblock %}
 
 {% block content %}
 
-<p>hi</p>
+<div class="placeList">
+	<div class="venue" id='1'>
+		<h4>Supah Long Bah Name</h4>
+		<!--
+		<div class = 'venue-pic'>
+		
+		</div>
+		-->
+		<div class="venue-left">
+			#crickets
+			<br/>
+			#12345678901234567890
+			<br/>
+			#brosonbrosonbros
+		</div>
+	
+	
+		<div class = 'venue-right'>
+			0.6 mi
+			<br/>
+			*****
+			<br/>
+			bar | club
+		</div>
+		<br><br><br>
+		<div class="separator">
+		</div>
+	</div>
+	
+	<div class="venue" id='2'>
+		<h4>Supah Long Bah Name</h4>
+		<!--
+		<div class = 'venue-pic'>
+		
+		</div>
+		-->
+		<div class="venue-left">
+			#crickets
+			<br/>
+			#123456789012345678901234567890
+			<br/>
+			#brosonbrosonbros
+		</div>
+	
+	
+		<div class = 'venue-right'>
+			0.6 mi
+			<br/>
+			*****
+			<br/>
+			bar | club
+		</div>
+		<br><br><br>
+		<div class="separator">
+		</div>
+	</div>
+	
+</div>
 
+<script type = "text/javascript">
+	if (navigator.geolocation) {
+		// If so, get the current position and feed it to listPlaces
+		navigator.geolocation.getCurrentPosition(listPlaces);
+	}
+	
+	function listPlaces(position){
+		var curLat = position.coords.latitude;
+		var curLong = position.coords.longitude;
+		
+		//call for ALL venue types; CHANGE for current position
+		apiCall = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+curLat+","+curLong+"&radius=550&types=bar|casino|night_club&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0";
+		
+		
+		/*var callAPI = $.ajax({
+			url: apiCall,
+			//data: myData,
+			type: 'GET',
+			crossDomain: true,
+			dataType: 'jsonp'
+		})
+			.done(function(objects){
+				$.each(objects.results, function(index, data){
+					$('.placeList').append("<div id='"+index+"'>"+data.name+" has a rating of: "+data.rating+"</div>");
+					});
+				console.log('call complete!');
+			})
+			
+			.fail(function(){
+				console.log('WHAT');
+			});*/
+			
+		var callAPI= $.getJSON(apiCall + "?callback=?", null, function(json){
+			console.log('grabbed json');
+		})
+			.done(function(json){
+				$.each(json.results, function(index, data){
+					$('.placeList').append("<div id='"+index+"'>"+data.name+" has a rating of: "+data.rating+"</div>");
+					});
+				console.log('call complete!');
+			})
+			
+			.fail(function(){
+				console.log('WHAT');
+			});
+		callAPI.complete(function(){
+			console.log('second complete');
+		});
+		
+	}
+	
+	
+</script>
 {% endblock %}

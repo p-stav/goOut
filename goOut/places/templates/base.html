@@ -9,13 +9,13 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<!--Google Maps-->
-	<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>-->
+	<!--Google Maps and Google Places APIs-->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
 	
 	<!-- bootstrap -->
 	{% load staticfiles %}
-	<!--<script src="{% static "jquery.js" %}"> </script>-->
+	<script src="{{STATIC_URL}}jquery.js" %}"> </script>
 	<link type="text/css" href="{{STATIC_URL}}bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet"/>
 	<link href="{{STATIC_URL}}bootstrap-3.0.0/dist/css/bootstrap-theme.css" rel="stylesheet"/>
 	<script src="{{STATIC_URL}}bootstrap-3.0.0/dist/js/bootstrap.js"> </script>
@@ -44,17 +44,17 @@
 			  <input type="text" class="form-control" placeholder="Find a place nearby">
 			</li>
 			<li>
-			  <a href="./getting-started">Write Review</a>
+			  <a href="./reveiw">Write Review</a>
 			</li>
 			<li>
-			  <a href="./getting-started">Login</a>
+			  <a href="./login">Login</a>
 			</li>
 		  </ul>
 		</nav>
 	  </div>
 	</header>
 	
-	<div id='content'>
+	<div class='content'>
 	 {% block content %}{% endblock %} 
     </div>
 

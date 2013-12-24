@@ -124,7 +124,7 @@
 		
 		function listPlaces(curLat, curLong){
 			//call for ALL venue types; CHANGE for current position
-			apiCall = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+curLat+","+curLong+"&radius=500&types=bar|casino|night_club&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0";
+			apiCall = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+curLat+","+curLong+"&radius=550&types=bar|casino|night_club&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0";
 			
 			var callAPI= $.getJSON(apiCall, function(json){
 				console.log('grabbed json');
