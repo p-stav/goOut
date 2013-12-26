@@ -11,10 +11,10 @@ class UserProfile(models.Model):
 	
 class PlaceName(models.Model):
 	placeId = models.CharField(max_length = 100)
-	placeName = models.CharField(max_length = 50)
+	venueName = models.CharField(max_length = 50)
 	
 	def __unicode__(self):
-		return self.placeName
+		return self.venueName
 		
 class Hashtag(models.Model):
 	tag=models.CharField(max_length=50)
@@ -30,7 +30,7 @@ class Place(models.Model):
 	score = models.FloatField()
 	
 	def __unicode__(self):
-		return self.placeId
+		return self.placeId.placeId
 
 class UserAction (models.Model):
 	uid = models.ForeignKey(UserProfile)
@@ -46,6 +46,6 @@ class FavoritePlace(models.Model):
 	placeId = models.ForeignKey(PlaceName)
 	
 	def  __unicode__(self):
-		return self.placeId
+		return self.placeId.placeId
 		
 

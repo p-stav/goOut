@@ -4,7 +4,7 @@ urlpatterns = patterns('places.views',
 	
 	#list of places, search page, and map
 	url(r'^$', 'index', name='index'),
-	url(r'^search/(?P<search_term>.+/$', 'search', name='search'),
+	url(r'^search/(?P<search_term>.+)/$', 'search', name='search'),
 	url(r'^/map/$', 'index', name='index'),
 	
 	
