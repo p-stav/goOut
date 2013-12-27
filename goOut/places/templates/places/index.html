@@ -3,22 +3,22 @@
 {% block title %}GoOut{% endblock %}
 
 {% block content %}
+<p>{{placeMatch}}</p>
 
 <div class="placeList">
-	{% for place in places %}
+	{% for place in placeMatch %}
 		<div class="venue">
-			<h4>{{ place.name }}</h4>
+			<h4>{{ place }}</h4>
 			<!--
 			<div class = 'venue-pic'>
 			
 			</div>
 			-->
 			<div class="venue-left">
-				#crickets
-				<br/>
-				#12345678901234567890
-				<br/>
-				#brosonbrosonbros
+				{% for tag in place.hashtags %}
+					#{{ tag }}
+					<br/>
+				{% endfor %}
 			</div>
 		
 		
@@ -27,19 +27,14 @@
 				<br/>
 				{% if place.price_level == 1 %}
 					$
-				
 				{% elif place.price_level == 2 %}
 					$$
-					
 				{% elif place.price_level == 3 %}
 					$$$
-					
 				{% elif place.price_level == 4 %}
 					$$$$
-				
 				{% elif place.price_level == 5 %}
 					$$$$$
-					
 				{% endif %}
 				
 				<br/>
@@ -49,49 +44,74 @@
 					{% elif type == 'night_club' %}
 						club
 					{% endif %}
-					
 				{% endfor %}
+					
 			</div>
 			<br><br><br>
 			<div class="separator">
 			</div>
 		</div>
+		
+
+		
 	{% endfor %}
-	<!--
-	<div class="venue" id='2'>
-		<h4>Supah Long Bah Name</h4>
-		
-		<div class = 'venue-pic'>
-		
-		</div>
-		
-		<div class="venue-left">
-			#crickets
-			<br/>
-			#123456789012345678901234567890
-			<br/>
-			#brosonbrosonbros
-		</div>
-	
-	
-		<div class = 'venue-right'>
-			0.6 mi
-			<br/>
-			*****
-			<br/>
-			bar | club
-		</div>
-		<br><br><br>
-		<div class="separator">
-		</div>
-	</div>
-	-->
-	
 </div>
 
+<!--List for items with no data in our DB -->
+<div class="placeList">
+	{% for place in placeNoMatch %}
+		<div class="venue">
+			<h4>{{ place }}</h4>
+			<!--
+			<div class = 'venue-pic'>
+			
+			</div>
+			-->
+			<div class="venue-left">
+				<!--googleApi stuff-->
+				Google
+				<br>
+				API
+				<br>
+				stuff
+			</div>
+		
+		
+			<div class = 'venue-right'>
+				{{ place.rating }} / 5.0
+				<br/>
+				{% if place.price_level == 1 %}
+					$
+				{% elif place.price_level == 2 %}
+					$$
+				{% elif place.price_level == 3 %}
+					$$$
+				{% elif place.price_level == 4 %}
+					$$$$
+				{% elif place.price_level == 5 %}
+					$$$$$
+				{% endif %}
+				
+				<br/>
+				{% for type in place.types %}
+					{% if type == 'bar' %}
+						bar 
+					{% elif type == 'night_club' %}
+						club
+					{% endif %}
+				{% endfor %}
+					
+			</div>
+			<br><br><br>
+			<div class="separator">
+			</div>
+		</div>
+		
+
+		
+	{% endfor %}
+</div>
 <script type = "text/javascript">
-/*
-	
 	if (navigator.geolocation) {
 		// If so, get the current position and feed it to listPlaces
 		navigator.geolocation.getCurrentPosition(listPlaces);
@@ -105,7 +125,7 @@
 		apiCall = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+curLat+","+curLong+"&radius=550&types=bar|casino|night_club&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0";
 		
 		
-		var callAPI = $.ajax({
+/*		var callAPI = $.ajax({
 			url: apiCall,
 			//data: myData,
 			type: 'GET',
@@ -123,9 +143,9 @@
 				console.log('WHAT');
 			});
 			
-		
+*/	
 		//EITHER THIS CALL OR THE ONE ABOVE IT
-		var callAPI= $.getJSON(apiCall + "?callback=?", null, function(json){
+		var callAPI= $.getJSON(apiCall, function(json){
 			console.log('grabbed json');
 		})
 			.done(function(json){
@@ -144,6 +164,6 @@
 		
 	}
 	
-*/
+
 </script>
 {% endblock %}
