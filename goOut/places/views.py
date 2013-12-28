@@ -60,7 +60,12 @@ def index(request):
 				except:
 					try: placeNoMatch[place['name']] = {'id': place['id'], 'rating':place['rating'], 'types':place['types'], 'vicinity':place['vicinity']}
 					except: placeNoMatch[place['name']] = {'id': place['id'], 'types':place['types'], 'vicinity':place['vicinity']}
-					
-	context = { 'placeMatch':placeMatch, 'placeNoMatch':placeNoMatch}
+
+	examplePlace1 = {'name' : 'FBI Blacksite', 'id' : 'abcdef', 'types' : ['da club', 'blacksite'], 'vicinity' : 'lol cannot say', 'rating' : 3.5, 'price_level' : 2, 'hashtags' : {'BrosOnBros' : 4, 'TheyAreTorturingMe' : 10}}
+	examplePlace2 = {'name' : 'Hot Mamas', 'id' : 'aghijk', 'types' : ['nomnom'], 'vicinity' : 'your mother\'s address', 'rating' : 11, 'price_level' : 0, 'hashtags' : {'BrosOnBros' : 1000000}}
+	
+	examplePlaces = [examplePlace1, examplePlace2]
+
+	context = { 'placeMatch':placeMatch, 'placeNoMatch':placeNoMatch, 'examplePlaces':examplePlaces}
 	
 	return render(request, 'places/index.html', context)
