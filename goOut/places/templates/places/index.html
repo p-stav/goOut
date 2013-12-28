@@ -3,7 +3,14 @@
 {% block title %}GoOut{% endblock %}
 
 {% block content %}
+<!--
 <p>{{placeMatch}}</p>
+
+<p> {{placeNoMatch}}</p>
+-->
+
+<!--GAL's TEST---------
+=======
 </br>
 </br>
 <p> It's a me! A Gal!</p>
@@ -35,19 +42,21 @@
 <p> End of Gal time</p>
 
 </br></br>
+>>>>>>> e4f124e8420dc30559fe89f05a5e6268caf0803c
+-->
 
 <div class="placeList">
 	{% for place in placeMatch %}
 		<div class="venue">
-			<h4>{{ place }}</h4>
+			<h4>{{ place.name }}</h4>
 			<!--
 			<div class = 'venue-pic'>
 			
 			</div>
 			-->
 			<div class="venue-left">
-				{% for tag in place.hashtags %}
-					#{{ tag }}
+				{% for tag,score in place.hashtags.items %}
+					#{{ tag }}: {{ score.score }}
 					<br/>
 				{% endfor %}
 			</div>
@@ -65,7 +74,10 @@
 				{% elif place.price_level == 4 %}
 					$$$$
 				{% elif place.price_level == 5 %}
-					$$$$$
+					$$$$$	
+				{% elif place.price_level == -1 %}
+					No price!
+					
 				{% endif %}
 				
 				<br/>
@@ -87,12 +99,13 @@
 		
 	{% endfor %}
 </div>
+<br/><br/><br/>
 
 <!--List for items with no data in our DB -->
 <div class="placeList">
 	{% for place in placeNoMatch %}
 		<div class="venue">
-			<h4>{{ place }}</h4>
+			<h4>{{ place.name }}</h4>
 			<!--
 			<div class = 'venue-pic'>
 			
@@ -121,6 +134,8 @@
 					$$$$
 				{% elif place.price_level == 5 %}
 					$$$$$
+				{% elif place.price_level == -1 %}
+					No price
 				{% endif %}
 				
 				<br/>
