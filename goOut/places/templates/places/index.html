@@ -47,7 +47,7 @@
 
 <div class="placeList">
 	{% for place in placeMatch %}
-		<div class="venue" id="{{ place.id }}">
+		<div class="venue" id="{{ place.reference }}">
 			
 			<h4>{{ place.name }}</h4>
 			<!--
@@ -105,7 +105,7 @@
 <!--List for items with no data in our DB -->
 <div class="placeList">
 	{% for place in placeNoMatch %}
-		<div class="venue" id="{{ place.id }}">
+		<div class="venue" id="{{ place.reference }}">
 			<h4>{{ place.name }}</h4>
 			<!--
 			<div class = 'venue-pic'>
