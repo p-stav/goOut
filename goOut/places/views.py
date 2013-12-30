@@ -46,6 +46,7 @@ def index(request):
 			#TO-DO: create order of list
 					
 			#try/except statements because json objects don't always have 'ratings' and 'price_level'. Append to lists. 
+			#how do you use .exists() function?
 			try: temp = {'name': place['name'],'id': place['id'], 'rating':place['rating'], 'price_level':place['price_level'], 'types':place['types'], 'vicinity':place['vicinity'], 'hashtags':hashtags}
 			except: 
 				try:temp = {'name': place['name'], 'id': place['id'], 'rating':'NA', 'price_level':place['price_level'], 'types':place['types'], 'vicinity':place['vicinity'], 'hashtags':hashtags}
@@ -71,3 +72,9 @@ def index(request):
 
 	context = { 'placeMatch':placeMatch, 'placeNoMatch':placeNoMatch} #'examplePlaces':examplePlaces}
 	return render(request, 'places/index.html', context)
+	
+	
+def placeDetail(request,place_id):
+
+	context = {}
+	return render(request, 'places/placeDetail.html', context)

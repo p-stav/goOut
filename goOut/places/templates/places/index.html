@@ -47,7 +47,8 @@
 
 <div class="placeList">
 	{% for place in placeMatch %}
-		<div class="venue">
+		<div class="venue" id="{{ place.id }}">
+			
 			<h4>{{ place.name }}</h4>
 			<!--
 			<div class = 'venue-pic'>
@@ -104,7 +105,7 @@
 <!--List for items with no data in our DB -->
 <div class="placeList">
 	{% for place in placeNoMatch %}
-		<div class="venue">
+		<div class="venue" id="{{ place.id }}">
 			<h4>{{ place.name }}</h4>
 			<!--
 			<div class = 'venue-pic'>
@@ -158,6 +159,14 @@
 	{% endfor %}
 </div>
 <script type = "text/javascript">
+	$(document).ready(function() {
+		$('.venue').click(function(){
+			//link to next page. Search into how this interfaces with django
+			location.href = './venue/'+$(this).attr('id');
+		});
+	
+	});
+
 	if (navigator.geolocation) {
 		// If so, get the current position and feed it to listPlaces
 		navigator.geolocation.getCurrentPosition(listPlaces);
