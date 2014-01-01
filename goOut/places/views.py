@@ -7,23 +7,26 @@ import sets
 
 #import googlemaps
 
+##find today's date to find items close to it in db
+#today = datetime.today()
+#for testing purposes, hardcode datetime
+date = datetime(2013, 12, 28, 22, 40, 41, 879000)
+cutoffTime = datetime(date.year,date.month,date.day, date.hour-2, date.minute, date.second, date.microsecond)
+
 # home/index page. 
 def index(request):
 	#find curLong + curLat
 	#HOW DO YOU DO THIS? Hard code for now
 	curLoc = '37.798542,-122.422345'
 			
-	##find today's date to find items close to it in db
-	#today = datetime.today()
-	#for testing purposes, hardcode datetime
-	date = datetime(2013, 12, 28, 22, 40, 41, 879000)
+	
+	
 
 	#grab array of reviews from our models
-	cutoffTime = datetime(date.year,date.month,date.day, date.hour-2, date.minute, date.second, date.microsecond)
 	curRev = Place.objects.filter(time__gte = cutoffTime)
 	curRevList = list(set([i.placeId.placeId for i in curRev]))
 
-	apiCall = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+curLoc+"&radius=550&types=bar|casino|night_club&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0";
+	apiCall = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+curLoc+"&radius=550&types=bar|casino|night_club&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"
 
 	#grab json object from google Places API
 	req = urlopen(apiCall).read()
@@ -45,37 +48,60 @@ def index(request):
 					
 			#TO-DO: create order of list
 					
-			#try/except statements because json objects don't always have 'ratings' and 'price_level'. Append to lists. 
-			#how do you use .exists() function?
-			try: temp = {'name': place['name'],'reference': place['reference'], 'rating':place['rating'], 'price_level':place['price_level'], 'types':place['types'], 'vicinity':place['vicinity'], 'hashtags':hashtags}
-			except: 
-				try:temp = {'name': place['name'], 'reference': place['reference'], 'rating':'NA', 'price_level':place['price_level'], 'types':place['types'], 'vicinity':place['vicinity'], 'hashtags':hashtags}
-				except:
-					try: temp = {'name': place['name'], 'reference': place['reference'], 'rating':place['rating'], 'price_level':-1, 'types':place['types'], 'vicinity':place['vicinity'], 'hashtags':hashtags}
-					except: temp = {'name': place['name'], 'reference': place['reference'], 'rating':'NA', 'price_level':-1 , 'types':place['types'], 'vicinity':place['vicinity'], 'hashtags':hashtags}
+			#check if price_level and rating exist and append
+			if 'rating' not in place.keys():
+				place['rating'] = 'NA'
+			if 'price_level' not in place.keys():
+				place['price_level'] = 'NA'
+				
+			temp = {'name': place['name'],'reference': place['reference'], 'rating':place['rating'], 'price_level':place['price_level'], 'types':place['types'], 'vicinity':place['vicinity'], 'hashtags':hashtags}
+			
 			#append
 			placeMatch.append(temp)
 		
 		else:
-			#nested try and excepts because json objects don't always have 'ratings' and 'price_level'
-			try: temp = {'name': place['name'], 'reference': place['reference'], 'rating':place['rating'], 'price_level':place['price_level'], 'types':place['types'], 'vicinity':place['vicinity']}
-			except:
-				try: temp = {'name': place['name'], 'reference': place['reference'], 'price_level':place['price_level'], 'rating':'NA','types':place['types'], 'vicinity':place['vicinity']}
-				except:
-					try: temp = {'name': place['name'],'reference': place['reference'], 'price_level':-1, 'rating':place['rating'], 'types':place['types'], 'vicinity':place['vicinity']}
-					except: temp = {'name': place['name'], 'reference': place['reference'], 'price_level':-1, 'rating':'NA', 'types':place['types'], 'vicinity':place['vicinity']}
+			#check to see if price level and rating exist
+			if 'rating' not in place.keys():
+				place['rating'] = 'NA'
+			if 'price_level' not in place.keys():
+				place['price_level'] = 'NA'
+				
+			temp = {'name': place['name'], 'reference': place['reference'], 'rating':place['rating'], 'price_level':place['price_level'], 'types':place['types'], 'vicinity':place['vicinity']}
+			
 			#append
 			placeNoMatch.append(temp)
-	#examplePlace1 = {'name' : 'FBI Blacksite', 'reference' : 'abcdef', 'types' : ['da club', 'blacksite'], 'vicinity' : 'lol cannot say', 'rating' : 3.5, 'price_level' : 2, 'hashtags' : {'BrosOnBros' : 4, 'TheyAreTorturingMe' : 10}}
-	#examplePlace2 = {'name' : 'Hot Mamas', 'reference' : 'aghijk', 'types' : ['nomnom'], 'vicinity' : 'your mother\'s address', 'rating' : 11, 'price_level' : 0, 'hashtags' : {'BrosOnBros' : 1000000}}
-	#examplePlaces = [examplePlace1, examplePlace2]
 
-	context = { 'placeMatch':placeMatch, 'placeNoMatch':placeNoMatch} #'examplePlaces':examplePlaces}
+	context = { 'placeMatch':placeMatch, 'placeNoMatch':placeNoMatch } #'examplePlaces':examplePlaces}
 	return render(request, 'places/index.html', context)
 	
 	
 def placeDetail(request,place_id):
 	#make call to Google API for information
+	apiCall = "https://maps.googleapis.com/maps/api/place/details/json?reference=" + place_id + "&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"
+
+	#grab json object from google Places API
+	req = urlopen(apiCall).read()
+	place = json.loads(req).get("result")
 	
-	context = {}
+	#get tags in our database
+	tags = Place.objects.filter(placeId__placeId = place['id'], time__gte = cutoffTime)
+	
+	#send relevant information to templates
+	#check to see if all keys exist. If not, assign 'NA' values
+	if 'formatted_phone_number' not in place.keys():
+		place['formatted_phone_number'] = 'NA'
+		
+	if 'formatted_address' not in place.keys():
+		place['formatted_address'] = 'NA'
+	
+	if 'rating' not in place.keys():
+		place['rating'] = 'NA'
+	
+	if 'price_level' not in place.keys():
+		place['price_level'] = 'NA'
+		
+	#find what the most descriptive hashtags have been in the past?
+	
+	context = {'tags':tags, 'name':place['name'], 'address':place['formatted_address'], 'phone': place['formatted_phone_number'], 'price':place["price_level"], 'rating':place['rating'], 'photos':place}
+	
 	return render(request, 'places/placeDetail.html', context)
