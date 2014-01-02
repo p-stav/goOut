@@ -105,3 +105,8 @@ def placeDetail(request,place_id):
 	context = {'tags':tags, 'name':place['name'], 'address':place['formatted_address'], 'phone': place['formatted_phone_number'], 'price':place["price_level"], 'rating':place['rating'], 'photos':place}
 	
 	return render(request, 'places/placeDetail.html', context)
+	
+def submitReview(request):
+
+	context = {}
+	return render(request, 'places/submitReview.html', context)
