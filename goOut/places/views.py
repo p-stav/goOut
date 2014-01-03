@@ -100,13 +100,25 @@ def placeDetail(request,place_id):
 	if 'price_level' not in place.keys():
 		place['price_level'] = 'NA'
 		
+	#create address
+	address = []
+	address.append(place['address_components'][0]['long_name'] + ' ' + place['address_components'][1]['long_name'])
+	address.append(place['address_components'][2]['long_name'] + ',' + place['address_components'][3]['long_name'])
+	
+	#see if have info on opening times
+	try: place['open'] = place['opening_hours']['open_now']
+	except: place['open'] = ''
+	
 	#find what the most descriptive hashtags have been in the past?
 	
-	context = {'tags':tags, 'name':place['name'], 'address':place['formatted_address'], 'phone': place['formatted_phone_number'], 'price':place["price_level"], 'rating':place['rating'], 'photos':place}
+	
+	context = {'tags':tags, 'name':place['name'], 'open': place['open'], 'venueTypes':place['types'], 'address':address, 'phone': place['formatted_phone_number'], 'price':place["price_level"], 'rating':place['rating'], 'photos':place}
 	
 	return render(request, 'places/placeDetail.html', context)
 	
 def submitReview(request):
-
-	context = {}
+	#grab all hashtags to display
+	tags = Hashtag.objects.all()
+	
+	context = {'tags':tags}
 	return render(request, 'places/submitReview.html', context)

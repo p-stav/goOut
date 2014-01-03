@@ -7,20 +7,52 @@
 	<h2 align='center'>{{name}}</h2>
 	
 	<!--short menu to write review, see more history, favorite, etc.-->
-	<div class='btn-group'>
+	<div align='center' class='btn-group'>
 	  <button type='button' class='btn btn-lg btn-default'><a href="#"><span class="glyphicon glyphicon-edit"></span></a></button>
 	  <button type='button' class='btn btn-lg btn-default'><a href="#"><span class="glyphicon glyphicon-bookmark"></span></a></button>
 	  <button type='button' class='btn btn-lg btn-default'><a href="#"><span class="glyphicon glyphicon-heart"></span></a></button>
 	</div>
 	
-	<p>address: {{address}}</p>
-	<p>phone: {{phone}}</p>
-	<p>price: {{price}}</p>
-	<p>rating: {{rating}}</p>
+	<br/>
+	<div class = 'introInfo'>
+		{% for addresses in address %}
+			<div class='smallGrey'>{{ addresses }}</div>
+		{% endfor %}
+		<div class='smallGrey'>{{ phone }}</div>
 	
-	{% for tag in tags %}
-	<p>tags: {{ tag.tag }}</p>
-	{% endfor %}
-	<!--<p>{{photos}}</p>-->
-
+	</div>
+	<div class='introInfoRight'>
+		{% if open %}
+			<div class='smallGrey' id='open'> Open Now </div>
+		{% else %}
+			<div class='smallGrey' id='open'> Closed </div>
+		{% endif %}
+		
+		<div class='smallGrey'>		
+			{% if price == 1 %}
+				$
+			{% elif price == 2 %}
+				$$
+			{% elif price == 3 %}
+				$$$
+			{% elif price == 4 %}
+				$$$$
+			{% elif price == 5 %}
+				$$$$$	
+			{% elif price == -1 %}
+				No Price
+				
+			{% endif %}
+		</div>
+		<div class='smallGrey'>rating: {{ rating }}</div>
+	</div>	
+	
+	
+	<br/><br/><br/>
+	<div>
+		{% for tag in tags %}
+		<p>tags: {{ tag.tag }}</p>
+		{% endfor %}
+		<!--<p>{{photos}}</p>-->
+	</div>
 {% endblock %}

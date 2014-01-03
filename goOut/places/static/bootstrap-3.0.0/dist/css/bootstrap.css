@@ -16,6 +16,25 @@
 	/*background-color:#61B4CF;*/
 }
 
+.introInfo {
+	margin-left: 10px;
+	float:left;
+	
+}
+
+.introInfoRight {
+	float:right;
+	margin-right:10px;
+	text-align: right;
+}
+
+
+.smallGrey {
+	color:#4186D3;
+	font-size:.85em;
+
+}
+
 .inlineNav li{
 	display: inline;
 	float: right;

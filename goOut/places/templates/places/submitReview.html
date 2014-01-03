@@ -3,8 +3,16 @@
 {% block title %}GoOut{% endblock %}
 
 {% block content %}
-hi
 
-
+<div class="btn-group">
+  <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown">
+    Large button <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    {%  for tag in tags %}
+		<li>#{{ tag }}</li>
+	{% endfor %}
+  </ul>
+</div>
 
 {% endblock %}
