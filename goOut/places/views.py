@@ -112,7 +112,7 @@ def placeDetail(request,place_id):
 	#find what the most descriptive hashtags have been in the past?
 	
 	
-	context = {'tags':tags, 'name':place['name'], 'open': place['open'], 'venueTypes':place['types'], 'address':address, 'phone': place['formatted_phone_number'], 'price':place["price_level"], 'rating':place['rating'], 'photos':place}
+	context = {'reference':place['reference'], 'tags':tags, 'name':place['name'], 'open': place['open'], 'venueTypes':place['types'], 'address':address, 'phone': place['formatted_phone_number'], 'price':place["price_level"], 'rating':place['rating'], 'photos':place}
 	
 	return render(request, 'places/placeDetail.html', context)
 	
@@ -122,3 +122,10 @@ def submitReview(request):
 	
 	context = {'tags':tags}
 	return render(request, 'places/submitReview.html', context)
+	
+def submitReviewVenue(request, reference):
+	#grab all hashtags to display
+	tags = Hashtag.objects.all()
+	
+	context = {'tags':tags}
+	return render(request, 'places/submitReviewVenue.html', context)

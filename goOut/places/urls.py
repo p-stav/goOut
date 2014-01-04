@@ -9,6 +9,7 @@ urlpatterns = patterns('places.views',
 	
 	
 	url(r'^review$', 'submitReview', name='submitReview'),
+	url(r'^review/(?P<reference>.+)/$', 'submitReviewVenue', name='submitReviewVenue'),
 	url(r'^submit/submit$', 'submit_submitReview', name='submit_submitReview'),
 	
 	#create user's own page, view other people's profile, and see user's favorited places
