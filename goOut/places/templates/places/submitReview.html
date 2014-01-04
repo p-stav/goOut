@@ -3,16 +3,50 @@
 {% block title %}GoOut{% endblock %}
 
 {% block content %}
-
-<div class="btn-group">
-  <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown">
-    Large button <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    {%  for tag in tags %}
-		<li>#{{ tag }}</li>
-	{% endfor %}
-  </ul>
+<!-- Single button -->
+<div class='margins' id='add-tags'>
+	<h2 align='center'>Placeholder for venue</h2>
+	
+	<div class="btn-group">
+		<button type="button" class="btn btn-default btn-lg dropdown-toggle btn-tag" data-toggle="dropdown">
+			Select tag:  <span class="caret"></span>
+		</button>
+	  <ul class="dropdown-menu" role="menu">
+		{% for tag in tags %}
+			<li class='btn-tag'><a class='btn-tag' href='#'>{{ tag }}</a></li>
+		{% endfor %}
+	  </ul>
+	</div>
+		
+</div>
+<br/><br/>
+<!--add button to add another tag, breh-->
+<div class='margins'>
+	<button type="button" id='add-tag' class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus-sign"></span> Add tag
+	</button>
 </div>
 
+<script>
+$(document).ready(function() {
+	var numTags = 0;
+	
+	$(document).on('click', ".dropdown-menu li", function(){
+		console.log($(this).text());
+		console.log('hi');
+		console.log($(this).attr('class'));
+		$('button.'+$(this).attr('class')).text($(this).text());
+		$('button.'+$(this).attr('class')).val($(this).text());
+		$('button.'+$(this).attr('class')).append('    <span class="caret"></span>');
+	});
+	
+   
+   $("#add-tag").click(function(){
+		numTags++;
+		$('#add-tags').append('<br/><br/><div class="btn-group"><button type="button" class="btn btn-default btn-lg dropdown-toggle btn-tag'+numTags+'" data-toggle="dropdown">Select tag:  <span class="caret"></span></button><ul class="dropdown-menu" role="menu">{% for tag in tags %}<li class="btn-tag'+numTags+'"><a class="btn-tag'+numTags+'" href="#">{{ tag }}</a></li>{% endfor %}</ul></div>');
+	});
+});
+
+
+
+</script>
 {% endblock %}
