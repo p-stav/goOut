@@ -7,11 +7,11 @@
 <div class='margins'>
 	<h2 align='center'>{{ name }}</h2>
 	{% autoescape on %}
-	<form role="form" method='post' action={% url "places:submit_submitReview" %}>
+	<form role="form" method='post' action'{% url "places:submit_submitReview" %}>
 		{% csrf_token %}
 		<div id='add-tags'> <!--to add other hashtag dropdowns -->
 			<div class="form-group">
-				<select class="form-control input-lg col-xs-4" id="tag" name="tag">
+				<select class="form-control input-lg col-xs-4" id="tag0" name="tag0">
 					<option>Select Tag:</option>
 					
 					{% for tag in tags %}
@@ -74,7 +74,7 @@ $(document).ready(function() {
    
    $("#add-tag").click(function(){
 		numTags++;
-		$('#add-tags').append('<br/><br/><br/><select class="form-control input-lg col-xs-4" id="tag'+numTags+'" name="tag"><option>Select Tag:</option>{% for tag in tags %}<option>{{ tag }}</option>{% endfor %}</select>');
+		$('#add-tags').append('<br/><br/><br/><select class="form-control input-lg col-xs-4" id="tag'+numTags+'" name="tag'+numTags+'"><option>Select Tag:</option>{% for tag in tags %}<option>{{ tag }}</option>{% endfor %}</select>');
 		
 		
 		//<div class="form-group"><div class="btn-group"><button type="button" class="btn btn-default btn-lg dropdown-toggle btn-tag'+numTags+'" data-toggle="dropdown">Select tag:  <span class="caret"></span></button><ul class="dropdown-menu" role="menu">{% for tag in tags %}<li class="btn-tag'+numTags+'"><a class="btn-tag'+numTags+'" href="#">{{ tag }}</a></li>{% endfor %}</ul></div></div>');
