@@ -139,10 +139,10 @@ def submitReviewVenue(request, place_name, reference):
 	
 def submit_submitReviewVenue(request):
 	#Check if place exists. If not, add place
-	if PlaceName.objects.get(placeId=request.POST['id']).exists():
-		newPlace = PlaceName.objects.get(placeId=request.Post['id'])
+	if PlaceName.objects.filter(placeId=request.POST['venueId']).exists():
+		newPlace = PlaceName.objects.get(placeId=request.Post['venueId'])
 	else:
-		newPlace = PlaceName.objects.create(placeId = request.POST['id'], venueName=request.POST['name'])
+		newPlace = PlaceName.objects.create(placeId = request.POST['venueId'], venueName=request.POST['venueName'])
 		newPlace.save()
 	"""
 	#get list of tags
