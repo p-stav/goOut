@@ -8,7 +8,7 @@
 	<h2 align='center'>{{ name }}</h2>
 	
 	{% autoescape on %}
-	<form role="form" method='post' action="{% url 'places:submit_submitReviewVenue' %}">
+	<form role="form" method='post' action={% url "places:submit_submitReview" %}>
 	
 	
 		{% csrf_token %}
