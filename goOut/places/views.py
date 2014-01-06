@@ -112,7 +112,7 @@ def placeDetail(request,place_id):
 	#find what the most descriptive hashtags have been in the past?
 	
 	
-	context = {'reference':place['reference'], 'tags':tags, 'name':place['name'], 'open': place['open'], 'venueTypes':place['types'], 'address':address, 'phone': place['formatted_phone_number'], 'price':place["price_level"], 'rating':place['rating'], 'photos':place}
+	context = {'id':place['id'], 'tags':tags, 'name':place['name'], 'open': place['open'], 'venueTypes':place['types'], 'address':address, 'phone': place['formatted_phone_number'], 'price':place["price_level"], 'rating':place['rating'], 'photos':place}
 	
 	return render(request, 'places/placeDetail.html', context)
 	
@@ -123,9 +123,30 @@ def submitReview(request):
 	context = {'tags':tags}
 	return render(request, 'places/submitReview.html', context)
 	
-def submitReviewVenue(request, reference):
+def submitReviewVenue(request, place_name, reference):
 	#grab all hashtags to display
 	tags = Hashtag.objects.all()
 	
-	context = {'tags':tags}
+	context = {'tags':tags, 'id':reference, 'name':place_name}
 	return render(request, 'places/submitReviewVenue.html', context)
+	
+def submit_submitReviewVenue(request):
+	
+	return HttpResponseRedirect('/')
+
+def submit_submitReview(request):
+	
+	return HttpResponseRedirect('/')
+		
+def fav(request):
+	context = {}
+	return render(request, 'places/fav', context)
+		
+		
+def view_profile(request):
+	context = {}
+	return render(request, 'places/view_profile', context)
+	
+def search(request):
+	context = {}
+	return render(request, 'places/search', context)

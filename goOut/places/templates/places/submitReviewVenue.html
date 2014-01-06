@@ -4,36 +4,60 @@
 
 {% block content %}
 <!-- Single button -->
-<div class='margins' id='add-tags'>
-	<h2 align='center'>Placeholder for venue</h2>
+<div class='margins'>
+	<h2 align='center'>{{ name }}</h2>
 	
-	<div class="btn-group">
-		<button type="button" class="btn btn-default btn-lg dropdown-toggle btn-tag" data-toggle="dropdown">
-			Select tag:  <span class="caret"></span>
-		</button>
-	  <ul class="dropdown-menu" role="menu">
-		{% for tag in tags %}
-			<li class='btn-tag'><a class='btn-tag' href='#'>{{ tag }}</a></li>
-		{% endfor %}
-	  </ul>
-	</div>
+	{% autoescape on %}
+	<form role="form" method='post' action="{% url 'places:submit_submitReviewVenue' %}">
+	
+	
+		{% csrf_token %}
+		<div id='add-tags'> <!--to add other hashtag dropdowns -->
+			<div class="form-group">
+				<div class="btn-group">
+					<button type="button" class="btn btn-default btn-lg dropdown-toggle btn-tag" data-toggle="dropdown">
+							Select tag:  <span class="caret"></span>
+					</button>
+					
+					<div class='placeId' id='{{ id }}'></div>
+					
+					<ul class="dropdown-menu" role="menu">
+						{% for tag in tags %}
+							<li class='btn-tag'><a class='btn-tag' href='#'>{{ tag }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
 		
+		</div>
+		
+		<div>
+			<button type="button" id='add-tag' class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus-sign"></span> Add tag</button>
+		</div>
+		
+		<br/> <br/>
+		<div class="form-group">
+			<div class="col-lg-6"><textarea class="form-control" id="comments" name="comments" rows="4" placeholder='Add Comment: 140 Characters'></textarea></div>
+		</div>
+		<br/>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary" name="submit_tags_form">Submit</button>
+		</div>
+	</form>
+	{% endautoescape %}
 </div>
 <br/><br/>
 <!--add button to add another tag, breh-->
-<div class='margins'>
-	<button type="button" id='add-tag' class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus-sign"></span> Add tag
-	</button>
-</div>
+
 
 <script>
 $(document).ready(function() {
 	var numTags = 0;
 	
 	$(document).on('click', ".dropdown-menu li", function(){
-		console.log($(this).text());
-		console.log('hi');
-		console.log($(this).attr('class'));
+		//console.log($(this).text());
+		//console.log('hi');
+		//console.log($(this).attr('class'));
 		$('button.'+$(this).attr('class')).text($(this).text());
 		$('button.'+$(this).attr('class')).val($(this).text());
 		$('button.'+$(this).attr('class')).append('    <span class="caret"></span>');
@@ -42,7 +66,7 @@ $(document).ready(function() {
    
    $("#add-tag").click(function(){
 		numTags++;
-		$('#add-tags').append('<br/><br/><div class="btn-group"><button type="button" class="btn btn-default btn-lg dropdown-toggle btn-tag'+numTags+'" data-toggle="dropdown">Select tag:  <span class="caret"></span></button><ul class="dropdown-menu" role="menu">{% for tag in tags %}<li class="btn-tag'+numTags+'"><a class="btn-tag'+numTags+'" href="#">{{ tag }}</a></li>{% endfor %}</ul></div>');
+		$('#add-tags').append('<div class="form-group"><div class="btn-group"><button type="button" class="btn btn-default btn-lg dropdown-toggle btn-tag'+numTags+'" data-toggle="dropdown">Select tag:  <span class="caret"></span></button><ul class="dropdown-menu" role="menu">{% for tag in tags %}<li class="btn-tag'+numTags+'"><a class="btn-tag'+numTags+'" href="#">{{ tag }}</a></li>{% endfor %}</ul></div></div>');
 	});
 });
 
