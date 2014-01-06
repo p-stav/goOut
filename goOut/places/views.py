@@ -1,3 +1,10 @@
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from django.http import Http404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render
 from urllib import urlopen
 import json, pprint
@@ -131,7 +138,39 @@ def submitReviewVenue(request, place_name, reference):
 	return render(request, 'places/submitReviewVenue.html', context)
 	
 def submit_submitReviewVenue(request):
+	#Check if place exists. If not, add place
+	if PlaceName.objects.get(id=request.POST['id']).exists():
+		newPlace = PlaceName.objects.get(id=request.Post['id'])
+	else:
+		newPlace = PlaceName.objects.create(placeId = request.POST['id'], venueName=request.POST['name'])
 	
+	#get list of tags
+	#listTags = request.body
+	tags=[]
+	for tag in request.POST:
+		tags.append(tag)
+
+	#Filter for all instances of Places with same placeId and tag
+	filterPlace = Place.objects.filter(placeId=newPlace, time__gte = cutoffTime)
+	
+	if len(filterPlace)>0:
+		#check to see if tag exists
+		for reviews in filterPlace:
+			if tag__tag in tags:
+				reviews.freq++
+				#update score
+				tags.del(tag__tag)
+			reviews.save()
+			
+		#create a new review with remaining tags that didn't match
+		for hashtag in tags: 
+			newVenueReview = Place.objects.create(placeId=newPlace, tag = Hashtag.objects.get(tag=hashtag), freq=1, time=datetime.today(), score = 100)
+			fix score
+			
+			#update UserAction and UserProfile Points
+			
+			newVenueReview.save()
+			
 	return HttpResponseRedirect('/')
 
 def submit_submitReview(request):
