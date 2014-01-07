@@ -121,14 +121,15 @@ def placeDetail(request,place_id):
 	context = {'id':place['id'], 'tags':tags, 'name':place['name'], 'open': place['open'], 'venueTypes':place['types'], 'address':address, 'phone': place['formatted_phone_number'], 'price':place["price_level"], 'rating':place['rating'], 'photos':place}
 	
 	return render(request, 'places/placeDetail.html', context)
-	
+
+#later, we will merge submitReview and submitReviewVenue to one view. It's a simple if statement to fix in a template file	
 def submitReview(request):
 	#grab all hashtags to display
 	tags = Hashtag.objects.all()
 	
 	context = {'tags':tags}
 	return render(request, 'places/submitReview.html', context)
-	
+
 def submitReviewVenue(request, place_name, reference):
 	#grab all hashtags to display
 	tags = Hashtag.objects.all()
@@ -139,48 +140,46 @@ def submitReviewVenue(request, place_name, reference):
 def submit_submitReview(request):
 	#Check if place exists. If not, add place
 	if Place.objects.filter(placeID=request.POST['venueId']).exists():
-		newPlace = Place.objects.get(placeID=request.Post['venueId'])
+		newPlace = Place.objects.get(placeID=request.POST['venueId'])
 	else:
 		newPlace = Place.objects.create(placeID = request.POST['venueId'], placeName=request.POST['venueName'])
 		newPlace.save()
 	
-	"""
 	#get list of tags
 	#listTags = request.body
 	tags=[]
 	tagCount = 0
-	tagName = 'tag'+tagCount
-	while (request.POST[tagName].exists()):
+	tagName = 'tag'+str(tagCount)
+	while (tagName in request.POST):
 		tags.append(request.POST[tagName])
 		tagCount += 1
-		tagName = 'tag' + tagCount
+		tagName = 'tag' + str(tagCount)
 
 	#Filter for all instances of Places with same placeId and tag within alotted time
-	filterPlace = Place.objects.filter(placeId=newPlace, time__gte = cutoffTime)
+	filterPlace = PlaceTag.objects.filter(place=newPlace, lastUpdate__gte = cutoffTime)
 	
 	if len(filterPlace)>0:
 		#check to see if tag exists
 		for reviews in filterPlace:
-			if reviews.tag__tag in tags:
+			if reviews.tag__text in tags:
 				reviews.freq +=1
 				#update score
 				
 				#take out hashtag from the list
-				position = tags.index(review.tag__tag)
+				position = tags.index(review.tag__text)
 				tags.pop(position)
 			reviews.save()
 			
-		#create a new review with remaining tags that didn't match
-		for hashtag in tags: 
-			newVenueReview = Place.objects.create(placeId=newPlace, tag = Hashtag.objects.get(tag=hashtag), freq=1, time=datetime.today(), score = 100)
-			
-			#fix score
-			
-			#update UserAction and UserProfile Points
-			
-			newVenueReview.save()
-	"""		
+	#create a new review with remaining tags that didn't match
+	for hashtag in tags: 
+		newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.today(), score = 100)
 		
+		#fix score
+		
+		#update UserAction and UserProfile Points
+		
+		newVenueReview.save()
+	
 			
 	return HttpResponseRedirect('/')
 		
