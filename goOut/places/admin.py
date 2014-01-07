@@ -1,11 +1,10 @@
 from django.contrib import admin
-from places.models import Place, UserAction, FavoritePlace, PlaceName,Hashtag, UserProfile
+from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction
 
 # Register your models here.
-admin.site.register(PlaceName)
-admin.site.register(Hashtag)
-admin.site.register(UserAction)
 admin.site.register(UserProfile)
-admin.site.register(FavoritePlace)
 admin.site.register(Place)
+admin.site.register(Hashtag)
+admin.site.register(PlaceTag)
+admin.site.register(UserAction)
 

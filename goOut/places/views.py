@@ -9,7 +9,7 @@ from django.shortcuts import render
 from urllib import urlopen
 import json, pprint
 from datetime import datetime
-from places.models import UserProfile, PlaceName, Hashtag, Place, UserAction, FavoritePlace
+from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction
 import sets
 
 #import googlemaps
@@ -30,8 +30,8 @@ def index(request):
 	
 
 	#grab array of reviews from our models
-	curRev = Place.objects.filter(time__gte = cutoffTime)
-	curRevList = list(set([i.placeId.placeId for i in curRev]))
+	curRev = PlaceTag.objects.filter(lastUpdate__gte = cutoffTime)
+	curRevList = list(set([placeTag.place.placeID for placeTag in curRev]))
 
 	apiCall = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+curLoc+"&radius=550&types=bar|casino|night_club&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"
 
@@ -45,23 +45,22 @@ def index(request):
 	placeNoMatch = []
 	
 	for place in places:
-		temp = {}
 		if place['reference'] in curRevList:
 			#iterate over curRev and find all instances to append to dict to append to json
 			hashtags = {}
-			for i in curRev:
-				if i.placeId.placeId == place['reference']:
-					hashtags[i.tag.tag] = {'score' : i.score}
+			for placeTag in curRev:
+				if placeTag.place.placeID == place['reference']:
+					hashtags[placeTag.tag.text] = placeTag.score
 					
 			#TO-DO: create order of list
 					
 			#check if price_level and rating exist and append
 			if 'rating' not in place.keys():
-				place['rating'] = 'NA'
+				place['rating'] = 'N/A'
 			if 'price_level' not in place.keys():
-				place['price_level'] = 'NA'
+				place['price_level'] = 'N/A'
 				
-			temp = {'name': place['name'],'reference': place['reference'], 'rating':place['rating'], 'price_level':place['price_level'], 'types':place['types'], 'vicinity':place['vicinity'], 'hashtags':hashtags}
+			temp = {'name': place['name'], 'reference': place['reference'], 'rating': place['rating'], 'price_level': place['price_level'], 'types': place['types'], 'vicinity': place['vicinity'], 'hashtags': hashtags}
 			
 			#append
 			placeMatch.append(temp)
@@ -69,16 +68,16 @@ def index(request):
 		else:
 			#check to see if price level and rating exist
 			if 'rating' not in place.keys():
-				place['rating'] = 'NA'
+				place['rating'] = 'N/A'
 			if 'price_level' not in place.keys():
-				place['price_level'] = 'NA'
+				place['price_level'] = 'N/A'
 				
 			temp = {'name': place['name'], 'reference': place['reference'], 'rating':place['rating'], 'price_level':place['price_level'], 'types':place['types'], 'vicinity':place['vicinity']}
 			
 			#append
 			placeNoMatch.append(temp)
 
-	context = { 'placeMatch':placeMatch, 'placeNoMatch':placeNoMatch } #'examplePlaces':examplePlaces}
+	context = { 'placeMatch': placeMatch, 'placeNoMatch': placeNoMatch }
 	return render(request, 'places/index.html', context)
 	
 	
@@ -90,22 +89,22 @@ def placeDetail(request,place_id):
 	req = urlopen(apiCall).read()
 	place = json.loads(req).get("result")
 	
-	#get tags in our database
-	tags = Place.objects.filter(placeId__placeId = place['id'], time__gte = cutoffTime)
+	#get PlaceTags in our database
+	tags = PlaceTag.objects.filter(place__placeID= place['id'], lastUpdate__gte = cutoffTime)
 	
 	#send relevant information to templates
 	#check to see if all keys exist. If not, assign 'NA' values
 	if 'formatted_phone_number' not in place.keys():
-		place['formatted_phone_number'] = 'NA'
+		place['formatted_phone_number'] = 'N/A'
 		
 	if 'formatted_address' not in place.keys():
-		place['formatted_address'] = 'NA'
+		place['formatted_address'] = 'N/A'
 	
 	if 'rating' not in place.keys():
-		place['rating'] = 'NA'
+		place['rating'] = 'N/A'
 	
 	if 'price_level' not in place.keys():
-		place['price_level'] = 'NA'
+		place['price_level'] = 'N/A'
 		
 	#create address
 	address = []
@@ -137,13 +136,14 @@ def submitReviewVenue(request, place_name, reference):
 	context = {'tags':tags, 'id':reference, 'name':place_name}
 	return render(request, 'places/submitReviewVenue.html', context)
 	
-def submit_submitReviewVenue(request):
+def submit_submitReview(request):
 	#Check if place exists. If not, add place
-	if PlaceName.objects.filter(placeId=request.POST['venueId']).exists():
-		newPlace = PlaceName.objects.get(placeId=request.Post['venueId'])
+	if Place.objects.filter(placeID=request.POST['venueId']).exists():
+		newPlace = Place.objects.get(placeID=request.Post['venueId'])
 	else:
-		newPlace = PlaceName.objects.create(placeId = request.POST['venueId'], venueName=request.POST['venueName'])
+		newPlace = Place.objects.create(placeID = request.POST['venueId'], placeName=request.POST['venueName'])
 		newPlace.save()
+	
 	"""
 	#get list of tags
 	#listTags = request.body
@@ -179,13 +179,9 @@ def submit_submitReviewVenue(request):
 			#update UserAction and UserProfile Points
 			
 			newVenueReview.save()
+	"""		
+		
 			
-		"""	
-			
-	return HttpResponseRedirect('/')
-
-def submit_submitReview(request):
-	
 	return HttpResponseRedirect('/')
 		
 def fav(request):

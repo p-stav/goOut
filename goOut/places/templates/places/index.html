@@ -3,47 +3,6 @@
 {% block title %}GoOut{% endblock %}
 
 {% block content %}
-<!--
-<p>{{placeMatch}}</p>
-
-<p> {{placeNoMatch}}</p>
--->
-
-<!--GAL's TEST---------
-=======
-</br>
-</br>
-<p> It's a me! A Gal!</p>
-
-
-{% for place in examplePlaces %}
-<hr>
-<h4>{{place.name}}</h4>
-<p>ID is {{place.id}}</p>
-<p>This place is a:
-	<ul>
-		{% for item in place.types %}
-			<li>{{item}}</li>
-		{% endfor %}
-	</ul>
-</p>
-<p>The address of this place is: {{place.vicinity}}</p>
-<p>The rating of this place is: {{place.rating}}</p>
-<p>The level of expensiveness for this place is: {{place.price_level}}</p>
-<p>The hashtags and the scores are:
-	<ul>
-		{% for key,value in place.hashtags.items %}
-			<li>The hashtag {{key}} has score {{value}}</li>
-		{% endfor %}
-	</ul>
-{% endfor %}
-<hr>
-
-<p> End of Gal time</p>
-
-</br></br>
->>>>>>> e4f124e8420dc30559fe89f05a5e6268caf0803c
--->
 
 <div class="placeList">
 	{% for place in placeMatch %}
@@ -56,8 +15,8 @@
 			</div>
 			-->
 			<div class="venue-left">
-				{% for tag,score in place.hashtags.items %}
-					#{{ tag }}: {{ score.score }}
+				{% for text, score in place.hashtags.items %}
+					#{{ text }}: {{ score }}
 					<br/>
 				{% endfor %}
 			</div>
