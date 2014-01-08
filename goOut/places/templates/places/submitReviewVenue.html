@@ -53,7 +53,7 @@
 		</div>
 		<br/>
 		<div class="form-group">
-			<button type="submit" class="btn btn-primary" name="submit_tags_form">Submit</button>
+			<button type="submit" id='submitButton' class="btn btn-primary" name="submit_tags_form">Submit</button>
 		</div>
 	</form>
 	{% endautoescape %}
@@ -75,6 +75,32 @@ $(document).ready(function() {
 		$('button.'+$(this).attr('class')).append('    <span class="caret"></span>');
 	});*/
 	
+   //prevent empty tags and duplicates from being sent:
+   $('#submitButton').click(function(event){
+		//alert('hi');
+		var tagList = [];
+		
+		$('select').each(function(){
+			if ($(this).val() =='Select Tag:')
+			{
+				$(this).parent().addClass('has-error');
+				alert('Oops! Please select a tag to associate with this venue!');
+				event.preventDefault();
+			}
+			
+			if (tagList.indexOf($(this).val()) != -1)
+			{
+				$(this).parent().addClass('has-error');
+				alert('Oops! Please select unique tags to associate with this venue!');
+				event.preventDefault();
+			}
+			
+			else
+			{
+				tagList.push($(this).val());
+			}
+		});
+	});
    
    $("#add-tag").click(function(){
 		numTags++;
@@ -83,7 +109,10 @@ $(document).ready(function() {
 		
 		//<div class="form-group"><div class="btn-group"><button type="button" class="btn btn-default btn-lg dropdown-toggle btn-tag'+numTags+'" data-toggle="dropdown">Select tag:  <span class="caret"></span></button><ul class="dropdown-menu" role="menu">{% for tag in tags %}<li class="btn-tag'+numTags+'"><a class="btn-tag'+numTags+'" href="#">{{ tag }}</a></li>{% endfor %}</ul></div></div>');
 	});
+	
+	//delete tag elements
 });
+
 
 
 

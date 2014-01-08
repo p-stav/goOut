@@ -161,12 +161,12 @@ def submit_submitReview(request):
 	if len(filterPlace)>0:
 		#check to see if tag exists
 		for reviews in filterPlace:
-			if reviews.tag__text in tags:
+			if reviews.tag.text in tags:
 				reviews.freq +=1
 				#update score
 				
 				#take out hashtag from the list
-				position = tags.index(review.tag__text)
+				position = tags.index(reviews.tag.text)
 				tags.pop(position)
 			reviews.save()
 			
