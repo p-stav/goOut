@@ -37,19 +37,19 @@ def index(request):
 
 	#grab json object from google Places API
 	req = urlopen(apiCall).read()
-	places = json.loads(req).get("results")
+	venues = json.loads(req).get("results")
 
 	#for each place, do a check for id in curRevList, and append hashtag information
 	#create two dictionaries to access for next view, one that have data for, one that we don't
 	placeMatch = []
 	placeNoMatch = []
 	
-	for place in places:
-		if place['reference'] in curRevList:
+	for place in venues:
+		if place['id'] in curRevList:
 			#iterate over curRev and find all instances to append to dict to append to json
 			hashtags = {}
 			for placeTag in curRev:
-				if placeTag.place.placeID == place['reference']:
+				if placeTag.place.placeID == place['id']:
 					hashtags[placeTag.tag.text] = placeTag.score
 					
 			#TO-DO: create order of list
@@ -60,7 +60,7 @@ def index(request):
 			if 'price_level' not in place.keys():
 				place['price_level'] = 'N/A'
 				
-			temp = {'name': place['name'], 'reference': place['reference'], 'rating': place['rating'], 'price_level': place['price_level'], 'types': place['types'], 'vicinity': place['vicinity'], 'hashtags': hashtags}
+			temp = {'name': place['name'], 'id': place['id'], 'reference':place['reference'], 'rating': place['rating'], 'price_level': place['price_level'], 'types': place['types'], 'vicinity': place['vicinity'], 'hashtags': hashtags}
 			
 			#append
 			placeMatch.append(temp)
@@ -72,7 +72,7 @@ def index(request):
 			if 'price_level' not in place.keys():
 				place['price_level'] = 'N/A'
 				
-			temp = {'name': place['name'], 'reference': place['reference'], 'rating':place['rating'], 'price_level':place['price_level'], 'types':place['types'], 'vicinity':place['vicinity']}
+			temp = {'name': place['name'], 'id': place['id'], 'reference':place['reference'], 'rating':place['rating'], 'price_level':place['price_level'], 'types':place['types'], 'vicinity':place['vicinity']}
 			
 			#append
 			placeNoMatch.append(temp)

@@ -5,6 +5,7 @@
 {% block content %}
 
 <div class="placeList">
+	<br/>
 	{% for place in placeMatch %}
 		<div class="venue" id="{{ place.reference }}">
 			
@@ -170,10 +171,10 @@
 			})
 			
 			.fail(function(){
-				console.log('WHAT');
+				//console.log('WHAT');
 			});
 		callAPI.complete(function(){
-			console.log('second complete');
+			//console.log('second complete');
 		});
 		
 	}
