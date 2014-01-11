@@ -13,11 +13,12 @@ urlpatterns = patterns('',
 	url(r'', include('places.urls', namespace='places')),
     	
 	#logging in capability, if we choose to include:
+	
 	url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'redirect_field_name': 'places/index.html'}),
 	url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page' : '/'}),
 	url(r'^accounts/add$', 'places.views.add_user', name='add_user'),
 	url(r'^accounts/add/add$', 'places.views.add_user_add', name='add_user_add'),
-
+	
 	#admin
 	url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

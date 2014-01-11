@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}login{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="jumbotron">
+		<div class="container">
+			<h3>Login</h3>
+			<!--voting-->
+			
+			{% if form.errors %}
+				<div class="alert alert-danger"><p><small>Your username and password didn't match. Please try again.</small></p></div>
+			{% endif %}
+			<br/>
+			
+			{% autoescape on %}
+			<form class="form-horizontal" method="post" action="{% url 'django.contrib.auth.views.login' %}">
+				{% csrf_token %}
+					{% if error %}
+						<div class="form-group has-error">
+							<div class="col-lg-6"><input class="form-control" id="id_username" maxlength="254" name="username" type="text" placeholder="{{ form.username.label_tag }}"/></div>
+						</div>
+					{% else %}
+						<div class="form-group">
+							<div class="col-lg-6"><input class="form-control" id="id_username" maxlength="254" name="username" type="text" placeholder="username"/></div>
+						</div>
+					{% endif %}
+					
+					{% if error %}
+						<div class="form-group has-error">
+							<!--<label for="id_password" class="col-lg-2 control-label">{{ form.password.label_tag }}</label>-->
+							<div class="col-lg-6"><input class="form-control" id="id_password" maxlength="254" name="password" type="password" placeholder='password'/></div>
+						</div>
+					{% else %}
+						<div class="form-group">
+							<!--<label for="id_password" class="col-lg-2 control-label">{{ form.password.label_tag }}</label>-->
+							<div class="col-lg-6"><input class="form-control" id="id_password" maxlength="254" name="password" type="password" placeholder='password'/></div>
+						</div>
+					{% endif %}
+					<label class='control-label'><input type="submit" value="login" class="btn btn-primary"/></label>
+					<input type="hidden" name="next" value="{{ next }}" />
+			</form>
+			
+			{% endautoescape %}
+			<h5 align='right' class='text-muted'><small> Don't have an account?</small><br/>
+			<a href='/accounts/add'><strong>Create one!</strong></a></h5>
+	
+			<!--	OLD TABLE	--!
+				<table>
+					<tr>
+						<td>{{ form.username.label_tag }}</td>
+						<td>{{ form.username }}</td>
+					</tr>
+					<tr>
+						<td>{{ form.password.label_tag }}</td>
+						<td>{{ form.password }}</td>
+					</tr>
+				</table>
+
+				<input type="submit" value="login" />
+				<input type="hidden" name="next" value="{{ next }}" />
+				</form>
+			-->
+		</div>
+	</div>
+</div>
+
+	
+
+{% endblock %}

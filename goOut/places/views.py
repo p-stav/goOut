@@ -123,6 +123,7 @@ def placeDetail(request,place_id):
 	return render(request, 'places/placeDetail.html', context)
 
 #later, we will merge submitReview and submitReviewVenue to one view. It's a simple if statement to fix in a template file	
+@login_required()
 def submitReview(request):
 	#grab all hashtags to display
 	tags = Hashtag.objects.all()
@@ -130,12 +131,14 @@ def submitReview(request):
 	context = {'tags':tags}
 	return render(request, 'places/submitReview.html', context)
 
+@login_required()
 def submitReviewVenue(request, place_name, reference):
 	#grab all hashtags to display
 	tags = Hashtag.objects.all()
 	
 	context = {'tags':tags, 'id':reference, 'name':place_name}
 	return render(request, 'places/submitReviewVenue.html', context)
+
 	
 def submit_submitReview(request):
 	#Check if place exists. If not, add place
@@ -183,11 +186,43 @@ def submit_submitReview(request):
 			
 	return HttpResponseRedirect('/')
 		
+		
+def add_user(request):
+	context = { }
+	return render(request, 'registration/add_user.html', context)
+	
+def add_user_add(request):
+	try:
+		newUser = User.objects.create(username=request.POST['uname'])
+		newUser.set_password(request.POST['pwd'])
+		# newUser.last_name = request.POST['last_name']
+		# newUser.first_name = request.POST['first_name']
+
+		# add to UserProfiles
+		newUser.save()
+
+		#temp = User.objects.get(username=request.POST['uname'])
+		addUserProf = UserProfile(user=newUser, points=0)
+		addUserProf.save()
+		
+		#add user to session
+		auth = authenticate(username=request.POST['uname'], password=request.POST['pwd'])
+		login(request, auth)
+		return HttpResponseRedirect('/')
+	
+	except:
+		error=1
+		context = {'error':error}
+		return render(request, 'registration/add_user.html', context)
+	
+	
+	
+@login_required()
 def fav(request):
 	context = {}
 	return render(request, 'places/fav', context)
 		
-		
+@login_required()	
 def view_profile(request):
 	context = {}
 	return render(request, 'places/view_profile', context)

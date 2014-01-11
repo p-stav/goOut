@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}INSERTNAME-Create Account{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="jumbotron">
+		<div class="container">
+			<h3>New User</h3>
+			<!--voting-->
+			
+			{% if error %}
+			<p class='alert alert-danger'><strong>Sorry, this username already exists. Please create another one.</strong></p>
+			{% else %}	
+			{% endif %}
+			<br/>
+			
+			{% autoescape on %}
+			<form class="form-horizontal" role="form" action="{% url 'add_user_add' %}" method="post">
+				{% csrf_token %}
+				<!--<div class="form-group">
+					<label for="first_name" class="col-lg-2 control-label">First Name:</label>
+					<div class="col-lg-6"><input class="form-control" id="first_name" name="first_name" type="text"/></div>
+				</div>
+						
+				<div class="form-group">
+					<label for="last_name" class="col-lg-2 control-label">Last Name:</label>
+						<div class="col-lg-6"><input class="form-control" id="last_name" name="last_name" type="text"/></div>
+				</div>-->
+				
+				{% if error %}
+					<div class="form-group has-error">
+						<!--<label for="username" class="col-lg-2 control-label">Username:</label>-->
+						<div class="col-lg-6"><input class="form-control" id="uname" name="uname" type="text" placeholder='username'/></div>
+					</div>
+				{% else %}
+					<div class="form-group">
+						<!--<label for="username" class="col-lg-2 control-label">Username:</label>-->
+						<div class="col-lg-6"><input class="form-control" id="uname" name="uname" type="text" placeholder='username'/></div>
+					</div>
+				{% endif %}
+				
+				<!--<div class="form-group">
+					<label for="email" class="col-lg-2 control-label">Email:</label>
+						<div class="col-lg-6"><input class="form-control" id="email" name="email" type="text"/></div>
+				</div>-->
+				
+				{% if error %}
+					<div class="form-group has-error">
+						<!--<label for="pwd" class="col-lg-2 control-label">Password:</label>-->
+						<div class="col-lg-6"><input class="form-control" id="pwd" name="pwd" type="password" placeholder='password'/></div>
+					</div>
+				{% else %}
+					<div class="form-group">
+						<!--<label for="pwd" class="col-lg-2 control-label">Password:</label>-->
+						<div class="col-lg-6"><input class="form-control" id="pwd" name="pwd" type="password" placeholder='password'/></div>
+					</div>
+				{% endif %}
+				
+				<div class="form-group">
+					<label class='control-label'><button type="submit" class="btn btn-primary" name="submit_user_form">Join!</button></label>
+				</div>
+			</form>
+			{% endautoescape %}
+			
+			<h5 align='right' class='text-muted'>Have an account?<br/>
+			<a href='/accounts/login'><strong>Sign in!</strong></a></h5>
+		</div>
+	</div>
+</div>
+{% endblock %}
