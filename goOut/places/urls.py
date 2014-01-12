@@ -13,14 +13,14 @@ urlpatterns = patterns('places.views',
 	url(r'^review/submit$', 'submit_submitReview', name='submit_submitReview'),
 	
 	#create user's own page, view other people's profile, and see user's favorited places
-	url(r'^user/$', 'view_profile', {'username' : ''}),
-	url(r'^user/(?P<username>.+)/$', 'view_profile', name='profile'),
-	url(r'^user/(?P<username>.+)/fav/$', 'fav', name='fav'),
+	url(r'^user/$', 'view_profile', name='profile'),
+	url(r'^user/fav/$', 'view_fav', name='view_fav'),
 	
+	url(r'^(?P<placeId>.+)/fav/$', 'add_fav', name='add_fav'),
+		
 	#detail page about a place
 	url(r'^venue/(?P<place_id>.+)/$', 'placeDetail', name='placeDetail'),	
 	
-	#url(r'^user/fav$', 'view_fav', name='user_fav'),
 	#url(r'^feedback$', 'feedback', name='feedback'),
 	#url(r'^feedback/submit$', 'feedback_submit', name='feedback_submit'),
 	#url(r'^(?P<joke_id>\d+)/up/$', 'up', name='up'),

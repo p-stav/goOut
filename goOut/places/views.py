@@ -218,14 +218,47 @@ def add_user_add(request):
 	
 	
 @login_required()
-def fav(request):
-	context = {}
-	return render(request, 'places/fav', context)
+def view_fav(request):
+	curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+	favorites = curUser.favoritePlaces.all()
+	
+	favList = []
+	
+	for venue in favorites:
+		hashtags = {}
+		temp = PlaceTag.objects.filter(place=venue, lastUpdate__gte=cutoffTime)
 		
+		for i in temp:
+			hashtags[i.tag.text]=i.score
+	
+		#create dictionsary to append to list
+		addToList = {'name':venue.placeName , 'hashtags':hashtags}
+		
+		favList.append(addToList)
+	
+	
+	
+	context = {'favorites':favList, 'user':curUser.user.username}
+	
+	return render(request, 'places/view_fav.html', context)
+		
+@login_required()
+def add_fav(request, placeId):
+	curUser=UserProfile.objects.get(user=User.objects.get(username=request.user.username))
+	current_venue = Place.objects.get(placeID = placeId)
+
+	if curUser.favoritePlaces.filter(id=current_venue.id).exists():
+		curUser.favoritePlaces.remove(current_venue)
+	else:
+		curUser.favoritePlaces.add(current_venue)
+	curUser.save()
+		
+	return HttpResponseRedirect('/')
+	
 @login_required()	
 def view_profile(request):
 	context = {}
-	return render(request, 'places/view_profile', context)
+	return render(request, 'places/view_profile.html', context)
 	
 def search(request):
 	context = {}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Favorite Venues{% endblock %}
+
+
+{% block content %}
+<h4 align ='center'> {{user}}'s Favorite Places:</h4>
+
+<!--all, or near your?-->
+{% if favorites|length > 0 %}
+
+	<div class="placeList">
+		<br/>
+		{% for place in favorites %}
+			<div class="venue" id="{{ place.reference }}">
+				
+				<h4>{{ place.name }}</h4>
+				<!--
+				<div class = 'venue-pic'>
+				
+				</div>
+				-->
+				<div class="venue-left">
+					{% for text, score in place.hashtags.items %}
+						#{{ text }}
+						<br/>
+					{% endfor %}
+				</div>
+			
+			
+				<div class = 'venue-right'>
+					<!--
+					{{ place.rating }} / 5.0
+					<br/>
+					{% if place.price_level == 1 %}
+						$
+					{% elif place.price_level == 2 %}
+						$$
+					{% elif place.price_level == 3 %}
+						$$$
+					{% elif place.price_level == 4 %}
+						$$$$
+					{% elif place.price_level == 5 %}
+						$$$$$	
+					{% elif place.price_level == -1 %}
+						No price!
+						
+					{% endif %}
+					
+					<br/>
+					{% for type in place.types %}
+						{% if type == 'bar' %}
+							bar 
+						{% elif type == 'night_club' %}
+							club
+						{% endif %}
+					{% endfor %}
+					
+					-->
+						
+				</div>
+				<br><br><br>
+				<div class="separator">
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+		</div>
+{% else %}
+	<p>You haven't favorited any jokes yet.</p>
+{% endif %}
+
+
+{% endblock %}
