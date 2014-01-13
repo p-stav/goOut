@@ -4,6 +4,25 @@
 
 {% block content %}
 
-hi
+<h3 align='center'>{{firstName}}</h3>
+<div class='favorites'>
+
+</div>
+
+<div class='history'>
+	<h4>Last Visits:</h4>
+	{% for place in favorites %}
+		{{place}} <br/>
+	{% endfor %}
+</div>
+
+<div class='tagFreq'>
+	<h4> Your most common tags: </h4>
+</div>
+
+<div class='placeFreq'>
+	<h4> Your most visited places: </h4>
+</div>
+
 
 {% endblock %}

@@ -244,7 +244,7 @@ def view_fav(request):
 		
 @login_required()
 def add_fav(request, placeId):
-	curUser=UserProfile.objects.get(user=User.objects.get(username=request.user.username))
+	curUser=UserProfile.objects.get(user=User.objects.get(id=request.user.id))
 	current_venue = Place.objects.get(placeID = placeId)
 
 	if curUser.favoritePlaces.filter(id=current_venue.id).exists():
@@ -257,7 +257,28 @@ def add_fav(request, placeId):
 	
 @login_required()	
 def view_profile(request):
-	context = {}
+	#get username, favorites list, last activity
+	curUser=UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+	
+	#last places reviewed, in order of time 
+	lastVisited = UserAction.objects.filter(userID=User.objects.get(id=request.user.id)).order_by('-time', 'tag__text')
+	
+	#get list of last 5 Places reviewed 
+	count=0
+	unique=0
+	placeList = []
+	
+	while (count<len(lastVisited)):
+		if unique>=5:
+			break		
+			
+		if lastVisited[count].place.placeName not in placeList:
+			placeList.append(lastVisited[count].place.placeName)
+			unique += 1
+			
+		count +=1 # in case there are less than five unique places visited. 
+	
+	context = {'firstName': curUser.user.first_name, 'favorites':placeList}
 	return render(request, 'places/view_profile.html', context)
 	
 def search(request):

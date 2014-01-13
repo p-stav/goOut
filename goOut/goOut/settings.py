@@ -49,6 +49,7 @@ INSTALLED_APPS = (
 	'django.contrib.staticfiles',
 	'django.contrib.contenttypes',
 	'places',
+	'django_geoip', #geoIP
 )
 
 
@@ -59,6 +60,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	# 'django_geoip.middleware.LocationMiddleware', #geoIP
 )
 
 ROOT_URLCONF = 'goOut.urls'
