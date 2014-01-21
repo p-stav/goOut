@@ -49,7 +49,7 @@ INSTALLED_APPS = (
 	'django.contrib.staticfiles',
 	'django.contrib.contenttypes',
 	'places',
-	'django_geoip', #geoIP
+	#'django_geoip', #geoIP
 )
 
 
