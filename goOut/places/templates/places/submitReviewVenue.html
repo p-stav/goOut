@@ -10,15 +10,23 @@
 	<form role="form" method='post' action={% url "places:submit_submitReview" %}>
 		{% csrf_token %}
 		<div id='add-tags'> <!--to add other hashtag dropdowns -->
-			<div class="form-group">
+			<div class="btn-group hi" data-toggle="buttons">
+				{% for tag in tags %}
+				 <label class="btn btn-primary" id="tagLabels">
+				 	<input type="checkbox" name="tagNames" value="{{tag}}">#{{tag}} 
+				 </label>
+				{% endfor %}
+			
+				
+				<!--
 				<select class="form-control input-lg col-xs-4" id="tag0" name="tag0">
 					<option>Select Tag:</option>
 					
 					{% for tag in tags %}
-						<option>#{{ tag.text }}</option>
+						<option>{{ tag.text }}</option>
 					{% endfor %}
 				</select>
-				
+				-->
 				
 				
 				
@@ -31,14 +39,16 @@
 							<li class='btn-tag'><a class='btn-tag' href='#'>{{ tag }}</a></li>
 						{% endfor %}
 					</ul>
-				</div>-->
+				</div>
+			   -->
 			</div>
 		</div>
 		<br/><br/><br/>
+		<!--
 		<div>
 			<button type="button" id='add-tag' class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus-sign"></span> Add tag</button>
 		</div>
-		
+		-->
 		<div class='form-group hidden'>
 			<textarea class="form-control" id="venueId" name="venueId" rows="4">{{ id }}</textarea>
 		</div>
@@ -80,6 +90,7 @@ $(document).ready(function() {
 	});*/
 	
    //prevent empty tags and duplicates from being sent:
+   /*
    $('#submitButton').click(function(event){
 		//alert('hi');
 		var tagList = [];
@@ -113,6 +124,7 @@ $(document).ready(function() {
 		
 		//<div class="form-group"><div class="btn-group"><button type="button" class="btn btn-default btn-lg dropdown-toggle btn-tag'+numTags+'" data-toggle="dropdown">Select tag:  <span class="caret"></span></button><ul class="dropdown-menu" role="menu">{% for tag in tags %}<li class="btn-tag'+numTags+'"><a class="btn-tag'+numTags+'" href="#">{{ tag }}</a></li>{% endfor %}</ul></div></div>');
 	});
+	*/
 	
 	//delete tag elements
 });

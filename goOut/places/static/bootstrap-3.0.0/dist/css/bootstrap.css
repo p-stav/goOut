@@ -71,6 +71,12 @@
 .right{
 float:right;
 }
+
+#tagLabels {
+	margin-bottom:5px;
+	margin-right:50px;
+	width:100%;	
+}
 /*********************************************************/
 
 
@@ -4344,7 +4350,8 @@ float: right;
 padding-top: 15px;
 padding-bottom: 15px;
 }
-
+
+
 
   .navbar-left {
     float: left !important;

@@ -150,14 +150,15 @@ def submit_submitReview(request):
 	
 	#get list of tags
 	#listTags = request.body
-	tags=[]
+	tags= request.POST.getlist('tagNames')
+	"""[]
 	tagCount = 0
 	tagName = 'tag'+str(tagCount)
 	while (tagName in request.POST):
 		tags.append(request.POST[tagName])
 		tagCount += 1
 		tagName = 'tag' + str(tagCount)
-
+	"""
 	#Filter for all instances of Places with same placeId and tag within alotted time
 	filterPlace = PlaceTag.objects.filter(place=newPlace, lastUpdate__gte = cutoffTime)
 	
