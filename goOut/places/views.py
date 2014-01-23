@@ -77,11 +77,24 @@ def index(request):
 			#append
 			placeNoMatch.append(temp)
 
-	context = { 'placeMatch': placeMatch, 'placeNoMatch': placeNoMatch }
+	#get username
+	if request.user.is_authenticated():
+		curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+		userName = curUser.user.username
+	else:
+		userName = ''
+	context = { 'userName':userName, 'placeMatch': placeMatch, 'placeNoMatch': placeNoMatch }
 	return render(request, 'places/index.html', context)
 	
 	
 def placeDetail(request,place_id):
+	#get username
+	if request.user.is_authenticated():
+		curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+		userName = curUser.user.username
+	else:
+		userName = ''
+	
 	#make call to Google API for information
 	apiCall = "https://maps.googleapis.com/maps/api/place/details/json?reference=" + place_id + "&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"
 
@@ -118,25 +131,39 @@ def placeDetail(request,place_id):
 	#find what the most descriptive hashtags have been in the past?
 	
 	
-	context = {'id':place['id'], 'tags':tags, 'name':place['name'], 'open': place['open'], 'venueTypes':place['types'], 'address':address, 'phone': place['formatted_phone_number'], 'price':place["price_level"], 'rating':place['rating'], 'photos':place}
+	context = {'userName':userName, 'id':place['id'], 'tags':tags, 'name':place['name'], 'open': place['open'], 'venueTypes':place['types'], 'address':address, 'phone': place['formatted_phone_number'], 'price':place["price_level"], 'rating':place['rating'], 'photos':place}
 	
 	return render(request, 'places/placeDetail.html', context)
 
 #later, we will merge submitReview and submitReviewVenue to one view. It's a simple if statement to fix in a template file	
 @login_required()
 def submitReview(request):
+	#get username
+	if request.user.is_authenticated():
+		curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+		userName = curUser.user.username
+	else:
+		userName = ''
+		
 	#grab all hashtags to display
 	tags = Hashtag.objects.all()
 	
-	context = {'tags':tags}
+	context = {'userName':userName,'tags':tags}
 	return render(request, 'places/submitReview.html', context)
 
 @login_required()
 def submitReviewVenue(request, place_name, reference):
+	#get username
+	if request.user.is_authenticated():
+		curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+		userName = curUser.user.username
+	else:
+		userName = ''
+	
 	#grab all hashtags to display
 	tags = Hashtag.objects.all()
 	
-	context = {'tags':tags, 'id':reference, 'name':place_name}
+	context = {'userName':userName, 'tags':tags, 'id':reference, 'name':place_name}
 	return render(request, 'places/submitReviewVenue.html', context)
 
 	
@@ -220,7 +247,10 @@ def add_user_add(request):
 	
 @login_required()
 def view_fav(request):
+
 	curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+	userName = curUser.user.username
+	
 	favorites = curUser.favoritePlaces.all()
 	
 	favList = []
@@ -233,7 +263,7 @@ def view_fav(request):
 			hashtags[i.tag.text]=i.score
 	
 		#create dictionsary to append to list
-		addToList = {'name':venue.placeName , 'hashtags':hashtags}
+		addToList = {'userName':userName, 'name':venue.placeName , 'hashtags':hashtags}
 		
 		favList.append(addToList)
 	
@@ -260,6 +290,7 @@ def add_fav(request, placeId):
 def view_profile(request):
 	#get username, favorites list, last activity
 	curUser=UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+	userName = curUser.user.username
 	
 	#last places reviewed, in order of time 
 	lastVisited = UserAction.objects.filter(userID=User.objects.get(id=request.user.id)).order_by('-time', 'tag__text')
@@ -279,7 +310,7 @@ def view_profile(request):
 			
 		count +=1 # in case there are less than five unique places visited. 
 	
-	context = {'firstName': curUser.user.first_name, 'favorites':placeList}
+	context = {'userName':userName,'firstName': curUser.user.first_name, 'favorites':placeList}
 	return render(request, 'places/view_profile.html', context)
 	
 def search(request):
