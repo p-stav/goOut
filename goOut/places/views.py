@@ -11,6 +11,9 @@ import json, pprint
 from datetime import datetime
 from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction
 import sets
+from math import exp
+
+timeDecayExponent = 0.00001
 
 #import googlemaps
 
@@ -56,6 +59,11 @@ def index(request):
 			hashtags = {}
 			for placeTag in curRev:
 				if placeTag.place.placeID == place['id']:
+					timeNow = datetime.today()
+					timeDelta = timeNow - placeTag.lastUpdate
+					placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
+					placeTag.lastUpdate = timeNow
+					placeTag.save()
 					hashtags[placeTag.tag.text] = placeTag.score
 					
 			#TO-DO: create order of list
@@ -136,6 +144,15 @@ def placeDetail(request,place_id):
 	
 	#find what the most descriptive hashtags have been in the past?
 	
+
+	#update scores
+	for placeTag in tags:
+		timeNow = datetime.today()
+		timeDelta = timeNow - placeTag.lastUpdate
+		placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
+		placeTag.lastUpdate = timeNow
+		placeTag.save()
+
 	
 	context = {'userName':userName, 'id':place['id'], 'tags':tags, 'name':place['name'], 'open': place['open'], 'venueTypes':place['types'], 'address':address, 'phone': place['formatted_phone_number'], 'price':place["price_level"], 'rating':place['rating'], 'photos':place}
 	
@@ -183,7 +200,7 @@ def submit_submitReview(request):
 	
 	#get list of tags
 	#listTags = request.body
-	tags= request.POST.getlist('tagNames')
+	tags = request.POST.getlist('tagNames')
 	"""[]
 	tagCount = 0
 	tagName = 'tag'+str(tagCount)
@@ -197,21 +214,26 @@ def submit_submitReview(request):
 	
 	if len(filterPlace)>0:
 		#check to see if tag exists
-		for reviews in filterPlace:
-			if reviews.tag.text in tags:
-				reviews.freq +=1
+		for placeTag in filterPlace:
+			if placeTag.tag.text in tags:
+				placeTag.freq += 1
+
 				#update score
-				
+				timeNow = datetime.today()
+				timeDelta = timeNow - placeTag.lastUpdate
+				placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
+				placeTag.score += 50
+				placeTag.lastUpdate = timeNow
+
 				#take out hashtag from the list
-				position = tags.index(reviews.tag.text)
+				position = tags.index(placeTag.tag.text)
 				tags.pop(position)
-			reviews.save()
+			placeTag.save()
 			
 	#create a new review with remaining tags that didn't match
 	for hashtag in tags: 
-		newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.today(), score = 100)
+		newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.today(), score = 50)
 		
-		#fix score
 		
 		#update UserAction and UserProfile Points
 		
