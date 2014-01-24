@@ -11,8 +11,8 @@
 
 	<!--Google Maps and Google Places APIs-->
 	
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
-	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
+	<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>-->
 	
 	<!-- bootstrap -->
 	{% load staticfiles %}
@@ -48,12 +48,14 @@
 					<li><a href="/accounts/add"><span class  = 'glyphicon glyphicon-plus'></span>    Create Profile</a></li>
 				{% endif %}
 							
+				<!--
 				{% url 'places:placeDetail' as my_view %}
 				{% if my_view %}
 					<li><a href="/venue/{{name}}/{{id}}"><span class  = 'glyphicon glyphicon-edit'></span>    Write Review</a></li>
 				{% else %}
 					<li><a href="/review"><span class='glyphicon glyphicon-edit'></span>    Write Review</a></li>
 				{%endif%}
+				-->
 				
 				{% if user.is_authenticated %}
 					<li><a href="/accounts/logout"><span class  = 'glyphicon glyphicon-minus-sign'></span>    logout</a></li>

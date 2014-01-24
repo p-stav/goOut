@@ -3,9 +3,10 @@ from django.conf.urls import patterns,  url
 urlpatterns = patterns('places.views',
 	
 	#list of places, search page, and map
-	url(r'^$', 'index', name='index'),
+	url(r'^$', 'getCurLoc', name='getCurLoc'),
+	url(r'^index$', 'index', name='index'),
 	url(r'^search/(?P<search_term>.+)/$', 'search', name='search'),
-	url(r'^/map/$', 'index', name='index'),
+	url(r'^map/$', 'map', name='map'),
 	
 	
 	url(r'^review$', 'submitReview', name='submitReview'),

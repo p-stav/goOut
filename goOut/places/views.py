@@ -20,14 +20,20 @@ import sets
 date = datetime(2013, 12, 28, 22, 40, 41, 879000)
 cutoffTime = datetime(date.year,date.month,date.day, date.hour-2, date.minute, date.second, date.microsecond)
 
-# home/index page. 
+def getCurLoc(request):
+	context = {}
+	return render(request, 'places/getCurLoc.html', context)
+	
+	
+#index page. 
 def index(request):
 	#find curLong + curLat
-	#HOW DO YOU DO THIS? Hard code for now
-	curLoc = '37.798542,-122.422345'
-			
 	
+	curLoc = request.POST['position']
 	
+	if curLoc == '': #hardcode if fails.
+		curLoc = '47.6159392,-122.3268701' #Seattle Pine/Bellevue
+		#SF chestnut/VanNess.798542,-122.422345'	
 
 	#grab array of reviews from our models
 	curRev = PlaceTag.objects.filter(lastUpdate__gte = cutoffTime)
@@ -316,3 +322,8 @@ def view_profile(request):
 def search(request):
 	context = {}
 	return render(request, 'places/search', context)
+	
+	
+def map(request):
+	context = {}
+	return render(request, 'places/maps', context)

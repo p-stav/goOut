@@ -119,6 +119,7 @@
 	{% endfor %}
 </div>
 <script type = "text/javascript">
+
 	$(document).ready(function() {
 		$('.venue').click(function(){
 			//link to next page. Search into how this interfaces with django
@@ -126,7 +127,7 @@
 		});
 	
 	});
-
+/*
 	if (navigator.geolocation) {
 		// If so, get the current position and feed it to listPlaces
 		navigator.geolocation.getCurrentPosition(listPlaces);
@@ -139,8 +140,8 @@
 		//call for ALL venue types; CHANGE for current position
 		apiCall = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+curLat+","+curLong+"&radius=550&types=bar|casino|night_club&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0";
 		
-		
-/*		var callAPI = $.ajax({
+
+	var callAPI = $.ajax({
 			url: apiCall,
 			//data: myData,
 			type: 'GET',
@@ -158,7 +159,7 @@
 				console.log('WHAT');
 			});
 			
-*/	
+
 		//EITHER THIS CALL OR THE ONE ABOVE IT
 		var callAPI= $.getJSON(apiCall, function(json){
 			console.log('grabbed json');
@@ -178,7 +179,7 @@
 		});
 		
 	}
-	
+*/
 
 </script>
 {% endblock %}
