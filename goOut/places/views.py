@@ -12,13 +12,14 @@ from datetime import datetime
 from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction
 import sets
 from math import exp
+from collections import Counter
 
 timeDecayExponent = 0.00001
 
 #import googlemaps
 
 ##find today's date to find items close to it in db
-#today = datetime.today()
+#date = datetime.today()
 #for testing purposes, hardcode datetime
 date = datetime(2013, 12, 28, 22, 40, 41, 879000)
 cutoffTime = datetime(date.year,date.month,date.day, date.hour-2, date.minute, date.second, date.microsecond)
@@ -35,7 +36,7 @@ def index(request):
 	curLoc = request.POST['position']
 	
 	if curLoc == '': #hardcode if fails.
-		curLoc = '47.6159392,-122.3268701' #Seattle Pine/Bellevue
+		curLoc = '#47.6159392,-122.3268701' #Seattle Pine/Bellevue
 		#SF chestnut/VanNess.798542,-122.422345'	
 
 	#grab array of reviews from our models
@@ -74,7 +75,12 @@ def index(request):
 			if 'price_level' not in place.keys():
 				place['price_level'] = 'N/A'
 				
-			temp = {'name': place['name'], 'id': place['id'], 'reference':place['reference'], 'rating': place['rating'], 'price_level': place['price_level'], 'types': place['types'], 'vicinity': place['vicinity'], 'hashtags': hashtags}
+			#sort hashtag scores, and pick 3
+			orderHashtags = Counter(hashtags)
+			topTags = orderHashtags.most_common(3)
+			topHashtags = [i[0] for i in topTags]
+			
+			temp = {'name': place['name'], 'id': place['id'], 'reference':place['reference'], 'rating': place['rating'], 'price_level': place['price_level'], 'types': place['types'], 'vicinity': place['vicinity'], 'hashtags': topHashtags}
 			
 			#append
 			placeMatch.append(temp)
@@ -191,6 +197,8 @@ def submitReviewVenue(request, place_name, reference):
 
 	
 def submit_submitReview(request):
+	curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+
 	#Check if place exists. If not, add place
 	if Place.objects.filter(placeID=request.POST['venueId']).exists():
 		newPlace = Place.objects.get(placeID=request.POST['venueId'])
@@ -230,16 +238,26 @@ def submit_submitReview(request):
 				tags.pop(position)
 			placeTag.save()
 			
+			#add new User Action
+			newAction = UserAction.objects.create(userID=curUser, time = datetime.today(), place = newPlace , tag = placeTag.tag)
+			newAction.save()
+			
 	#create a new review with remaining tags that didn't match
 	for hashtag in tags: 
 		newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.today(), score = 50)
 		
+		#log new user action
+		newAction = UserAction.objects.create(userID=curUser, time = datetime.today(), place = newPlace , tag = Hashtag.objects.get(text=hashtag))
+		newAction.save()
 		
 		#update UserAction and UserProfile Points
 		
 		newVenueReview.save()
 	
-			
+	#add a point to the user
+	curUser.points += 1
+	curUser.save()
+	
 	return HttpResponseRedirect('/')
 		
 		
