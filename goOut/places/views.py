@@ -16,7 +16,6 @@ from collections import Counter
 
 timeDecayExponent = 0.00001
 
-#import googlemaps
 
 ##find today's date to find items close to it in db
 #date = datetime.today()
@@ -304,12 +303,19 @@ def view_fav(request):
 	for venue in favorites:
 		hashtags = {}
 		temp = PlaceTag.objects.filter(place=venue, lastUpdate__gte=cutoffTime)
-		
+
 		for i in temp:
 			hashtags[i.tag.text]=i.score
 	
+
+
+		#before submit hashtag list, change to list of top 3:
+		orderHashtags = Counter(hashtags)
+		topTags = orderHashtags.most_common(3)
+		topHashtags = [i[0] for i in topTags]
 		#create dictionsary to append to list
-		addToList = {'userName':userName, 'name':venue.placeName , 'hashtags':hashtags}
+		
+		addToList = {'userName':userName, 'name':venue.placeName , 'hashtags':topHashtags}
 		
 		favList.append(addToList)
 	
@@ -320,9 +326,15 @@ def view_fav(request):
 	return render(request, 'places/view_fav.html', context)
 		
 @login_required()
-def add_fav(request, placeId):
+def add_fav(request, place_name, placeId):
 	curUser=UserProfile.objects.get(user=User.objects.get(id=request.user.id))
-	current_venue = Place.objects.get(placeID = placeId)
+
+	#check if place exists; if not, add!
+	if Place.objects.filter(placeID=placeId).exists():
+		current_venue = Place.objects.get(placeID = placeId)
+	else: #add place
+		current_venue = Place.objects.create(placeID=placeId, placeName=place_name)
+		current_venue.save()
 
 	if curUser.favoritePlaces.filter(id=current_venue.id).exists():
 		curUser.favoritePlaces.remove(current_venue)

@@ -17,7 +17,7 @@ urlpatterns = patterns('places.views',
 	url(r'^user/$', 'view_profile', name='profile'),
 	url(r'^user/fav/$', 'view_fav', name='view_fav'),
 	
-	url(r'^(?P<placeId>.+)/fav/$', 'add_fav', name='add_fav'),
+	url(r'^(?P<place_name>.+)/(?P<placeId>.+)/fav/$', 'add_fav', name='add_fav'),
 		
 	#detail page about a place
 	url(r'^venue/(?P<place_id>.+)/$', 'placeDetail', name='placeDetail'),	

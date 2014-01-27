@@ -21,7 +21,7 @@
 				</div>
 				-->
 				<div class="venue-left">
-					{% for text, score in place.hashtags.items %}
+					{% for text in place.hashtags %}
 						#{{ text }}
 						<br/>
 					{% endfor %}
