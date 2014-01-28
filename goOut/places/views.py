@@ -11,8 +11,9 @@ import json, pprint
 from datetime import datetime
 from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction
 import sets
-from math import exp
+from math import exp, log10, floor
 from collections import Counter
+import oauth2
 
 timeDecayExponent = 0.00001
 
@@ -35,18 +36,42 @@ def index(request):
 	curLoc = request.POST['position']
 	
 	if curLoc == '': #hardcode if fails.
-		curLoc = '#47.6159392,-122.3268701' #Seattle Pine/Bellevue
+		curLoc = '47.6159392,-122.3268701' #Seattle Pine/Bellevue
 		#SF chestnut/VanNess.798542,-122.422345'	
+	
+	"""YELP API"""
+	# Values for access
+	consumer_key = 'nee5cvfcAEBHCg3wSGSdKw'
+	consumer_secret = '3FmOuF9CLBGjyITGF66hbKmbgho'
+	token = 'Ta-DBi45PaqkBhBnPJ1xpv1mmIjkVmxP'
+	token_secret = 'ngCe85K7Xk6Sq37hI-4T-rE1Xtw'
 
-	#grab array of reviews from our models
-	curRev = PlaceTag.objects.filter(lastUpdate__gte = cutoffTime)
-	curRevList = list(set([placeTag.place.placeID for placeTag in curRev]))
+	consumer = oauth2.Consumer(consumer_key, consumer_secret)
+	url = 'http://api.yelp.com/v2/search?term=nightlife&ll=' + curLoc
+	
+	oauth_request = oauth2.Request('GET', url, {})
+	oauth_request.update({'oauth_nonce': oauth2.generate_nonce(),'oauth_timestamp': oauth2.generate_timestamp(),'oauth_token': token, 'oauth_consumer_key': consumer_key})
+
+	token = oauth2.Token(token, token_secret)
+	oauth_request.sign_request(oauth2.SignatureMethod_HMAC_SHA1(), consumer, token)
+	signed_url = oauth_request.to_url()
+
+	#grab json object from Yelp API
+	req = urlopen(signed_url).read()
+	venues = json.loads(req).get("businesses")
+
+	"""GOOGLE PLACES API:
 
 	apiCall = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+curLoc+"&radius=550&types=bar|casino|night_club&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"
 
 	#grab json object from google Places API
 	req = urlopen(apiCall).read()
 	venues = json.loads(req).get("results")
+	"""
+
+	#grab array of reviews from our models
+	curRev = PlaceTag.objects.filter(lastUpdate__gte = cutoffTime)
+	curRevList = list(set([placeTag.place.placeID for placeTag in curRev]))
 
 	#for each place, do a check for id in curRevList, and append hashtag information
 	#create two dictionaries to access for next view, one that have data for, one that we don't
@@ -71,15 +96,21 @@ def index(request):
 			#check if price_level and rating exist and append
 			if 'rating' not in place.keys():
 				place['rating'] = 'N/A'
-			if 'price_level' not in place.keys():
-				place['price_level'] = 'N/A'
+			#if 'price_level' not in place.keys():
+			#	place['price_level'] = 'N/A'
 				
 			#sort hashtag scores, and pick 3
 			orderHashtags = Counter(hashtags)
 			topTags = orderHashtags.most_common(3)
 			topHashtags = [i[0] for i in topTags]
 			
-			temp = {'name': place['name'], 'id': place['id'], 'reference':place['reference'], 'rating': place['rating'], 'price_level': place['price_level'], 'types': place['types'], 'vicinity': place['vicinity'], 'hashtags': topHashtags}
+			#round distance, list of categories, and location
+			distance = round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
+			categories = [i[0] for i in place['categories']]
+			try: location = place['location']['neighborhoods'][0]
+			except: location='fahk'
+
+			temp = {'name': place['name'], 'id': place['id'], 'rating': place['rating_img_url'], 'types': categories, 'location': location, 'hashtags': topHashtags, 'distance':distance}
 			
 			#append
 			placeMatch.append(temp)
@@ -88,10 +119,24 @@ def index(request):
 			#check to see if price level and rating exist
 			if 'rating' not in place.keys():
 				place['rating'] = 'N/A'
-			if 'price_level' not in place.keys():
-				place['price_level'] = 'N/A'
-				
-			temp = {'name': place['name'], 'id': place['id'], 'reference':place['reference'], 'rating':place['rating'], 'price_level':place['price_level'], 'types':place['types'], 'vicinity':place['vicinity']}
+			#if 'price_level' not in place.keys():
+			#	place['price_level'] = 'N/A'
+
+			#round distance, list of categories, and location
+			distance = round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
+			categories = [i[0] for i in place['categories']]
+			location = []
+			try: location.append(place['location']['address'][0])
+			except: continue
+
+			try: location.append(place['location']['cross_streets']) 
+			except: continue
+			
+			try: location.append(place['location']['neighborhoods'][0])
+			except: continue
+
+			temp = {'name': place['name'], 'id': place['id'], 'rating': place['rating_img_url'], 'types': categories, 'location': location, 'distance':distance}
+			
 			
 			#append
 			placeNoMatch.append(temp)
@@ -114,38 +159,59 @@ def placeDetail(request,place_id):
 	else:
 		userName = ''
 	
-	#make call to Google API for information
+	"""YELP API"""
+	# Values for access
+	consumer_key = 'nee5cvfcAEBHCg3wSGSdKw'
+	consumer_secret = '3FmOuF9CLBGjyITGF66hbKmbgho'
+	token = 'Ta-DBi45PaqkBhBnPJ1xpv1mmIjkVmxP'
+	token_secret = 'ngCe85K7Xk6Sq37hI-4T-rE1Xtw'
+
+	consumer = oauth2.Consumer(consumer_key, consumer_secret)
+	url = 'http://api.yelp.com/v2/business/' + place_id
+	
+	oauth_request = oauth2.Request('GET', url, {})
+	oauth_request.update({'oauth_nonce': oauth2.generate_nonce(),'oauth_timestamp': oauth2.generate_timestamp(),'oauth_token': token, 'oauth_consumer_key': consumer_key})
+
+	token = oauth2.Token(token, token_secret)
+	oauth_request.sign_request(oauth2.SignatureMethod_HMAC_SHA1(), consumer, token)
+	signed_url = oauth_request.to_url()
+
+	req = urlopen(signed_url).read()
+	place = json.loads(req)
+	
+
+	"""
 	apiCall = "https://maps.googleapis.com/maps/api/place/details/json?reference=" + place_id + "&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"
 
 	#grab json object from google Places API
 	req = urlopen(apiCall).read()
 	place = json.loads(req).get("result")
-	
+	"""
 	#get PlaceTags in our database
 	tags = PlaceTag.objects.filter(place__placeID= place['id'], lastUpdate__gte = cutoffTime)
 	
 	#send relevant information to templates
 	#check to see if all keys exist. If not, assign 'NA' values
-	if 'formatted_phone_number' not in place.keys():
-		place['formatted_phone_number'] = 'N/A'
+	if 'display_phone' not in place.keys():
+		place['display_phone'] = 'N/A'
 		
-	if 'formatted_address' not in place.keys():
-		place['formatted_address'] = 'N/A'
+	if 'display_address' not in place['location'].keys():
+		place['location']['display_address'] = 'N/A'
 	
-	if 'rating' not in place.keys():
-		place['rating'] = 'N/A'
+	if 'rating_img_url' not in place.keys():
+		place['rating_img_url'] = 'N/A'
 	
-	if 'price_level' not in place.keys():
-		place['price_level'] = 'N/A'
+	#if 'price_level' not in place.keys():
+	#	place['price_level'] = 'N/A'
 		
 	#create address
-	address = []
-	address.append(place['address_components'][0]['long_name'] + ' ' + place['address_components'][1]['long_name'])
-	address.append(place['address_components'][2]['long_name'] + ',' + place['address_components'][3]['long_name'])
+	#address = []
+	#address.append(place['address_components'][0]['long_name'] + ' ' + place['address_components'][1]['long_name'])
+	#address.append(place['address_components'][2]['long_name'] + ',' + place['address_components'][3]['long_name'])
 	
 	#see if have info on opening times
-	try: place['open'] = place['opening_hours']['open_now']
-	except: place['open'] = ''
+	#try: place['open'] = place['opening_hours']['open_now']
+	#except: place['open'] = ''
 	
 	#find what the most descriptive hashtags have been in the past?
 	
@@ -158,8 +224,9 @@ def placeDetail(request,place_id):
 		placeTag.lastUpdate = timeNow
 		placeTag.save()
 
-	
-	context = {'userName':userName, 'id':place['id'], 'tags':tags, 'name':place['name'], 'open': place['open'], 'venueTypes':place['types'], 'address':address, 'phone': place['formatted_phone_number'], 'price':place["price_level"], 'rating':place['rating'], 'photos':place}
+	categories = [i[0] for i in place['categories']]
+
+	context = {'userName':userName, 'id':place['id'], 'tags':tags, 'name':place['name'], 'venueTypes':categories, 'address':place['location']['display_address'], 'phone': place['display_phone'], 'rating':place['rating_img_url']}
 	
 	return render(request, 'places/placeDetail.html', context)
 

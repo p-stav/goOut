@@ -4,28 +4,33 @@
 
 {% block content %}
 
-<div class="placeList">
+<div class="placeList" id='match'>
 	<br/>
+	
+	
 	{% for place in placeMatch %}
-		<div class="venue" id="{{ place.reference }}">
-			
-			<h4>{{ place.name }}</h4>
+		<div class="venue" id="{{ place.id }}">
 			<!--
 			<div class = 'venue-pic'>
 			
 			</div>
 			-->
+
+			<h4>{{ place.name }}</h4>
 			<div class="venue-left">
 				{% for tag in place.hashtags %}
 					#{{ tag }}
-					<br/>
+					{% if not forloop.last %} <br/> {% endif %}
 				{% endfor %}
 			</div>
 		
 		
 			<div class = 'venue-right'>
-				{{ place.rating }} / 5.0
+				<img src="{{place.rating}}">
 				<br/>
+				{{place.distance}} mi
+				<br/>
+				<!--
 				{% if place.price_level == 1 %}
 					$
 				{% elif place.price_level == 2 %}
@@ -42,12 +47,12 @@
 				{% endif %}
 				
 				<br/>
+				-->
+				<br/>
+
 				{% for type in place.types %}
-					{% if type == 'bar' %}
-						bar 
-					{% elif type == 'night_club' %}
-						club
-					{% endif %}
+					{{type}} 
+					{%if not forloop.last %}, {% endif %}
 				{% endfor %}
 					
 			</div>
@@ -63,28 +68,32 @@
 <br/><br/><br/>
 
 <!--List for items with no data in our DB -->
-<div class="placeList">
+<div class="placeList" id='noMatch'>
 	{% for place in placeNoMatch %}
-		<div class="venue" id="{{ place.reference }}">
-			<h4>{{ place.name }}</h4>
+		<div class="venue" id="{{ place.id }}">
 			<!--
 			<div class = 'venue-pic'>
 			
 			</div>
 			-->
+			<h4>{{ place.name }}</h4>
 			<div class="venue-left">
-				<!--googleApi stuff-->
-				Google
-				<br>
-				API
-				<br>
-				stuff
+				
+
+				{% for line in place.location %}
+					{{line}}
+					{% if not forloop.last %} <br/> {% endif %}
+
+				{% endfor %}
 			</div>
 		
 		
 			<div class = 'venue-right'>
-				{{ place.rating }} / 5.0
+				<img src="{{place.rating}}">
 				<br/>
+				{{place.distance}} mi
+				<br/>
+				<!--
 				{% if place.price_level == 1 %}
 					$
 				{% elif place.price_level == 2 %}
@@ -100,12 +109,12 @@
 				{% endif %}
 				
 				<br/>
+				-->
+				<br/>
+
 				{% for type in place.types %}
-					{% if type == 'bar' %}
-						bar 
-					{% elif type == 'night_club' %}
-						club
-					{% endif %}
+					{{type}} 
+					{% if not forloop.last %}, {% endif %}
 				{% endfor %}
 					
 			</div>
@@ -113,11 +122,10 @@
 			<div class="separator">
 			</div>
 		</div>
-		
-
-		
 	{% endfor %}
 </div>
+
+
 <script type = "text/javascript">
 
 	$(document).ready(function() {
