@@ -15,7 +15,7 @@ urlpatterns = patterns('places.views',
 	
 	#create user's own page, view other people's profile, and see user's favorited places
 	url(r'^user/$', 'view_profile', name='profile'),
-	url(r'^user/fav/$', 'view_fav', name='view_fav'),
+	url(r'^fav/$', 'view_fav', name='view_fav'),
 	
 	url(r'^(?P<place_name>.+)/(?P<placeId>.+)/fav/$', 'add_fav', name='add_fav'),
 		

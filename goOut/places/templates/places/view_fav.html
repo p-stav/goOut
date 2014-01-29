@@ -12,7 +12,7 @@
 	<div class="placeList">
 		<br/>
 		{% for place in favorites %}
-			<div class="venue" id="{{ place.reference }}">
+			<div class="venue" id="{{ place.id }}">
 				
 				<h4>{{ place.name }}</h4>
 				<!--
@@ -70,5 +70,15 @@
 	<p>You haven't favorited any jokes yet.</p>
 {% endif %}
 
+<script type = "text/javascript">
 
+	$(document).ready(function() {
+		$('.venue').click(function(){
+			//link to next page. Search into how this interfaces with django
+			location.href = '../venue/'+$(this).attr('id');
+		});
+	
+	});
+
+</script>
 {% endblock %}

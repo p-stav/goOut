@@ -388,7 +388,7 @@ def view_fav(request):
 		topHashtags = [i[0] for i in topTags]
 		#create dictionsary to append to list
 		
-		addToList = {'userName':userName, 'name':venue.placeName , 'hashtags':topHashtags}
+		addToList = {'userName':userName, 'name':venue.placeName , 'hashtags':topHashtags, 'id':venue.placeID}
 		
 		favList.append(addToList)
 	
