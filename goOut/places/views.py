@@ -108,7 +108,7 @@ def index(request):
 			distance = round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
 			categories = [i[0] for i in place['categories']]
 			try: location = place['location']['neighborhoods'][0]
-			except: location='fahk'
+			except: location=''
 
 			temp = {'name': place['name'], 'id': place['id'], 'rating': place['rating_img_url'], 'types': categories, 'location': location, 'hashtags': topHashtags, 'distance':distance}
 			
@@ -125,17 +125,17 @@ def index(request):
 			#round distance, list of categories, and location
 			distance = round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
 			categories = [i[0] for i in place['categories']]
-			location = []
-			try: location.append(place['location']['address'][0])
+			address = []
+			try: address.append(place['location']['address'][0])
 			except: continue
 
-			try: location.append(place['location']['cross_streets']) 
+			try: address.append(place['location']['cross_streets']) 
 			except: continue
 			
-			try: location.append(place['location']['neighborhoods'][0])
-			except: continue
+			try: location=place['location']['neighborhoods'][0]
+			except: location=''
 
-			temp = {'name': place['name'], 'id': place['id'], 'rating': place['rating_img_url'], 'types': categories, 'location': location, 'distance':distance}
+			temp = {'name': place['name'], 'id': place['id'], 'rating': place['rating_img_url'], 'types': categories, 'address':address, 'location': location, 'distance':distance}
 			
 			
 			#append
@@ -224,9 +224,15 @@ def placeDetail(request,place_id):
 		placeTag.lastUpdate = timeNow
 		placeTag.save()
 
-	categories = [i[0] for i in place['categories']]
+	#edit address:
+	address = []
+	address.append(place['location']['address'][0] + '  ' + place['location']['city'] + ',' + place['location']['state_code'])
+	address.append(place['location']['cross_streets'] + ', ' + place['location']['neighborhoods'][0])
 
-	context = {'userName':userName, 'id':place['id'], 'tags':tags, 'name':place['name'], 'venueTypes':categories, 'address':place['location']['display_address'], 'phone': place['display_phone'], 'rating':place['rating_img_url']}
+	categories = [i[0] for i in place['categories']]
+	display_phone = place['display_phone'][3:]
+
+	context = {'userName':userName, 'id':place['id'], 'tags':tags, 'name':place['name'], 'venueTypes':categories, 'address':address, 'phone': display_phone, 'rating':place['rating_img_url_small']}
 	
 	return render(request, 'places/placeDetail.html', context)
 

@@ -4,9 +4,7 @@
 
 {% block content %}
 
-<div class="placeList" id='match'>
-	<br/>
-	
+<div class="placeList" id='match'>	
 	
 	{% for place in placeMatch %}
 		<div class="venue" id="{{ place.id }}">
@@ -16,12 +14,21 @@
 			</div>
 			-->
 
-			<h4>{{ place.name }}</h4>
+			<div class='h4'>{{ place.name }}</div>
+
+			<div class='venueType'>
+				{% for type in place.types %}
+					{{type}} 
+					{%if not forloop.last %}, {% endif %}
+				{% endfor %}
+			</div>
+			<br/>
 			<div class="venue-left">
 				{% for tag in place.hashtags %}
 					#{{ tag }}
 					{% if not forloop.last %} <br/> {% endif %}
 				{% endfor %}
+
 			</div>
 		
 		
@@ -48,15 +55,12 @@
 				
 				<br/>
 				-->
-				<br/>
+				{{place.location}}
 
-				{% for type in place.types %}
-					{{type}} 
-					{%if not forloop.last %}, {% endif %}
-				{% endfor %}
+				
 					
 			</div>
-			<br><br><br>
+			<br><br>
 			<div class="separator">
 			</div>
 		</div>
@@ -65,7 +69,7 @@
 		
 	{% endfor %}
 </div>
-<br/><br/><br/>
+<br/>
 
 <!--List for items with no data in our DB -->
 <div class="placeList" id='noMatch'>
@@ -76,15 +80,20 @@
 			
 			</div>
 			-->
-			<h4>{{ place.name }}</h4>
-			<div class="venue-left">
-				
-
-				{% for line in place.location %}
-					{{line}}
-					{% if not forloop.last %} <br/> {% endif %}
-
+			<div class='h4'>{{ place.name }}</div>
+			<div class='venueType'>
+				{% for type in place.types %}
+					{{type}} 
+					{%if not forloop.last %}, {% endif %}
 				{% endfor %}
+			</div>
+			<br/>
+			<div class="venue-left">
+				{% for line in place.address %}
+					{{line}}
+					<br/>
+				{% endfor %}
+				filler
 			</div>
 		
 		
@@ -110,15 +119,11 @@
 				
 				<br/>
 				-->
-				<br/>
+				{{place.location}}
 
-				{% for type in place.types %}
-					{{type}} 
-					{% if not forloop.last %}, {% endif %}
-				{% endfor %}
-					
+									
 			</div>
-			<br><br><br>
+			<br><br>
 			<div class="separator">
 			</div>
 		</div>
