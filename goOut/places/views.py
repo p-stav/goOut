@@ -25,7 +25,11 @@ date = datetime(2013, 12, 28, 22, 40, 41, 879000)
 cutoffTime = datetime(date.year,date.month,date.day, date.hour-2, date.minute, date.second, date.microsecond)
 
 def getCurLoc(request):
-	context = {}
+	term = request.POST.getlist('searchTerm')
+
+	if term: context = {'search':term}
+	else:context = {'search':''}
+	
 	return render(request, 'places/getCurLoc.html', context)
 	
 	
@@ -34,6 +38,7 @@ def index(request):
 	#find curLong + curLat
 	
 	curLoc = request.POST['position']
+	searchTerm = request.POST['search']
 	
 	if curLoc == '': #hardcode if fails.
 		curLoc = '47.6159392,-122.3268701' #Seattle Pine/Bellevue
@@ -47,7 +52,11 @@ def index(request):
 	token_secret = 'ngCe85K7Xk6Sq37hI-4T-rE1Xtw'
 
 	consumer = oauth2.Consumer(consumer_key, consumer_secret)
+	
+	#if not search:
 	url = 'http://api.yelp.com/v2/search?term=nightlife&ll=' + curLoc
+#	else: 
+#		url = 'http://api.yelp.com/v2/search?term=' + searchTerm + '&ll=' + curLoc
 	
 	oauth_request = oauth2.Request('GET', url, {})
 	oauth_request.update({'oauth_nonce': oauth2.generate_nonce(),'oauth_timestamp': oauth2.generate_timestamp(),'oauth_token': token, 'oauth_consumer_key': consumer_key})

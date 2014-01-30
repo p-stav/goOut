@@ -100,8 +100,21 @@
 		-->
 	  </div>
 	  
-	    <ul class="nav navbar-nav navbar-right">
-		<li><a href="/search"><span class  = 'glyphicon glyphicon-search'></span></a></li>
+	    <ul class="nav navbar-nav pull-right navbar-right">
+		<li class="dropdown">
+			<a href="#search" class="dropdown-toggle" data-toggle="dropdown">
+				<span class  = 'glyphicon glyphicon-search'></span>
+			</a>
+			<div class="dropdown-menu" style="padding-left: 5px; padding-right: 5px;">
+				<form action={% url "places:getCurLoc" %} method="post" accept-charset="UTF-8">
+				{% csrf_token %}
+					<div class='input-group'><input type="text" name="searchTerm" class="form-control" placeholder="Nearby:">
+						<span class="input-group-btn"><input class="btn btn-default" type="submit" value="go"></span>
+					</div>
+				</form>
+
+			</div>
+		</li>
 		
 		<li class="dropdown">
 			<a href="#filter" class="dropdown-toggle" data-toggle="dropdown"><span class  = 'glyphicon glyphicon-filter'></span></a>
@@ -112,6 +125,14 @@
 	  </ul>
 	</header>
 	
+
+	<script>
+		// Fix input element click problem
+  		$('.dropdown input, .dropdown label').click(function(e) {
+    		e.stopPropagation();
+  		});
+
+	</script>
 	<div class='content'>
 	 {% block content %}{% endblock %} 
     </div>
