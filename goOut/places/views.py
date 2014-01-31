@@ -38,7 +38,10 @@ def index(request):
 	#find curLong + curLat
 	
 	curLoc = request.POST['position']
-	searchTerm = request.POST['search']
+	if request.POST['search']:
+		searchTerm = request.POST['search'][0]
+	else:
+		searchTerm = False
 	
 	if curLoc == '': #hardcode if fails.
 		curLoc = '47.6159392,-122.3268701' #Seattle Pine/Bellevue
@@ -53,10 +56,12 @@ def index(request):
 
 	consumer = oauth2.Consumer(consumer_key, consumer_secret)
 	
-	#if not search:
-	url = 'http://api.yelp.com/v2/search?term=nightlife&ll=' + curLoc
-#	else: 
-#		url = 'http://api.yelp.com/v2/search?term=' + searchTerm + '&ll=' + curLoc
+	if not searchTerm:
+		url = 'http://api.yelp.com/v2/search?term=nightlife&ll=' + curLoc
+	else: 
+		url = 'http://api.yelp.com/v2/search?term=' + searchTerm + '&ll=' + curLoc
+
+		
 	
 	oauth_request = oauth2.Request('GET', url, {})
 	oauth_request.update({'oauth_nonce': oauth2.generate_nonce(),'oauth_timestamp': oauth2.generate_timestamp(),'oauth_token': token, 'oauth_consumer_key': consumer_key})
