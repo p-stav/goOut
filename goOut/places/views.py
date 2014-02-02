@@ -40,9 +40,11 @@ def getCurLoc(request):
 	
 #index page. 
 def index(request):
-	#find curLong + curLat
-	
-	curLoc = request.POST['position']
+	#get curLong + curLat, or redirect to get info
+	if request.POST.get('position'):
+			curLoc = request.POST['position']
+	else: return HttpResponseRedirect('/')
+
 
 	if curLoc == '': #hardcode if fails.
 		curLoc = '47.6159392,-122.3268701' #Seattle Pine/Bellevue
@@ -61,8 +63,8 @@ def index(request):
 	
 
 	if  term != '':
-		url = 'http://api.yelp.com/v2/search?term=' + request.POST['search'] + '&ll=' + curLoc
-	if sortMethod != 0:
+		url = 'http://api.yelp.com/v2/search?term=' + term + '&ll=' + curLoc
+	elif sortMethod != '0':
 		url = 'http://api.yelp.com/v2/search?term=nightlife&ll=' + curLoc +'&sort=' + sortMethod
 	else:
 		url = 'http://api.yelp.com/v2/search?term=nightlife&ll=' + curLoc

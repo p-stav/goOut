@@ -4,9 +4,6 @@
 
 {% block content %}
 
-<br/>{{search}}
-<br/> {{url}}
-<br/> {{sort}}
 <div class="placeList" id='match'>	
 	
 	{% for place in placeMatch %}
@@ -72,7 +69,8 @@
 		
 	{% endfor %}
 </div>
-<br/>
+<br/><br/>
+<p class="text-info">Untagged Venues:</p>
 
 <!--List for items with no data in our DB -->
 <div class="placeList" id='noMatch'>

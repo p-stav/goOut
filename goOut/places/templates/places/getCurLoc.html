@@ -13,12 +13,12 @@
 
 	<!--Google Maps and Google Places APIs-->
 	
-	<script type='text/javascript' src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
 	<!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>-->
 	
 	<!-- bootstrap -->
 	{% load staticfiles %}
-	<script src="{{STATIC_URL}}jquery.js" %}"> </script>
+	<script src="{{STATIC_URL}}jquery.js" > </script>
 	<link type="text/css" href="{{STATIC_URL}}bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet"/>
 	<link href="{{STATIC_URL}}bootstrap-3.0.0/dist/css/bootstrap-theme.css" rel="stylesheet"/>
 	<script src="{{STATIC_URL}}bootstrap-3.0.0/dist/js/bootstrap.js"> </script>
@@ -33,6 +33,15 @@
 </head>
 
 <body>
+	<div class='container'>
+		<br/><br/>
+		<h3 class='text-info'>hi</h3></br>
+		<h4 style="color:#6f5499;">Welcome to Koala!</h4><br/>
+		<button type="button" id="loading-example-btn" data-loading-text="Loading..." class="btn btn-primary">
+  			Loading..
+		</button>
+	</div>
+
 	<div class='hidden'>
 		<form role="form" method='post' id='locationForm' action={% url "places:index" %}>
 		{% csrf_token %}
@@ -42,6 +51,10 @@
 			
 			<div class='form-group'>
 				<textarea class="form-control" id="search" name="search" rows="4">{{search}}</textarea>
+			</div>
+
+			<div class='form-group'>
+				<textarea class="form-control" id="sortMethod" name="sortMethod" rows="4">{{sortMethod}}</textarea>
 			</div>
 
 			<div class="form-group">
@@ -57,6 +70,10 @@
 
 <script>
 	$(document).ready(function() {
+		//loading state
+		var btn = $('#loading-example-btn');
+		btn.button('loading');
+
 		// We need to check if the browser has the correct capabilities.
 		if (navigator.geolocation) {
 			// If so, get the current position and feed it to exportPosition (or errorPosition if there was a problem)
@@ -68,5 +85,7 @@
 			$('#locationForm').submit();
 			
 		}
+
+
 	});
 </script>

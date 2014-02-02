@@ -99,13 +99,13 @@
 	  
 	    <ul class="nav navbar-nav pull-right navbar-right">
 		  <li class="dropdown">
-			<a href="#search" class="dropdown-toggle" data-toggle="dropdown">
+			<a href="#search" class="dropdown-toggle findClick" data-toggle="dropdown">
 				<span class  = 'glyphicon glyphicon-search'></span>
 			</a>
 			<div class="dropdown-menu noClick" style="padding-left: 5px; padding-right: 5px;">
 				<form action={% url "places:getCurLoc" %} method="post" accept-charset="UTF-8">
 				{% csrf_token %}
-					<div class='input-group'><input type="text" name="searchTerm" class="form-control" placeholder="Nearby:">
+					<div class='input-group'><input type="text" name="searchTerm" class="form-control searchTerm" placeholder="Nearby:">
 						<span class="input-group-btn"><input class="btn btn-default" type="submit" value="go"></span>
 					</div>
 				</form>
@@ -120,21 +120,21 @@
 			  	<form action={% url "places:getCurLoc" %} method="post" accept-charset="UTF-8">
 			  		{% csrf_token %}
 			  		<div class="btn-group" data-toggle="buttons">
-			  			<label class="btn btn-small btn-primary">
+			  			<label class="btn btn-xs btn-primary">
 			  				<input type='radio' class="sortMethod" name="sortMethod" value="0">Best Match<br/>
 			  			</label>
 
-			  			<label class="btn btn-primary">
+			  			<label class="btn btn-xs btn-primary">
 			  				<input type='radio' class="sortMethod" name="sortMethod" value="1"> By distance <br/>
 			  			</label>
 
-			  			<label class="btn btn-primary">
+			  			<label class="btn btn-xs btn-primary">
 			  				<input type='radio' class="sortMethod" name="sortMethod" value="2">By rating
 			  			</label>
 			  		</div>
-			  	</br>
+			  	</br></br>
 			  		<div class="form-group">
-						<button type="submit" id='submitButton' class="btn btn-primary" name="submit_tags_form">Submit</button>
+						<button type="submit" id='submitButton' class="btn btn-primary btn-xs" name="submit_tags_form">Submit</button>
 					</div>
 				</form>
 			</div>
@@ -149,17 +149,10 @@
     		e.stopPropagation();
   		});
 
-		$('.sortMethod').click(function(e) {
-			alert('hi');
-			var method = $(this).value;
+  		$('.findClick').click(function(){
+  			$('.searchTerm').focus();
 
-			if (method =='By distance') {
-				$.post('../getCurLoc', {'sortMethod':'1'});
-			}
-			if (method =='By rating') {
-				$.post('../getCurLoc', {'sortMethod':'2'});
-			}
-		});
+  		});
 	</script>
 	<div class='content'>
 	 {% block content %}{% endblock %} 

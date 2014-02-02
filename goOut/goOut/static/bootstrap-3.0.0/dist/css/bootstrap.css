@@ -95,6 +95,11 @@ float:right;
   margin-right:50px;
   width:100%; 
 }
+
+.sortMethod {
+  display:none;
+
+}
 /*********************************************************/
 
 
@@ -3326,7 +3331,7 @@ input[type="button"].btn-block {
   font-size: 14px;
   list-style: none;
   background-color: #ffffff;
-  color: #ffffff;
+  color: #333333;
   border: 1px solid #cccccc;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 4px;
