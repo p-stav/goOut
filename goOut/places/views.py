@@ -25,11 +25,16 @@ date = datetime(2013, 12, 28, 22, 40, 41, 879000)
 cutoffTime = datetime(date.year,date.month,date.day, date.hour-2, date.minute, date.second, date.microsecond)
 
 def getCurLoc(request):
-	term = request.POST.getlist('searchTerm')
+	if request.POST.get('sortMethod'):
+		method = request.POST['sortMethod']
+	else: method = '0'
 
-	if term: context = {'search':term}
-	else:context = {'search':''}
-	
+	if request.POST.get('searchTerm'):
+		term = request.POST['searchTerm']
+	else: term = ''
+
+	context = {'sortMethod':method, 'search':term}
+
 	return render(request, 'places/getCurLoc.html', context)
 	
 	
@@ -38,11 +43,7 @@ def index(request):
 	#find curLong + curLat
 	
 	curLoc = request.POST['position']
-	if request.POST['search']:
-		searchTerm = request.POST['search'][0]
-	else:
-		searchTerm = False
-	
+
 	if curLoc == '': #hardcode if fails.
 		curLoc = '47.6159392,-122.3268701' #Seattle Pine/Bellevue
 		#SF chestnut/VanNess.798542,-122.422345'	
@@ -55,11 +56,17 @@ def index(request):
 	token_secret = 'ngCe85K7Xk6Sq37hI-4T-rE1Xtw'
 
 	consumer = oauth2.Consumer(consumer_key, consumer_secret)
+	sortMethod = request.POST.get('sortMethod')
+	term = request.POST['search']
 	
-	if not searchTerm:
+
+	if  term != '':
+		url = 'http://api.yelp.com/v2/search?term=' + request.POST['search'] + '&ll=' + curLoc
+	if sortMethod != 0:
+		url = 'http://api.yelp.com/v2/search?term=nightlife&ll=' + curLoc +'&sort=' + sortMethod
+	else:
 		url = 'http://api.yelp.com/v2/search?term=nightlife&ll=' + curLoc
-	else: 
-		url = 'http://api.yelp.com/v2/search?term=' + searchTerm + '&ll=' + curLoc
+		
 
 		
 	
@@ -161,7 +168,7 @@ def index(request):
 		userName = curUser.user.username
 	else:
 		userName = ''
-	context = { 'userName':userName, 'placeMatch': placeMatch, 'placeNoMatch': placeNoMatch }
+	context = { 'sort':sortMethod,'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeNoMatch': placeNoMatch }
 	return render(request, 'places/index.html', context)
 	
 	

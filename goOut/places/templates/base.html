@@ -16,7 +16,7 @@
 	
 	<!-- bootstrap -->
 	{% load staticfiles %}
-	<script src="{{STATIC_URL}}jquery.js" %}"> </script>
+	<script src="{{STATIC_URL}}jquery.js"> </script>
 	<link type="text/css" href="{{STATIC_URL}}bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet"/>
 	<link href="{{STATIC_URL}}bootstrap-3.0.0/dist/css/bootstrap-theme.css" rel="stylesheet"/>
 	<script src="{{STATIC_URL}}bootstrap-3.0.0/dist/js/bootstrap.js"> </script>
@@ -83,10 +83,7 @@
 		<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
 		  <ul class="nav navbar-nav navbar-right">
 		 -->
-			<!--<li id='topPadding'>
-			  <input type="text" class="form-control" placeholder="Find a place nearby">
-			</li>-->
-			
+						
 			<!--Need to make next button dynamic; if in venueDetail, pass Id. If not, don't pass ID-->
 			<!--
 			<li><a href="/review"><span class  = 'glyphicon glyphicon-edit'></span></a></li>
@@ -101,11 +98,11 @@
 	  </div>
 	  
 	    <ul class="nav navbar-nav pull-right navbar-right">
-		<li class="dropdown">
+		  <li class="dropdown">
 			<a href="#search" class="dropdown-toggle" data-toggle="dropdown">
 				<span class  = 'glyphicon glyphicon-search'></span>
 			</a>
-			<div class="dropdown-menu" style="padding-left: 5px; padding-right: 5px;">
+			<div class="dropdown-menu noClick" style="padding-left: 5px; padding-right: 5px;">
 				<form action={% url "places:getCurLoc" %} method="post" accept-charset="UTF-8">
 				{% csrf_token %}
 					<div class='input-group'><input type="text" name="searchTerm" class="form-control" placeholder="Nearby:">
@@ -114,24 +111,55 @@
 				</form>
 
 			</div>
-		</li>
+		  </li>
 		
-		<li class="dropdown">
-			<a href="#filter" class="dropdown-toggle" data-toggle="dropdown"><span class  = 'glyphicon glyphicon-filter'></span></a>
-			<ul class="dropdown-menu">
-			  <li><a href="#">Filter options</a></li>
-			</ul>
-		</li>
+		  <li class="dropdown">
+			<a href="#sort" class="dropdown-toggle" data-toggle="dropdown"><span class  = 'glyphicon glyphicon-filter'></span></a>
+			<div class="dropdown-menu" style="padding-left: 5px; padding-right: 5px;">
+			  	Sort by: <br/>
+			  	<form action={% url "places:getCurLoc" %} method="post" accept-charset="UTF-8">
+			  		{% csrf_token %}
+			  		<div class="btn-group" data-toggle="buttons">
+			  			<label class="btn btn-small btn-primary">
+			  				<input type='radio' class="sortMethod" name="sortMethod" value="0">Best Match<br/>
+			  			</label>
+
+			  			<label class="btn btn-primary">
+			  				<input type='radio' class="sortMethod" name="sortMethod" value="1"> By distance <br/>
+			  			</label>
+
+			  			<label class="btn btn-primary">
+			  				<input type='radio' class="sortMethod" name="sortMethod" value="2">By rating
+			  			</label>
+			  		</div>
+			  	</br>
+			  		<div class="form-group">
+						<button type="submit" id='submitButton' class="btn btn-primary" name="submit_tags_form">Submit</button>
+					</div>
+				</form>
+			</div>
+		  </li>
 	  </ul>
 	</header>
 	
 
 	<script>
 		// Fix input element click problem
-  		$('.dropdown input, .dropdown label').click(function(e) {
+  		$('.noClick').click(function(e) {
     		e.stopPropagation();
   		});
 
+		$('.sortMethod').click(function(e) {
+			alert('hi');
+			var method = $(this).value;
+
+			if (method =='By distance') {
+				$.post('../getCurLoc', {'sortMethod':'1'});
+			}
+			if (method =='By rating') {
+				$.post('../getCurLoc', {'sortMethod':'2'});
+			}
+		});
 	</script>
 	<div class='content'>
 	 {% block content %}{% endblock %} 
