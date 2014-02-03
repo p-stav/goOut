@@ -72,10 +72,14 @@
 	
 	<br/>
 	<div>
+		<!--
 		{% for tag in tags %}
-		<p>tags: {{ tag.tag }}</p>
-		{% endfor %}
+		<p style="font-size:200%">tags: {{ tag.tag }}</p>
+		{% endfor %} -->
 		<!--<p>{{photos}}</p>-->
+		{% for tag, fontSize in tagsWithFonts %}
+		<p style="font-size:{{fontSize}}%">{{tag.tag}}</p>
+		{% endfor %}
 	</div>
 </div>
 {% endblock %}

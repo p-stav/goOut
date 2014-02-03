@@ -24,6 +24,10 @@ timeDecayExponent = 0.00001
 date = datetime(2013, 12, 28, 22, 40, 41, 879000)
 cutoffTime = datetime(date.year,date.month,date.day, date.hour-2, date.minute, date.second, date.microsecond)
 
+minFontPercentage = 100
+maxFontPercentage = 200
+highestScore = 50
+
 def getCurLoc(request):
 	if request.POST.get('sortMethod'):
 		method = request.POST['sortMethod']
@@ -211,7 +215,7 @@ def placeDetail(request,place_id):
 	place = json.loads(req).get("result")
 	"""
 	#get PlaceTags in our database
-	tags = PlaceTag.objects.filter(place__placeID= place['id'], lastUpdate__gte = cutoffTime)
+	tags = PlaceTag.objects.filter(place__placeID= place['id'], lastUpdate__gte = cutoffTime).order_by('-score')
 	
 	#send relevant information to templates
 	#check to see if all keys exist. If not, assign 'NA' values
@@ -243,9 +247,22 @@ def placeDetail(request,place_id):
 	for placeTag in tags:
 		timeNow = datetime.today()
 		timeDelta = timeNow - placeTag.lastUpdate
-		placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
+		placeTag.score *= exp(-1 * timeDecayExponent * timeDelta.total_seconds())
 		placeTag.lastUpdate = timeNow
 		placeTag.save()
+
+
+	#calculate font sizes
+	fontSizes = []
+	totalScore = 0.0
+	for placeTag in tags:
+		fontSizePercentage = (placeTag.score / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
+		if fontSizePercentage > 400:
+			fontSizePercentage = 400
+		fontSizes.append(fontSizePercentage)
+
+	tagsWithFonts = zip(tags, fontSizes)
+
 
 	#edit address:
 	address = []
@@ -255,7 +272,7 @@ def placeDetail(request,place_id):
 	categories = [i[0] for i in place['categories']]
 	display_phone = place['display_phone'][3:]
 
-	context = {'userName':userName, 'id':place['id'], 'tags':tags, 'name':place['name'], 'venueTypes':categories, 'address':address, 'phone': display_phone, 'rating':place['rating_img_url_small']}
+	context = {'userName':userName, 'id':place['id'], 'tags':tags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':categories, 'address':address, 'phone': display_phone, 'rating':place['rating_img_url_small']}
 	
 	return render(request, 'places/placeDetail.html', context)
 
@@ -300,6 +317,14 @@ def submit_submitReview(request):
 	else:
 		newPlace = Place.objects.create(placeID = request.POST['venueId'], placeName=request.POST['venueName'])
 		newPlace.save()
+
+	# Check if user recently reviewed this place (in last cutoff time)
+	recentUserActions = UserAction.objects.filter(place=newPlace, userID=curUser, time__gte = cutoffTime)
+
+	if recentUserActions:
+		return HttpResponseRedirect('/')
+
+
 	
 	#get list of tags
 	#listTags = request.body
@@ -312,6 +337,7 @@ def submit_submitReview(request):
 		tagCount += 1
 		tagName = 'tag' + str(tagCount)
 	"""
+
 	#Filter for all instances of Places with same placeId and tag within alotted time
 	filterPlace = PlaceTag.objects.filter(place=newPlace, lastUpdate__gte = cutoffTime)
 	
@@ -345,8 +371,7 @@ def submit_submitReview(request):
 		newAction = UserAction.objects.create(userID=curUser, time = datetime.today(), place = newPlace , tag = Hashtag.objects.get(text=hashtag))
 		newAction.save()
 		
-		#update UserAction and UserProfile Points
-		
+
 		newVenueReview.save()
 	
 	#add a point to the user
