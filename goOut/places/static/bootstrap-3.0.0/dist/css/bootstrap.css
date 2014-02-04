@@ -78,9 +78,9 @@
 	margin-top: 5px;
 }
 
-.curTag {
+/*.curTag {
 	color: #7109AA;
-}
+}*/
 
 .venueType {
   font-size:10px;
@@ -94,7 +94,7 @@
 	margin-top: 8px;
 	font-size:.8em;
 	/*margin-top:15px;*/
-	width:12%;
+	width:15%;
 }
 
 .separator{

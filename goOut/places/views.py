@@ -141,7 +141,7 @@ def index(request):
 			if 'image_url' not in place.keys():
 				place['image_url']='hi'
 				
-			temp = {'picture': place['image_url'] ,'name': place['name'], 'id': place['id'], """'rating': place['rating_img_url'],""" 'types': categories, 'hashtags': topHashtags, 'distance':distance}
+			temp = {'picture': place['image_url'] ,'name': place['name'], 'id': place['id'], 'types': categories, 'hashtags': topHashtags, 'distance':distance}
 			
 			#append
 			placeMatch.append(temp)
@@ -175,7 +175,7 @@ def index(request):
 			if 'image_url' not in place.keys():
 				place['image_url']='hi'
 				
-			temp = {'picture': place['image_url'] ,'name': place['name'], 'id': place['id'], """'rating': place['rating_img_url'],""" 'types': categories, 'hashtags': topHashtags, 'distance':distance}
+			temp = {'picture': place['image_url'] ,'name': place['name'], 'id': place['id'], 'types': categories, 'hashtags': topHashtags, 'distance':distance}
 			
 			#append
 			placeMatchOld.append(temp)
@@ -200,7 +200,7 @@ def index(request):
 			if 'image_url' not in place.keys():
 				place['image_url']='hi'
 
-			temp = {'picture': place['image_url'], 'name': place['name'], 'id': place['id'], """'rating': place['rating_img_url'], """'types': categories, 'address':address, 'distance':distance}
+			temp = {'picture': place['image_url'], 'name': place['name'], 'id': place['id'], 'types': categories, 'address':address, 'distance':distance}
 			
 			
 			#append
