@@ -24,17 +24,21 @@
 			</div>
 			<br/>
 			<div class="venue-left">
+				<img src="{{place.picture}}"></img>
+			</div>
+			
+			<div class='venue-info curTag'>
 				{% for tag in place.hashtags %}
 					#{{ tag }}
 					{% if not forloop.last %} <br/> {% endif %}
 				{% endfor %}
-
 			</div>
 		
 		
 			<div class = 'venue-right'>
-				<img src="{{place.rating}}">
-				<br/>
+				<!--<img src="{{place.rating}}">
+				<br/>-->
+				
 				{{place.distance}} mi
 				<br/>
 				<!--
@@ -54,33 +58,72 @@
 				{% endif %}
 				
 				<br/>
-				-->
-				{{place.location}}
-
-				
-					
+				-->	
 			</div>
-			<br><br>
+			<br><br><br/>
 			<div class="separator">
 			</div>
 		</div>
-		
-
-		
 	{% endfor %}
-</div>
-<br/><br/>
-<p class="text-info">Untagged Venues:</p>
 
-<!--List for items with no data in our DB -->
-<div class="placeList" id='noMatch'>
-	{% for place in placeNoMatch %}
+	{% for place in placeMatchOld %}
 		<div class="venue" id="{{ place.id }}">
-			<!--
-			<div class = 'venue-pic'>
-			
+
+			<div class='h4'>{{ place.name }}</div>
+
+			<div class='venueType'>
+				{% for type in place.types %}
+					{{type}} 
+					{%if not forloop.last %}, {% endif %}
+				{% endfor %}
 			</div>
-			-->
+			<br/>
+			<div class="venue-left">
+				<img src="{{place.picture}}"></img>
+			</div>
+			
+			<div class='venue-info'>
+				Popular Tags:<br/>
+				{% for tag in place.hashtags %}
+					#{{ tag }}
+					{% if not forloop.last %} <br/> {% endif %}
+				{% endfor %}
+			</div>
+		
+		
+			<div class = 'venue-right'>
+				<!--<img src="{{place.rating}}">
+				<br/>-->
+				{{place.distance}} mi
+				<br/>
+				<!--
+				{% if place.price_level == 1 %}
+					$
+				{% elif place.price_level == 2 %}
+					$$
+				{% elif place.price_level == 3 %}
+					$$$
+				{% elif place.price_level == 4 %}
+					$$$$
+				{% elif place.price_level == 5 %}
+					$$$$$	
+				{% elif place.price_level == -1 %}
+					No price!
+					
+				{% endif %}
+				
+				<br/>
+				-->	
+			</div>
+			<br><br><br/>
+			<div class="separator">
+			</div>
+		</div>
+	{% endfor %}
+		
+	<!--List for items with no data in our DB -->
+	{% for place in placeNoMatch %}
+		<div class="venue" id="{{ place.id }}">			
 			<div class='h4'>{{ place.name }}</div>
 			<div class='venueType'>
 				{% for type in place.types %}
@@ -90,17 +133,20 @@
 			</div>
 			<br/>
 			<div class="venue-left">
+				<img src="{{place.picture}}"></img>
+			</div>
+			<div class="venue-info">
 				{% for line in place.address %}
 					{{line}}
 					<br/>
 				{% endfor %}
-				filler
+				#desperateforReviews
 			</div>
 		
 		
 			<div class = 'venue-right'>
-				<img src="{{place.rating}}">
-				<br/>
+				<!--<img src="{{place.rating}}">
+				<br/>-->
 				{{place.distance}} mi
 				<br/>
 				<!--
@@ -120,11 +166,9 @@
 				
 				<br/>
 				-->
-				{{place.location}}
-
 									
 			</div>
-			<br><br>
+			<br><br><br/>
 			<div class="separator">
 			</div>
 		</div>

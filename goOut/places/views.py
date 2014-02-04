@@ -99,10 +99,15 @@ def index(request):
 	#grab array of reviews from our models
 	curRev = PlaceTag.objects.filter(lastUpdate__gte = cutoffTime)
 	curRevList = list(set([placeTag.place.placeID for placeTag in curRev]))
+	
+	#grab all other instances
+	otherRev = PlaceTag.objects.filter(lastUpdate__lt = cutoffTime)
+	otherRevList = list(set([placeTag.place.placeID for placeTag in otherRev]))
 
 	#for each place, do a check for id in curRevList, and append hashtag information
 	#create two dictionaries to access for next view, one that have data for, one that we don't
 	placeMatch = []
+	placeMatchOld = []
 	placeNoMatch = []
 	
 	for place in venues:
@@ -118,30 +123,63 @@ def index(request):
 					placeTag.save()
 					hashtags[placeTag.tag.text] = placeTag.score
 					
-			#TO-DO: create order of list
-					
-			#check if price_level and rating exist and append
-			if 'rating' not in place.keys():
-				place['rating'] = 'N/A'
-			#if 'price_level' not in place.keys():
-			#	place['price_level'] = 'N/A'
-				
 			#sort hashtag scores, and pick 3
 			orderHashtags = Counter(hashtags)
 			topTags = orderHashtags.most_common(3)
 			topHashtags = [i[0] for i in topTags]
 			
+			#check if price_level and rating exist and append
+			if 'rating' not in place.keys():
+				place['rating'] = 'N/A'
+			#if 'price_level' not in place.keys():
+			#	place['price_level'] = 'N/A'
+			
 			#round distance, list of categories, and location
 			distance = round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
 			categories = [i[0] for i in place['categories']]
-			try: location = place['location']['neighborhoods'][0]
-			except: location=''
-
-			temp = {'name': place['name'], 'id': place['id'], 'rating': place['rating_img_url'], 'types': categories, 'location': location, 'hashtags': topHashtags, 'distance':distance}
+			
+			if 'image_url' not in place.keys():
+				place['image_url']='hi'
+				
+			temp = {'picture': place['image_url'] ,'name': place['name'], 'id': place['id'], """'rating': place['rating_img_url'],""" 'types': categories, 'hashtags': topHashtags, 'distance':distance}
 			
 			#append
 			placeMatch.append(temp)
 		
+		elif place['id'] in otherRevList:
+			hashtags = {} #will show top two hashtags
+			for placeTag in otherRev:
+				if placeTag.place.placeID == place['id']:
+					timeNow = datetime.today()
+					timeDelta = timeNow - placeTag.lastUpdate
+					placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
+					placeTag.lastUpdate = timeNow
+					#placeTag.save()
+					hashtags[placeTag.tag.text] = placeTag.score
+					
+			#sort hashtag scores, and pick 3
+			orderHashtags = Counter(hashtags)
+			topTags = orderHashtags.most_common(2)
+			topHashtags = [i[0] for i in topTags]
+								
+			#check if price_level and rating exist and append
+			if 'rating' not in place.keys():
+				place['rating'] = 'N/A'
+			#if 'price_level' not in place.keys():
+			#	place['price_level'] = 'N/A'
+			
+			#round distance, list of categories, and location
+			distance = round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
+			categories = [i[0] for i in place['categories']]
+			
+			if 'image_url' not in place.keys():
+				place['image_url']='hi'
+				
+			temp = {'picture': place['image_url'] ,'name': place['name'], 'id': place['id'], """'rating': place['rating_img_url'],""" 'types': categories, 'hashtags': topHashtags, 'distance':distance}
+			
+			#append
+			placeMatchOld.append(temp)
+			
 		else:
 			#check to see if price level and rating exist
 			if 'rating' not in place.keys():
@@ -159,10 +197,10 @@ def index(request):
 			try: address.append(place['location']['cross_streets']) 
 			except: continue
 			
-			try: location=place['location']['neighborhoods'][0]
-			except: location=''
+			if 'image_url' not in place.keys():
+				place['image_url']='hi'
 
-			temp = {'name': place['name'], 'id': place['id'], 'rating': place['rating_img_url'], 'types': categories, 'address':address, 'location': location, 'distance':distance}
+			temp = {'picture': place['image_url'], 'name': place['name'], 'id': place['id'], """'rating': place['rating_img_url'], """'types': categories, 'address':address, 'distance':distance}
 			
 			
 			#append
@@ -174,7 +212,7 @@ def index(request):
 		userName = curUser.user.username
 	else:
 		userName = ''
-	context = { 'sort':sortMethod,'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeNoMatch': placeNoMatch }
+	context = { 'sort':sortMethod,'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch }
 	return render(request, 'places/index.html', context)
 	
 	
@@ -266,6 +304,11 @@ def placeDetail(request,place_id):
 
 	#edit address:
 	address = []
+	if 'cross_streets' not in place['location'].keys():
+		place['location']['cross_streets'] = ''
+	if 'neighborhoods' not in place['location'].keys():
+		place['location']['neighborhoods'] = ['','']
+	
 	address.append(place['location']['address'][0] + '  ' + place['location']['city'] + ',' + place['location']['state_code'])
 	address.append(place['location']['cross_streets'] + ', ' + place['location']['neighborhoods'][0])
 

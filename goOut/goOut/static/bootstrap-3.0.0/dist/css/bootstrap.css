@@ -12,13 +12,13 @@
 
 /*ADDED MANUALLY*/
 .margins {
-  margin-left:10px;
-  margin-right:10px;
+	margin-left:10px;
+	margin-right:10px;
 }
 
 .content{
-  margin-top:60px;
-  /*background-color:#61B4CF;*/
+	margin-top:60px;
+	/*background-color:#61B4CF;*/
 }
 
 .intro {
@@ -31,40 +31,55 @@
 }
 
 .introInfo {
-  margin-left: 10px;
-  float:left;
+	margin-left: 10px;
+	float:left;
   font-size: 12px;
-  
+	
 }
 
 .introInfoRight {
-  float:right;
-  margin-right:10px;
-  text-align: right;
+	float:right;
+	margin-right:10px;
+	text-align: right;
   font-size: 10px;
 }
 
 .smallGrey {
-  color:#4186D3;
-  font-size:.85em;
+	color:#4186D3;
+	font-size:.85em;
 
 }
 
 .inlineNav li{
-  display: inline;
-  float: right;
+	display: inline;
+	float: right;
 }
 
 .venue{
-  padding-left:5px;
-  padding-right:5px;
+	padding-left:5px;
+	padding-right:5px;
+	margin-top:10px;
 }
 
 .venue-left{
-  float:left;
-  width:60%;
-  font-size: .8em;
+	float:left;
+	width:60%;
+	font-size: .8em;
   
+}
+.venue-left img {
+	height:70px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.venue-info {
+	margin-left:80px;
+	position:absolute;
+	margin-top: 5px;
+}
+
+.curTag {
+	color: #7109AA;
 }
 
 .venueType {
@@ -74,16 +89,17 @@
 }
 
 .venue-right{
-  float:right;
-  padding-right:5px;
-  font-size:.8em;
-  /*margin-top:15px;*/
-  width:35%;
+	float:right;
+	padding-right:5px;
+	margin-top: 8px;
+	font-size:.8em;
+	/*margin-top:15px;*/
+	width:12%;
 }
 
 .separator{
-  border-bottom: 1px solid #7109AA;
-  margin-top: 10px;
+	border-bottom: 1px solid #7109AA;
+	margin-top: 20px;
 }
 
 .right{
@@ -91,9 +107,9 @@ float:right;
 }
 
 #tagLabels {
-  margin-bottom:5px;
-  margin-right:50px;
-  width:100%; 
+	margin-bottom:5px;
+	margin-right:50px;
+	width:100%;	
 }
 
 .sortMethod {
@@ -4381,7 +4397,7 @@ padding-bottom: 15px;
   .navbar-left {
     float: left !important;
   }
-  {
+	{
     float: right !important;
   }
 
