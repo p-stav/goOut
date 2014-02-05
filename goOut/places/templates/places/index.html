@@ -22,25 +22,14 @@
 					{%if not forloop.last %}, {% endif %}
 				{% endfor %}
 			</div>
-			<br/>
-			<div class="venue-left">
-				<img src="{{place.picture}}"></img>
-			</div>
 			
-			<div class='venue-info curTag'>
-				{% for tag in place.hashtags %}
-					#{{ tag }}
-					{% if not forloop.last %} <br/> {% endif %}
-				{% endfor %}
-			</div>
-		
-		
 			<div class = 'venue-right'>
 				<!--<img src="{{place.rating}}">
 				<br/>-->
 				
 				{{place.distance}} mi
-				<br/>
+				<br/><br/><br/>
+				<img src="{{STATIC_URL}}{{color}}.jpg">	
 				<!--
 				{% if place.price_level == 1 %}
 					$
@@ -59,6 +48,17 @@
 				
 				<br/>
 				-->	
+			</div>
+			<br/>
+			<div class="venue-left">
+				<img src="{{place.picture}}"></img>
+			</div>
+			
+			<div class='venue-info curTag'>
+				{% for tag in place.hashtags %}
+					#{{ tag }}
+					{% if not forloop.last %} <br/> {% endif %}
+				{% endfor %}
 			</div>
 			<br><br><br/>
 			<div class="separator">
@@ -77,26 +77,12 @@
 					{%if not forloop.last %}, {% endif %}
 				{% endfor %}
 			</div>
-			<br/>
-			<div class="venue-left">
-				<img src="{{place.picture}}"></img>
-			</div>
-			
-			<div class='venue-info'>
-				Popular Tags:<br/>
-				{% for tag in place.hashtags %}
-					#{{ tag }}
-					{% if not forloop.last %} <br/> {% endif %}
-				{% endfor %}
-			</div>
-		
-		
 			<div class = 'venue-right'>
 				<!--<img src="{{place.rating}}">
 				<br/>-->
 				{{place.distance}} mi
-				<br/>
-				<!--
+				<br/><br/><br/>
+				<img src="{{STATIC_URL}}{{color}}.jpg">					<!--
 				{% if place.price_level == 1 %}
 					$
 				{% elif place.price_level == 2 %}
@@ -115,6 +101,18 @@
 				<br/>
 				-->	
 			</div>
+			<br/>
+			<div class="venue-left">
+				<img src="{{place.picture}}"></img>
+			</div>
+			
+			<div class='venue-info'>
+				Known For:<br/>
+				{% for tag in place.hashtags %}
+					#{{ tag }}
+					{% if not forloop.last %} <br/> {% endif %}
+				{% endfor %}
+			</div>
 			<br><br><br/>
 			<div class="separator">
 			</div>
@@ -131,24 +129,12 @@
 					{%if not forloop.last %}, {% endif %}
 				{% endfor %}
 			</div>
-			<br/>
-			<div class="venue-left">
-				<img src="{{place.picture}}"></img>
-			</div>
-			<div class="venue-info">
-				{% for line in place.address %}
-					{{line}}
-					<br/>
-				{% endfor %}
-				#desperateforReviews
-			</div>
-		
-		
 			<div class = 'venue-right'>
 				<!--<img src="{{place.rating}}">
 				<br/>-->
 				{{place.distance}} mi
-				<br/>
+				<br/><br/><br/>
+				<img src="{{STATIC_URL}}{{color}}.jpg">	
 				<!--
 				{% if place.price_level == 1 %}
 					$
@@ -165,8 +151,20 @@
 				{% endif %}
 				
 				<br/>
-				-->
-									
+				-->				
+			</div>
+			<br/>
+			<div class="venue-left">
+				<img src="{{place.picture}}"></img>
+			</div>
+			<div class="venue-info">
+				<div>#desperateForReviews</div>
+				<div class='noReviewsAddress'>
+					{% for line in place.address %}
+						{{line}}
+						<br/>
+					{% endfor %}
+				</div>
 			</div>
 			<br><br><br/>
 			<div class="separator">

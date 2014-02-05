@@ -78,6 +78,9 @@
 	margin-top: 5px;
 }
 
+.noReviewsAddress {
+	margin-top:7px;
+}
 /*.curTag {
 	color: #7109AA;
 }*/
@@ -91,9 +94,8 @@
 .venue-right{
 	float:right;
 	padding-right:5px;
-	margin-top: 8px;
-	font-size:.8em;
-	/*margin-top:15px;*/
+	
+	font-size:10px; 
 	width:15%;
 }
 
@@ -114,8 +116,9 @@ float:right;
 
 .sortMethod {
   display:none;
-
 }
+
+
 /*********************************************************/
 
 
@@ -5036,12 +5039,17 @@ a.list-group-item.active > .badge,
 }
 
 .jumbotron {
-  padding: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top:1px;
+  border-bottom: 3px solid #7109AA;
   font-size: 21px;
   font-weight: 200;
   line-height: 2.1428571435;
   color: inherit;
   background-color: #eeeeee;
+  text-align:center;
+  
 }
 
 .jumbotron h1 {
