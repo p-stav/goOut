@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render
 from urllib import urlopen
 import json, pprint
-from datetime import datetime
+from datetime import datetime, timedelta
 from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction
 import sets
 from math import exp, log10, floor
@@ -22,7 +22,8 @@ timeDecayExponent = 0.00001
 date = datetime.today()
 #for testing purposes, hardcode datetime
 #date = datetime(2013, 12, 28, 22, 40, 41, 879000)
-cutoffTime = datetime(date.year,date.month,date.day, date.hour-2, date.minute, date.second, date.microsecond)
+timeDeltaForCutoff = timedelta(hour=-2)
+cutoffTime = date + timeDeltaForCutoff
 
 minFontPercentage = 100
 maxFontPercentage = 200
