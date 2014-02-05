@@ -19,9 +19,9 @@ timeDecayExponent = 0.00001
 
 
 ##find today's date to find items close to it in db
-#date = datetime.today()
+date = datetime.today()
 #for testing purposes, hardcode datetime
-date = datetime(2013, 12, 28, 22, 40, 41, 879000)
+#date = datetime(2013, 12, 28, 22, 40, 41, 879000)
 cutoffTime = datetime(date.year,date.month,date.day, date.hour-2, date.minute, date.second, date.microsecond)
 
 minFontPercentage = 100
@@ -140,8 +140,16 @@ def index(request):
 			
 			if 'image_url' not in place.keys():
 				place['image_url']='hi'
+
+			numRecentReviews = UserAction.objects.filter(place=place, time__gte = cutoffTime)
+			color = 'blue'
+			if numRecentReviews >= 5:
+				color = 'red'
+			elif numRecentReviews >= 2:
+				color = 'purple'
+
 				
-			temp = {'picture': place['image_url'] ,'name': place['name'], 'id': place['id'], 'types': categories, 'hashtags': topHashtags, 'distance':distance}
+			temp = {'picture': place['image_url'] ,'name': place['name'], 'id': place['id'], 'types': categories, 'hashtags': topHashtags, 'distance':distance, 'color':color}
 			
 			#append
 			placeMatch.append(temp)
@@ -174,8 +182,10 @@ def index(request):
 			
 			if 'image_url' not in place.keys():
 				place['image_url']='hi'
+
+
 				
-			temp = {'picture': place['image_url'] ,'name': place['name'], 'id': place['id'], 'types': categories, 'hashtags': topHashtags, 'distance':distance}
+			temp = {'picture': place['image_url'] ,'name': place['name'], 'id': place['id'], 'types': categories, 'hashtags': topHashtags, 'distance':distance, 'color':'blue'}
 			
 			#append
 			placeMatchOld.append(temp)
@@ -200,7 +210,7 @@ def index(request):
 			if 'image_url' not in place.keys():
 				place['image_url']='hi'
 
-			temp = {'picture': place['image_url'], 'name': place['name'], 'id': place['id'], 'types': categories, 'address':address, 'distance':distance}
+			temp = {'picture': place['image_url'], 'name': place['name'], 'id': place['id'], 'types': categories, 'address':address, 'distance':distance, 'color':'blue'}
 			
 			
 			#append
@@ -217,10 +227,14 @@ def index(request):
 	
 	
 def placeDetail(request,place_id):
+	placeFavorited = False
 	#get username
 	if request.user.is_authenticated():
 		curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
 		userName = curUser.user.username
+		# check if user has favorited this place
+		placeFavorited = curUser.favoritePlaces.filter(placeID=place_id).exists()
+
 	else:
 		userName = ''
 	
@@ -265,6 +279,9 @@ def placeDetail(request,place_id):
 	
 	if 'rating_img_url' not in place.keys():
 		place['rating_img_url'] = 'N/A'
+
+	if 'review_count' not in place.keys():
+		place['review_count'] = 'N/A'
 	
 	#if 'price_level' not in place.keys():
 	#	place['price_level'] = 'N/A'
@@ -315,7 +332,7 @@ def placeDetail(request,place_id):
 	categories = [i[0] for i in place['categories']]
 	display_phone = place['display_phone'][3:]
 
-	context = {'userName':userName, 'id':place['id'], 'tags':tags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':categories, 'address':address, 'phone': display_phone, 'rating':place['rating_img_url_small']}
+	context = {'userName':userName, 'id':place['id'], 'tags':tags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':categories, 'address':address, 'phone': display_phone, 'rating':place['rating_img_url_small'], 'review_count':place['review_count'], 'placeFavorited':placeFavorited}
 	
 	return render(request, 'places/placeDetail.html', context)
 
@@ -364,8 +381,8 @@ def submit_submitReview(request):
 	# Check if user recently reviewed this place (in last cutoff time)
 	recentUserActions = UserAction.objects.filter(place=newPlace, userID=curUser, time__gte = cutoffTime)
 
-	if recentUserActions:
-		return HttpResponseRedirect('/')
+	#if recentUserActions:
+	#	return HttpResponseRedirect('/')
 
 
 	
