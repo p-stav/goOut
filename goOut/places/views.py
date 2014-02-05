@@ -142,7 +142,7 @@ def index(request):
 			if 'image_url' not in place.keys():
 				place['image_url']='hi'
 
-			numRecentReviews = UserAction.objects.filter(place=place, time__gte = cutoffTime)
+			numRecentReviews = UserAction.objects.filter(place=Place.objects.get(place_id=place['id']), time__gte = cutoffTime)
 			color = 'blue'
 			if numRecentReviews >= 5:
 				color = 'red'
