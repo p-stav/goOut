@@ -22,7 +22,7 @@ timeDecayExponent = 0.00001
 date = datetime.today()
 #for testing purposes, hardcode datetime
 #date = datetime(2013, 12, 28, 22, 40, 41, 879000)
-timeDeltaForCutoff = timedelta(hour=-2)
+timeDeltaForCutoff = timedelta(hours=-2)
 cutoffTime = date + timeDeltaForCutoff
 
 minFontPercentage = 100
