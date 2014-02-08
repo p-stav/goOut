@@ -6,46 +6,23 @@
 
 <div class='container'>
 	<div class="jumbotron">
-	  <h3>{{name}}</h3>
-	  <p>
-	  	<div align='center' class='btn-group'>
-		  <a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-lg btn-default'><span class="glyphicon glyphicon-edit"></span></button></a>
-		 <a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-lg btn-default'><span class="glyphicon glyphicon-heart"></span></button></a>
-		 <!--
-		  <button type='button' class='btn btn-lg btn-default'><a href="#"><span class="glyphicon glyphicon-map-marker"></span></a></button>
-		 -->
-		</div>
-	  </p>
-	  <!--short menu to write review, see more history, favorite, etc.-->
-	</div>
-
-	<br/>
-	<div>
-		<!--
-		{% for tag in tags %}
-		<p style="font-size:200%">tags: {{ tag.tag }}</p>
-		{% endfor %} -->
-		<!--<p>{{photos}}</p>-->
-		{% for tag, fontSize in tagsWithFonts %}
-		<p style="font-size:{{fontSize}}%">{{tag.tag}}</p>
-		{% endfor %}
-	</div>
-	
-	<br/>
-	<div class='intro'>
-
+	  <div class='h3' align="center">{{name}}</div>
+		<!--<div class='intro'>-->
 		<div class = 'introInfo'>
-			<div class='smallGrey'>
+			<div class='smallBlack' align="center">
 				{% for type in venueTypes %}
 					{{type}} 
 					{%if not forloop.last %}, {% endif %}
 				{% endfor %}
 			</div>
-			{% for addresses in address %}
-				<div class='smallGrey'>{{ addresses }}</div>
-			{% endfor %}
-			
-		
+
+			<br/>
+			<div class='smallBlue'>
+				{% for addresses in address %}
+					{{ addresses }}
+					{%if not forloop.last %}<br/> {% endif %}
+				{% endfor %}
+			</div>
 		</div>
 		<div class='introInfoRight'>
 			<!--
@@ -74,9 +51,38 @@
 			
 			</div>
 			-->
-			<div class='smallGrey'><img src='{{ rating }}'></div>
-			<div class='smallGrey'>{{ phone }}</div>
+			<div class='smallBlue'><img src='{{ rating }}'> ({{review_count}})</div><br/><br/>
+			<!-- <div class='smallBlue'>{{ phone }}</div>  -->
 		</div>
+	<!--</div>--><br/>
+	  	<div class='btn-group buttonsPlaceDetail'>
+			<div class="left">
+				<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-sm btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-heart"></span></button></a>
+			</div>
+		 	<div class="right">
+		 		<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-sm btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span></button></a>
+		 	</div>
+		</div>
+		 <!--
+		  <button type='button' class='btn btn-lg btn-default'><a href="#"><span class="glyphicon glyphicon-map-marker"></span></a></button>
+		 -->
+	  
+	  <!--short menu to write review, see more history, favorite, etc.-->
 	</div>
+
+	<br/>
+	<div>
+		<!--
+		{% for tag in tags %}
+		<p style="font-size:200%">tags: {{ tag.tag }}</p>
+		{% endfor %} -->
+		<!--<p>{{photos}}</p>-->
+		{% for tag, fontSize in tagsWithFonts %}
+		<p style="font-size:{{fontSize}}%">{{tag.tag}}</p>
+		{% endfor %}
+	</div>
+	
+	<br/>
+	
 </div>
 {% endblock %}

@@ -144,9 +144,9 @@ def index(request):
 
 			numRecentReviews = UserAction.objects.filter(place=Place.objects.get(placeID=place['id']), time__gte = cutoffTime)
 			color = 'blue'
-			if numRecentReviews >= 5:
+			if len(numRecentReviews) >= 5:
 				color = 'red'
-			elif numRecentReviews >= 2:
+			elif len(numRecentReviews) >= 2:
 				color = 'purple'
 
 				
@@ -438,8 +438,10 @@ def submit_submitReview(request):
 	#add a point to the user
 	curUser.points += 1
 	curUser.save()
-	
-	return HttpResponseRedirect('/')
+
+	redirectURL = '/venue/' + request.POST['venueId']
+
+	return HttpResponseRedirect(redirectURL)
 		
 		
 def add_user(request):
