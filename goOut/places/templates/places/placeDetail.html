@@ -54,14 +54,10 @@
 			<div class='smallBlue'><img src='{{ rating }}'> ({{review_count}})</div><br/><br/>
 			<!-- <div class='smallBlue'>{{ phone }}</div>  -->
 		</div>
-	<!--</div>--><br/>
+	<!--</div>--><BR/>
 	  	<div class='btn-group buttonsPlaceDetail'>
-			<div class="left">
-				<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-sm btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-heart"></span></button></a>
-			</div>
-		 	<div class="right">
-		 		<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-sm btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span></button></a>
-		 	</div>
+			<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-sm btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-heart"></span></button></a>
+		 	<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-sm btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span></button></a>
 		</div>
 		 <!--
 		  <button type='button' class='btn btn-lg btn-default'><a href="#"><span class="glyphicon glyphicon-map-marker"></span></a></button>
@@ -80,6 +76,11 @@
 		{% for tag, fontSize in tagsWithFonts %}
 		<p style="font-size:{{fontSize}}%">{{tag.tag}}</p>
 		{% endfor %}
+
+		{% if not tagsWithFonts %}
+			<p> There are no tags for this Venue now!</p>
+			<p> Be the first to share how this place is! </p>
+		{% endif %}
 	</div>
 	
 	<br/>
