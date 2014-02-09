@@ -9,15 +9,27 @@
 	{% autoescape on %}
 	<form role="form" method='post' action={% url "places:submit_submitReview" %}>
 		{% csrf_token %}
-		<div id='add-tags'> <!--to add other hashtag dropdowns -->
+		<div ='add-tags'> <!--to add other hashtag dropdowns -->
+			<div class='add-tags'
+				{% for tag in tags %}
+					<div class="tag">
+						<input name='tagNames' type="checkbox" class="h4 hidden " value="{{tag.text}}"> #{{tag.text}}
+						<div class="separatorTag"></div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+
+
+			<!--
 			<div class="btn-group hi" data-toggle="buttons">
 				{% for tag in tags %}
-				 <label class="btn btn-primary" id="tagLabels">
+				 <div class<label class="btn btn-primary" id="tagLabels">
 				 	<input type="checkbox" name="tagNames" value="{{tag}}">#{{tag}} 
 				 </label>
 				{% endfor %}
 			
-				
+			-->	
 				<!--
 				<select class="form-control input-lg col-xs-4" id="tag0" name="tag0">
 					<option>Select Tag:</option>
@@ -41,8 +53,6 @@
 					</ul>
 				</div>
 			   -->
-			</div>
-		</div>
 		<br/><br/><br/>
 		<!--
 		<div>
@@ -78,8 +88,35 @@
 
 <script>
 $(document).ready(function() {
-	var numTags = 0;
-	
+	$('.tag').click(function() {
+		if ($(this).hasClass('selectedTag'))
+		{
+			//bckgrnd color change
+			$(this).removeClass('selectedTag'); 
+			
+			//separator color change
+			$(this).find('.separatorTagSelected').addClass('separatorTag').removeClass('separatorTagSelected');
+
+			//uncheck checkbox
+			$(this).find('input').prop('checked', false);
+		}
+
+		else //($(this).hasClass('tag'))
+		{
+			//bckgrnd color change
+			$(this).addClass('selectedTag');
+			
+			//separator color change
+			$(this).find('.separatorTag').removeClass('separatorTag').addClass('separatorTagSelected');
+
+			//check box
+			$(this).find('input').prop('checked', true);	
+		}	
+
+	});
+
+
+	//var numTags = 0;
 	/*$(document).on('click', ".dropdown-menu li", function(){
 		//console.log($(this).text());
 		//console.log('hi');

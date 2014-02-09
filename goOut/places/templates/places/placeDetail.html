@@ -56,8 +56,8 @@
 		</div>
 	<!--</div>--><BR/>
 	  	<div class='btn-group buttonsPlaceDetail'>
+			<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-sm btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span></button></a>
 			<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-sm btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-heart"></span></button></a>
-		 	<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-sm btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span></button></a>
 		</div>
 		 <!--
 		  <button type='button' class='btn btn-lg btn-default'><a href="#"><span class="glyphicon glyphicon-map-marker"></span></a></button>
@@ -74,7 +74,7 @@
 		{% endfor %} -->
 		<!--<p>{{photos}}</p>-->
 		{% for tag, fontSize in tagsWithFonts %}
-		<p style="font-size:{{fontSize}}%">{{tag.tag}}</p>
+		<p style="font-size:{{fontSize}};">{{tag.tag}}</p>
 		{% endfor %}
 
 		{% if not tagsWithFonts %}
