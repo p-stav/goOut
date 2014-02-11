@@ -52,8 +52,7 @@ font-size: .85em;
 }
 
 .buttonsPlaceDetail {
-  text-align: center;
-  
+  text-align: center;  
 }
 
 .inlineNav li{
@@ -62,15 +61,14 @@ font-size: .85em;
 }
 
 .tag{
-  padding-left:5px;
-  padding-right:5px;
+  margin-left:5px;
+  margin-right:5px;
   padding-top:10px;
 }
 
 .selectedTag {
   color: #ffffff;
   background-color: #7109AA;
-
 }
 
 .venue{
@@ -5077,6 +5075,7 @@ a.list-group-item.active > .badge,
   padding-left: 10px;
   padding-right: 10px;
   padding-top:1px;
+  padding-bottom:2px;
   border-bottom: 3px solid #7109AA;
   font-size: 21px;
   font-weight: 200;

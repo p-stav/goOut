@@ -54,13 +54,22 @@
 			<div class='smallBlue'><img src='{{ rating }}'> ({{review_count}})</div><br/><br/>
 			<!-- <div class='smallBlue'>{{ phone }}</div>  -->
 		</div>
-	<!--</div>--><BR/>
+	<!--</div>-->
+
+		<br/>
 	  	<div class='btn-group buttonsPlaceDetail'>
-			<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-sm btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span></button></a>
-			<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-sm btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-heart"></span></button></a>
+			<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-sm btn-primary buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span></button></a>
+			
+			{% if placeFavorited %}
+				<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-sm btn-primary buttonPlaceDetail active'><span class="glyphicon glyphicon-star"></span></button></a>
+			{% else %}
+				<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-sm btn-primary buttonPlaceDetail'><span class="glyphicon glyphicon-star"></span></button></a>
+			{% endif %}
+
 		</div>
 		 <!--
-		  <button type='button' class='btn btn-lg btn-default'><a href="#"><span class="glyphicon glyphicon-map-marker"></span></a></button>
+		  <button type='button' class='btn btn-lg btn-default'><a href="#"><span class="glyphicon glyphicon-map-marker"><
+		{%else}/span></a></button>
 		 -->
 	  
 	  <!--short menu to write review, see more history, favorite, etc.-->
@@ -73,13 +82,22 @@
 		<p style="font-size:200%">tags: {{ tag.tag }}</p>
 		{% endfor %} -->
 		<!--<p>{{photos}}</p>-->
-		{% for tag, fontSize in tagsWithFonts %}
-		<p style="font-size:{{fontSize}};">{{tag.tag}}</p>
-		{% endfor %}
+		{% if tagsWithFonts %}
+			{% for tag, fontSize in tagsWithFonts %}
+			<p style="font-size:{{fontSize}};">#{{tag.tag}}</p>
+			{% endfor %}
 
-		{% if not tagsWithFonts %}
-			<p> There are no tags for this Venue now!</p>
-			<p> Be the first to share how this place is! </p>
+		{%elif oldTags %}
+			<div class='h4'>Are you here? <a href="/review/{{ name }}/{{ id }}">Write a review!</a></div>
+			</br>
+			<h4 id='titleOldTags'>Most common tags here:</h4>
+			{% for tag in oldTags %}
+				<p>#{{tag.tag}}</p>
+			{%endfor%}
+
+		{% else%}
+			<p> There are no tags for this Venue!</p>
+			<p><a href="/review/{{ name }}/{{ id }}"> Be the first to review this place!</a></p>
 		{% endif %}
 	</div>
 	

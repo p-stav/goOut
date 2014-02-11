@@ -9,15 +9,13 @@
 	{% autoescape on %}
 	<form role="form" method='post' action={% url "places:submit_submitReview" %}>
 		{% csrf_token %}
-		<div ='add-tags'> <!--to add other hashtag dropdowns -->
-			<div class='add-tags'
-				{% for tag in tags %}
-					<div class="tag">
-						<input name='tagNames' type="checkbox" class="h4 hidden " value="{{tag.text}}"> #{{tag.text}}
-						<div class="separatorTag"></div>
-					</div>
-				{% endfor %}
-			</div>
+		<div class='add-tags'>
+			{% for tag in tags %}
+				<div class="tag">
+					<input name='tagNames' type="checkbox" class="h4 hidden " value="{{tag.text}}"> #{{tag.text}}
+					<div class="separatorTag"></div>
+				</div>
+			{% endfor %}
 		</div>
 
 
@@ -53,7 +51,7 @@
 					</ul>
 				</div>
 			   -->
-		<br/><br/><br/>
+		<br/>
 		<!--
 		<div>
 			<button type="button" id='add-tag' class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus-sign"></span> Add tag</button>
@@ -66,8 +64,6 @@
 		<div class='form-group hidden'>
 			<textarea class="form-control" id="venueName" name="venueName" rows="4">{{ name }}</textarea>
 		</div>
-		
-		<br/>
 		<!-------comment put comment-----
 		<div class="form-group">
 			<div class="col-lg-6"><textarea class="form-control" id="comments" name="comments" rows="4" placeholder='Add Comment: 140 Characters'></textarea></div>
@@ -80,8 +76,8 @@
 			<button type="submit" id='submitButton' class="btn btn-primary" name="submit_tags_form">Submit</button>
 		</div>
 	</form>
-	{% endautoescape %}
 </div>
+	{% endautoescape %}
 <br/><br/>
 <!--add button to add another tag, breh-->
 

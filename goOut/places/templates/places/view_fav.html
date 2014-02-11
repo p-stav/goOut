@@ -20,16 +20,16 @@
 				
 				</div>
 				-->
-				<div class="venue-left">
+				<div class="favListTags">
 					{% for text in place.hashtags %}
 						#{{ text }}
-						<br/>
+						{%if not forloop.last %}<br/>{% endif %}
 					{% endfor %}
 				</div>
-			
-			
+		
+				<!--
 				<div class = 'venue-right'>
-					<!--
+					
 					{{ place.rating }} / 5.0
 					<br/>
 					{% if place.price_level == 1 %}
@@ -55,12 +55,15 @@
 							club
 						{% endif %}
 					{% endfor %}
-					
-					-->
-						
 				</div>
-				<br><br><br>
-				<div class="separator">
+				-->
+
+				{% if place.hashtags|length == 0 %}
+					uh oh!<br/> No current tags
+					<br/><br/>
+				{% endif %}
+				
+				<div class="separatorTag">
 				</div>
 			</div>
 		{% endfor %}

@@ -267,9 +267,16 @@ def placeDetail(request,place_id):
 	req = urlopen(apiCall).read()
 	place = json.loads(req).get("result")
 	"""
-	#get PlaceTags in our database
+	#####get PlaceTags in our database
+	#if len(PlaceTag.objects.filter(place__placeID= place['id'], lastUpdate__gte = cutoffTime)) >0:
 	tags = PlaceTag.objects.filter(place__placeID= place['id'], lastUpdate__gte = cutoffTime).order_by('-score')
-	
+	#else:
+	#len(PlaceTag.objects.filter(place__placeID= place['id'])) > 0:
+	getOldTags = PlaceTag.objects.filter(place__placeID= place['id'],lastUpdate__lt = cutoffTime).order_by('-score')
+	temp = Counter(getOldTags)
+	commonOld = temp.most_common(3)
+	oldTags = [i[0] for i in commonOld]
+
 	#send relevant information to templates
 	#check to see if all keys exist. If not, assign 'NA' values
 	if 'display_phone' not in place.keys():
@@ -333,7 +340,7 @@ def placeDetail(request,place_id):
 	categories = [i[0] for i in place['categories']]
 	display_phone = place['display_phone'][3:]
 
-	context = {'userName':userName, 'id':place['id'], 'tags':tags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':categories, 'address':address, 'phone': display_phone, 'rating':place['rating_img_url_small'], 'review_count':place['review_count'], 'placeFavorited':placeFavorited}
+	context = {'userName':userName, 'id':place['id'], 'oldTags':oldTags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':categories, 'address':address, 'phone': display_phone, 'rating':place['rating_img_url_small'], 'review_count':place['review_count'], 'placeFavorited':placeFavorited}
 	
 	return render(request, 'places/placeDetail.html', context)
 
@@ -526,7 +533,7 @@ def add_fav(request, place_name, placeId):
 		curUser.favoritePlaces.add(current_venue)
 	curUser.save()
 		
-	return HttpResponseRedirect('/')
+	return HttpResponseRedirect('/venue/'+placeId+'/')
 	
 @login_required()	
 def view_profile(request):
