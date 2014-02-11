@@ -223,7 +223,7 @@ def index(request):
 		userName = curUser.user.username
 	else:
 		userName = ''
-	context = { 'sort':sortMethod,'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch }
+	context = { 'sort':sortMethod,'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'index':'index' }
 	return render(request, 'places/index.html', context)
 	
 	
@@ -274,7 +274,7 @@ def placeDetail(request,place_id):
 	#len(PlaceTag.objects.filter(place__placeID= place['id'])) > 0:
 	getOldTags = PlaceTag.objects.filter(place__placeID= place['id'],lastUpdate__lt = cutoffTime).order_by('-score')
 	temp = Counter(getOldTags)
-	commonOld = temp.most_common(3)
+	commonOld = temp.most_common(5)
 	oldTags = [i[0] for i in commonOld]
 
 	#send relevant information to templates
@@ -459,8 +459,9 @@ def add_user_add(request):
 	try:
 		newUser = User.objects.create(username=request.POST['uname'])
 		newUser.set_password(request.POST['pwd'])
-		# newUser.last_name = request.POST['last_name']
-		# newUser.first_name = request.POST['first_name']
+		newUser.last_name = request.POST['last_name']
+		newUser.first_name = request.POST['first_name']
+		newUser.email = request.POST['email']
 
 		# add to UserProfiles
 		newUser.save()
