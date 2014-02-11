@@ -61,7 +61,7 @@
 			<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-sm btn-primary buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span></button></a>
 			
 			{% if placeFavorited %}
-				<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-sm btn-primary buttonPlaceDetail active'><span class="glyphicon glyphicon-star"></span></button></a>
+				<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-sm btn-info buttonPlaceDetail active'><span class="glyphicon glyphicon-star"></span></button></a>
 			{% else %}
 				<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-sm btn-primary buttonPlaceDetail'><span class="glyphicon glyphicon-star"></span></button></a>
 			{% endif %}
@@ -90,7 +90,7 @@
 		{%elif oldTags %}
 			<div class='h4'>Are you here? <a href="/review/{{ name }}/{{ id }}">Write a review!</a></div>
 			</br>
-			<h4 id='titleOldTags'>Most common tags here:</h4>
+			<h4 id='titleOldTags'>Most common tags:</h4>
 			{% for tag in oldTags %}
 				<p>#{{tag.tag}}</p>
 			{%endfor%}
