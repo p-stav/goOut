@@ -274,7 +274,7 @@ def placeDetail(request,place_id):
 	#len(PlaceTag.objects.filter(place__placeID= place['id'])) > 0:
 	getOldTags = PlaceTag.objects.filter(place__placeID= place['id'],lastUpdate__lt = cutoffTime).order_by('-score')
 	temp = Counter(getOldTags)
-	commonOld = temp.most_common(3)
+	commonOld = temp.most_common()
 	oldTags = [i[0] for i in commonOld]
 
 	#send relevant information to templates
@@ -407,7 +407,7 @@ def submit_submitReview(request):
 	"""
 
 	#Filter for all instances of Places with same placeId and tag within alotted time
-	filterPlace = PlaceTag.objects.filter(place=newPlace, lastUpdate__gte = cutoffTime)
+	filterPlace = PlaceTag.objects.filter(place=newPlace)
 	
 	if len(filterPlace)>0:
 		#check to see if tag exists

@@ -57,7 +57,7 @@
 	<!--</div>-->
 
 		<br/>
-	  	<div class='btn-group buttonsPlaceDetail'>
+	  	<div class='btn-group buttonsPlaceDetail' style='width:100%'>
 			<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-sm btn-primary buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span></button></a>
 			
 			{% if placeFavorited %}
@@ -84,7 +84,7 @@
 		<!--<p>{{photos}}</p>-->
 		{% if tagsWithFonts %}
 			{% for tag, fontSize in tagsWithFonts %}
-			<p style="font-size:{{fontSize}};">#{{tag.tag}}</p>
+			<p style="font-size:{{fontSize}}%;">#{{tag.tag}}</p>
 			{% endfor %}
 
 		{%elif oldTags %}
