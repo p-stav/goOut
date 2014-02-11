@@ -31,9 +31,7 @@
 }
 
 .introInfo {
-	margin-left: 10px;
-	float:left;
-  font-size: 12px;
+  font-size: 10px;
 	
 }
 
@@ -43,16 +41,34 @@
 	text-align: right;
   font-size: 10px;
 }
+.smallBlack {
+font-size: .85em;
 
-.smallGrey {
+}
+.smallBlue {
 	color:#4186D3;
 	font-size:.85em;
+  float:left;
+}
 
+.buttonsPlaceDetail {
+  text-align: center;  
 }
 
 .inlineNav li{
 	display: inline;
 	float: right;
+}
+
+.tag{
+  margin-left:5px;
+  margin-right:5px;
+  padding-top:10px;
+}
+
+.selectedTag {
+  color: #ffffff;
+  background-color: #7109AA;
 }
 
 .venue{
@@ -78,6 +94,9 @@
 	margin-top: 5px;
 }
 
+.noReviewsAddress {
+	margin-top:7px;
+}
 /*.curTag {
 	color: #7109AA;
 }*/
@@ -91,15 +110,23 @@
 .venue-right{
 	float:right;
 	padding-right:5px;
-	margin-top: 8px;
-	font-size:.8em;
-	/*margin-top:15px;*/
+	
+	font-size:10px; 
 	width:15%;
 }
 
 .separator{
 	border-bottom: 1px solid #7109AA;
 	margin-top: 20px;
+}
+
+.separatorTag{
+  border-bottom: 1px solid #7109AA;
+  padding-top: 10px;
+}
+.separatorTagSelected {
+  border-bottom: 1px solid #ffffff;
+  padding-top: 10px;
 }
 
 .right{
@@ -114,8 +141,17 @@ float:right;
 
 .sortMethod {
   display:none;
-
 }
+
+.left {
+  float:left;
+}
+
+.right {
+  float: right;
+}
+
+
 /*********************************************************/
 
 
@@ -4295,12 +4331,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-brand {
-  
+  font-family: sans-serif;
   padding-left:10px;
   padding-right:10px;
-  margin-top:20px;
-  font-size: 18px;
-  line-height: 20px;
+  padding-top:30px;
+  font-size: 20px;
+  
 }
 
 .navbar-brand:hover,
@@ -5036,12 +5072,17 @@ a.list-group-item.active > .badge,
 }
 
 .jumbotron {
-  padding: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top:1px;
+  padding-bottom:2px;
+  border-bottom: 3px solid #7109AA;
   font-size: 21px;
   font-weight: 200;
-  line-height: 2.1428571435;
   color: inherit;
   background-color: #eeeeee;
+  /*text-align:center;*/
+  
 }
 
 .jumbotron h1 {
