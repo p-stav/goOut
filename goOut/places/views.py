@@ -121,7 +121,7 @@ def index(request):
 					timeDelta = timeNow - placeTag.lastUpdate
 					placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
 					placeTag.lastUpdate = timeNow
-					placeTag.save()
+					#placeTag.save()
 					hashtags[placeTag.tag.text] = placeTag.score
 					
 			#sort hashtag scores, and pick 3
@@ -223,7 +223,7 @@ def index(request):
 		userName = curUser.user.username
 	else:
 		userName = ''
-	context = { 'sort':sortMethod,'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch }
+	context = { 'sort':sortMethod,'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'index': 1 }
 	return render(request, 'places/index.html', context)
 	
 	
@@ -312,7 +312,7 @@ def placeDetail(request,place_id):
 		timeDelta = timeNow - placeTag.lastUpdate
 		placeTag.score *= exp(-1 * timeDecayExponent * timeDelta.total_seconds())
 		placeTag.lastUpdate = timeNow
-		placeTag.save()
+		#placeTag.save()
 
 
 	#calculate font sizes
