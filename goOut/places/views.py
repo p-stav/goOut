@@ -223,11 +223,8 @@ def index(request):
 		userName = curUser.user.username
 	else:
 		userName = ''
-<<<<<<< HEAD
-	context = { 'sort':sortMethod,'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'index': 1 }
-=======
 	context = { 'sort':sortMethod,'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'index':'index' }
->>>>>>> hi
+
 	return render(request, 'places/index.html', context)
 	
 	
