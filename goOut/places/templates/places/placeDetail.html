@@ -84,7 +84,7 @@
 		<!--<p>{{photos}}</p>-->
 		{% if tagsWithFonts %}
 			{% for tag,fontSize,freq in tagsWithFonts %}
-			<p style="font-size:{{fontSize}}%;">#{{tag.tag}} <span class='freqTag' style="font-size:14px;">{{freq}}</span></p>
+			<p style="font-size:{{fontSize}}%;">#{{tag.tag}} <span class='freqTag' style="font-size:40%;">({{freq}}x)</span></p>
 			{% endfor %}
 
 		{%elif oldTags %}

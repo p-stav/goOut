@@ -60,6 +60,10 @@ font-size: .85em;
 	float: right;
 }
 
+.freqTag{ 
+  color: #999999;
+
+}
 .tag{
   margin-left:5px;
   margin-right:5px;

@@ -327,11 +327,12 @@ def placeDetail(request,place_id):
 	totalScore = 0.0
 	for placeTag in tags:
 		fontSizePercentage = (placeTag.score / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
-		tagsFreq.append(placeTag.freq)
-
 		if fontSizePercentage > 400:
 			fontSizePercentage = 400
 		fontSizes.append(fontSizePercentage)
+
+		venueTags = UserAction.objects.filter(place__placeID= place['id'], tag__text=placeTag.tag.text, time__gte = cutoffTime)
+		tagsFreq.append(len(venueTags))
 
 	tagsWithFonts = zip(tags, fontSizes, tagsFreq)
 
