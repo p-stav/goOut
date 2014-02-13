@@ -269,15 +269,17 @@ def placeDetail(request,place_id):
 	place = json.loads(req).get("result")
 	"""
 	#####get PlaceTags in our database
-	#if len(PlaceTag.objects.filter(place__placeID= place['id'], lastUpdate__gte = cutoffTime)) >0:
-	tags = PlaceTag.objects.filter(place__placeID= place['id'], lastUpdate__gte = cutoffTime).order_by('-score')
-	#else:
+	if len(PlaceTag.objects.filter(place__placeID= place['id'], lastUpdate__gte = cutoffTime)) >0:
+		tags = PlaceTag.objects.filter(place__placeID= place['id'], lastUpdate__gte = cutoffTime).order_by('-score')
+		oldTags=[]
+	else:
 	#len(PlaceTag.objects.filter(place__placeID= place['id'])) > 0:
-	getOldTags = PlaceTag.objects.filter(place__placeID= place['id'],lastUpdate__lt = cutoffTime).order_by('-score')
-	temp = Counter(getOldTags)
-	commonOld = temp.most_common()
-	oldTags = [i[0] for i in commonOld]
-
+		getOldTags = PlaceTag.objects.filter(place__placeID= place['id'],lastUpdate__lt = cutoffTime).order_by('-score')
+		allOldTags = [i.tag.text for i in getOldTags]
+		oldTags = []
+		for i in range (0,5):
+				oldTags.append(allOldTags[i])
+		tags=[]
 	#send relevant information to templates
 	#check to see if all keys exist. If not, assign 'NA' values
 	if 'display_phone' not in place.keys():
@@ -318,14 +320,17 @@ def placeDetail(request,place_id):
 
 	#calculate font sizes
 	fontSizes = []
+	tagsFreq=[]
 	totalScore = 0.0
 	for placeTag in tags:
 		fontSizePercentage = (placeTag.score / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
+		tagsFreq.append(placeTag.freq)
+
 		if fontSizePercentage > 400:
 			fontSizePercentage = 400
 		fontSizes.append(fontSizePercentage)
 
-	tagsWithFonts = zip(tags, fontSizes)
+	tagsWithFonts = zip(tags, fontSizes, tagsFreq)
 
 
 	#edit address:
