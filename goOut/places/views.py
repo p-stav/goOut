@@ -277,8 +277,11 @@ def placeDetail(request,place_id):
 		getOldTags = PlaceTag.objects.filter(place__placeID= place['id'],lastUpdate__lt = cutoffTime).order_by('-score')
 		allOldTags = [i.tag.text for i in getOldTags]
 		oldTags = []
-		for i in range (0,5):
+		if len(allOldTags) >5:
+			for i in range (0,5):
 				oldTags.append(allOldTags[i])
+		else:
+			oldTags=allOldTags
 		tags=[]
 	#send relevant information to templates
 	#check to see if all keys exist. If not, assign 'NA' values
