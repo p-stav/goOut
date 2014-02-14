@@ -9,7 +9,7 @@ from django.shortcuts import render
 from urllib import urlopen
 import json, pprint
 from datetime import datetime, timedelta
-from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction
+from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction, UserFeedback
 import sets
 from math import exp, log10, floor
 from collections import Counter
@@ -582,3 +582,20 @@ def search(request):
 def map(request):
 	context = {}
 	return render(request, 'places/maps', context)
+
+@login_required()
+def feedback(request):
+	context = {}
+	return render(request, 'places/feedback.html', context)
+
+@login_required()
+def feedback_submit(request):
+	curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+	new_feedback = UserFeedback.objects.create(feedback=request.POST['feedback'], date=datetime.today(), userID=curUser)
+	new_feedback.save()
+
+	return HttpResponseRedirect('/')
+
+def about(request):
+	context = {}
+	return render(request, 'places/about.html', context)

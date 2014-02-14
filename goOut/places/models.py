@@ -42,4 +42,12 @@ class UserAction (models.Model):
 	def __unicode__(self):
 		return self.userID.user.username + " " + self.place.placeName
 		
+class UserFeedback(models.Model):
+	feedback = models.TextField(max_length=2000)
+	date = models.DateTimeField()
+	userID = models.ForeignKey(UserProfile)
+
+	def __unicode__(self):
+		return self.feedback
+
 

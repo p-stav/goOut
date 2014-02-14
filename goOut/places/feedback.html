@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Feedback{% endblock %}
+
+{% block content %}
+<div class="container">
+
+	<div class="jumbotron">
+
+		<div class="container">
+			<p> Please let us know if you like this website and want us to keep working to improve it! </p>
+			</br>
+			<form class="form-horizontal" role="form" action="{% url 'jokeFeed:feedback_submit' %}" method="post">
+				{% csrf_token %}
+				<div class="form-group">
+					<label class="col-lg-2 control-label">Feedback:</label>
+						<div class="col-lg-8"><textarea class="form-control" id="feedback" name="feedback" rows="4"></textarea></div>
+				</div>
+
+				<div class="form-group">
+					<label class='control-label'><button type="submit" class="btn btn-primary" name="submit_feedback_form">Submit</button></label>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %}
