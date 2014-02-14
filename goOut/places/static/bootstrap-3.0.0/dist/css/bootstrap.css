@@ -52,7 +52,9 @@ font-size: .85em;
 }
 
 .buttonsPlaceDetail {
-  text-align: center;  
+  text-align: center; 
+  margin-top:5px;
+  margin-bottom: 3px; 
 }
 
 .inlineNav li{

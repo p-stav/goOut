@@ -19,7 +19,7 @@ timeDecayExponent = 0.00001
 
 
 ##find today's date to find items close to it in db
-date = datetime.today()
+date = datetime.utcnow()
 #for testing purposes, hardcode datetime
 #date = datetime(2013, 12, 28, 22, 40, 41, 879000)
 timeDeltaForCutoff = timedelta(hours=-2)
@@ -117,7 +117,7 @@ def index(request):
 			hashtags = {}
 			for placeTag in curRev:
 				if placeTag.place.placeID == place['id']:
-					timeNow = datetime.today()
+					timeNow = datetime.utcnow()
 					timeDelta = timeNow - placeTag.lastUpdate
 					placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
 					placeTag.lastUpdate = timeNow
@@ -159,7 +159,7 @@ def index(request):
 			hashtags = {} #will show top two hashtags
 			for placeTag in otherRev:
 				if placeTag.place.placeID == place['id']:
-					timeNow = datetime.today()
+					timeNow = datetime.utcnow()
 					timeDelta = timeNow - placeTag.lastUpdate
 					placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
 					placeTag.lastUpdate = timeNow
@@ -314,7 +314,7 @@ def placeDetail(request,place_id):
 
 	#update scores
 	for placeTag in tags:
-		timeNow = datetime.today()
+		timeNow = datetime.utcnow()
 		timeDelta = timeNow - placeTag.lastUpdate
 		placeTag.score *= exp(-1 * timeDecayExponent * timeDelta.total_seconds())
 		placeTag.lastUpdate = timeNow
