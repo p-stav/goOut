@@ -330,7 +330,7 @@ def placeDetail(request,place_id):
 		if fontSizePercentage > 400:
 			fontSizePercentage = 400
 		fontSizes.append(fontSizePercentage)
-
+	
 		venueTags = UserAction.objects.filter(place__placeID= place['id'], tag__text=placeTag.tag.text, time__gte = cutoffTime)
 		tagsFreq.append(len(venueTags))
 
@@ -426,7 +426,7 @@ def submit_submitReview(request):
 				placeTag.freq += 1
 
 				#update score
-				timeNow = datetime.today()
+				timeNow = datetime.utcnow()
 				timeDelta = timeNow - placeTag.lastUpdate
 				placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
 				placeTag.score += 50
@@ -438,17 +438,17 @@ def submit_submitReview(request):
 
 
 				#add new User Action
-				newAction = UserAction.objects.create(userID=curUser, time = datetime.today(), place = newPlace , tag = placeTag.tag)
+				newAction = UserAction.objects.create(userID=curUser, time = datetime.utcnow(), place = newPlace , tag = placeTag.tag)
 				newAction.save()
 				placeTag.save()
 
 			
 	#create a new review with remaining tags that didn't match
 	for hashtag in tags: 
-		newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.today(), score = 50)
+		newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.utcnow(), score = 50)
 		
 		#log new user action
-		newAction = UserAction.objects.create(userID=curUser, time = datetime.today(), place = newPlace , tag = Hashtag.objects.get(text=hashtag))
+		newAction = UserAction.objects.create(userID=curUser, time = datetime.utcnow(), place = newPlace , tag = Hashtag.objects.get(text=hashtag))
 		newAction.save()
 		
 
