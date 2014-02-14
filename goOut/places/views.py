@@ -435,11 +435,13 @@ def submit_submitReview(request):
 				#take out hashtag from the list
 				position = tags.index(placeTag.tag.text)
 				tags.pop(position)
-			placeTag.save()
-			
-			#add new User Action
-			newAction = UserAction.objects.create(userID=curUser, time = datetime.today(), place = newPlace , tag = placeTag.tag)
-			newAction.save()
+
+
+				#add new User Action
+				newAction = UserAction.objects.create(userID=curUser, time = datetime.today(), place = newPlace , tag = placeTag.tag)
+				newAction.save()
+				placeTag.save()
+
 			
 	#create a new review with remaining tags that didn't match
 	for hashtag in tags: 
