@@ -202,16 +202,16 @@ def index(request):
 			distance = round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
 			categories = [i[0] for i in place['categories']]
 			address = []
-			try: address.append(place['location']['address'][0])
+			"""try: address.append(place['location']['address'][0])
 			except: continue
 
 			try: address.append(place['location']['cross_streets']) 
 			except: continue
-			
+			"""
 			if 'image_url' not in place.keys():
 				place['image_url']='hi'
 
-			temp = {'picture': place['image_url'], 'name': place['name'], 'id': place['id'], 'types': categories, 'address':address, 'distance':distance, 'color':'blue'}
+			temp = {'picture': place['image_url'], 'name': place['name'], 'id': place['id'], 'types': categories, 'distance':distance, 'color':'blue'}
 			
 			
 			#append
