@@ -40,7 +40,16 @@ def getCurLoc(request):
 
 	context = {'sortMethod':method, 'search':term}
 
+
 	return render(request, 'places/getCurLoc.html', context)
+
+
+def getCurLocHashtag(request):
+
+	context = {'hashtag':request.POST.get('hashtag')}
+
+	return render(request, 'places/getCurLocHashtag.html', context)
+
 	
 	
 #index page. 
@@ -599,3 +608,63 @@ def feedback_submit(request):
 def about(request):
 	context = {}
 	return render(request, 'places/about.html', context)
+
+def tag(request, hashtag):
+	#get username
+	if request.user.is_authenticated():
+		curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+		userName = curUser.user.username
+		# check if user has favorited this place
+		placeFavorited = curUser.favoritePlaces.filter(placeID=place_id).exists()
+
+	else:
+		userName = ''
+
+	if request.POST.get('position'):
+		curLoc = request.POST['position']
+	else: 
+		context = {'hashtag' : hashtag}
+		return render(request, 'places/getCurLocHashtag.html', context)
+
+	if curLoc == '': #hardcode if fails.
+		curLoc = '47.6159392,-122.3268701' #Seattle Pine/Bellevue
+		#SF chestnut/VanNess.798542,-122.422345'	
+
+
+
+
+	placetagsWithTag = PlaceTag.objects.filter(tag__text=hashtag)
+	placeTagList = []
+
+	"""YELP API"""
+	# Values for access
+	consumer_key = 'nee5cvfcAEBHCg3wSGSdKw'
+	consumer_secret = '3FmOuF9CLBGjyITGF66hbKmbgho'
+	token = 'Ta-DBi45PaqkBhBnPJ1xpv1mmIjkVmxP'
+	token_secret = 'ngCe85K7Xk6Sq37hI-4T-rE1Xtw'
+
+	consumer = oauth2.Consumer(consumer_key, consumer_secret)
+
+
+
+	for placeTag in placetagsWithTag:
+		url = 'http://api.yelp.com/v2/business/' + placeTag.place.placeID + '&ll=' + curLoc
+		
+		oauth_request = oauth2.Request('GET', url, {})
+		oauth_request.update({'oauth_nonce': oauth2.generate_nonce(),'oauth_timestamp': oauth2.generate_timestamp(),'oauth_token': token, 'oauth_consumer_key': consumer_key})
+
+		token = oauth2.Token(token, token_secret)
+		oauth_request.sign_request(oauth2.SignatureMethod_HMAC_SHA1(), consumer, token)
+		signed_url = oauth_request.to_url()
+
+		req = urlopen(signed_url).read()
+		place = json.loads(req)
+		distanceToPlace = place['distance'];
+		picture = place['image_url'];
+		categories = [i[0] for i in place['categories']]
+		finalScore = placeTag.score + 1 / distanceToPlace
+		placeTagList.append({'id' : placeTag.place.placeID, 'name' : placeTag.place.placeName, 'picture' : picture, 'types' : types, 'distance' : distanceToPlace, 'finalScore' : finalScore})
+	placeTagList.sort(key=lambda x:x['finalScore'])
+	context = {'placeTagList' : placeTagList}
+	return render(request, 'places/tag.html', context)
+

@@ -49,14 +49,7 @@
 					<li><a href="/accounts/add"><span class  = 'glyphicon glyphicon-plus'></span>    Create Profile</a></li>
 				{% endif %}
 							
-				<!--
-				{% url 'places:placeDetail' as my_view %}
-				{% if my_view %}
-					<li><a href="/venue/{{name}}/{{id}}"><span class  = 'glyphicon glyphicon-edit'></span>    Write Review</a></li>
-				{% else %}
-					<li><a href="/review"><span class='glyphicon glyphicon-edit'></span>    Write Review</a></li>
-				{%endif%}
-				-->
+				
 				
 				{% if user.is_authenticated %}
 					<li><a href="/accounts/logout"><span class  = 'glyphicon glyphicon-minus-sign'></span>    logout</a></li>

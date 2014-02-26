@@ -4,6 +4,7 @@ urlpatterns = patterns('places.views',
 	
 	#list of places, search page, and map
 	url(r'^$', 'getCurLoc', name='getCurLoc'),
+	url(r'^getCurLocHashtag$', 'getCurLocHashtag', name='getCurLocHashtag'),
 	url(r'^index$', 'index', name='index'),
 	url(r'^search/(?P<search_term>.+)/$', 'search', name='search'),
 	url(r'^map/$', 'map', name='map'),
@@ -26,6 +27,8 @@ urlpatterns = patterns('places.views',
 	url(r'^feedback/submit$', 'feedback_submit', name='feedback_submit'),
 
 	url(r'^about$', 'about', name='about'),
+
+	url(r'^tag/(?P<hashtag>.+)/$', 'tag', name='tag'),
 
 	#url(r'^feedback$', 'feedback', name='feedback'),
 	#url(r'^feedback/submit$', 'feedback_submit', name='feedback_submit'),
