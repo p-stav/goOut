@@ -95,9 +95,9 @@ font-size: .85em;
 	border-radius: 5px;
 }
 .venue-info {
-	margin-left:80px;
+	
 	position:absolute;
-	margin-top: 5px;
+	margin-top: 15px;
 }
 
 .noReviewsAddress {
@@ -110,20 +110,39 @@ font-size: .85em;
 .venueType {
   font-size:10px;
   color:#999999;
+  width:70%;
   float:left;
+
 }
 
 .venue-right{
 	float:right;
 	padding-right:5px;
-	
+	margin-top: 7px;
 	font-size:10px; 
-	width:15%;
+	
+}
+
+.venueInternalRight {
+  margin-top:5px;
+
+}
+
+.venuePic {
+  height: 70px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.venueTitle {
+  float:left;
+  width:70%;
+ 
 }
 
 .separator{
 	border-bottom: 1px solid #7109AA;
-	margin-top: 20px;
+	margin-top:20px;
 }
 
 .separatorTag{
