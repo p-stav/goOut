@@ -614,8 +614,7 @@ def tag(request, hashtag):
 	if request.user.is_authenticated():
 		curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
 		userName = curUser.user.username
-		# check if user has favorited this place
-		placeFavorited = curUser.favoritePlaces.filter(placeID=place_id).exists()
+		
 
 	else:
 		userName = ''
@@ -648,7 +647,7 @@ def tag(request, hashtag):
 
 
 	for placeTag in placetagsWithTag:
-		url = 'http://api.yelp.com/v2/business/' + placeTag.place.placeID + '&ll=' + curLoc
+		url = 'http://api.yelp.com/v2/business/' + placeTag.place.placeID + '?ll=' + curLoc
 		
 		oauth_request = oauth2.Request('GET', url, {})
 		oauth_request.update({'oauth_nonce': oauth2.generate_nonce(),'oauth_timestamp': oauth2.generate_timestamp(),'oauth_token': token, 'oauth_consumer_key': consumer_key})
@@ -659,6 +658,8 @@ def tag(request, hashtag):
 
 		req = urlopen(signed_url).read()
 		place = json.loads(req)
+		
+		
 		distanceToPlace = place['distance'];
 		picture = place['image_url'];
 		categories = [i[0] for i in place['categories']]
