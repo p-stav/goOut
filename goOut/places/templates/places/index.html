@@ -8,35 +8,30 @@
 	
 	{% for place in placeMatch %}
 		<div class="venue" id="{{ place.id }}">
+			<div align="right" class="venueInternalRight">
+				{{place.distance}} mi
+			</div>
 
-			<div class='venueTitle h4'>{{ place.name }}</div>
-			<div class = 'venue-right' align="right">
-				<!--<img src="{{place.rating}}">
-				<br/>-->
-				<img src="{{STATIC_URL}}{{place.color}}.jpg" style="width:11px;">
-				<br/>
-				<div class="venueInternalRight">
-					{{place.distance}} mi
-				</div>
-				<div class="venueInternalRight">			
-					<img class="venuePic" src="{{place.picture}}"></img>
-				</div>
-			</div>
-			<br/>
-			<div class='venueType'>
-				{% for type in place.types %}
-					{{type}} 
-					{%if not forloop.last %}, {% endif %}
-				{% endfor %}
-			</div>
-			<br/>
-			<div class='venue-info curTag'>
+			<div class='venue-info curTag' style="color:rgb({{place.color}});">
 				{% for tag in place.hashtags %}
-					#{{ tag }}
-					{% if not forloop.last %} <br/> {% endif %}
+					<span class='indexTag'>#{{ tag }}</span>
 				{% endfor %}
 			</div>
-			<br><br><br/>
+
+			<br/>
+			<div class="colorWrapper" style="background-color:rgb({{place.color}});" >
+				<img class="venuePic"  src="{{place.picture}}"></img>
+				<div class='venueTitle'>{{ place.name }}</div>
+				<div class='venueType'>
+					{% for type in place.types %}
+						{{type}} 
+						{%if not forloop.last %}, {% endif %}
+					{% endfor %}
+				</div>
+				<br/>
+			</div>
+
+			
 			<div class="separator">
 			</div>
 		</div>
@@ -44,36 +39,30 @@
 
 	{% for place in placeMatchOld %}
 		<div class="venue" id="{{ place.id }}">
+			<div align="right" class="venueInternalRight">
+				{{place.distance}} mi
+			</div>
 
-			<div class='venueTitle h4'>{{ place.name }}</div>
-			<div class = 'venue-right' align="right">
-				<!--<img src="{{place.rating}}">
-				<br/>-->
-				<img src="{{STATIC_URL}}{{place.color}}.jpg" style="width:11px;">
-				<br/>
-				<div class="venueInternalRight">
-					{{place.distance}} mi
-				</div>
-				<div class="venueInternalRight">			
-					<img class="venuePic" src="{{place.picture}}"></img>
-				</div>
-			</div>
-			<br/>
-			<div class='venueType'>
-				{% for type in place.types %}
-					{{type}} 
-					{%if not forloop.last %}, {% endif %}
-				{% endfor %}
-			</div>
-			<br/>
-			<div class='venue-info'>
+			<div class='venue-info curTag' style="color:rgb({{place.color}});">
 				Known For:<br/>
 				{% for tag in place.hashtags %}
-					#{{ tag }}
-					{% if not forloop.last %} <br/> {% endif %}
+					<span class='indexTag'>#{{ tag }}</span>
 				{% endfor %}
 			</div>
-			<br><br><br/>
+			<br>
+
+			<div class="colorWrapper" style="background-color:rgb({{place.color}});" >
+				<img class="venuePic"  src="{{place.picture}}"></img>
+				<div class='venueTitle'>{{ place.name }}</div>
+				<div class='venueType'>
+					{% for type in place.types %}
+						{{type}} 
+						{%if not forloop.last %}, {% endif %}
+					{% endfor %}
+				</div>
+				<br/>
+			</div>
+
 			<div class="separator">
 			</div>
 		</div>
@@ -82,36 +71,30 @@
 	<!--List for items with no data in our DB -->
 	{% for place in placeNoMatch %}
 		<div class="venue" id="{{ place.id }}">
+			<div align="right" class="venueInternalRight">
+				{{place.distance}} mi
+			</div>
 
-			<div class='venueTitle h4'>{{ place.name }}</div>
-			<div class = 'venue-right' align="right">
-				<!--<img src="{{place.rating}}">
-				<br/>-->
-				<img src="{{STATIC_URL}}{{place.color}}.jpg" style="width:11px;">
-				<br/>
-				<div class="venueInternalRight">
-					{{place.distance}} mi
-				</div>
-				<div class="venueInternalRight">			
-					<img class="venuePic" src="{{place.picture}}"></img>
-				</div>
-			</div>
-			<br/>
-			<div class='venueType'>
-				{% for type in place.types %}
-					{{type}} 
-					{%if not forloop.last %}, {% endif %}
-				{% endfor %}
-			</div>
-			<br/>
-			<div class="venue-info">
+			<div class='venue-info curTag' style="color:rgb({{place.color}});">
 				<div>#noTags!</div>
 				<div class='noReviewsAddress'>
 					Be the first to Tag!
 					<br/>
 				</div>
 			</div>
-			<br><br><br/>
+	
+			<div class="colorWrapper" style="background-color:rgb({{place.color}});" >
+				<img class="venuePic"  src="{{place.picture}}"></img>
+				<div class='venueTitle'>{{ place.name }}</div>
+				<div class='venueType'>
+					{% for type in place.types %}
+						{{type}} 
+						{%if not forloop.last %}, {% endif %}
+					{% endfor %}
+				</div>
+				<br/>
+			</div>
+			
 			<div class="separator">
 			</div>
 		</div>

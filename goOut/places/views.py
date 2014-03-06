@@ -135,7 +135,7 @@ def index(request):
 					
 			#sort hashtag scores, and pick 3
 			orderHashtags = Counter(hashtags)
-			topTags = orderHashtags.most_common(3)
+			topTags = orderHashtags.most_common(5)
 			topHashtags = [i[0] for i in topTags]
 			
 			#check if price_level and rating exist and append
@@ -152,11 +152,11 @@ def index(request):
 				place['image_url']='hi'
 
 			numRecentReviews = UserAction.objects.filter(place=Place.objects.get(placeID=place['id']), time__gte = cutoffTime)
-			color = 'blue'
+			color = '46,117,182'
 			if len(numRecentReviews) >= 5:
-				color = 'red'
+				color = '255,80,80'
 			elif len(numRecentReviews) >= 2:
-				color = 'purple'
+				color = '128,0,128'
 
 				
 			temp = {'picture': place['image_url'] ,'name': place['name'], 'id': place['id'], 'types': categories, 'hashtags': topHashtags, 'distance':distance, 'color':color}
@@ -177,7 +177,7 @@ def index(request):
 					
 			#sort hashtag scores, and pick 3
 			orderHashtags = Counter(hashtags)
-			topTags = orderHashtags.most_common(2)
+			topTags = orderHashtags.most_common(5)
 			topHashtags = [i[0] for i in topTags]
 								
 			#check if price_level and rating exist and append
@@ -195,7 +195,7 @@ def index(request):
 
 
 				
-			temp = {'picture': place['image_url'] ,'name': place['name'], 'id': place['id'], 'types': categories, 'hashtags': topHashtags, 'distance':distance, 'color':'blue'}
+			temp = {'picture': place['image_url'] ,'name': place['name'], 'id': place['id'], 'types': categories, 'hashtags': topHashtags, 'distance':distance, 'color':'46,117,182'}
 			
 			#append
 			placeMatchOld.append(temp)
@@ -220,7 +220,7 @@ def index(request):
 			if 'image_url' not in place.keys():
 				place['image_url']='hi'
 
-			temp = {'picture': place['image_url'], 'name': place['name'], 'id': place['id'], 'types': categories, 'distance':distance, 'color':'blue'}
+			temp = {'picture': place['image_url'], 'name': place['name'], 'id': place['id'], 'types': categories, 'distance':distance, 'color':'127,127,127'}
 			
 			
 			#append
