@@ -31,7 +31,7 @@
 }
 
 .introInfo {
-  font-size: 10px;
+  font-size: 11px;
 	
 }
 
@@ -39,21 +39,24 @@
 	float:right;
 	margin-right:10px;
 	text-align: right;
-  font-size: 10px;
+  font-size: 11px;
 }
 .smallBlack {
 font-size: .85em;
 
 }
-.smallBlue {
-	color:#4186D3;
-	font-size:.9em;
-  float:left;
+.smallWhite {
+	color:#fff;
+	font-size:11px;
+}
+
+.whiteText{
+  color:#fff;
 }
 
 .buttonsPlaceDetail {
   text-align: center; 
-  margin-top:5px;
+  margin-top:15px;
   margin-bottom: 3px; 
 }
 
@@ -194,7 +197,9 @@ float:right;
   float: right;
 }
 
-
+.noDecoration{
+  text-decoration:none;
+}
 /*********************************************************/
 
 
@@ -5120,11 +5125,9 @@ a.list-group-item.active > .badge,
   padding-right: 10px;
   padding-top:1px;
   padding-bottom:2px;
-  border-bottom: 3px solid #7109AA;
   font-size: 21px;
   font-weight: 200;
   color: inherit;
-  background-color: #eeeeee;
   /*text-align:center;*/
   
 }

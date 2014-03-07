@@ -73,7 +73,7 @@ def index(request):
 
 	term = request.POST['search']
 
-	url = 'https://api.foursquare.com/v2/venues/search?ll=' + curLoc + '&radius=' + radius + '&intent=checkin&categoryId=' + category_id 
+	url = 'https://api.foursquare.com/v2/venues/search?ll=' + curLoc + '&radius=' + radius + '&intent=browse&categoryId=' + category_id 
 	url += '&client_id=' + client_id + '&client_secret=' + client_secret + '&v=20140306'
 
 	if term != '':
@@ -165,7 +165,7 @@ def index(request):
 			#	place['price_level'] = 'N/A'
 			
 			#round distance, list of categories, and location
-			distance = (place['location'])['distance']#round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
+			distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
 			category = place['categories'][0]['name']
 			
 			image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
@@ -201,7 +201,7 @@ def index(request):
 			#	place['price_level'] = 'N/A'
 			
 			#round distance, list of categories, and location
-			distance = (place['location'])['distance']#round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
+			distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
 			category = place['categories'][0]['name']
 			
 			image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
@@ -221,7 +221,7 @@ def index(request):
 			#	place['price_level'] = 'N/A'
 
 			#round distance, list of categories, and location
-			distance = (place['location'])['distance']#round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
+			distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
 			category = category = place['categories'][0]['name']
 			#address = []
 			"""try: address.append(place['location']['address'][0])
@@ -355,10 +355,10 @@ def placeDetail(request,place_id):
 	
 	#address.append(place['location']['address'][0] + '  ' + place['location']['city'] + ',' + place['location']['state_code'])
 	#address.append(place['location']['cross_streets'] + ', ' + place['location']['neighborhoods'][0])
-
-	address = place['location']['address']
+	address  = []
+	address.append(place['location']['address'])
+	address.append(place['location']['crossStreet'])
 	category = category = place['categories'][0]['name']
-	display_phone = place['contact']['formattedPhone']
 
 	image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
 
@@ -366,7 +366,7 @@ def placeDetail(request,place_id):
 	color=getColorTheme(place['id'])
 
 
-	context = {'userName':userName, 'id':place['id'], 'oldTags':oldTags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':categories, 'address':address, 'phone': display_phone, 'rating':place['rating_img_url_small'], 'review_count':place['review_count'], 'placeFavorited':placeFavorited, 'color':color, 'picture' : image_url}
+	context = {'userName':userName, 'id':place['id'], 'oldTags':oldTags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':category, 'address':address, 'placeFavorited':placeFavorited, 'color':color, 'picture' : image_url}
 	return render(request, 'places/placeDetail.html', context)
 
 
@@ -683,13 +683,15 @@ def tag(request, hashtag):
 
 #####################################functions to call in views!#############################
 def getColorTheme(id):
-	numRecentReviews = UserAction.objects.filter(place=Place.objects.get(placeID=id), time__gte = cutoffTime)
-	color = '46,117,182'
-	if len(numRecentReviews) >= 5:
-		color = '255,80,80'
-	elif len(numRecentReviews) >= 2:
-		color = '128,0,128'
+	color = '127,127,127'
+	if Place.objects.filter(placeID=id).exists():
+		numRecentReviews = UserAction.objects.filter(place=Place.objects.get(placeID=id), time__gte = cutoffTime)
 
+		color = '46,117,182'
+		if len(numRecentReviews) >= 5:
+			color = '255,80,80'
+		elif len(numRecentReviews) >= 2:
+			color = '128,0,128'
 	return color
 
 ############################################################################################

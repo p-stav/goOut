@@ -20,7 +20,7 @@
 			</div>
 		</div>
 		<div class='introInfoRight'>
-			<div style="float:right;"><a class="noDecoration whiteText" href="http://foursquare.com/v/{{id}}">4sq Page</div>
+			<div style="float:right;"><a class="noDecoration whiteText" href="http://foursquare.com/v/{{id}}">4Square Page</div>
 			
 		</div>
 	<!--</div>-->
@@ -51,9 +51,11 @@
 		<p style="font-size:200%">tags: {{ tag.tag }}</p>
 		{% endfor %} -->
 		<!--<p>{{photos}}</p>-->
+
+
 		{% if tagsWithFonts %}
 			{% for tag,fontSize,freq in tagsWithFonts %}
-			<p style="font-size:{{fontSize}}%;">#{{tag.tag}} <span class='freqTag' style="font-size:40%;">({{freq}}x)</span></p>
+			<p style="font-size:{{fontSize}}%; color:rgb({{color}});">#{{tag.tag}} <span class='freqTag' style="font-size:40%;">({{freq}}x)</span></p>
 			{% endfor %}
 
 		{%elif oldTags %}
@@ -61,7 +63,7 @@
 			</br>
 			<h4 id='titleOldTags'>Most common tags:</h4>
 			{% for tag in oldTags %}
-				<p>#{{tag}}</p>
+				<p style="color:rgb({{color}});">#{{tag}}</p>
 			{%endfor%}
 
 		{% else%}
@@ -75,5 +77,5 @@
 </div>
 
 <!--yelp button-->
-<div class='right' style="width:95%; position:relative; margin-top:3em;"><img src="http://s3-media1.ak.yelpcdn.com/assets/2/www/img/1589098a542f/developers/Powered_By_Yelp_White.png"></div>
+<!--<div class='right' style="width:95%; position:relative; margin-top:3em;"><img src="http://s3-media1.ak.yelpcdn.com/assets/2/www/img/1589098a542f/developers/Powered_By_Yelp_White.png"></div>-->
 {% endblock %}
