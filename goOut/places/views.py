@@ -62,11 +62,27 @@ def index(request):
 
 	if curLoc == '': #hardcode if fails.
 		curLoc = '47.6159392,-122.3268701' #Seattle Pine/Bellevue
-		#SF chestnut/VanNess.798542,-122.422345'	
+		#SF chestnut/VanNess.798542,-122.422345'
+
+	client_id = 'T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O'
+	client_secret = '0P1EQQ3NH102D0R3GNGTG0ZAL0S5T41YDB2NPOOMRMO2I2EO'
+	category_id = '4d4b7105d754a06376d81259'
+	radius = '1000'	
+
+	term = request.POST['search']
+
+	url = 'https://api.foursquare.com/v2/venues/search?ll=' + curLoc + '&radius=' + radius + '&intent=checkin&categoryId=' + category_id 
+	url += '&client_id=' + client_id + '&client_secret=' + client_secret + '&v=20140306'
+
+	if term != '':
+		url += '&query=' + term
+
+	req = urlopen(url).read()
+	venues = json.loads(req).get("response").get("venues")
 	
 	"""YELP API"""
 	# Values for access
-	consumer_key = 'nee5cvfcAEBHCg3wSGSdKw'
+	"""consumer_key = 'nee5cvfcAEBHCg3wSGSdKw'
 	consumer_secret = '3FmOuF9CLBGjyITGF66hbKmbgho'
 	token = 'Ta-DBi45PaqkBhBnPJ1xpv1mmIjkVmxP'
 	token_secret = 'ngCe85K7Xk6Sq37hI-4T-rE1Xtw'
@@ -95,7 +111,9 @@ def index(request):
 
 	#grab json object from Yelp API
 	req = urlopen(signed_url).read()
-	venues = json.loads(req).get("businesses")
+	venues = json.loads(req).get("businesses")"""
+
+
 
 	"""GOOGLE PLACES API:
 
@@ -139,17 +157,16 @@ def index(request):
 			topHashtags = [i[0] for i in topTags]
 			
 			#check if price_level and rating exist and append
-			if 'rating' not in place.keys():
-				place['rating'] = 'N/A'
+			#if 'rating' not in place.keys():
+			#	place['rating'] = 'N/A'
 			#if 'price_level' not in place.keys():
 			#	place['price_level'] = 'N/A'
 			
 			#round distance, list of categories, and location
-			distance = round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
-			categories = [i[0] for i in place['categories']]
+			distance = (place['location'])['distance']#round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
+			category = place['categories'][0]['name']
 			
-			if 'image_url' not in place.keys():
-				place['image_url']='hi'
+			image_url = place['categories'][0]['icon']['prefix'] + '120x120' + place['categories'][0]['icon']['suffix']
 
 			numRecentReviews = UserAction.objects.filter(place=Place.objects.get(placeID=place['id']), time__gte = cutoffTime)
 			color = '46,117,182'
@@ -159,7 +176,7 @@ def index(request):
 				color = '128,0,128'
 
 				
-			temp = {'picture': place['image_url'] ,'name': place['name'], 'id': place['id'], 'types': categories, 'hashtags': topHashtags, 'distance':distance, 'color':color}
+			temp = {'picture': image_url ,'name': place['name'], 'id': place['id'], 'types': category, 'hashtags': topHashtags, 'distance':distance, 'color':color}
 			
 			#append
 			placeMatch.append(temp)
@@ -181,46 +198,44 @@ def index(request):
 			topHashtags = [i[0] for i in topTags]
 								
 			#check if price_level and rating exist and append
-			if 'rating' not in place.keys():
-				place['rating'] = 'N/A'
+			#if 'rating' not in place.keys():
+			#	place['rating'] = 'N/A'
 			#if 'price_level' not in place.keys():
 			#	place['price_level'] = 'N/A'
 			
 			#round distance, list of categories, and location
-			distance = round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
-			categories = [i[0] for i in place['categories']]
+			distance = (place['location'])['distance']#round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
+			category = place['categories'][0]['name']
 			
-			if 'image_url' not in place.keys():
-				place['image_url']='hi'
+			image_url = place['categories'][0]['icon']['prefix'] + '120x120' + place['categories'][0]['icon']['suffix']
 
 
 				
-			temp = {'picture': place['image_url'] ,'name': place['name'], 'id': place['id'], 'types': categories, 'hashtags': topHashtags, 'distance':distance, 'color':'46,117,182'}
+			temp = {'picture': image_url ,'name': place['name'], 'id': place['id'], 'types': category, 'hashtags': topHashtags, 'distance':distance, 'color':'46,117,182'}
 			
 			#append
 			placeMatchOld.append(temp)
 			
 		else:
 			#check to see if price level and rating exist
-			if 'rating' not in place.keys():
-				place['rating'] = 'N/A'
+			##if 'rating' not in place.keys():
+			#	place['rating'] = 'N/A'
 			#if 'price_level' not in place.keys():
 			#	place['price_level'] = 'N/A'
 
 			#round distance, list of categories, and location
-			distance = round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
-			categories = [i[0] for i in place['categories']]
-			address = []
+			distance = (place['location'])['distance']#round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
+			category = category = place['categories'][0]['name']
+			#address = []
 			"""try: address.append(place['location']['address'][0])
 			except: continue
 
 			try: address.append(place['location']['cross_streets']) 
 			except: continue
 			"""
-			if 'image_url' not in place.keys():
-				place['image_url']='hi'
+			image_url = place['categories'][0]['icon']['prefix'] + '120x120' + place['categories'][0]['icon']['suffix']
 
-			temp = {'picture': place['image_url'], 'name': place['name'], 'id': place['id'], 'types': categories, 'distance':distance, 'color':'127,127,127'}
+			temp = {'picture': image_url, 'name': place['name'], 'id': place['id'], 'types': category, 'distance':distance, 'color':'127,127,127'}
 			
 			
 			#append
@@ -232,6 +247,7 @@ def index(request):
 		userName = curUser.user.username
 	else:
 		userName = ''
+	sortMethod=''
 	context = { 'sort':sortMethod,'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'index':'index' }
 
 	return render(request, 'places/index.html', context)
@@ -249,9 +265,19 @@ def placeDetail(request,place_id):
 	else:
 		userName = ''
 	
+	client_id = 'T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O'
+	client_secret = '0P1EQQ3NH102D0R3GNGTG0ZAL0S5T41YDB2NPOOMRMO2I2EO'
+	category_id = '4d4b7105d754a06376d81259'	
+
+
+	url = 'https://api.foursquare.com/v2/venues/' + place_id + '&client_id=' + client_id + '&client_secret=' + client_secret + '&v=20140306'
+
+	req = urlopen(url).read()
+	place = json.loads(req).get("venue")
+
 	"""YELP API"""
 	# Values for access
-	consumer_key = 'nee5cvfcAEBHCg3wSGSdKw'
+	"""consumer_key = 'nee5cvfcAEBHCg3wSGSdKw'
 	consumer_secret = '3FmOuF9CLBGjyITGF66hbKmbgho'
 	token = 'Ta-DBi45PaqkBhBnPJ1xpv1mmIjkVmxP'
 	token_secret = 'ngCe85K7Xk6Sq37hI-4T-rE1Xtw'
@@ -267,7 +293,8 @@ def placeDetail(request,place_id):
 	signed_url = oauth_request.to_url()
 
 	req = urlopen(signed_url).read()
-	place = json.loads(req)
+	place = json.loads(req)"""
+
 	
 
 	"""
@@ -294,17 +321,8 @@ def placeDetail(request,place_id):
 		tags=[]
 	#send relevant information to templates
 	#check to see if all keys exist. If not, assign 'NA' values
-	if 'display_phone' not in place.keys():
-		place['display_phone'] = 'N/A'
 		
-	if 'display_address' not in place['location'].keys():
-		place['location']['display_address'] = 'N/A'
-	
-	if 'rating_img_url' not in place.keys():
-		place['rating_img_url'] = 'N/A'
 
-	if 'review_count' not in place.keys():
-		place['review_count'] = 'N/A'
 	
 	#if 'price_level' not in place.keys():
 	#	place['price_level'] = 'N/A'
@@ -347,20 +365,22 @@ def placeDetail(request,place_id):
 
 
 	#edit address:
-	address = []
-	if 'cross_streets' not in place['location'].keys():
-		place['location']['cross_streets'] = ''
-	if 'neighborhoods' not in place['location'].keys():
-		place['location']['neighborhoods'] = ['','']
+	#address = []
+	#if 'cross_streets' not in place['location'].keys():
+	#	place['location']['cross_streets'] = ''
+	#if 'neighborhoods' not in place['location'].keys():
+	##	place['location']['neighborhoods'] = ['','']
 	
-	address.append(place['location']['address'][0] + '  ' + place['location']['city'] + ',' + place['location']['state_code'])
-	address.append(place['location']['cross_streets'] + ', ' + place['location']['neighborhoods'][0])
+	#address.append(place['location']['address'][0] + '  ' + place['location']['city'] + ',' + place['location']['state_code'])
+	#address.append(place['location']['cross_streets'] + ', ' + place['location']['neighborhoods'][0])
 
-	categories = [i[0] for i in place['categories']]
-	display_phone = place['display_phone'][3:]
+	address = place['location']['address']
+	category = category = place['categories'][0]['name']
+	display_phone = place['contact']['formattedPhone']
+	image_url = image_url = place['categories'][0]['icon']['prefix'] + '120x120' + place['categories'][0]['icon']['suffix']
 
-	context = {'userName':userName, 'id':place['id'], 'oldTags':oldTags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':categories, 'address':address, 'phone': display_phone, 'rating':place['rating_img_url_small'], 'review_count':place['review_count'], 'placeFavorited':placeFavorited}
-	
+	context = {'userName':userName, 'id':place['id'], 'oldTags':oldTags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':category, 'address':address, 'phone': display_phone, 'placeFavorited':placeFavorited, 'picture' : image_url}
+
 	return render(request, 'places/placeDetail.html', context)
 
 #later, we will merge submitReview and submitReviewVenue to one view. It's a simple if statement to fix in a template file	
