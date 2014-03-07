@@ -5,19 +5,14 @@
 {% block content %}
 
 <div class='container'>
-	<div class="jumbotron">
-	  <div class='h3' align="center">{{name}}</div>
+	<div class="jumbotron" style="background-color:rgb({{color}});">
+		<div class='h3 whiteText' align="center">{{name}}</div>
 		<!--<div class='intro'>-->
-		<div class = 'introInfo'>
-			<div class='smallBlack' align="center">
-				{% for type in venueTypes %}
-					{{type}} 
-					{%if not forloop.last %}, {% endif %}
-				{% endfor %}
-			</div>
+		<div class = 'introInfo whiteText'>
+			<div  align="center">{{venueTypes}}</div>
 
 			<br/>
-			<div class='smallBlue'>
+			<div class='left introInfo'>
 				{% for addresses in address %}
 					{{ addresses }}
 					{%if not forloop.last %}<br/> {% endif %}
@@ -25,47 +20,19 @@
 			</div>
 		</div>
 		<div class='introInfoRight'>
-			<!--
-			{% if open %}
-				<div class='smallGrey' id='open'> Open Now </div>
-			{% else %}
-				<div class='smallGrey' id='open'> Closed </div>
-			{% endif %}
+			<div style="float:right;"><a class="noDecoration whiteText" href="http://foursquare.com/v/{{id}}">4sq Page</div>
 			
-			
-			<div class='smallGrey'>		
-				{% if price == 1 %}
-					$
-				{% elif price == 2 %}
-					$$
-				{% elif price == 3 %}
-					$$$
-				{% elif price == 4 %}
-					$$$$
-				{% elif price == 5 %}
-					$$$$$	
-				{% elif price == -1 %}
-					No Price
-					
-				{% endif %}
-			
-			</div>
-			-->
-			<div class='smallBlue'><img src='{{ rating }}'> ({{review_count}})</div><br/>
-			<div class='smallBlue' style="float:right;"><a href="http://www.yelp.com/biz/{{id}}">Yelp Page</div>
-			
-			<!-- <div class='smallBlue'>{{ phone }}</div>  -->
 		</div>
 	<!--</div>-->
 
 		<br/>
 	  	<div class='btn-group buttonsPlaceDetail' style='width:100%'>
-			<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-primary buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span></button></a>
+			<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span></button></a>
 			
 			{% if placeFavorited %}
 				<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-info buttonPlaceDetail active'><span class="glyphicon glyphicon-star"></span></button></a>
 			{% else %}
-				<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-primary buttonPlaceDetail'><span class="glyphicon glyphicon-star"></span></button></a>
+				<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-star"></span></button></a>
 			{% endif %}
 
 		</div>

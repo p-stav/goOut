@@ -17,7 +17,6 @@ import oauth2
 
 timeDecayExponent = 0.00001
 
-
 ##find today's date to find items close to it in db
 date = datetime.utcnow()
 #for testing purposes, hardcode datetime
@@ -26,8 +25,11 @@ timeDeltaForCutoff = timedelta(hours=-2)
 cutoffTime = date + timeDeltaForCutoff
 
 minFontPercentage = 100
-maxFontPercentage = 200
+maxFontPercentage = 150
 highestScore = 50
+
+
+
 
 def getCurLoc(request):
 	if request.POST.get('sortMethod'):
@@ -168,12 +170,7 @@ def index(request):
 			
 			image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
 
-			numRecentReviews = UserAction.objects.filter(place=Place.objects.get(placeID=place['id']), time__gte = cutoffTime)
-			color = '46,117,182'
-			if len(numRecentReviews) >= 5:
-				color = '255,80,80'
-			elif len(numRecentReviews) >= 2:
-				color = '128,0,128'
+			color=getColorTheme(place['id'])
 
 				
 			temp = {'picture': image_url ,'name': place['name'], 'id': place['id'], 'types': category, 'hashtags': topHashtags, 'distance':distance, 'color':color}
@@ -247,8 +244,10 @@ def index(request):
 		userName = curUser.user.username
 	else:
 		userName = ''
-	sortMethod=''
-	context = { 'sort':sortMethod,'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'index':'index' }
+
+	sortMethod = ''
+	context = {'sort':sortMethod,'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'index':'index' }
+
 
 	return render(request, 'places/index.html', context)
 	
@@ -321,23 +320,6 @@ def placeDetail(request,place_id):
 		tags=[]
 	#send relevant information to templates
 	#check to see if all keys exist. If not, assign 'NA' values
-		
-
-	
-	#if 'price_level' not in place.keys():
-	#	place['price_level'] = 'N/A'
-		
-	#create address
-	#address = []
-	#address.append(place['address_components'][0]['long_name'] + ' ' + place['address_components'][1]['long_name'])
-	#address.append(place['address_components'][2]['long_name'] + ',' + place['address_components'][3]['long_name'])
-	
-	#see if have info on opening times
-	#try: place['open'] = place['opening_hours']['open_now']
-	#except: place['open'] = ''
-	
-	#find what the most descriptive hashtags have been in the past?
-	
 
 	#update scores
 	for placeTag in tags:
@@ -377,11 +359,17 @@ def placeDetail(request,place_id):
 	address = place['location']['address']
 	category = category = place['categories'][0]['name']
 	display_phone = place['contact']['formattedPhone']
-	image_url = image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
 
-	context = {'userName':userName, 'id':place['id'], 'oldTags':oldTags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':category, 'address':address, 'phone': display_phone, 'placeFavorited':placeFavorited, 'picture' : image_url}
+	image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
 
+	#get color theme
+	color=getColorTheme(place['id'])
+
+
+	context = {'userName':userName, 'id':place['id'], 'oldTags':oldTags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':categories, 'address':address, 'phone': display_phone, 'rating':place['rating_img_url_small'], 'review_count':place['review_count'], 'placeFavorited':placeFavorited, 'color':color, 'picture' : image_url}
 	return render(request, 'places/placeDetail.html', context)
+
+
 
 #later, we will merge submitReview and submitReviewVenue to one view. It's a simple if statement to fix in a template file	
 @login_required()
@@ -689,3 +677,19 @@ def tag(request, hashtag):
 	context = {'placeTagList' : placeTagList}
 	return render(request, 'places/tag.html', context)
 
+
+
+
+
+#####################################functions to call in views!#############################
+def getColorTheme(id):
+	numRecentReviews = UserAction.objects.filter(place=Place.objects.get(placeID=id), time__gte = cutoffTime)
+	color = '46,117,182'
+	if len(numRecentReviews) >= 5:
+		color = '255,80,80'
+	elif len(numRecentReviews) >= 2:
+		color = '128,0,128'
+
+	return color
+
+############################################################################################
