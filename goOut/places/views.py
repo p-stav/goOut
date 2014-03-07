@@ -166,7 +166,7 @@ def index(request):
 			distance = (place['location'])['distance']#round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
 			category = place['categories'][0]['name']
 			
-			image_url = place['categories'][0]['icon']['prefix'] + '120x120' + place['categories'][0]['icon']['suffix']
+			image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
 
 			numRecentReviews = UserAction.objects.filter(place=Place.objects.get(placeID=place['id']), time__gte = cutoffTime)
 			color = '46,117,182'
@@ -207,7 +207,7 @@ def index(request):
 			distance = (place['location'])['distance']#round(place['distance'] * 0.000621371192, -int(floor(log10(place['distance'] * 0.000621371192))))
 			category = place['categories'][0]['name']
 			
-			image_url = place['categories'][0]['icon']['prefix'] + '120x120' + place['categories'][0]['icon']['suffix']
+			image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
 
 
 				
@@ -233,7 +233,7 @@ def index(request):
 			try: address.append(place['location']['cross_streets']) 
 			except: continue
 			"""
-			image_url = place['categories'][0]['icon']['prefix'] + '120x120' + place['categories'][0]['icon']['suffix']
+			image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
 
 			temp = {'picture': image_url, 'name': place['name'], 'id': place['id'], 'types': category, 'distance':distance, 'color':'127,127,127'}
 			
@@ -269,11 +269,11 @@ def placeDetail(request,place_id):
 	client_secret = '0P1EQQ3NH102D0R3GNGTG0ZAL0S5T41YDB2NPOOMRMO2I2EO'
 	category_id = '4d4b7105d754a06376d81259'	
 
-
-	url = 'https://api.foursquare.com/v2/venues/' + place_id + '&client_id=' + client_id + '&client_secret=' + client_secret + '&v=20140306'
+	#url = 'https://api.foursquare.com/v2/venues/50f1027ee4b04196702b9cb8?ll=47.6159392,-122.3268701&client_id=T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O&client_secret=0P1EQQ3NH102D0R3GNGTG0ZAL0S5T41YDB2NPOOMRMO2I2EO&v=20140229'
+	url = 'https://api.foursquare.com/v2/venues/' + place_id + '?client_id=' + client_id + '&client_secret=' + client_secret + '&v=20140306'
 
 	req = urlopen(url).read()
-	place = json.loads(req).get("venue")
+	place = json.loads(req).get("response").get("venue")
 
 	"""YELP API"""
 	# Values for access
@@ -377,7 +377,7 @@ def placeDetail(request,place_id):
 	address = place['location']['address']
 	category = category = place['categories'][0]['name']
 	display_phone = place['contact']['formattedPhone']
-	image_url = image_url = place['categories'][0]['icon']['prefix'] + '120x120' + place['categories'][0]['icon']['suffix']
+	image_url = image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
 
 	context = {'userName':userName, 'id':place['id'], 'oldTags':oldTags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':category, 'address':address, 'phone': display_phone, 'placeFavorited':placeFavorited, 'picture' : image_url}
 
