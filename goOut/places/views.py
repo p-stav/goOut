@@ -18,11 +18,8 @@ import oauth2
 timeDecayExponent = 0.00001
 
 ##find today's date to find items close to it in db
-date = datetime.utcnow()
 #for testing purposes, hardcode datetime
 #date = datetime(2013, 12, 28, 22, 40, 41, 879000)
-timeDeltaForCutoff = timedelta(hours=-2)
-cutoffTime = date + timeDeltaForCutoff
 
 minFontPercentage = 100
 maxFontPercentage = 150
@@ -56,6 +53,12 @@ def getCurLocHashtag(request):
 	
 #index page. 
 def index(request):
+        ##find today's date to find items close to it in db                                                                                                                                  
+        date = datetime.utcnow()
+        #for testing purposes, hardcode datetime                                                                                                                                             
+        #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+        timeDeltaForCutoff = timedelta(hours=-2)
+        cutoffTime = date + timeDeltaForCutoff
 	#get curLong + curLat, or redirect to get info
 	if request.POST.get('position'):
 			curLoc = request.POST['position']
@@ -253,6 +256,12 @@ def index(request):
 	
 	
 def placeDetail(request,place_id):
+        ##find today's date to find items close to it in db                                                                                                                                  
+        date = datetime.utcnow()
+        #for testing purposes, hardcode datetime                                                                                                                                             
+        #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+        timeDeltaForCutoff = timedelta(hours=-2)
+        cutoffTime = date + timeDeltaForCutoff
 	placeFavorited = False
 	#get username
 	if request.user.is_authenticated():
@@ -404,6 +413,12 @@ def submitReviewVenue(request, place_name, reference):
 
 	
 def submit_submitReview(request):
+        ##find today's date to find items close to it in db                                                                                                                                  
+        date = datetime.utcnow()
+        #for testing purposes, hardcode datetime                                                                                                                                             
+        #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+        timeDeltaForCutoff = timedelta(hours=-2)
+        cutoffTime = date + timeDeltaForCutoff
 	curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
 
 	#Check if place exists. If not, add place
@@ -512,7 +527,12 @@ def add_user_add(request):
 	
 @login_required()
 def view_fav(request):
-
+        ##find today's date to find items close to it in db                                                                                                                                  
+        date = datetime.utcnow()
+        #for testing purposes, hardcode datetime                                                                                                                                             
+        #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+        timeDeltaForCutoff = timedelta(hours=-2)
+        cutoffTime = date + timeDeltaForCutoff
 	curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
 	userName = curUser.user.username
 	
@@ -683,6 +703,12 @@ def tag(request, hashtag):
 
 #####################################functions to call in views!#############################
 def getColorTheme(id):
+        ##find today's date to find items close to it in db                                                                                                                                  
+        date = datetime.utcnow()
+        #for testing purposes, hardcode datetime                                                                                                                                             
+        #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+        timeDeltaForCutoff = timedelta(hours=-2)
+        cutoffTime = date + timeDeltaForCutoff
 	color = '127,127,127'
 	if Place.objects.filter(placeID=id).exists():
 		numRecentReviews = UserAction.objects.filter(place=Place.objects.get(placeID=id), time__gte = cutoffTime)
