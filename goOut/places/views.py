@@ -9,7 +9,7 @@ from django.shortcuts import render
 from urllib import urlopen
 import json, pprint
 from datetime import datetime, timedelta
-from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction, UserFeedback
+from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction, UserFeedback, UserComment
 import sets
 from math import exp, log10, floor
 from collections import Counter
@@ -431,17 +431,20 @@ def submit_submitReview(request):
 		newPlace = Place.objects.create(placeID = request.POST['venueId'], placeName=request.POST['venueName'])
 		newPlace.save()
 
-	# Check if user recently reviewed this place (in last cutoff time)
+	###Do we want to dissallow user from reviewing multiple times in window?
+	#Check if user recently reviewed this place (in last cutoff time)
+	"""
 	recentUserActions = UserAction.objects.filter(place=newPlace, userID=curUser, time__gte = cutoffTime)
 
-	#if recentUserActions:
-	#	return HttpResponseRedirect('/')
-
+	if recentUserActions:
+		return HttpResponseRedirect('/')
+	"""
 
 	
 	#get list of tags
 	#listTags = request.body
 	tags = request.POST.getlist('tagNames')
+
 	"""[]
 	tagCount = 0
 	tagName = 'tag'+str(tagCount)
@@ -492,6 +495,11 @@ def submit_submitReview(request):
 	#add a point to the user
 	curUser.points += 1
 	curUser.save()
+
+	#store comment
+	newComment = UserComment.objects.create(User=curUser, time = datetime.utcnow(), Place = newPlace, comment=request.POST['venueComment'])
+	newComment.save()
+
 
 	redirectURL = '/venue/' + request.POST['venueId']
 
