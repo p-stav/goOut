@@ -38,6 +38,7 @@ class UserAction (models.Model):
 	place = models.ForeignKey(Place)
 	tag = models.ForeignKey(Hashtag)
 	time = models.DateTimeField()
+	comment = models.CharField(max_length=140)
 	
 	def __unicode__(self):
 		return self.userID.user.username + " " + self.place.placeName
