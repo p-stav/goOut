@@ -71,8 +71,8 @@ def index(request):
 
 	client_id = 'T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O'
 	client_secret = '0P1EQQ3NH102D0R3GNGTG0ZAL0S5T41YDB2NPOOMRMO2I2EO'
-	category_id = '4d4b7105d754a06376d81259'
-	radius = '1000'	
+	category_id =  '4bf58dd8d48988d116941735,50327c8591d4c4b30a586d5d,4bf58dd8d48988d11e941735,4bf58dd8d48988d118941735,4bf58dd8d48988d1d8941735,4bf58dd8d48988d120941735,4bf58dd8d48988d121941735,4bf58dd8d48988d11f941735,4bf58dd8d48988d11b941735,4bf58dd8d48988d1d4941735,4bf58dd8d48988d11d941735,4bf58dd8d48988d122941735,4bf58dd8d48988d123941735'
+	radius = '500'	
 
 	term = request.POST['search']
 
@@ -365,8 +365,11 @@ def placeDetail(request,place_id):
 	#address.append(place['location']['address'][0] + '  ' + place['location']['city'] + ',' + place['location']['state_code'])
 	#address.append(place['location']['cross_streets'] + ', ' + place['location']['neighborhoods'][0])
 	address  = []
-	address.append(place['location']['address'])
-	address.append(place['location']['crossStreet'])
+
+	if 'address' in place['location'].keys():
+		address.append(place['location']['address'])
+	if 'crossStreet' in place['location'].keys():
+		address.append(place['location']['crossStreet'])
 	category = category = place['categories'][0]['name']
 
 	image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
