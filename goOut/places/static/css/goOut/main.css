@@ -192,5 +192,10 @@ float:right;
 .noDecoration{
   text-decoration:none;
 }
+
+.hidden {
+  display:none;
+
+}
 /*********************************************************/
 
