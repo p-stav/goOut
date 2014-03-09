@@ -25,6 +25,8 @@ minFontPercentage = 100
 maxFontPercentage = 150
 highestScore = 50
 
+CategoryBlacklist = ['4bf58dd8d48988d1e0931735',
+'4bf58dd8d48988d1d5941735']
 
 
 
@@ -53,12 +55,12 @@ def getCurLocHashtag(request):
 	
 #index page. 
 def index(request):
-        ##find today's date to find items close to it in db                                                                                                                                  
-        date = datetime.utcnow()
-        #for testing purposes, hardcode datetime                                                                                                                                             
-        #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
-        timeDeltaForCutoff = timedelta(hours=-2)
-        cutoffTime = date + timeDeltaForCutoff
+	#find today's date to find items close to it in db                                                                                                                                  
+	date = datetime.utcnow()
+	#for testing purposes, hardcode datetime                                                                                                                                             
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	timeDeltaForCutoff = timedelta(hours=-2)
+	cutoffTime = date + timeDeltaForCutoff
 	#get curLong + curLat, or redirect to get info
 	if request.POST.get('position'):
 			curLoc = request.POST['position']
@@ -142,6 +144,10 @@ def index(request):
 	placeMatch = []
 	placeMatchOld = []
 	placeNoMatch = []
+
+	# Remove venues with categories on the blacklist
+	venues = [place for place in venues if not isBlacklistedCategory(place)]
+
 	
 	for place in venues:
 		if place['id'] in curRevList:
@@ -256,12 +262,12 @@ def index(request):
 	
 	
 def placeDetail(request,place_id):
-        ##find today's date to find items close to it in db                                                                                                                                  
-        date = datetime.utcnow()
-        #for testing purposes, hardcode datetime                                                                                                                                             
-        #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
-        timeDeltaForCutoff = timedelta(hours=-2)
-        cutoffTime = date + timeDeltaForCutoff
+	##find today's date to find items close to it in db                                                                                                                                  
+	date = datetime.utcnow()
+	#for testing purposes, hardcode datetime                                                                                                                                             
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	timeDeltaForCutoff = timedelta(hours=-2)
+	cutoffTime = date + timeDeltaForCutoff
 	placeFavorited = False
 	#get username
 	if request.user.is_authenticated():
@@ -419,12 +425,12 @@ def submitReviewVenue(request, place_name, reference):
 
 	
 def submit_submitReview(request):
-        ##find today's date to find items close to it in db                                                                                                                                  
-        date = datetime.utcnow()
-        #for testing purposes, hardcode datetime                                                                                                                                             
-        #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
-        timeDeltaForCutoff = timedelta(hours=-2)
-        cutoffTime = date + timeDeltaForCutoff
+	##find today's date to find items close to it in db                                                                                                                                  
+	date = datetime.utcnow()
+	#for testing purposes, hardcode datetime                                                                                                                                             
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	timeDeltaForCutoff = timedelta(hours=-2)
+	cutoffTime = date + timeDeltaForCutoff
 	curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
 
 	#Check if place exists. If not, add place
@@ -541,12 +547,12 @@ def add_user_add(request):
 	
 @login_required()
 def view_fav(request):
-        ##find today's date to find items close to it in db                                                                                                                                  
-        date = datetime.utcnow()
-        #for testing purposes, hardcode datetime                                                                                                                                             
-        #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
-        timeDeltaForCutoff = timedelta(hours=-2)
-        cutoffTime = date + timeDeltaForCutoff
+	##find today's date to find items close to it in db                                                                                                                                  
+	date = datetime.utcnow()
+	#for testing purposes, hardcode datetime                                                                                                                                             
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	timeDeltaForCutoff = timedelta(hours=-2)
+	cutoffTime = date + timeDeltaForCutoff
 	curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
 	userName = curUser.user.username
 	
@@ -733,5 +739,12 @@ def getColorTheme(id):
 		elif len(numRecentReviews) >= 2:
 			color = '128,0,128'
 	return color
+
+def isBlacklistedCategory(place):
+	if place['categories'][0]['id'] in CategoryBlacklist:
+		return True
+	else:
+		return False
+
 
 ############################################################################################
