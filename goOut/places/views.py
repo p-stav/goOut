@@ -9,7 +9,7 @@ from django.shortcuts import render
 from urllib import urlopen
 import json, pprint
 from datetime import datetime, timedelta
-from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction, UserFeedback
+from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction, UserFeedback, UserComment
 import sets
 from math import exp, log10, floor
 from collections import Counter
@@ -25,6 +25,8 @@ minFontPercentage = 100
 maxFontPercentage = 150
 highestScore = 50
 
+CategoryBlacklist = ['4bf58dd8d48988d1e0931735',
+'4bf58dd8d48988d1d5941735']
 
 
 
@@ -53,12 +55,12 @@ def getCurLocHashtag(request):
 	
 #index page. 
 def index(request):
-        ##find today's date to find items close to it in db                                                                                                                                  
-        date = datetime.utcnow()
-        #for testing purposes, hardcode datetime                                                                                                                                             
-        #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
-        timeDeltaForCutoff = timedelta(hours=-2)
-        cutoffTime = date + timeDeltaForCutoff
+	#find today's date to find items close to it in db                                                                                                                                  
+	date = datetime.utcnow()
+	#for testing purposes, hardcode datetime                                                                                                                                             
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	timeDeltaForCutoff = timedelta(hours=-2)
+	cutoffTime = date + timeDeltaForCutoff
 	#get curLong + curLat, or redirect to get info
 	if request.POST.get('position'):
 			curLoc = request.POST['position']
@@ -142,6 +144,10 @@ def index(request):
 	placeMatch = []
 	placeMatchOld = []
 	placeNoMatch = []
+
+	# Remove venues with categories on the blacklist
+	venues = [place for place in venues if not isBlacklistedCategory(place)]
+
 	
 	for place in venues:
 		if place['id'] in curRevList:
@@ -256,12 +262,12 @@ def index(request):
 	
 	
 def placeDetail(request,place_id):
-        ##find today's date to find items close to it in db                                                                                                                                  
-        date = datetime.utcnow()
-        #for testing purposes, hardcode datetime                                                                                                                                             
-        #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
-        timeDeltaForCutoff = timedelta(hours=-2)
-        cutoffTime = date + timeDeltaForCutoff
+	##find today's date to find items close to it in db                                                                                                                                  
+	date = datetime.utcnow()
+	#for testing purposes, hardcode datetime                                                                                                                                             
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	timeDeltaForCutoff = timedelta(hours=-2)
+	cutoffTime = date + timeDeltaForCutoff
 	placeFavorited = False
 	#get username
 	if request.user.is_authenticated():
@@ -377,8 +383,12 @@ def placeDetail(request,place_id):
 	#get color theme
 	color=getColorTheme(place['id'])
 
+	#get comments from last two hours
+	comments=[]
+	if Place.objects.filter(placeID=place['id']).exists():
+		comments = UserComment.objects.filter(Place=Place.objects.get(placeID=place['id']), time__gte=cutoffTime)
 
-	context = {'userName':userName, 'id':place['id'], 'oldTags':oldTags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':category, 'address':address, 'placeFavorited':placeFavorited, 'color':color, 'picture' : image_url}
+	context = {'userName':userName, 'id':place['id'], 'oldTags':oldTags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':category, 'address':address, 'placeFavorited':placeFavorited, 'color':color, 'picture' : image_url, 'comments':comments}
 	return render(request, 'places/placeDetail.html', context)
 
 
@@ -408,20 +418,23 @@ def submitReviewVenue(request, place_name, reference):
 	else:
 		userName = ''
 	
+	#get color theme
+	color=getColorTheme(reference)
+
 	#grab all hashtags to display
 	tags = Hashtag.objects.all()
 	
-	context = {'userName':userName, 'tags':tags, 'id':reference, 'name':place_name}
+	context = {'userName':userName, 'tags':tags, 'id':reference, 'name':place_name, 'color':color}
 	return render(request, 'places/submitReviewVenue.html', context)
 
 	
 def submit_submitReview(request):
-        ##find today's date to find items close to it in db                                                                                                                                  
-        date = datetime.utcnow()
-        #for testing purposes, hardcode datetime                                                                                                                                             
-        #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
-        timeDeltaForCutoff = timedelta(hours=-2)
-        cutoffTime = date + timeDeltaForCutoff
+	##find today's date to find items close to it in db                                                                                                                                  
+	date = datetime.utcnow()
+	#for testing purposes, hardcode datetime                                                                                                                                             
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	timeDeltaForCutoff = timedelta(hours=-2)
+	cutoffTime = date + timeDeltaForCutoff
 	curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
 
 	#Check if place exists. If not, add place
@@ -431,17 +444,20 @@ def submit_submitReview(request):
 		newPlace = Place.objects.create(placeID = request.POST['venueId'], placeName=request.POST['venueName'])
 		newPlace.save()
 
-	# Check if user recently reviewed this place (in last cutoff time)
+	###Do we want to dissallow user from reviewing multiple times in window?
+	#Check if user recently reviewed this place (in last cutoff time)
+	"""
 	recentUserActions = UserAction.objects.filter(place=newPlace, userID=curUser, time__gte = cutoffTime)
 
-	#if recentUserActions:
-	#	return HttpResponseRedirect('/')
-
+	if recentUserActions:
+		return HttpResponseRedirect('/')
+	"""
 
 	
 	#get list of tags
 	#listTags = request.body
 	tags = request.POST.getlist('tagNames')
+
 	"""[]
 	tagCount = 0
 	tagName = 'tag'+str(tagCount)
@@ -493,6 +509,12 @@ def submit_submitReview(request):
 	curUser.points += 1
 	curUser.save()
 
+	#store comment
+	if request.POST['venueComment']:
+		newComment = UserComment.objects.create(User=curUser, time = datetime.utcnow(), Place = newPlace, comment=request.POST['venueComment'])
+		newComment.save()
+
+
 	redirectURL = '/venue/' + request.POST['venueId']
 
 	return HttpResponseRedirect(redirectURL)
@@ -530,12 +552,12 @@ def add_user_add(request):
 	
 @login_required()
 def view_fav(request):
-        ##find today's date to find items close to it in db                                                                                                                                  
-        date = datetime.utcnow()
-        #for testing purposes, hardcode datetime                                                                                                                                             
-        #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
-        timeDeltaForCutoff = timedelta(hours=-2)
-        cutoffTime = date + timeDeltaForCutoff
+	##find today's date to find items close to it in db                                                                                                                                  
+	date = datetime.utcnow()
+	#for testing purposes, hardcode datetime                                                                                                                                             
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	timeDeltaForCutoff = timedelta(hours=-2)
+	cutoffTime = date + timeDeltaForCutoff
 	curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
 	userName = curUser.user.username
 	
@@ -722,5 +744,12 @@ def getColorTheme(id):
 		elif len(numRecentReviews) >= 2:
 			color = '128,0,128'
 	return color
+
+def isBlacklistedCategory(place):
+	if place['categories'][0]['id'] in CategoryBlacklist:
+		return True
+	else:
+		return False
+
 
 ############################################################################################

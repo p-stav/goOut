@@ -103,7 +103,7 @@
 			<div class="dropdown-menu noClick" style="padding-left: 5px; padding-right: 5px;">
 				<form action={% url "places:getCurLoc" %} method="post" accept-charset="UTF-8">
 				{% csrf_token %}
-					<div class='input-group'><input type="text" name="searchTerm" class="form-control searchTerm" placeholder="Nearby:">
+					<div class='input-group'><input type="text" name="searchTerm" class="form-control searchTerm" placeholder="Search:">
 						<span class="input-group-btn"><input class="btn btn-default" type="submit" value="go"></span>
 					</div>
 				</form>

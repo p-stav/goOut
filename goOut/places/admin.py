@@ -1,5 +1,5 @@
 from django.contrib import admin
-from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction, UserFeedback
+from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction, UserFeedback, UserComment
 
 # Register your models here.
 admin.site.register(UserProfile)
@@ -8,4 +8,4 @@ admin.site.register(Hashtag)
 admin.site.register(PlaceTag)
 admin.site.register(UserAction)
 admin.site.register(UserFeedback)
-
+admin.site.register(UserComment)
