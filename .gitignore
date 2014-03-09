@@ -1,5 +1,5 @@
 ######################################
-### PYTHON
+### Python.gitignore
 ######################################
 
 # Byte-compiled / optimized / DLL files
@@ -43,7 +43,7 @@ docs/_build/
 *.pyc
 
 ######################################
-### NODE
+### Node.gitignore
 ######################################
 
 # Logs
@@ -72,5 +72,53 @@ build/Release
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules
 
+
+######################################
+### Windows.gitignore
+######################################
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+
+######################################
+### OSX.gitignore
+######################################
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+######################################
+### SublimeText.gitignore
+######################################
+# SublimeText project files
+*.sublime-workspace
+
+
+######################################
+### Custom app: goOut
+######################################
 /dev.sqlite3
 /goOut/places/static/css/public.css
+
