@@ -4,8 +4,8 @@
 
 /*ADDED MANUALLY*/
 .margins {
-  margin-left:10px;
-  margin-right:10px;
+  margin: 20px 10px 0px 10px;
+
 }
 
 .content{
@@ -61,10 +61,35 @@ font-size: .85em;
   color: #999999;
 
 }
+
+
 .tag{
-  margin-left:5px;
-  margin-right:5px;
-  padding-top:10px;
+  font-size: 16px;
+  font-family: 'Roboto',sans-serif;
+  padding: 5px 10px 5px 10px;
+  margin: 5px 0 5px 0;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  border: 1px solid #c0c0c0;
+
+}
+
+.jumboTitle{
+  margin:20px 10px 0px 10px;
+  font-size: 24px;
+
+}
+.activeTag {
+  color: #ffffff;
+  background-color: #7109AA;
+}
+.unselectedTag {
+  display:none;
+}
+
+
+.add-tags{
+    margin: 0px 30px 5px 30px;
 }
 
 .colorWrapper{
@@ -75,11 +100,6 @@ font-size: .85em;
   padding: 10px 10px 0px 8px;
   font-family: 'Roboto', sans-serif;
 =
-}
-
-.selectedTag {
-  color: #ffffff;
-  background-color: #7109AA;
 }
 
 .venue{
@@ -156,15 +176,6 @@ font-size: .85em;
 .separator{
   border-bottom: 1px solid #c0c0c0;
   margin-top:20px;
-}
-
-.separatorTag{
-  border-bottom: 1px solid #7109AA;
-  padding-top: 10px;
-}
-.separatorTagSelected {
-  border-bottom: 1px solid #ffffff;
-  padding-top: 10px;
 }
 
 .right{

@@ -5,8 +5,8 @@
 {% block content %}
 
 <div class='container'>
-	<div class="jumbotron" style="background-color:rgb({{color}});">
-		<div class='h3 whiteText' align="center">{{name}}</div>
+	<div class="jumbotron" style="background-color:rgb({{color}}); font-family:'Roboto', sans-serif;">
+		<p class='jumboTitle whiteText' align="center">{{name}}</p>
 		<!--<div class='intro'>-->
 		<div class = 'introInfo whiteText'>
 			<div  align="center">{{venueTypes}}</div>
@@ -60,10 +60,10 @@
 
 		{%elif oldTags %}
 			<div class='h4'>Are you here? <a href="/review/{{ name }}/{{ id }}">Write a review!</a></div>
-			</br>
+			</br><br/>
 			<h4 id='titleOldTags'>Most common tags:</h4>
 			{% for tag in oldTags %}
-				<p style="color:rgb({{color}});">#{{tag}}</p>
+				<p style="color:rgb({{color}}); font-size:16px">#{{tag}}</p>
 			{%endfor%}
 
 		{% else%}
