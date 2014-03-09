@@ -509,8 +509,9 @@ def submit_submitReview(request):
 	curUser.save()
 
 	#store comment
-	newComment = UserComment.objects.create(User=curUser, time = datetime.utcnow(), Place = newPlace, comment=request.POST['venueComment'])
-	newComment.save()
+	if request.POST['venueComment']:
+		newComment = UserComment.objects.create(User=curUser, time = datetime.utcnow(), Place = newPlace, comment=request.POST['venueComment'])
+		newComment.save()
 
 
 	redirectURL = '/venue/' + request.POST['venueId']
