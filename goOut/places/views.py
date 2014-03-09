@@ -384,8 +384,9 @@ def placeDetail(request,place_id):
 	color=getColorTheme(place['id'])
 
 	#get comments from last two hours
-	comments = UserComment.objects.filter(Place=Place.objects.get(placeID=place['id']), time__gte=cutoffTime)
-
+	comments=[]
+	if Place.objects.filter(placeID=place['id']).exists():
+		comments = UserComment.objects.filter(Place=Place.objects.get(placeID=place['id']), time__gte=cutoffTime)
 
 	context = {'userName':userName, 'id':place['id'], 'oldTags':oldTags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':category, 'address':address, 'placeFavorited':placeFavorited, 'color':color, 'picture' : image_url, 'comments':comments}
 	return render(request, 'places/placeDetail.html', context)
