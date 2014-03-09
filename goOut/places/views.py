@@ -417,10 +417,13 @@ def submitReviewVenue(request, place_name, reference):
 	else:
 		userName = ''
 	
+	#get color theme
+	color=getColorTheme(reference)
+
 	#grab all hashtags to display
 	tags = Hashtag.objects.all()
 	
-	context = {'userName':userName, 'tags':tags, 'id':reference, 'name':place_name}
+	context = {'userName':userName, 'tags':tags, 'id':reference, 'name':place_name, 'color':color}
 	return render(request, 'places/submitReviewVenue.html', context)
 
 	

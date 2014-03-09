@@ -102,10 +102,7 @@ font-size: .85em;
   font-size: 24px;
 
 }
-.activeTag {
-  color: #ffffff;
-  background-color: #7109AA;
-}
+
 .unselectedTag {
   display:none;
 }
