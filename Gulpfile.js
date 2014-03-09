@@ -10,10 +10,10 @@ var paths = {
         ,'http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js'
         ],
     less : [
-        'goOut/places/static/css/goOut/master.less'
+        'goOut/places/static/css/less/master.less'
         ],
     styles: [
-        'goOut/places/static/css/goOut/*'
+        'goOut/places/static/css/less/*'
     ]
 };
 
