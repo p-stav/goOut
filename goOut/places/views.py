@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import Http404
@@ -52,6 +53,45 @@ def getCurLocHashtag(request):
 	return render(request, 'places/getCurLocHashtag.html', context)
 
 
+
+###
+# Location endpoint to update and get the user's location based on session
+###
+@csrf_exempt
+def location(request):
+	data = {}
+
+	try:
+		if request.method == 'GET':
+			# Get location data from session if we have it
+			location = request.session.get('location', '')
+
+		elif request.method == 'POST':
+			location = request.POST.get('location').split(',')
+
+			# Cordinate is a pair of values
+			if len(location) != 2:
+				raise Exception('Invalid coordinate format')
+
+			_lat = float(location[0])
+			_long = float(location[1])
+
+			if abs(_lat) > 90:
+				raise Exception('Latitude value is not within range [-90,90]')
+
+			if ( abs(_long) > 180):
+				raise Exception('Longitude value is not within range [-180,180]')
+
+			request.session['location'] = str(_lat) + ',' + str(_long)
+			data['success'] = True
+
+	except Exception, e:
+		data['success'] = False
+		data['message'] = str(e)
+	finally:
+		data['location'] = request.session['location']
+
+	return HttpResponse(json.dumps(data), content_type='application/json')
 
 #index page.
 def index(request):
