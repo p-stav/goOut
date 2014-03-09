@@ -73,3 +73,4 @@ build/Release
 node_modules
 
 /dev.sqlite3
+/goOut/places/static/css/public.css

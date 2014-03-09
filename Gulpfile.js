@@ -19,7 +19,7 @@ var paths = {
 
 gulp.task('less', function() {
 
-    return gulp.src(paths.styles)
+    return gulp.src(paths.less)
         .pipe(less())
         // .pipe(uglify())
         .pipe(rename('public.css'))
