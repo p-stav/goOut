@@ -51,34 +51,31 @@ def getCurLocHashtag(request):
 
 	return render(request, 'places/getCurLocHashtag.html', context)
 
-	
-	
-#index page. 
+
+
+#index page.
 def index(request):
-	#find today's date to find items close to it in db                                                                                                                                  
+	#find today's date to find items close to it in db
 	date = datetime.utcnow()
-	#for testing purposes, hardcode datetime                                                                                                                                             
-	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	#for testing purposes, hardcode datetime
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)
 	timeDeltaForCutoff = timedelta(hours=-2)
 	cutoffTime = date + timeDeltaForCutoff
-	#get curLong + curLat, or redirect to get info
-	if request.POST.get('position'):
-			curLoc = request.POST['position']
-	else: return HttpResponseRedirect('/')
 
-
-	if curLoc == '': #hardcode if fails.
-		curLoc = '47.6159392,-122.3268701' #Seattle Pine/Bellevue
-		#SF chestnut/VanNess.798542,-122.422345'
+	#get curLong + curLat
+	# Get current position or default to specific coordinates
+	curLoc = request.POST.get('position', '47.6159392,-122.3268701')
+  # 47.6159392,-122.3268701 = Seattle Pine/Bellevue
+  # SF chestnut/VanNess.798542,-122.422345'
 
 	client_id = 'T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O'
 	client_secret = '0P1EQQ3NH102D0R3GNGTG0ZAL0S5T41YDB2NPOOMRMO2I2EO'
 	category_id =  '4bf58dd8d48988d116941735,50327c8591d4c4b30a586d5d,4bf58dd8d48988d11e941735,4bf58dd8d48988d118941735,4bf58dd8d48988d1d8941735,4bf58dd8d48988d120941735,4bf58dd8d48988d121941735,4bf58dd8d48988d11f941735,4bf58dd8d48988d11b941735,4bf58dd8d48988d1d4941735,4bf58dd8d48988d11d941735,4bf58dd8d48988d122941735,4bf58dd8d48988d123941735'
-	radius = '500'	
+	radius = '500'
 
-	term = request.POST['search']
+	term = request.POST.get('search', '')
 
-	url = 'https://api.foursquare.com/v2/venues/search?ll=' + curLoc + '&radius=' + radius + '&intent=browse&categoryId=' + category_id 
+	url = 'https://api.foursquare.com/v2/venues/search?ll=' + curLoc + '&radius=' + radius + '&intent=browse&categoryId=' + category_id
 	url += '&client_id=' + client_id + '&client_secret=' + client_secret + '&v=20140306'
 
 	if term != '':
@@ -86,7 +83,7 @@ def index(request):
 
 	req = urlopen(url).read()
 	venues = json.loads(req).get("response").get("venues")
-	
+
 	"""YELP API"""
 	# Values for access
 	"""consumer_key = 'nee5cvfcAEBHCg3wSGSdKw'
@@ -97,7 +94,7 @@ def index(request):
 	consumer = oauth2.Consumer(consumer_key, consumer_secret)
 	sortMethod = request.POST.get('sortMethod')
 	term = request.POST['search']
-	
+
 
 	if  term != '':
 		url = 'http://api.yelp.com/v2/search?term=' + term + '&ll=' + curLoc
@@ -105,10 +102,10 @@ def index(request):
 		url = 'http://api.yelp.com/v2/search?term=nightlife&ll=' + curLoc +'&sort=' + sortMethod
 	else:
 		url = 'http://api.yelp.com/v2/search?term=nightlife&ll=' + curLoc
-		
 
-		
-	
+
+
+
 	oauth_request = oauth2.Request('GET', url, {})
 	oauth_request.update({'oauth_nonce': oauth2.generate_nonce(),'oauth_timestamp': oauth2.generate_timestamp(),'oauth_token': token, 'oauth_consumer_key': consumer_key})
 
@@ -134,7 +131,7 @@ def index(request):
 	#grab array of reviews from our models
 	curRev = PlaceTag.objects.filter(lastUpdate__gte = cutoffTime)
 	curRevList = list(set([placeTag.place.placeID for placeTag in curRev]))
-	
+
 	#grab all other instances
 	otherRev = PlaceTag.objects.filter(lastUpdate__lt = cutoffTime)
 	otherRevList = list(set([placeTag.place.placeID for placeTag in otherRev]))
@@ -148,7 +145,7 @@ def index(request):
 	# Remove venues with categories on the blacklist
 	venues = [place for place in venues if not isBlacklistedCategory(place)]
 
-	
+
 	for place in venues:
 		if place['id'] in curRevList:
 			#iterate over curRev and find all instances to append to dict to append to json
@@ -161,32 +158,32 @@ def index(request):
 					placeTag.lastUpdate = timeNow
 					#placeTag.save()
 					hashtags[placeTag.tag.text] = placeTag.score
-					
+
 			#sort hashtag scores, and pick 3
 			orderHashtags = Counter(hashtags)
 			topTags = orderHashtags.most_common(5)
 			topHashtags = [i[0] for i in topTags]
-			
+
 			#check if price_level and rating exist and append
 			#if 'rating' not in place.keys():
 			#	place['rating'] = 'N/A'
 			#if 'price_level' not in place.keys():
 			#	place['price_level'] = 'N/A'
-			
+
 			#round distance, list of categories, and location
 			distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
 			category = place['categories'][0]['name']
-			
+
 			image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
 
 			color=getColorTheme(place['id'])
 
-				
+
 			temp = {'picture': image_url ,'name': place['name'], 'id': place['id'], 'types': category, 'hashtags': topHashtags, 'distance':distance, 'color':color}
-			
+
 			#append
 			placeMatch.append(temp)
-		
+
 		elif place['id'] in otherRevList:
 			hashtags = {} #will show top two hashtags
 			for placeTag in otherRev:
@@ -197,31 +194,31 @@ def index(request):
 					placeTag.lastUpdate = timeNow
 					#placeTag.save()
 					hashtags[placeTag.tag.text] = placeTag.score
-					
+
 			#sort hashtag scores, and pick 3
 			orderHashtags = Counter(hashtags)
 			topTags = orderHashtags.most_common(5)
 			topHashtags = [i[0] for i in topTags]
-								
+
 			#check if price_level and rating exist and append
 			#if 'rating' not in place.keys():
 			#	place['rating'] = 'N/A'
 			#if 'price_level' not in place.keys():
 			#	place['price_level'] = 'N/A'
-			
+
 			#round distance, list of categories, and location
 			distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
 			category = place['categories'][0]['name']
-			
+
 			image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
 
 
-				
+
 			temp = {'picture': image_url ,'name': place['name'], 'id': place['id'], 'types': category, 'hashtags': topHashtags, 'distance':distance, 'color':'46,117,182'}
-			
+
 			#append
 			placeMatchOld.append(temp)
-			
+
 		else:
 			#check to see if price level and rating exist
 			##if 'rating' not in place.keys():
@@ -236,14 +233,14 @@ def index(request):
 			"""try: address.append(place['location']['address'][0])
 			except: continue
 
-			try: address.append(place['location']['cross_streets']) 
+			try: address.append(place['location']['cross_streets'])
 			except: continue
 			"""
 			image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
 
 			temp = {'picture': image_url, 'name': place['name'], 'id': place['id'], 'types': category, 'distance':distance, 'color':'127,127,127'}
-			
-			
+
+
 			#append
 			placeNoMatch.append(temp)
 
@@ -255,17 +252,17 @@ def index(request):
 		userName = ''
 
 	sortMethod = ''
-	context = {'sort':sortMethod,'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'index':'index' }
+	context = {'sort':sortMethod,'url':url, 'search':request.POST.get('search', ''), 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'index':'index' }
 
 
 	return render(request, 'places/index.html', context)
-	
-	
+
+
 def placeDetail(request,place_id):
-	##find today's date to find items close to it in db                                                                                                                                  
+	##find today's date to find items close to it in db
 	date = datetime.utcnow()
-	#for testing purposes, hardcode datetime                                                                                                                                             
-	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	#for testing purposes, hardcode datetime
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)
 	timeDeltaForCutoff = timedelta(hours=-2)
 	cutoffTime = date + timeDeltaForCutoff
 	placeFavorited = False
@@ -278,10 +275,10 @@ def placeDetail(request,place_id):
 
 	else:
 		userName = ''
-	
+
 	client_id = 'T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O'
 	client_secret = '0P1EQQ3NH102D0R3GNGTG0ZAL0S5T41YDB2NPOOMRMO2I2EO'
-	category_id = '4d4b7105d754a06376d81259'	
+	category_id = '4d4b7105d754a06376d81259'
 
 	#url = 'https://api.foursquare.com/v2/venues/50f1027ee4b04196702b9cb8?ll=47.6159392,-122.3268701&client_id=T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O&client_secret=0P1EQQ3NH102D0R3GNGTG0ZAL0S5T41YDB2NPOOMRMO2I2EO&v=20140229'
 	url = 'https://api.foursquare.com/v2/venues/' + place_id + '?client_id=' + client_id + '&client_secret=' + client_secret + '&v=20140306'
@@ -298,7 +295,7 @@ def placeDetail(request,place_id):
 
 	consumer = oauth2.Consumer(consumer_key, consumer_secret)
 	url = 'http://api.yelp.com/v2/business/' + place_id
-	
+
 	oauth_request = oauth2.Request('GET', url, {})
 	oauth_request.update({'oauth_nonce': oauth2.generate_nonce(),'oauth_timestamp': oauth2.generate_timestamp(),'oauth_token': token, 'oauth_consumer_key': consumer_key})
 
@@ -309,7 +306,7 @@ def placeDetail(request,place_id):
 	req = urlopen(signed_url).read()
 	place = json.loads(req)"""
 
-	
+
 
 	"""
 	apiCall = "https://maps.googleapis.com/maps/api/place/details/json?reference=" + place_id + "&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"
@@ -354,7 +351,7 @@ def placeDetail(request,place_id):
 		if fontSizePercentage > 400:
 			fontSizePercentage = 400
 		fontSizes.append(fontSizePercentage)
-	
+
 		venueTags = UserAction.objects.filter(place__placeID= place['id'], tag__text=placeTag.tag.text, time__gte = cutoffTime)
 		tagsFreq.append(len(venueTags))
 
@@ -367,7 +364,7 @@ def placeDetail(request,place_id):
 	#	place['location']['cross_streets'] = ''
 	#if 'neighborhoods' not in place['location'].keys():
 	##	place['location']['neighborhoods'] = ['','']
-	
+
 	#address.append(place['location']['address'][0] + '  ' + place['location']['city'] + ',' + place['location']['state_code'])
 	#address.append(place['location']['cross_streets'] + ', ' + place['location']['neighborhoods'][0])
 	address  = []
@@ -393,7 +390,7 @@ def placeDetail(request,place_id):
 
 
 
-#later, we will merge submitReview and submitReviewVenue to one view. It's a simple if statement to fix in a template file	
+#later, we will merge submitReview and submitReviewVenue to one view. It's a simple if statement to fix in a template file
 @login_required()
 def submitReview(request):
 	#get username
@@ -402,10 +399,10 @@ def submitReview(request):
 		userName = curUser.user.username
 	else:
 		userName = ''
-		
+
 	#grab all hashtags to display
 	tags = Hashtag.objects.all()
-	
+
 	context = {'userName':userName,'tags':tags}
 	return render(request, 'places/submitReview.html', context)
 
@@ -417,22 +414,22 @@ def submitReviewVenue(request, place_name, reference):
 		userName = curUser.user.username
 	else:
 		userName = ''
-	
+
 	#get color theme
 	color=getColorTheme(reference)
 
 	#grab all hashtags to display
 	tags = Hashtag.objects.all()
-	
+
 	context = {'userName':userName, 'tags':tags, 'id':reference, 'name':place_name, 'color':color}
 	return render(request, 'places/submitReviewVenue.html', context)
 
-	
+
 def submit_submitReview(request):
-	##find today's date to find items close to it in db                                                                                                                                  
+	##find today's date to find items close to it in db
 	date = datetime.utcnow()
-	#for testing purposes, hardcode datetime                                                                                                                                             
-	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	#for testing purposes, hardcode datetime
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)
 	timeDeltaForCutoff = timedelta(hours=-2)
 	cutoffTime = date + timeDeltaForCutoff
 	curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
@@ -453,7 +450,7 @@ def submit_submitReview(request):
 		return HttpResponseRedirect('/')
 	"""
 
-	
+
 	#get list of tags
 	#listTags = request.body
 	tags = request.POST.getlist('tagNames')
@@ -469,7 +466,7 @@ def submit_submitReview(request):
 
 	#Filter for all instances of Places with same placeId and tag within alotted time
 	filterPlace = PlaceTag.objects.filter(place=newPlace)
-	
+
 	if len(filterPlace)>0:
 		#check to see if tag exists
 		for placeTag in filterPlace:
@@ -493,18 +490,18 @@ def submit_submitReview(request):
 				newAction.save()
 				placeTag.save()
 
-			
+
 	#create a new review with remaining tags that didn't match
-	for hashtag in tags: 
+	for hashtag in tags:
 		newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.utcnow(), score = 50)
-		
+
 		#log new user action
 		newAction = UserAction.objects.create(userID=curUser, time = datetime.utcnow(), place = newPlace , tag = Hashtag.objects.get(text=hashtag))
 		newAction.save()
-		
+
 
 		newVenueReview.save()
-	
+
 	#add a point to the user
 	curUser.points += 1
 	curUser.save()
@@ -518,12 +515,12 @@ def submit_submitReview(request):
 	redirectURL = '/venue/' + request.POST['venueId']
 
 	return HttpResponseRedirect(redirectURL)
-		
-		
+
+
 def add_user(request):
 	context = { }
 	return render(request, 'registration/add_user.html', context)
-	
+
 def add_user_add(request):
 	try:
 		newUser = User.objects.create(username=request.POST['uname'])
@@ -537,41 +534,41 @@ def add_user_add(request):
 		#temp = User.objects.get(username=request.POST['uname'])
 		addUserProf = UserProfile(user=newUser, points=0)
 		addUserProf.save()
-		
+
 		#add user to session
 		auth = authenticate(username=request.POST['uname'], password=request.POST['pwd'])
 		login(request, auth)
 		return HttpResponseRedirect('/')
-	
+
 	except:
 		error=1
 		context = {'error':error}
 		return render(request, 'registration/add_user.html', context)
-	
-	
-	
+
+
+
 @login_required()
 def view_fav(request):
-	##find today's date to find items close to it in db                                                                                                                                  
+	##find today's date to find items close to it in db
 	date = datetime.utcnow()
-	#for testing purposes, hardcode datetime                                                                                                                                             
-	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	#for testing purposes, hardcode datetime
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)
 	timeDeltaForCutoff = timedelta(hours=-2)
 	cutoffTime = date + timeDeltaForCutoff
 	curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
 	userName = curUser.user.username
-	
+
 	favorites = curUser.favoritePlaces.all()
-	
+
 	favList = []
-	
+
 	for venue in favorites:
 		hashtags = {}
 		temp = PlaceTag.objects.filter(place=venue, lastUpdate__gte=cutoffTime)
 
 		for i in temp:
 			hashtags[i.tag.text]=i.score
-	
+
 
 
 		#before submit hashtag list, change to list of top 3:
@@ -579,17 +576,17 @@ def view_fav(request):
 		topTags = orderHashtags.most_common(3)
 		topHashtags = [i[0] for i in topTags]
 		#create dictionsary to append to list
-		
+
 		addToList = {'userName':userName, 'name':venue.placeName , 'hashtags':topHashtags, 'id':venue.placeID}
-		
+
 		favList.append(addToList)
-	
-	
-	
+
+
+
 	context = {'favorites':favList, 'user':curUser.user.username}
-	
+
 	return render(request, 'places/view_fav.html', context)
-		
+
 @login_required()
 def add_fav(request, place_name, placeId):
 	curUser=UserProfile.objects.get(user=User.objects.get(id=request.user.id))
@@ -606,41 +603,41 @@ def add_fav(request, place_name, placeId):
 	else:
 		curUser.favoritePlaces.add(current_venue)
 	curUser.save()
-		
+
 	return HttpResponseRedirect('/venue/'+placeId+'/')
-	
-@login_required()	
+
+@login_required()
 def view_profile(request):
 	#get username, favorites list, last activity
 	curUser=UserProfile.objects.get(user=User.objects.get(id=request.user.id))
 	userName = curUser.user.username
-	
-	#last places reviewed, in order of time 
+
+	#last places reviewed, in order of time
 	lastVisited = UserAction.objects.filter(userID=User.objects.get(id=request.user.id)).order_by('-time', 'tag__text')
-	
-	#get list of last 5 Places reviewed 
+
+	#get list of last 5 Places reviewed
 	count=0
 	unique=0
 	placeList = []
-	
+
 	while (count<len(lastVisited)):
 		if unique>=5:
-			break		
-			
+			break
+
 		if lastVisited[count].place.placeName not in placeList:
 			placeList.append(lastVisited[count].place.placeName)
 			unique += 1
-			
-		count +=1 # in case there are less than five unique places visited. 
-	
+
+		count +=1 # in case there are less than five unique places visited.
+
 	context = {'userName':userName,'firstName': curUser.user.first_name, 'favorites':placeList}
 	return render(request, 'places/view_profile.html', context)
-	
+
 def search(request):
 	context = {}
 	return render(request, 'places/search', context)
-	
-	
+
+
 def map(request):
 	context = {}
 	return render(request, 'places/maps', context)
@@ -667,20 +664,20 @@ def tag(request, hashtag):
 	if request.user.is_authenticated():
 		curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
 		userName = curUser.user.username
-		
+
 
 	else:
 		userName = ''
 
 	if request.POST.get('position'):
 		curLoc = request.POST['position']
-	else: 
+	else:
 		context = {'hashtag' : hashtag}
 		return render(request, 'places/getCurLocHashtag.html', context)
 
 	if curLoc == '': #hardcode if fails.
 		curLoc = '47.6159392,-122.3268701' #Seattle Pine/Bellevue
-		#SF chestnut/VanNess.798542,-122.422345'	
+		#SF chestnut/VanNess.798542,-122.422345'
 
 
 
@@ -701,7 +698,7 @@ def tag(request, hashtag):
 
 	for placeTag in placetagsWithTag:
 		url = 'http://api.yelp.com/v2/business/' + placeTag.place.placeID + '?ll=' + curLoc
-		
+
 		oauth_request = oauth2.Request('GET', url, {})
 		oauth_request.update({'oauth_nonce': oauth2.generate_nonce(),'oauth_timestamp': oauth2.generate_timestamp(),'oauth_token': token, 'oauth_consumer_key': consumer_key})
 
@@ -711,8 +708,8 @@ def tag(request, hashtag):
 
 		req = urlopen(signed_url).read()
 		place = json.loads(req)
-		
-		
+
+
 		distanceToPlace = place['distance'];
 		picture = place['image_url'];
 		categories = [i[0] for i in place['categories']]
@@ -728,10 +725,10 @@ def tag(request, hashtag):
 
 #####################################functions to call in views!#############################
 def getColorTheme(id):
-        ##find today's date to find items close to it in db                                                                                                                                  
+        ##find today's date to find items close to it in db
         date = datetime.utcnow()
-        #for testing purposes, hardcode datetime                                                                                                                                             
-        #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+        #for testing purposes, hardcode datetime
+        #date = datetime(2013, 12, 28, 22, 40, 41, 879000)
         timeDeltaForCutoff = timedelta(hours=-2)
         cutoffTime = date + timeDeltaForCutoff
 	color = '127,127,127'
