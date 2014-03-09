@@ -147,7 +147,7 @@ def index(request):
 	placeNoMatch = []
 
 	# Remove venues with categories on the blacklist
-	venues = [place for place in venues if isBlacklistedCategory(place)]
+	venues = [place for place in venues if not isBlacklistedCategory(place)]
 	
 	for place in venues:
 		if place['id'] in curRevList:
@@ -738,7 +738,7 @@ def getColorTheme(id):
 	return color
 
 def isBlacklistedCategory(place):
-	if place['categories']['id'] in CategoryBlacklist:
+	if place['categories'][0]['id'] in CategoryBlacklist:
 		return True
 	else:
 		return False
