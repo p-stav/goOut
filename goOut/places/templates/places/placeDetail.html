@@ -6,12 +6,12 @@
 
 <div class='container'>
 	<div class="jumbotron" style="background-color:rgb({{color}}); font-family:'Roboto', sans-serif;">
-		<p class='jumboTitle whiteText' align="center">{{name}}</p>
+		<div class="whiteText" align="center">
+			<h1>{{name}}</h1>
+			<p class="lead">{{venueTypes}}</p>
+		</div>
 		<!--<div class='intro'>-->
 		<div class = 'introInfo whiteText'>
-			<div  align="center">{{venueTypes}}</div>
-
-			<br/>
 			<div class='left introInfo'>
 				{% for addresses in address %}
 					{{ addresses }}
@@ -21,14 +21,14 @@
 		</div>
 		<div class='introInfoRight'>
 			<div style="float:right;"><a class="noDecoration whiteText" href="http://foursquare.com/v/{{id}}?ref=T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O">4Square Page</div>
-			
+
 		</div>
 	<!--</div>-->
 
 		<br/>
 	  	<div class='btn-group buttonsPlaceDetail' style='width:100%'>
 			<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span></button></a>
-			
+
 			{% if placeFavorited %}
 				<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-info buttonPlaceDetail active'><span class="glyphicon glyphicon-star"></span></button></a>
 			{% else %}
@@ -40,7 +40,7 @@
 		  <button type='button' class='btn btn-lg btn-default'><a href="#"><span class="glyphicon glyphicon-map-marker"><
 		{%else}/span></a></button>
 		 -->
-	  
+
 	  <!--short menu to write review, see more history, favorite, etc.-->
 	</div>
 
@@ -71,7 +71,7 @@
 			<p><a href="/review/{{ name }}/{{ id }}"> Be the first to review this place!</a></p>
 		{% endif %}
 	</div>
-	
+
 	<br/>
 	<br/>
 	<br/>
