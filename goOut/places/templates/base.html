@@ -68,24 +68,25 @@
 						  <li class="dropdown">
 								<a href="#sort" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-sort-by-attributes-alt"></span></a>
 								<div class="dropdown-menu" style="padding-left: 5px; padding-right: 5px; width:223px;">
-								  	Sort by: <br/>
-								  	<form action="{% url "places:getCurLoc" %}" method="post" accept-charset="UTF-8">
+								  	<form id="form-sort-by" role="form" action="{% url "places:getCurLoc" %}" method="post" accept-charset="UTF-8">
+								  		<h3 class="lead">Sort by:</h3>
 								  		{% csrf_token %}
-								  		<div class="btn-group" data-toggle="buttons">
-								  			<label class="btn btn-xs btn-primary">
-								  				<input type='radio' class="sortMethod" name="sortMethod" value="0">Best Match<br/>
-								  			</label>
+								  		<div class="form-group list-group" data-toggle="buttons">
 
-								  			<label class="btn btn-xs btn-primary">
-								  				<input type='radio' class="sortMethod" name="sortMethod" value="1"> By distance <br/>
-								  			</label>
+								  			<div class="btn btn-sm btn-default">
+								  				<input type="radio" class="sortMethod" name="sortMethod" value="0">Best Match
+								  			</div>
 
-								  			<label class="btn btn-xs btn-primary">
-								  				<input type='radio' class="sortMethod" name="sortMethod" value="2">By rating
-								  			</label>
+								  			<div class="btn btn-sm btn-default">
+								  				<input type="radio" class="sortMethod" name="sortMethod" value="1"> By distance
+								  			</div>
+
+								  			<div class="btn btn-sm btn-default">
+								  				<input type="radio" class="sortMethod" name="sortMethod" value="2">By rating
+								  			</div>
 								  		</div>
 								  		<div class="form-group">
-												<button type="submit" id='submitButton' class="btn btn-primary btn-xs" name="submit_tags_form">Submit</button>
+												<button type="submit" id="submitButton" class="btn btn-primary" name="submit_tags_form">Submit</button>
 											</div>
 									</form>
 								</div>
