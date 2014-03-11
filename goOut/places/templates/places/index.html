@@ -4,8 +4,8 @@
 
 {% block content %}
 
-<div class="placeList" id='match'>	
-	
+<div class="placeList" id="match">
+
 	{% for place in placeMatch %}
 		<div class="venue" id="{{ place.id }}">
 			<div align="right" class="venueInternalRight">
@@ -28,7 +28,7 @@
 				<br/>
 			</div>
 
-			
+
 			<div class="separator">
 			</div>
 		</div>
@@ -53,7 +53,7 @@
 				<div class='venueTitle'>{{ place.name }}</div>
 				<div class='venueType'>
 					{{ place.types}}
-						
+
 				</div>
 				<br/>
 			</div>
@@ -62,7 +62,7 @@
 			</div>
 		</div>
 	{% endfor %}
-		
+
 	<!--List for items with no data in our DB -->
 	{% for place in placeNoMatch %}
 		<div class="venue" id="{{ place.id }}">
@@ -77,7 +77,7 @@
 					<br/><br/>
 				</div>
 			</div>
-	
+
 			<div class="colorWrapper" style="background-color:rgb({{place.color}});" >
 				<img class="venuePic"  src="{{place.picture}}"></img>
 				<div class='venueTitle'>{{ place.name }}</div>
@@ -86,80 +86,24 @@
 				</div>
 				<br/>
 			</div>
-			
+
 			<div class="separator">
 			</div>
 		</div>
 	{% endfor %}
-	
+
 	<br/><br/><br/>
-	<!--yelp button-->
-	<!--<div class='right' style="width:100%; bottom:0px; float:right;"><img src="http://s3-media1.ak.yelpcdn.com/assets/2/www/img/1589098a542f/developers/Powered_By_Yelp_White.png"></div>-->
 </div>
+{% endblock %}
 
-
-<script type = "text/javascript">
-
+{% block javascript %}
+<script type="text/javascript">
 	$(document).ready(function() {
 		$('.venue').click(function(){
 			//link to next page. Search into how this interfaces with django
-			location.href = './venue/'+$(this).attr('id');
+			location.href = '/venue/'+$(this).attr('id');
 		});
-	
+
 	});
-/*
-	if (navigator.geolocation) {
-		// If so, get the current position and feed it to listPlaces
-		navigator.geolocation.getCurrentPosition(listPlaces);
-	}
-	
-	function listPlaces(position){
-		var curLat = position.coords.latitude;
-		var curLong = position.coords.longitude;
-		
-		//call for ALL venue types; CHANGE for current position
-		apiCall = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+curLat+","+curLong+"&radius=550&types=bar|casino|night_club&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0";
-		
-
-	var callAPI = $.ajax({
-			url: apiCall,
-			//data: myData,
-			type: 'GET',
-			crossDomain: true,
-			dataType: 'jsonp'
-		})
-			.done(function(objects){
-				$.each(objects.results, function(index, data){
-					$('.placeList').append("<div id='"+index+"'>"+data.name+" has a rating of: "+data.rating+"</div>");
-					});
-				console.log('call complete!');
-			})
-			
-			.fail(function(){
-				console.log('WHAT');
-			});
-			
-
-		//EITHER THIS CALL OR THE ONE ABOVE IT
-		var callAPI= $.getJSON(apiCall, function(json){
-			console.log('grabbed json');
-		})
-			.done(function(json){
-				$.each(json.results, function(index, data){
-					$('.placeList').append("<div id='"+index+"'>"+data.name+" has a rating of: "+data.rating+"</div>");
-					});
-				console.log('call complete!');
-			})
-			
-			.fail(function(){
-				//console.log('WHAT');
-			});
-		callAPI.complete(function(){
-			//console.log('second complete');
-		});
-		
-	}
-*/
-
 </script>
 {% endblock %}

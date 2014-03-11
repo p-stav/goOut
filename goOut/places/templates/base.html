@@ -8,22 +8,15 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<!--Google Maps and Google Places APIs-->
-	<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
-	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>-->
-
 	<!-- bootstrap -->
 	{% load staticfiles %}
-	<script src="{{STATIC_URL}}js/jquery.js"> </script>
 	<link type="text/css" href="{{STATIC_URL}}css/public.css" rel="stylesheet"/>
-	<script src="{{STATIC_URL}}vender/bootstrap-3.1.1/dist/js/bootstrap.js"> </script>
 
 	<!--load google fonts!-->
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
 	<title>{% block title %}{% endblock %}</title>
 </head>
-
 <body>
 	<!-- Docs master nav -->
     <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
@@ -109,21 +102,37 @@
 	  </ul>
 	</header>
 
-
-	<script>
-		// Fix input element click problem
-  		$('.noClick').click(function(e) {
-    		e.stopPropagation();
-  		});
-
-  		$('.findClick').click(function(){
-  			$('.searchTerm').focus();
-
-  		});
-	</script>
-	<div class='content'>
+	<div class="content container-fluid">
 		{% block content %}{% endblock %}
   </div>
+
+  <footer>
+  	<div class="container-fluider" align="center">
+  		<ul class="text-muted list-inline">
+  			<li>&copy; 2014 Kefvi</li>
+  			<li><a href="https://github.com/p-stav">Paul</a></li>
+  			<li><a href="http://github.com/GalOshri">Gal</a></li>
+  			<li><a href="https://github.com/JamieChung">Jamie</a></li>
+  		</ul>
+  	</div>
+  </footer>
+
+	<script src="{{STATIC_URL}}js/jquery.js"> </script>
+	<script src="{{STATIC_URL}}vender/bootstrap-3.1.1/dist/js/bootstrap.js"> </script>
+	{% block javascript %}{% endblock %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			// Fix input element click problem
+			$('.noClick').click(function(e) {
+				e.stopPropagation();
+			});
+
+			$('.findClick').click(function(){
+				$('.searchTerm').focus();
+
+			});
+		});
+	</script>
 </body>
 </html>
 
