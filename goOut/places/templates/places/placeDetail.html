@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}GoOut{% endblock %}
+{% block title %}{{name}} &mdash; GoOut{% endblock %}
 
 {% block content %}
 
@@ -20,8 +20,7 @@
 			</div>
 		</div>
 		<div class='introInfoRight'>
-			<div style="float:right;"><a class="noDecoration whiteText" href="http://foursquare.com/v/{{id}}?ref=T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O">4Square Page</div>
-
+			<a class="noDecoration whiteText" href="http://foursquare.com/v/{{id}}?ref=T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O">4Square Page</a>
 		</div>
 	<!--</div>-->
 
@@ -61,14 +60,14 @@
 		{%elif oldTags %}
 			<div class='h4'>Are you here? <a href="/review/{{ name }}/{{ id }}">Write a review!</a></div>
 			</br><br/>
-			<h4 id='titleOldTags'>Most common tags:</h4>
+			<h3 id='titleOldTags'>Most common tags:</h3>
 			{% for tag in oldTags %}
 				<p style="color:rgb({{color}}); font-size:16px">#{{tag}}</p>
 			{%endfor%}
 
 		{% else%}
-			<p> There are no tags for this Venue!</p>
-			<p><a href="/review/{{ name }}/{{ id }}"> Be the first to review this place!</a></p>
+			<h3> There are no tags for this Venue!</h3>
+			<p class="lead"><a href="/review/{{ name }}/{{ id }}"> Be the first to review this place!</a></p>
 		{% endif %}
 	</div>
 
@@ -77,6 +76,7 @@
 	<br/>
 	<br/>
 
+	{% if comments %}
 	<!--Comments-->
 	<div class='placeComments'>
 		<h4>Comments:</h4>
@@ -88,8 +88,8 @@
 				</tr>
 			{%endfor%}
 		</table>
-
 	</div>
+	{% endif %}
 </div>
 
 <!--yelp button-->

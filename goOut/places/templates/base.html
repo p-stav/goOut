@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
 
 	<!--Google Maps and Google Places APIs-->
-
 	<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>-->
 
@@ -23,86 +21,54 @@
 	<!--load google fonts!-->
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
-
 	<title>{% block title %}{% endblock %}</title>
-
 </head>
 
 <body>
 	<!-- Docs master nav -->
     <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
 	  <div class="navbar-header">
-		<!--dropdown for account stuff-->
-		<div class='btn-group'>
-			<button class="navbar-toggle" type="button" data-toggle="dropdown">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<ul class="dropdown-menu" role='menu'>
-				{% if user.is_authenticated %}
-					<!--<li><a href="/user"><span class  = 'glyphicon glyphicon-user'></span>    {{userName}}</a></li>-->
-					<li><a href="#"><span class  = 'glyphicon glyphicon-user'></span>    {{userName}}</a></li>
-					<li><a href="/fav"><span class  = 'glyphicon glyphicon-star'></span>    Favorites</a></li>
+			<!--dropdown for account stuff-->
+			<div class='btn-group'>
+				<button class="navbar-toggle" type="button" data-toggle="dropdown">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<ul class="dropdown-menu" role='menu'>
+					{% if user.is_authenticated %}
+						<!--<li><a href="/user"><span class  = 'glyphicon glyphicon-user'></span>    {{userName}}</a></li>-->
+						<li><a href="#"><span class  = 'glyphicon glyphicon-user'></span>    {{userName}}</a></li>
+						<li><a href="/fav"><span class  = 'glyphicon glyphicon-star'></span>    Favorites</a></li>
 
-				{% else %}
-					<li><a href="/accounts/login"><span class  = 'glyphicon glyphicon-user'></span>    Sign In</a></li>
-					<li><a href="/accounts/add"><span class  = 'glyphicon glyphicon-plus'></span>    Create Profile</a></li>
-				{% endif %}
+					{% else %}
+						<li><a href="/accounts/login"><span class  = 'glyphicon glyphicon-user'></span>    Sign In</a></li>
+						<li><a href="/accounts/add"><span class  = 'glyphicon glyphicon-plus'></span>    Create Profile</a></li>
+					{% endif %}
 
+					{% if user.is_authenticated %}
+						<li><a href="/accounts/logout"><span class  = 'glyphicon glyphicon-minus-sign'></span>    logout</a></li>
+					{% else %}
+					{% endif %}
+					<li><a href="/about"><span class  = 'glyphicon glyphicon-unchecked'></span>    About Us</a></li>
+					<li><a href="/feedback"><span class  = 'glyphicon glyphicon-send'></span>    Send Feedback</a></li>
 
-
-				{% if user.is_authenticated %}
-					<li><a href="/accounts/logout"><span class  = 'glyphicon glyphicon-minus-sign'></span>    logout</a></li>
-				{% else %}
-				{% endif %}
-				<li><a href="/about"><span class  = 'glyphicon glyphicon-unchecked'></span>    About Us</a></li>
-				<li><a href="/feedback"><span class  = 'glyphicon glyphicon-send'></span>    Send Feedback</a></li>
-
-			</ul>
-		</div>
-		<!--Brand name-->
-		<a class="navbar-brand" href="/"><img src="{{STATIC_URL}}Kefi.png" alt="Kefi" width="60.4px" height="25px"> </a>
+				</ul>
+			</div>
+			<!--Brand name-->
+			<a class="navbar-brand" href="/"><img src="{{STATIC_URL}}Kefi.png" alt="Kefi" width="80" /></a>
 	  </div>
-
-	  <!--
-		<div class="navbar-header">
-		  <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		  </button>
-		  <a href="./" class="navbar-brand">Go Out</a>
-		</div>
-		-->
-		<!--
-		<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-		  <ul class="nav navbar-nav navbar-right">
-		 -->
-
-			<!--Need to make next button dynamic; if in venueDetail, pass Id. If not, don't pass ID-->
-			<!--
-			<li><a href="/review"><span class  = 'glyphicon glyphicon-edit'></span></a></li>
-
-			<li><a href="/search"><span class  = 'glyphicon glyphicon-search'></span></a></li>
-			<li>
-			  <a href="./login"><span class  = 'glyphicon glyphicon-user'></span></a>
-			</li>
-		  </ul>
-		</nav>
-		-->
 	  </div>
 
 	    <ul class="nav navbar-nav pull-right navbar-right">
 		  <li class="dropdown">
 			<a href="#search" class="dropdown-toggle findClick" data-toggle="dropdown">
-				<span class  = 'glyphicon glyphicon-search'></span>
+				<span class="glyphicon glyphicon-search"></span>
 			</a>
 			<div class="dropdown-menu noClick" style="padding-left: 5px; padding-right: 5px;">
 				<form action={% url "places:getCurLoc" %} method="post" accept-charset="UTF-8">
-				{% csrf_token %}
+					{% csrf_token %}
 					<div class='input-group'><input type="text" name="searchTerm" class="form-control searchTerm" placeholder="Search:">
 						<span class="input-group-btn"><input class="btn btn-default" type="submit" value="go"></span>
 					</div>
@@ -156,9 +122,8 @@
   		});
 	</script>
 	<div class='content'>
-	 {% block content %}{% endblock %}
-    </div>
-
+		{% block content %}{% endblock %}
+  </div>
 </body>
 </html>
 
