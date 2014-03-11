@@ -1,95 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
-	<title> </title>
-	 <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
+	<title>GoOut</title>
+		<!-- Meta, title, CSS, favicons, etc. -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
 
-	<!--Google Maps and Google Places APIs-->
-
-	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
-	<!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>-->
-
-	<!-- bootstrap -->
-	{% load staticfiles %}
-	<script src="{{STATIC_URL}}js/jquery.js" > </script>
-	<link type="text/css" href="{{STATIC_URL}}css/public.css" rel="stylesheet"/>
-	<script src="{{STATIC_URL}}vender/bootstrap-3.1.1/dist/js/bootstrap.js"> </script>
-
-
-	<!--
-	<link type="text/css" href="{{STATIC_URL}}bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet"/>
-	<link href="{{STATIC_URL}}bootstrap-3.0.0/dist/css/bootstrap-theme.css" rel="stylesheet"/>
-	<script src="{{STATIC_URL}}bootstrap-3.0.0/dist/js/bootstrap.js"> </script>
-	-->
+		{% load staticfiles %}
+		<script src="{{STATIC_URL}}js/jquery.js" > </script>
+		<link type="text/css" href="{{STATIC_URL}}css/public.css" rel="stylesheet"/>
+		<script src="{{STATIC_URL}}vender/bootstrap-3.1.1/dist/js/bootstrap.js"> </script>
 
 </head>
 
 <body>
-	<div class='container'>
-		<br/><br/>
-		<h1 style=""><img src="{{STATIC_URL}}Kefi.png" width="120.8px" height="50px"></h1>
+	<div class="container" id="home-page">
+		<h1><img src="{{STATIC_URL}}Kefi.png" width="150"></h1>
+		<p class="lead">Your scene.<br/>Here and Now.</p>
 
-		<!--<p><b>Kefi</b>: fun; spirit of joy</p><br/>-->
-		<br/><br/><p style="font-size:24px; color:#4186D3;">Your scene.<br/>Here and Now.</p>
-		<br/><button type="button" id="loading-example-btn" data-loading-text="Loading..." class="btn btn-primary">
+		<button type="button" id="loading-example-btn" data-loading-text="Loading..." class="btn btn-primary">
   			Loading..
 		</button>
 
-		<br/><br/><br/><br/>
-		<img src="{{STATIC_URL}}PoweredByFourSquare.png" width="241" height="60px"/>
+		<hr />
+
+		<img src="{{STATIC_URL}}PoweredByFourSquare.png" width="240" />
 	</div>
 
-	<div class='hidden'>
-		<form role="form" method='post' id='locationForm' action={% url "places:index" %}>
+	<form role="form" class="hidden" method="post" id="locationForm" action="{% url "places:index" %}">
 		{% csrf_token %}
-			<div class='form-group'>
-				<textarea class="form-control insertLoc" id="position" name="position" rows="4"></textarea>
-			</div>
+		<input type="hidden" id="position" name="position" value="" />
+		<input type="hidden" name="search" value="{{search}}" />
+		<input type="hidden" name="sortMethod" value="{{sortMethod}}" />
+	</form>
 
-			<div class='form-group'>
-				<textarea class="form-control" id="search" name="search" rows="4">{{search}}</textarea>
-			</div>
+	<script>
+		$(document).ready(function() {
 
-			<div class='form-group'>
-				<textarea class="form-control" id="sortMethod" name="sortMethod" rows="4">{{sortMethod}}</textarea>
-			</div>
+			//loading state
+			$('#loading-example-btn').button('loading');
 
-			<div class="form-group">
-				<button type="submit" id='submitButton' class="btn btn-default" name="submit_loc_form">Submit</button>
-			</div>
-		</form>
+			// We need to check if the browser has the correct capabilities.
+			if (navigator.geolocation) {
+				// If so, get the current position and feed it to exportPosition (or errorPosition if there was a problem)
+					navigator.geolocation.getCurrentPosition(function(position){
+						$('#position').val(position.coords.latitude + ',' + position.coords.longitude);
+						$('#locationForm').submit();
+					});
+			} else {
+				// We can still submit the default form if we are unable to detect location
+				$('#locationForm').submit();
+			}
 
-	</div>
-
-
+		});
+	</script>
 </body>
-
-
-<script>
-	$(document).ready(function() {
-		//loading state
-		var btn = $('#loading-example-btn');
-		btn.button('loading');
-
-		// We need to check if the browser has the correct capabilities.
-		if (navigator.geolocation) {
-			// If so, get the current position and feed it to exportPosition (or errorPosition if there was a problem)
-				navigator.geolocation.getCurrentPosition(LocationForm);
-		}
-
-		function LocationForm(position) {
-			$('.insertLoc').text(position.coords.latitude + ',' + position.coords.longitude);
-			$('#locationForm').submit();
-
-		}
-
-
-	});
-</script>
+</html>
