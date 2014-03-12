@@ -11,7 +11,7 @@ import json, pprint
 from datetime import datetime, timedelta
 from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction, UserFeedback, UserComment
 import sets
-from math import exp, log10, floor
+from math import exp, log10, floor, trunc
 from collections import Counter
 import oauth2
 
@@ -387,6 +387,25 @@ def placeDetail(request,place_id):
 	comments=[]
 	if Place.objects.filter(placeID=place['id']).exists():
 		comments = UserComment.objects.filter(Place=Place.objects.get(placeID=place['id']), time__gte=cutoffTime)
+
+	commentTimestamps = []
+	for comment in comments:
+		commentTime = comment.time
+		timeDifference = date - commentTime
+		timeDifference = timeDifference.total_seconds()
+		timestampString = 'Just now !'
+		if timeDifference > 60:
+			timeDifference /= 60
+			timestampString = str(trunc(timeDifference)) + ' min ago'
+			if timeDifference > 60:
+				timeDifference /= 60
+				timestampString = str(trunc(timeDifference)) + ' hr ago'
+		commentTimestamps.append(timestampString)
+
+	comments = zip(comments,commentTimestamps)
+
+	comments.reverse()
+
 
 	context = {'userName':userName, 'id':place['id'], 'oldTags':oldTags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':category, 'address':address, 'placeFavorited':placeFavorited, 'color':color, 'picture' : image_url, 'comments':comments}
 	return render(request, 'places/placeDetail.html', context)

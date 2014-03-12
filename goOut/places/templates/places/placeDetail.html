@@ -81,11 +81,15 @@
 	<div class='placeComments'>
 		<h4>Comments:</h4>
 		<table class='commentsTable'>
-			{% for comment in comments%}
+			{% for comment,timestamp in comments%}
 				<tr>
 					<td><p class='commentUser'>{{comment.User.user.username}}</p></td>
-					 <td><p class='commentText'> {{comment.comment}}</p></td>
+					 <td><p class='commentTimestamp'>{{timestamp}}</p></td>
 				</tr>
+				<tr >
+					<td colspan="2"><p class='commentText'> {{comment.comment}}</p></td>
+				</tr>
+				
 			{%endfor%}
 		</table>
 
