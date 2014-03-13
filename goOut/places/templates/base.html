@@ -23,12 +23,17 @@
 	<!--load google fonts!-->
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
+	
 
 	<title>{% block title %}{% endblock %}</title>
 
 </head>
 
 <body>
+	<!--load heatdata -->
+	<script type='text/javascript'>var heatdata_uid = '1THUm2O3NOGM';</script>
+	<script src="http://heatdata.com/heatdata.js"></script>
+
 	<!-- Docs master nav -->
     <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
 	  <div class="navbar-header">
@@ -112,19 +117,41 @@
 		  </li>
 
 		{% if index %}
+
+		  <li >
+			<a href="#tagSearch" class="dropdown-toggle" data-toggle="modal" data-target="#tagModal">
+				<span class='hashtag' style="font-size:18px;">#</span>
+			</a>
+		  </li>
+		
+
+		 
+
+
 		  <li class="dropdown">
 			<a href="#sort" class="dropdown-toggle" data-toggle="dropdown"><span class  = 'glyphicon glyphicon-sort-by-attributes-alt'></span></a>
 			<div class="dropdown-menu" style="padding-left: 5px; padding-right: 5px; width:223px;">
-			  	Sort by: <br/>
+			  	
 			  	<form action={% url "places:getCurLoc" %} method="post" accept-charset="UTF-8">
 			  		{% csrf_token %}
+
+			  		<div class="sortMethod">
+						<input name='sortMethod' type="checkbox" class="h4 hidden " value="tagFilter"> Filter by tag
+						<!--<div class='unselectedTag' style='float:right'><span class='glyphicon glyphicon-ok'</span></div>-->
+					</div>
+
+					<div class="sortMethod">
+						<input name='sortMethod' type="checkbox" class="h4 hidden " value="distSort"> Sort by distance
+						<!--<div class='unselectedTag' style='float:right'><span class='glyphicon glyphicon-ok'</span></div>-->
+					</div>
+
 			  		<div class="btn-group" data-toggle="buttons">
 			  			<label class="btn btn-xs btn-primary">
 			  				<input type='radio' class="sortMethod" name="sortMethod" value="0">Best Match<br/>
 			  			</label>
 
 			  			<label class="btn btn-xs btn-primary">
-			  				<input type='radio' class="sortMethod" name="sortMethod" value="1"> By distance <br/>
+			  				<input type='radio' class="sortMethod" name="sortMethod" value="1"> Sort By distance <br/>
 			  			</label>
 
 			  			<label class="btn btn-xs btn-primary">
@@ -155,6 +182,7 @@
 
   		});
 	</script>
+	
 	<div class='content'>
 	 {% block content %}{% endblock %}
     </div>

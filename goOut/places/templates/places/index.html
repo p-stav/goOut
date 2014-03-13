@@ -97,6 +97,20 @@
 	<!--<div class='right' style="width:100%; bottom:0px; float:right;"><img src="http://s3-media1.ak.yelpcdn.com/assets/2/www/img/1589098a542f/developers/Powered_By_Yelp_White.png"></div>-->
 </div>
 
+<!--modal-->
+<div class="modal fade bs-example-modal-sm" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" style="font-family:'Roboto', sans-serif;">
+			<div class="modal-header">Pick a tag to see matched venues!</div>
+			<div class="modal-body">
+				{% for tag in tags %}
+					<div class="tag inactiveTag" id="{{tag}}">#{{tag}}</div>
+				{%endfor%}
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <script type = "text/javascript">
 
@@ -105,7 +119,14 @@
 			//link to next page. Search into how this interfaces with django
 			location.href = './venue/'+$(this).attr('id');
 		});
-	
+
+
+		$('.tag').click(function() {
+			if ($(this).hasClass('inactiveTag'))
+			{
+				location.href='./tag/' + $(this).attr('id');
+			}
+		});
 	});
 /*
 	if (navigator.geolocation) {

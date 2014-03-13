@@ -18,11 +18,10 @@
 	
 	<!-- bootstrap -->
 	{% load staticfiles %}
-	<script src="{{STATIC_URL}}jquery.js" > </script>
-	<link type="text/css" href="{{STATIC_URL}}bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet"/>
-	<link href="{{STATIC_URL}}bootstrap-3.0.0/dist/css/bootstrap-theme.css" rel="stylesheet"/>
-	<script src="{{STATIC_URL}}bootstrap-3.0.0/dist/js/bootstrap.js"> </script>
-	
+	<script src="{{STATIC_URL}}js/jquery.js" > </script>
+	<link type="text/css" href="{{STATIC_URL}}css/goOut/main.css" rel="stylesheet"/>
+	<script src="{{STATIC_URL}}css/bootstrap-3.0.0/dist/js/bootstrap.js"> </script>
+		
 	
 	<!--
 	<link type="text/css" href="{{STATIC_URL}}bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet"/>
@@ -38,8 +37,10 @@
 		<h1 style=""><img src="{{STATIC_URL}}Kefi.png" width="120.8px" height="50px"></h1>
 		
 		<!--<p><b>Kefi</b>: fun; spirit of joy</p><br/>-->
-		<br/><br/><p style="font-size:24px; color:#4186D3;">Your scene.<br/>Here and Now.</p>
-		<br/><button type="button" id="loading-example-btn" data-loading-text="Loading..." class="btn btn-primary">
+		<br/><br/><p style="font-size:24px; color:#4186D3;">Finding venues with #{{hashtag}}</p>
+		<br/>
+
+		<button type="button" id="loading-example-btn" data-loading-text="Loading..." class="btn btn-primary">
   			Loading..
 		</button>
 	</div>

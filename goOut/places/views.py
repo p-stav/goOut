@@ -74,7 +74,7 @@ def index(request):
 	client_id = 'T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O'
 	client_secret = '0P1EQQ3NH102D0R3GNGTG0ZAL0S5T41YDB2NPOOMRMO2I2EO'
 	category_id =  '4bf58dd8d48988d116941735,50327c8591d4c4b30a586d5d,4bf58dd8d48988d11e941735,4bf58dd8d48988d118941735,4bf58dd8d48988d1d8941735,4bf58dd8d48988d120941735,4bf58dd8d48988d121941735,4bf58dd8d48988d11f941735,4bf58dd8d48988d11b941735,4bf58dd8d48988d1d4941735,4bf58dd8d48988d11d941735,4bf58dd8d48988d122941735,4bf58dd8d48988d123941735'
-	radius = '500'	
+	radius = '1000'	
 
 	term = request.POST['search']
 
@@ -87,6 +87,13 @@ def index(request):
 	req = urlopen(url).read()
 	venues = json.loads(req).get("response").get("venues")
 	
+
+	#check for sortMethod tag to sort by distance
+	sortMethod = request.POST.get('sortMethod')
+	if sortMethod != '0':
+		venues = sorted(venues, key=lambda k: k['location']['distance'])
+
+		
 	"""YELP API"""
 	# Values for access
 	"""consumer_key = 'nee5cvfcAEBHCg3wSGSdKw'
@@ -247,6 +254,9 @@ def index(request):
 			#append
 			placeNoMatch.append(temp)
 
+	#get all hashtags to display
+	tags = Hashtag.objects.all()
+
 	#get username
 	if request.user.is_authenticated():
 		curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
@@ -255,7 +265,7 @@ def index(request):
 		userName = ''
 
 	sortMethod = ''
-	context = {'sort':sortMethod,'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'index':'index' }
+	context = {'tags':tags, 'sort':sortMethod, 'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'index':'index' }
 
 
 	return render(request, 'places/index.html', context)
@@ -526,7 +536,7 @@ def add_user(request):
 	
 def add_user_add(request):
 	try:
-		newUser = User.objects.create(username=request.POST['uname'])
+		newUser = User.objects.create(username=request.POST['uname'], email=request.POST['email'])
 		newUser.set_password(request.POST['pwd'])
 		# newUser.last_name = request.POST['last_name']
 		# newUser.first_name = request.POST['first_name']
@@ -612,8 +622,8 @@ def add_fav(request, place_name, placeId):
 @login_required()	
 def view_profile(request):
 	#get username, favorites list, last activity
-	curUser=UserProfile.objects.get(user=User.objects.get(id=request.user.id))
-	userName = curUser.user.username
+	userName = getUsername(request.user.id)
+	
 	
 	#last places reviewed, in order of time 
 	lastVisited = UserAction.objects.filter(userID=User.objects.get(id=request.user.id)).order_by('-time', 'tag__text')
@@ -645,15 +655,20 @@ def map(request):
 	context = {}
 	return render(request, 'places/maps', context)
 
-@login_required()
 def feedback(request):
 	context = {}
 	return render(request, 'places/feedback.html', context)
 
-@login_required()
+
 def feedback_submit(request):
-	curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
-	new_feedback = UserFeedback.objects.create(feedback=request.POST['feedback'], date=datetime.today(), userID=curUser)
+	#if signed in and if not signed in:
+	if request.user.id:
+		curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+		new_feedback = UserFeedback.objects.create(feedback=request.POST['feedback'], date=datetime.today(), userID=curUser)
+
+	else:
+		new_feedback = UserFeedback.objects.create(feedback=request.POST['feedback'], date=datetime.today(), userID=UserProfile.objects.get(username='defaultFeedback'))
+	
 	new_feedback.save()
 
 	return HttpResponseRedirect('/')
@@ -665,12 +680,17 @@ def about(request):
 def tag(request, hashtag):
 	#get username
 	if request.user.is_authenticated():
-		curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
-		userName = curUser.user.username
-		
-
+		userName = getUsername(request.user.id)
 	else:
 		userName = ''
+
+	##find today's date to find items close to it in db                                                                                                                                  
+	date = datetime.utcnow()
+	#for testing purposes, hardcode datetime                                                                                                                                             
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	timeDeltaForCutoff = timedelta(hours=-2)
+	cutoffTime = date + timeDeltaForCutoff
+
 
 	if request.POST.get('position'):
 		curLoc = request.POST['position']
@@ -685,10 +705,10 @@ def tag(request, hashtag):
 
 
 
-	placetagsWithTag = PlaceTag.objects.filter(tag__text=hashtag)
+	placetagsWithTag = PlaceTag.objects.filter(tag__text=hashtag, lastUpdate__gte = cutoffTime)
 	placeTagList = []
 
-	"""YELP API"""
+	"""YELP API
 	# Values for access
 	consumer_key = 'nee5cvfcAEBHCg3wSGSdKw'
 	consumer_secret = '3FmOuF9CLBGjyITGF66hbKmbgho'
@@ -696,12 +716,15 @@ def tag(request, hashtag):
 	token_secret = 'ngCe85K7Xk6Sq37hI-4T-rE1Xtw'
 
 	consumer = oauth2.Consumer(consumer_key, consumer_secret)
-
+	"""
 
 
 	for placeTag in placetagsWithTag:
-		url = 'http://api.yelp.com/v2/business/' + placeTag.place.placeID + '?ll=' + curLoc
+		url = 'https://api.foursquare.com/v2/venues/' + placeTag.place.placeID + '?ll=' + curLoc + '&&client_id=T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O&client_secret=0P1EQQ3NH102D0R3GNGTG0ZAL0S5T41YDB2NPOOMRMO2I2EO&v=20130815'
+		req = urlopen(url).read()
+		place = json.loads(req).get("response").get("venue")
 		
+		"""
 		oauth_request = oauth2.Request('GET', url, {})
 		oauth_request.update({'oauth_nonce': oauth2.generate_nonce(),'oauth_timestamp': oauth2.generate_timestamp(),'oauth_token': token, 'oauth_consumer_key': consumer_key})
 
@@ -711,15 +734,30 @@ def tag(request, hashtag):
 
 		req = urlopen(signed_url).read()
 		place = json.loads(req)
+		"""
 		
 		
-		distanceToPlace = place['distance'];
-		picture = place['image_url'];
-		categories = [i[0] for i in place['categories']]
-		finalScore = placeTag.score + 1 / distanceToPlace
-		placeTagList.append({'id' : placeTag.place.placeID, 'name' : placeTag.place.placeName, 'picture' : picture, 'types' : types, 'distance' : distanceToPlace, 'finalScore' : finalScore})
+		distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
+		category = place['categories'][0]['name']
+		image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
+		color=getColorTheme(placeTag.place.placeID)
+		finalScore = placeTag.score + 1 / distance
+
+		#grab top 5 hashtags
+		hashtags = {}
+		allTagsForPlace = PlaceTag.objects.filter(place = placeTag.place, lastUpdate__gte = cutoffTime)
+		for placeInstance in allTagsForPlace:
+			hashtags[placeInstance.tag.text] = placeInstance.score
+
+		orderHashtags = Counter(hashtags)
+		topTags = orderHashtags.most_common(5)
+		topHashtags = [i[0] for i in topTags]
+
+
+		placeTagList.append({'id' : placeTag.place.placeID, 'name' : placeTag.place.placeName, 'picture' : image_url, 'types' : category, 'distance' : distance, 'finalScore' : finalScore, 'hashtags':topHashtags, 'color':color})
+	
 	placeTagList.sort(key=lambda x:x['finalScore'])
-	context = {'placeTagList' : placeTagList}
+	context = {'placeTagList' : placeTagList, 'hashtag':hashtag}
 	return render(request, 'places/tag.html', context)
 
 
@@ -750,6 +788,12 @@ def isBlacklistedCategory(place):
 		return True
 	else:
 		return False
+
+def getUsername(uid):
+	curUser=UserProfile.objects.get(user=User.objects.get(id=uid))
+	userName = curUser.user.username
+
+	return userName
 
 
 ############################################################################################
