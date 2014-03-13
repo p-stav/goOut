@@ -43,13 +43,13 @@ class UserAction (models.Model):
 		return self.userID.user.username + " " + self.place.placeName
 		
 class UserComment(models.Model):
-		comment = models.CharField(max_length=140)
-		time = models.DateTimeField()
-		User = models.ForeignKey(UserProfile)
-		Place = models.ForeignKey(Place)
+	comment = models.CharField(max_length=140)
+	time = models.DateTimeField()
+	User = models.ForeignKey(UserProfile)
+	Place = models.ForeignKey(Place)
 
-		def __unicode__(self):
-			return self.Place.placeName + "  " + self.comment
+	def __unicode__(self):
+		return self.Place.placeName + "  " + self.comment
 
 class UserFeedback(models.Model):
 	feedback = models.TextField(max_length=2000)
