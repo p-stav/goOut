@@ -2,8 +2,14 @@
 	{% block title %}Hashtag Filter{% endblock %}
 
 {%block content %}
-	<p class="h3"style="font-family:'Roboto', sans-serif; text-align:center;">#{{hashtag}}</p>
+<div class="container">
+	<div class="jumbotron">
+		
+		<p class= "jumboTitle" style="font-family:'Roboto', sans-serif; text-align:center;">#{{hashtag}}</p>
 
+		<br/>
+	</div>
+</div>
 	{% for place in placeTagList %}
 		<div class="venue" id="{{ place.id }}">
 			<div align="right" class="venueInternalRight">
@@ -33,7 +39,30 @@
 	{% endfor %}
 	
 
+	<!--modal-->
+	<div class="modal fade bs-example-modal-sm" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="font-family:'Roboto', sans-serif;">
+				<div class="modal-header">Pick a tag to see matched venues!</div>
+				<div class="modal-body">
+					{% for tag in tags %}
+						<div class="tag inactiveTag" id="{{tag}}">#{{tag}}</div>
+					{%endfor%}
+				</div>
+			</div>
+		</div>
+	</div>
 
-
+<script>
+	$(document).ready(function() {
+		$('.tag').click(function() {
+				if ($(this).hasClass('inactiveTag'))
+				{
+					$(this).css('background-color','#c0c0c0');
+					location.href='/tag/' + $(this).attr('id');
+				}
+			});
+	});
+</script>
 
 {% endblock %}

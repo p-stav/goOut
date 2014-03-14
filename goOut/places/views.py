@@ -265,7 +265,7 @@ def index(request):
 		userName = ''
 
 	sortMethod = ''
-	context = {'tags':tags, 'sort':sortMethod, 'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'index':'index' }
+	context = {'tags':tags, 'sort':sortMethod, 'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'headerUIAdditions':'hi' }
 
 
 	return render(request, 'places/index.html', context)
@@ -773,13 +773,18 @@ def tag(request, hashtag):
 		topHashtags = [i[0] for i in topTags]
 
 
+
+
 		placeTagList.append({'id' : placeTag.place.placeID, 'name' : placeTag.place.placeName, 'picture' : image_url, 'types' : category, 'distance' : distance, 'finalScore' : finalScore, 'hashtags':topHashtags, 'color':color})
 	
+
 	placeTagList.sort(key=lambda x:x['finalScore'])
-	context = {'placeTagList' : placeTagList, 'hashtag':hashtag}
+
+	#get all hashtags to display on header
+	tags = Hashtag.objects.all()
+
+	context = {'placeTagList' : placeTagList, 'hashtag':hashtag, 'headerUIAdditions':'hi', 'username':userName, 'tags':tags}
 	return render(request, 'places/tag.html', context)
-
-
 
 
 
