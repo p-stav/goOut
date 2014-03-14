@@ -403,7 +403,7 @@ def placeDetail(request,place_id):
 		commentTime = comment.time
 		timeDifference = date - commentTime
 		timeDifference = timeDifference.total_seconds()
-		timestampString = 'Just now !'
+		timestampString = 'Just now!'
 		if timeDifference > 60:
 			timeDifference /= 60
 			timestampString = str(trunc(timeDifference)) + ' min ago'
