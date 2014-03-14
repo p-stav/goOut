@@ -1,77 +1,45 @@
 {% extends "base.html" %}
 
-{% block title %}Favorite Places{% endblock %}
+{% block title %}Favorites{% endblock %}
 
 
 {% block content %}
-<h4 align ='center'> {{user}}'s Favorite Places:</h4>
+<p class="h3"style="font-family:'Roboto', sans-serif; text-align:center;">Favorites</p>
 
 <!--all, or near your?-->
-{% if favorites|length > 0 %}
+	{% for place in favorites %}
+		<div class="venue" id="{{ place.id }}">
+			<!--<div align="right" class="venueInternalRight">
+				{{place.distance}} mi
+			</div>-->
 
-	<div class="placeList">
-		<br/>
-		{% for place in favorites %}
-			<div class="venue" id="{{ place.id }}">
-				
-				<h4>{{ place.name }}</h4>
-				<!--
-				<div class = 'venue-pic'>
-				
-				</div>
-				-->
-				<div class="favListTags">
-					{% for text in place.hashtags %}
-						#{{ text }}
-						{%if not forloop.last %}<br/>{% endif %}
-					{% endfor %}
-				</div>
-		
-				<!--
-				<div class = 'venue-right'>
-					
-					{{ place.rating }} / 5.0
-					<br/>
-					{% if place.price_level == 1 %}
-						$
-					{% elif place.price_level == 2 %}
-						$$
-					{% elif place.price_level == 3 %}
-						$$$
-					{% elif place.price_level == 4 %}
-						$$$$
-					{% elif place.price_level == 5 %}
-						$$$$$	
-					{% elif place.price_level == -1 %}
-						No price!
-						
-					{% endif %}
-					
-					<br/>
-					{% for type in place.types %}
-						{% if type == 'bar' %}
-							bar 
-						{% elif type == 'night_club' %}
-							club
-						{% endif %}
-					{% endfor %}
-				</div>
-				-->
-
-				{% if place.hashtags|length == 0 %}
-					uh oh!<br/> No current tags
-					<br/><br/>
-				{% endif %}
-				
-				<div class="separatorTag">
-				</div>
+			<div class='venue-info curTag' style="color:rgb({{place.color}});">
+				{% for tag in place.hashtags %}
+					<span class='indexTag'>#{{ tag }}</span>
+				{% endfor %}
 			</div>
-		{% endfor %}
-	</div>
+
+			<br/>
+			<div class="colorWrapper" style="background-color:rgb({{place.color}});" >
+				<img class="venuePic"  src="{{place.picture}}"></img>
+				<div class='venueTitle'>{{ place.name }}</div>
+				<div class='venueType'>
+					{{place.types}}
+				</div>
+				<br/>
+			</div>
+
+			
+			<div class="separator">
+			</div>
 		</div>
-{% else %}
-	<p>You haven't favorited any venues yet.</p>
-{% endif %}
+	{% empty %}
+		<br/>
+		<br/>
+		<p class="h4" style="font-family:'Roboto', sans-serif; text-align:center;">
+			No places are favorited. Go find your Kefi.
+		</p>
+	{% endfor %}
 
 <script type = "text/javascript">
 

@@ -594,26 +594,48 @@ def view_fav(request):
 	
 	favList = []
 	
-	for venue in favorites:
-		hashtags = {}
-		temp = PlaceTag.objects.filter(place=venue, lastUpdate__gte=cutoffTime)
-
-		for i in temp:
-			hashtags[i.tag.text]=i.score
-	
-
-
-		#before submit hashtag list, change to list of top 3:
-		orderHashtags = Counter(hashtags)
-		topTags = orderHashtags.most_common(3)
-		topHashtags = [i[0] for i in topTags]
-		#create dictionsary to append to list
+	for placeItem in favorites:
+		url = 'https://api.foursquare.com/v2/venues/' + placeItem.placeID + '?client_id=T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O&client_secret=0P1EQQ3NH102D0R3GNGTG0ZAL0S5T41YDB2NPOOMRMO2I2EO&v=20130815'
+		req = urlopen(url).read()
+		place = json.loads(req).get("response").get("venue")
 		
-		addToList = {'userName':userName, 'name':venue.placeName , 'hashtags':topHashtags, 'id':venue.placeID}
+		"""
+		oauth_request = oauth2.Request('GET', url, {})
+		oauth_request.update({'oauth_nonce': oauth2.generate_nonce(),'oauth_timestamp': oauth2.generate_timestamp(),'oauth_token': token, 'oauth_consumer_key': consumer_key})
+
+		token = oauth2.Token(token, token_secret)
+		oauth_request.sign_request(oauth2.SignatureMethod_HMAC_SHA1(), consumer, token)
+		signed_url = oauth_request.to_url()
+
+		req = urlopen(signed_url).read()
+		place = json.loads(req)
+		"""
+		
+		
+		#distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
+		category = place['categories'][0]['name']
+		image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
+		color=getColorTheme(placeItem.placeID)
+		
+
+		#grab top 5 hashtags
+		hashtags = {}
+		finalScore = 0.0
+		allTagsForPlace = PlaceTag.objects.filter(place = placeItem, lastUpdate__gte = cutoffTime)
+		for placeInstance in allTagsForPlace:
+			hashtags[placeInstance.tag.text] = placeInstance.score
+			finalScore + placeInstance.score
+
+		orderHashtags = Counter(hashtags)
+		topTags = orderHashtags.most_common(5)
+		topHashtags = [i[0] for i in topTags]
+
+		
+		addToList = {'userName':userName, 'id' : placeItem.placeID, 'name' : placeItem.placeName, 'picture' : image_url, 'types' : category, 'finalScore' : finalScore, 'hashtags':topHashtags, 'color':color}
 		
 		favList.append(addToList)
 	
-	
+	favList.sort(key=lambda x:x['finalScore'])
 	
 	context = {'favorites':favList, 'user':curUser.user.username}
 	

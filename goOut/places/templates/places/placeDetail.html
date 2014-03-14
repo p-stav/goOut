@@ -59,7 +59,7 @@
 			{% endfor %}
 
 		{%elif oldTags %}
-			<div class='h4'>Are you here? <a href="/review/{{ name }}/{{ id }}">Write a review!</a></div>
+			<div class='h4'>Are you here? <a href="/review/{{ name }}/{{ id }}">Get the party started!</a></div>
 			</br><br/>
 			<h4 id='titleOldTags'>Most common tags:</h4>
 			{% for tag in oldTags %}
@@ -79,6 +79,7 @@
 
 	<!--Comments-->
 	<div class='placeComments'>
+		{% if comments %}
 		<h4>Comments:</h4>
 		<table class='commentsTable'>
 			{% for comment,timestamp in comments%}
@@ -92,6 +93,7 @@
 				
 			{%endfor%}
 		</table>
+		{% endif %}
 
 	</div>
 </div>
