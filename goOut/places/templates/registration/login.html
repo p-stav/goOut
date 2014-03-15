@@ -6,6 +6,7 @@
 	<div class="jumbotron">
 		<div class="container">
 			<h3>Login</h3>
+
 			<!--voting-->
 			
 			{% if form.errors %}
@@ -14,7 +15,7 @@
 			<br/>
 			
 			{% autoescape on %}
-			<form class="form-horizontal" method="post" action="/accounts/login/?next={{ next }}">
+			<form class="form-horizontal" method="post" action="{% url 'django.contrib.auth.views.login' %}">
 				{% csrf_token %}
 					{% if error %}
 						<div class="form-group has-error">
