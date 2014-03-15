@@ -417,8 +417,10 @@ def placeDetail(request,place_id):
 
 	comments.reverse()
 
+	#get all hashtags to display on header
+	tags = Hashtag.objects.all()
 
-	context = {'userName':userName, 'id':place['id'], 'oldTags':oldTags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':category, 'address':address, 'placeFavorited':placeFavorited, 'color':color, 'picture' : image_url, 'comments':comments}
+	context = {'userName':userName, 'id':place['id'], 'oldTags':oldTags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':category, 'address':address, 'placeFavorited':placeFavorited, 'color':color, 'picture' : image_url, 'comments':comments, 'tags':tags}
 	return render(request, 'places/placeDetail.html', context)
 
 
@@ -571,7 +573,12 @@ def add_user_add(request):
 		#add user to session
 		auth = authenticate(username=request.POST['uname'], password=request.POST['pwd'])
 		login(request, auth)
-		return HttpResponseRedirect('/')
+
+		if request.POST.get('next'):
+			return HttpResponseRedirect(request.POST['next'])
+		else:
+			return HttpResponseRedirect('/')	
+		
 	
 	except:
 		error=1

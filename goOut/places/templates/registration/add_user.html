@@ -65,6 +65,11 @@
 					</div>
 				{% endif %}
 				
+				<div class="form-group hidden">
+					<!--<label for="pwd" class="col-lg-2 control-label">Password:</label>-->
+					<textarea class="form-control insertNext" id="next" name="next" type="text"></textarea>
+				</div>
+
 				<div class="form-group">
 					<label class='control-label'><button type="submit" class="btn btn-primary" name="submit_user_form">Join!</button></label>
 				</div>
@@ -76,4 +81,16 @@
 		</div>
 	</div>
 </div>
+
+
+<script>
+	$(document).ready(function() {
+		var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+		var next = hashes[0];
+
+		$('.insertNext').text(next.split("=")[1]);
+	});
+
+
+</script>
 {% endblock %}
