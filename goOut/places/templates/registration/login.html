@@ -14,7 +14,7 @@
 			<br/>
 			
 			{% autoescape on %}
-			<form class="form-horizontal" method="post" action="{% url 'django.contrib.auth.views.login' %}">
+			<form class="form-horizontal" method="post" action="/accounts/login/?next={{ next }}">
 				{% csrf_token %}
 					{% if error %}
 						<div class="form-group has-error">

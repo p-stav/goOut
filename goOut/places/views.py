@@ -39,6 +39,7 @@ def getCurLoc(request):
 		term = request.POST['searchTerm']
 	else: term = ''
 
+
 	context = {'sortMethod':method, 'search':term}
 
 
