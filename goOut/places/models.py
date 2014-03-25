@@ -19,10 +19,11 @@ class UserProfile(models.Model):
 		
 class Hashtag(models.Model):
 	text = models.CharField(max_length=50)
+	#mapping = 
 	
 	def __unicode__(self):
 		return self.text
-		
+
 class PlaceTag(models.Model):
 	place = models.ForeignKey(Place)
 	tag = models.ForeignKey(Hashtag)
@@ -32,6 +33,16 @@ class PlaceTag(models.Model):
 	
 	def __unicode__(self):
 		return self.place.placeName + " " + self.tag.text
+
+class CustomPlaceTag(models.Model):
+	text = models.CharField(max_length=50)
+	time = models.DateTimeField()
+	userID = models.ForeignKey(UserProfile)
+	place = models.ForeignKey(Place)
+	score = models.FloatField()
+
+	def __unicode__(self):
+		return self.text
 
 class UserAction (models.Model):
 	userID = models.ForeignKey(UserProfile)

@@ -74,6 +74,12 @@ font-size: .85em;
 
 }
 
+.personalTag{
+  border:none;
+  background:transparent;
+  
+}
+
 .placeComment{
   font-family:'Roboto', sans-serif;
 

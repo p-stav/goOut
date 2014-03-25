@@ -22,6 +22,10 @@
 					<!--<div class='unselectedTag' style='float:right'><span class='glyphicon glyphicon-ok'</span></div>-->
 				</div>
 			{% endfor %}
+			<div class="tag">
+				#<input class="personalTag" name='personalTag' type="text" placeholder="CreateYourOwnTag">
+					<!--<div class='unselectedTag' style='float:right'><span class='glyphicon glyphicon-ok'</span></div>-->
+			</div>
 			<br/>
 			<div class='add-comment form-group'>
 				<textarea class="form-control commentBox" name='venueComment' id='comment'  rows="3" style="resize:none;" placeholder="What else is going on here?" maxlength="140"></textarea>
@@ -111,7 +115,7 @@ $(document).ready(function() {
 			$(this).find('input').prop('checked', true);
 		}
 
-		else //($(this).hasClass('activeTag'))
+		else if ($(this).hasClass('activeTag'))
 		{
 			//make selected
 			$(this).removeClass('activeTag').addClass('inactiveTag');
@@ -126,10 +130,23 @@ $(document).ready(function() {
 
 	});
 
-$('.commentBox').keydown(function(){
-	var charLength = $('.commentBox').val().length + 1;
-	$('.numLength').text(140 - charLength);
-});
+	$(".personalTag").on("focusout", function() {
+		if ($(this).val() !="") {
+			$(this).parent().addClass('activeTag');
+			$(this).css("color","white")
+		}
+
+		else if ($(this).val() =="") {
+			$(this).parent().removeClass('activeTag');
+		}
+
+	});
+
+
+	$('.commentBox').keydown(function(){
+		var charLength = $('.commentBox').val().length + 1;
+		$('.numLength').text(140 - charLength);
+	});
 
 
 	//var numTags = 0;
