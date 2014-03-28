@@ -22,16 +22,31 @@
 					<!--<div class='unselectedTag' style='float:right'><span class='glyphicon glyphicon-ok'</span></div>-->
 				</div>
 			{% endfor %}
-			<div class="tag">
-				#<input class="personalTag" name='personalTag' type="text" placeholder="CreateYourOwnTag">
-					<!--<div class='unselectedTag' style='float:right'><span class='glyphicon glyphicon-ok'</span></div>-->
-			</div>
+		
+
 			<br/>
-			<div class='add-comment form-group'>
-				<textarea class="form-control commentBox" name='venueComment' id='comment'  rows="3" style="resize:none;" placeholder="What else is going on here?" maxlength="140"></textarea>
-				<div class='charLenCheck'><span class='numLength'>140</span> Characters Left</div>
+			<br/>
+			<div class="personalTags">
+				<p class='' style="font-family:'Roboto',sans-serif; font-size:14px;">Can't find what you're looking for?</p>
+				<div class="tag">
+					#<input class="personalTag" name='personalTag' type="text" placeholder="CreateYourOwnTag">
+					<div class="removeTag" style='float:right'><span>&times;</span></div>
+				</div>
 
 			</div>
+
+			<div>
+				<div class="addCustomTag btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span></button>
+			</div>
+
+				<br/>
+			
+			<!--
+				<textarea class="form-control commentBox" name='venueComment' id='comment'  rows="3" style="resize:none;" placeholder="Add your own tags!" maxlength="140"></textarea>
+				<div class='charLenCheck'><span class='numLength'>140</span> Characters Left</div>
+			-->
+
+			
 
 
 				<!--
@@ -130,7 +145,8 @@ $(document).ready(function() {
 
 	});
 
-	$(".personalTag").on("focusout", function() {
+	
+	$(document).on("focusout",".personalTag", function() {
 		if ($(this).val() !="") {
 			$(this).parent().addClass('activeTag');
 			$(this).css("color","white")
@@ -142,10 +158,20 @@ $(document).ready(function() {
 
 	});
 
-
 	$('.commentBox').keydown(function(){
 		var charLength = $('.commentBox').val().length + 1;
 		$('.numLength').text(140 - charLength);
+	});
+
+	$('.addCustomTag').click(function() {
+		$(".personalTags").append("<div class='tag'>#<input class='personalTag' name='personalTag' type='text' placeholder='CreateYourOwnTag'><div class='removeTag' style='float:right'><span>&times;</span></div></div>");
+
+	});
+
+
+	$(document).on("click",".removeTag", function(){
+		$(this).parent().remove();
+
 	});
 
 

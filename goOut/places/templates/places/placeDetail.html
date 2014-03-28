@@ -72,15 +72,13 @@
 		{% endif %}
 	</div>
 	
-	<br/>
-	<br/>
-	<br/>
-	<br/>
+	<br/><br/>
+
 
 	<!--Comments-->
 	<div class='placeComments'>
 		{% if comments %}
-		<h4>Comments:</h4>
+		<h4>Tag Wall:</h4>
 		<table class='commentsTable'>
 			{% for comment,timestamp in comments%}
 				<tr>
@@ -88,7 +86,8 @@
 					 <td><p class='commentTimestamp'>{{timestamp}}</p></td>
 				</tr>
 				<tr >
-					<td colspan="2"><p class='commentText'> {{comment.comment}}</p></td>
+					<td colspan="2">
+						<p class='commentText'> {{comment.comment}}</p></td>
 				</tr>
 				
 			{%endfor%}

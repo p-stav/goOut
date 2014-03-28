@@ -541,10 +541,16 @@ def submit_submitReview(request):
 	curUser.points += 1
 	curUser.save()
 
-	#store comment
-	if request.POST['venueComment']:
-		newComment = UserComment.objects.create(User=curUser, time = datetime.utcnow(), Place = newPlace, comment=request.POST['venueComment'])
-		newComment.save()
+	#get personalized hashtags:
+	personalTags = request.POST.getlist('personalTag')
+	
+	tagText = ""
+	
+	for tag in personalTags:
+		tagText +="#"+tag+"\r\n"
+	
+	newTag = UserComment.objects.create(User=curUser, time = datetime.utcnow(), Place = newPlace, comment=tagText)
+	newTag.save()
 
 
 	redirectURL = '/venue/' + request.POST['venueId']
