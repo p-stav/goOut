@@ -547,13 +547,20 @@ def submit_submitReview(request):
 	tagText = ""
 	
 	for tag in personalTags:
-		tagText +="#"+tag+"\r\n"
-	
-	newTag = UserComment.objects.create(User=curUser, time = datetime.utcnow(), Place = newPlace, comment=tagText)
-	newTag.save()
+		if tag != '':
+			if "#" in tag:
+				tag = tag.replace("#", "")
+
+			if " " in tag:
+				tag = tag.replace(" ", "")
+
+			tagText += "#" + tag + "\n\r"
+	if tagText != "":
+		newTag = UserComment.objects.create(User=curUser, time = datetime.utcnow(), Place = newPlace, comment=tagText)
+		newTag.save()
 
 
-	redirectURL = '/venue/' + request.POST['venueId']
+	redirectURL = "/venue/" + request.POST["venueId"]
 
 	return HttpResponseRedirect(redirectURL)
 		

@@ -28,8 +28,8 @@
 			<br/>
 			<div class="personalTags">
 				<p class='' style="font-family:'Roboto',sans-serif; font-size:14px;">Can't find what you're looking for?</p>
-				<div class="tag">
-					#<input class="personalTag" name='personalTag' type="text" placeholder="CreateYourOwnTag">
+				<div class="createTag">
+					#<input class="personalTag" name='personalTag' type="text" placeholder="CreateYourOwnTag" maxlength="40">
 					<div class="removeTag" style='float:right'><span>&times;</span></div>
 				</div>
 
@@ -149,18 +149,14 @@ $(document).ready(function() {
 	$(document).on("focusout",".personalTag", function() {
 		if ($(this).val() !="") {
 			$(this).parent().addClass('activeTag');
-			$(this).css("color","white")
+			$(this).css("color","white");
 		}
 
 		else if ($(this).val() =="") {
 			$(this).parent().removeClass('activeTag');
+			$(this).css("color","black");
 		}
 
-	});
-
-	$('.commentBox').keydown(function(){
-		var charLength = $('.commentBox').val().length + 1;
-		$('.numLength').text(140 - charLength);
 	});
 
 	$('.addCustomTag').click(function() {
@@ -174,6 +170,40 @@ $(document).ready(function() {
 
 	});
 
+	//perform checks to make sure that custom tags are in correct fomat
+	$('#submitButton').click(function(event){
+		//alert('hi');
+		
+		
+		$('.createTag input').each(function(){
+			if ($(this).val() =='insert case here')
+			{
+				$(this).parent().addClass('has-error');
+				alert('Oops! Please select a tag to associate with this venue!');
+				event.preventDefault();
+			}
+			
+			if (tagList.indexOf($(this).val()) != -1)
+			{
+				$(this).parent().addClass('has-error');
+				alert('Oops! Please select unique tags to associate with this venue!');
+				event.preventDefault();
+			}
+			
+			else
+			{
+				tagList.push($(this).val());
+			}
+		});
+	});
+
+	/*
+	//character counter
+	$('.commentBox').keydown(function(){
+		var charLength = $('.commentBox').val().length + 1;
+		$('.numLength').text(140 - charLength);
+	});
+	*/
 
 	//var numTags = 0;
 	/*$(document).on('click', ".dropdown-menu li", function(){
