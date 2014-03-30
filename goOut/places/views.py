@@ -366,8 +366,9 @@ def placeDetail(request,place_id):
 			fontSizePercentage = 400
 		fontSizes.append(fontSizePercentage)
 	
-		venueTags = UserAction.objects.filter(place__placeID= place['id'], tag__text=placeTag.tag.text, time__gte = cutoffTime)
-		tagsFreq.append(len(venueTags))
+		userActionsCorrectTag = placeTag.tag.useraction_set.filter(place__placeID= place['id'], time__gte = cutoffTime)
+		#venueTags = UserAction.objects.filter(place__placeID= place['id'], tag__text=placeTag.tag.text, time__gte = cutoffTime)
+		tagsFreq.append(len(userActionsCorrectTag))
 
 	tagsWithFonts = zip(tags, fontSizes, tagsFreq)
 
@@ -501,6 +502,9 @@ def submit_submitReview(request):
 
 	#Filter for all instances of Places with same placeId and tag within alotted time
 	filterPlace = PlaceTag.objects.filter(place=newPlace)
+
+	#add new User Action
+	newAction = UserAction.objects.create(userID=curUser, time = datetime.utcnow(), place = newPlace)
 	
 	if len(filterPlace)>0:
 		#check to see if tag exists
@@ -519,10 +523,8 @@ def submit_submitReview(request):
 				position = tags.index(placeTag.tag.text)
 				tags.pop(position)
 
-
-				#add new User Action
-				newAction = UserAction.objects.create(userID=curUser, time = datetime.utcnow(), place = newPlace , tag = placeTag.tag)
-				newAction.save()
+				newAction.tags.add(placeTag.tag)
+				
 				placeTag.save()
 
 			
@@ -531,8 +533,7 @@ def submit_submitReview(request):
 		newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.utcnow(), score = 50)
 		
 		#log new user action
-		newAction = UserAction.objects.create(userID=curUser, time = datetime.utcnow(), place = newPlace , tag = Hashtag.objects.get(text=hashtag))
-		newAction.save()
+		newAction.tags.add(newVenueReview.tag)
 		
 
 		newVenueReview.save()
@@ -540,6 +541,8 @@ def submit_submitReview(request):
 	#add a point to the user
 	curUser.points += 1
 	curUser.save()
+
+	newAction.save()
 
 	#get personalized hashtags:
 	personalTags = request.POST.getlist('personalTag')
@@ -688,7 +691,7 @@ def view_profile(request):
 	
 	
 	#last places reviewed, in order of time 
-	lastVisited = UserAction.objects.filter(userID=User.objects.get(id=request.user.id)).order_by('-time', 'tag__text')
+	lastVisited = UserAction.objects.filter(userID=User.objects.get(id=request.user.id)).order_by('-time')
 	
 	#get list of last 5 Places reviewed 
 	count=0

@@ -37,7 +37,7 @@ class PlaceTag(models.Model):
 class UserAction (models.Model):
 	userID = models.ForeignKey(UserProfile)
 	place = models.ForeignKey(Place)
-	tag = models.ForeignKey(Hashtag)
+	tags = models.ManyToManyField(Hashtag)
 	time = models.DateTimeField()
 	
 	def __unicode__(self):
