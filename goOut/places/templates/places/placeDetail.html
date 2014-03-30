@@ -61,14 +61,14 @@
 		{%elif oldTags %}
 			<!--<div class='h4'>Are you here? <a href="/review/{{ name }}/{{ id }}">Get the party started!</a></div>
 			</br><br/>-->
-			<h4 id='titleOldTags'>Most common tags:</h4>
+			<h4 id='titleOldTags'>What</h4>
 			{% for tag in oldTags %}
 				<p style="color:rgb({{color}}); font-size:16px">#{{tag}}</p>
 			{%endfor%}
 
 		{% else%}
 			<p> There are no tags for this Venue!</p>
-			<p><a href="/review/{{ name }}/{{ id }}"> Be the first to review this place!</a></p>
+			<p><a href="/review/{{ name }}/{{ id }}">Be the first to review this place!</a></p>
 		{% endif %}
 	</div>
 	
