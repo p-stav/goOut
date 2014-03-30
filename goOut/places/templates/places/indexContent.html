@@ -1,0 +1,92 @@
+{% for place in placeMatch %}
+		
+		<div class="venue" id="{{ place.id }}">
+			<div align="right" class="venueInternalRight">
+					{{place.distance}} mi
+			</div>
+
+			<div class="colorWrapper" style="background-color:rgb({{place.color}});" >
+				
+				<img class="venuePic"  src="{{place.picture}}"></img>
+				<div class='venueTitle'>{{ place.name }}</div>
+				<div class='venueType'>
+					{{place.types}}
+				</div>
+				<br/>
+			</div>
+
+			
+
+			<div class='venue-info curTag' style="color:rgb({{place.color}});">
+				{% for tag in place.hashtags %}
+					<span class='indexTag'>#{{ tag }}</span>
+				{% endfor %}
+			</div>
+
+			<br/>
+			
+
+			
+			<div class="separator">
+			</div>
+		</div>
+	{% endfor %}
+
+	{% for place in placeMatchOld %}
+		<div class="venue" id="{{ place.id }}">
+			<div align="right" class="venueInternalRight">
+				{{place.distance}} mi
+			</div>
+
+			<div class="colorWrapper" style="background-color:rgb({{place.color}});" >
+				<img class="venuePic"  src="{{place.picture}}"></img>
+				<div class='venueTitle'>{{ place.name }}</div>
+				<div class='venueType'>
+					{{ place.types}}
+						
+				</div>
+				<br/>
+			</div>
+
+
+			<div class='venue-info curTag' style="color:rgb({{place.color}});">
+				Known For:<br/>
+				{% for tag in place.hashtags %}
+					<span class='indexTag'>#{{ tag }}</span>
+				{% endfor %}
+			</div>
+			<br>
+
+			<div class="separator">
+			</div>
+		</div>
+	{% endfor %}
+		
+	<!--List for items with no data in our DB -->
+	{% for place in placeNoMatch %}
+		<div class="venue" id="{{ place.id }}">
+			<div align="right" class="venueInternalRight">
+				{{place.distance}} mi
+			</div>
+
+			<div class="colorWrapper" style="background-color:rgb({{place.color}});" >
+				<img class="venuePic"  src="{{place.picture}}"></img>
+				<div class='venueTitle'>{{ place.name }}</div>
+				<div class='venueType'>
+					{{place.types}}
+				</div>
+				<br/>
+			</div>
+			
+			<div class='venue-info curTag' style="color:rgb({{place.color}});">
+				<div>#NoTags!</div>
+				<div class='noReviewsAddress'>
+					Be the first to Tag!
+					<br/><br/>
+				</div>
+			</div>
+			
+			<div class="separator">
+			</div>
+		</div>
+	{% endfor %}

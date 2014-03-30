@@ -4,100 +4,11 @@
 
 {% block content %}
 
+
+
 <div class="placeList" id='match'>	
 	
-	{% for place in placeMatch %}
-		
-		<div class="venue" id="{{ place.id }}">
-			<div align="right" class="venueInternalRight">
-					{{place.distance}} mi
-			</div>
-
-			<div class="colorWrapper" style="background-color:rgb({{place.color}});" >
-				
-				<img class="venuePic"  src="{{place.picture}}"></img>
-				<div class='venueTitle'>{{ place.name }}</div>
-				<div class='venueType'>
-					{{place.types}}
-				</div>
-				<br/>
-			</div>
-
-			
-
-			<div class='venue-info curTag' style="color:rgb({{place.color}});">
-				{% for tag in place.hashtags %}
-					<span class='indexTag'>#{{ tag }}</span>
-				{% endfor %}
-			</div>
-
-			<br/>
-			
-
-			
-			<div class="separator">
-			</div>
-		</div>
-	{% endfor %}
-
-	{% for place in placeMatchOld %}
-		<div class="venue" id="{{ place.id }}">
-			<div align="right" class="venueInternalRight">
-				{{place.distance}} mi
-			</div>
-
-			<div class="colorWrapper" style="background-color:rgb({{place.color}});" >
-				<img class="venuePic"  src="{{place.picture}}"></img>
-				<div class='venueTitle'>{{ place.name }}</div>
-				<div class='venueType'>
-					{{ place.types}}
-						
-				</div>
-				<br/>
-			</div>
-
-
-			<div class='venue-info curTag' style="color:rgb({{place.color}});">
-				Known For:<br/>
-				{% for tag in place.hashtags %}
-					<span class='indexTag'>#{{ tag }}</span>
-				{% endfor %}
-			</div>
-			<br>
-
-			<div class="separator">
-			</div>
-		</div>
-	{% endfor %}
-		
-	<!--List for items with no data in our DB -->
-	{% for place in placeNoMatch %}
-		<div class="venue" id="{{ place.id }}">
-			<div align="right" class="venueInternalRight">
-				{{place.distance}} mi
-			</div>
-
-			<div class="colorWrapper" style="background-color:rgb({{place.color}});" >
-				<img class="venuePic"  src="{{place.picture}}"></img>
-				<div class='venueTitle'>{{ place.name }}</div>
-				<div class='venueType'>
-					{{place.types}}
-				</div>
-				<br/>
-			</div>
-			
-			<div class='venue-info curTag' style="color:rgb({{place.color}});">
-				<div>#NoTags!</div>
-				<div class='noReviewsAddress'>
-					Be the first to Tag!
-					<br/><br/>
-				</div>
-			</div>
-			
-			<div class="separator">
-			</div>
-		</div>
-	{% endfor %}
+	{% include "places/indexContent.html" %}
 	
 	<br/><br/><br/>
 	<!--yelp button-->
@@ -139,59 +50,7 @@
 			}
 		});
 	});
-/*
-	if (navigator.geolocation) {
-		// If so, get the current position and feed it to listPlaces
-		navigator.geolocation.getCurrentPosition(listPlaces);
-	}
-	
-	function listPlaces(position){
-		var curLat = position.coords.latitude;
-		var curLong = position.coords.longitude;
-		
-		//call for ALL venue types; CHANGE for current position
-		apiCall = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+curLat+","+curLong+"&radius=550&types=bar|casino|night_club&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0";
-		
 
-	var callAPI = $.ajax({
-			url: apiCall,
-			//data: myData,
-			type: 'GET',
-			crossDomain: true,
-			dataType: 'jsonp'
-		})
-			.done(function(objects){
-				$.each(objects.results, function(index, data){
-					$('.placeList').append("<div id='"+index+"'>"+data.name+" has a rating of: "+data.rating+"</div>");
-					});
-				console.log('call complete!');
-			})
-			
-			.fail(function(){
-				console.log('WHAT');
-			});
-			
-
-		//EITHER THIS CALL OR THE ONE ABOVE IT
-		var callAPI= $.getJSON(apiCall, function(json){
-			console.log('grabbed json');
-		})
-			.done(function(json){
-				$.each(json.results, function(index, data){
-					$('.placeList').append("<div id='"+index+"'>"+data.name+" has a rating of: "+data.rating+"</div>");
-					});
-				console.log('call complete!');
-			})
-			
-			.fail(function(){
-				//console.log('WHAT');
-			});
-		callAPI.complete(function(){
-			//console.log('second complete');
-		});
-		
-	}
-*/
 
 </script>
 {% endblock %}
