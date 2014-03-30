@@ -28,7 +28,7 @@ urlpatterns = patterns('places.views',
 
 	url(r'^about$', 'about', name='about'),
 
-	url(r'^tag/(?P<hashtag>.+)/$', 'tag', name='tag'),
+	url(r'^tag$', 'tag', name='tag'),
 
 	#url(r'^feedback$', 'feedback', name='feedback'),
 	#url(r'^feedback/submit$', 'feedback_submit', name='feedback_submit'),

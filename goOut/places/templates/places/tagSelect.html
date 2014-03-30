@@ -1,15 +1,61 @@
-<div class="modal fade bs-example-modal-sm" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content" style="font-family:'Roboto', sans-serif;">
-			<div class="modal-header">
-				Pick a tag to see matched venues!
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			</div>
-			<div class="modal-body">
-				{% for tag in tags %}
-					<div class="tag inactiveTag" id="{{tag}}">#{{tag}}</div>
-				{%endfor%}
+
+<form action={% url "places:tag" %} method="post" id="tagSearchForm" accept-charset="UTF-8">
+	{% csrf_token %}
+	<div class="modal fade bs-example-modal-sm" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="font-family:'Roboto', sans-serif;">
+				<div class="modal-header">
+					Pick a tag to see matched venues!
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					{% for tag in tags %}
+						<div class="tag inactiveTag">
+							<input name='hashtag' type="checkbox" class="h4 hidden " value="{{tag.text}}"> #{{tag.text}}
+							<!--<div class='unselectedTag' style='float:right'><span class='glyphicon glyphicon-ok'</span></div>-->
+						</div>
+					{%endfor%}
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+	<div class="form-group hidden">
+		<textarea class="form-control insertLoc" id="position" name="position" rows="4"></textarea>
+	</div>
+
+	<div class="form-group hidden">
+		<button type="submit" id='submitButton' class="btn btn-primary" name="submit_tags_form">Submit</button>
+	</div>
+
+
+</form>
+
+<script>
+
+	$(document).ready(function() {
+		if (navigator.geolocation) {
+			// If so, get the current position and feed it to exportPosition (or errorPosition if there was a problem)
+			navigator.geolocation.getCurrentPosition(LocationForm);
+		}
+
+		function LocationForm(position) {
+			$('.insertLoc').text(position.coords.latitude + ',' + position.coords.longitude);
+		}
+
+
+		$('.tag').click(function() {
+		if ($(this).hasClass('inactiveTag'))
+			{
+				//select and color
+				$(this).find('input').prop('checked', true);
+				$(this).css('background-color','#c0c0c0');
+				$('#tagSearchForm').submit();
+			}
+			
+		});
+
+		
+	});
+
+</script>

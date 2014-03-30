@@ -739,7 +739,7 @@ def about(request):
 	context = {}
 	return render(request, 'places/about.html', context)
 
-def tag(request, hashtag):
+def tag(request):
 	#get username
 	if request.user.is_authenticated():
 		userName = getUsername(request.user.id)
@@ -747,25 +747,18 @@ def tag(request, hashtag):
 		userName = ''
 
 	##find today's date to find items close to it in db                                                                                                                                  
-	date = datetime.utcnow()
-	#for testing purposes, hardcode datetime                                                                                                                                             
-	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	date = datetime.utcnow()                                                                                                                              
 	timeDeltaForCutoff = timedelta(hours=-2)
 	cutoffTime = date + timeDeltaForCutoff
 
 
 	if request.POST.get('position'):
 		curLoc = request.POST['position']
-	else: 
-		context = {'hashtag' : hashtag}
-		return render(request, 'places/getCurLocHashtag.html', context)
 
-	if curLoc == '': #hardcode if fails.
-		curLoc = '47.6159392,-122.3268701' #Seattle Pine/Bellevue
-		#SF chestnut/VanNess.798542,-122.422345'	
+	if request.POST.get('hashtag'): 
+		hashtag = request.POST['hashtag']
 
-
-
+	
 
 	placetagsWithTag = PlaceTag.objects.filter(tag__text=hashtag, lastUpdate__gte = cutoffTime)
 	placeTagList = []
