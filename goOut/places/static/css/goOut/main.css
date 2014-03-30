@@ -73,6 +73,16 @@ font-size: .85em;
   border: 1px solid #c0c0c0;
 }
 
+.searchTag{
+  font-size: 16px;
+  font-family: 'Roboto',sans-serif;
+  padding: 5px 10px 5px 10px;
+  margin: 10px 0 10px 0;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  border: 1px solid #c0c0c0;
+}
+
 .createTag {
   font-size: 16px;
   font-family: 'Roboto',sans-serif;
@@ -95,6 +105,10 @@ font-size: .85em;
 .placeComment{
   font-family:'Roboto', sans-serif;
 
+}
+
+.commentsTable {
+  width:100%;
 }
 
 .commentUser{

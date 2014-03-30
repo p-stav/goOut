@@ -27,7 +27,7 @@
 
 		<br/>
 	  	<div class='btn-group buttonsPlaceDetail' style='width:100%'>
-			<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span><p style="font-size: 10px;">Tag</p></button></a>
+			<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span><p style="font-size: 10px;">Kef it</p></button></a>
 			
 			{% if placeFavorited %}
 				<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-info buttonPlaceDetail active'><span class="glyphicon glyphicon-star"></span><p style="font-size: 10px;">Fav</p></button></a>
@@ -55,15 +55,15 @@
 
 		{% if tagsWithFonts %}
 			{% for tag,fontSize,freq in tagsWithFonts %}
-			<p style="font-size:{{fontSize}}%; color:rgb({{color}});">#{{tag.tag}} <span class='freqTag' style="font-size:40%;">({{freq}}x)</span></p>
+			<p style="font-size:{{fontSize}}%; color:rgb({{color}}); font-family:'Roboto', sans-serif;">#{{tag.tag}} <span class='freqTag' style="font-size:40%;">({{freq}}x)</span></p>
 			{% endfor %}
 
 		{%elif oldTags %}
 			<!--<div class='h4'>Are you here? <a href="/review/{{ name }}/{{ id }}">Get the party started!</a></div>
 			</br><br/>-->
-			<h4 id='titleOldTags'>What</h4>
+			<h4 id='titleOldTags'>What happened here lately?</h4>
 			{% for tag in oldTags %}
-				<p style="color:rgb({{color}}); font-size:16px">#{{tag}}</p>
+				<p style="font-size:16px; font-family:'Roboto', sans-serif;">#{{tag}}</p>
 			{%endfor%}
 
 		{% else%}

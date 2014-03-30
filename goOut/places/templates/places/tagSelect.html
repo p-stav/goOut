@@ -10,7 +10,7 @@
 				</div>
 				<div class="modal-body">
 					{% for tag in tags %}
-						<div class="tag inactiveTag">
+						<div class="searchTag inactiveTag">
 							<input name='hashtag' type="checkbox" class="h4 hidden " value="{{tag.text}}"> #{{tag.text}}
 							<!--<div class='unselectedTag' style='float:right'><span class='glyphicon glyphicon-ok'</span></div>-->
 						</div>
@@ -44,7 +44,7 @@
 		}
 
 
-		$('.tag').click(function() {
+		$('.searchTag').click(function() {
 		if ($(this).hasClass('inactiveTag'))
 			{
 				//select and color
