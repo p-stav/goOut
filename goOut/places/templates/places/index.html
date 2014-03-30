@@ -16,21 +16,7 @@
 </div>
 
 <!--modal-->
-<div class="modal fade bs-example-modal-sm" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content" style="font-family:'Roboto', sans-serif;">
-			<div class="modal-header">
-				Pick a tag to see matched venues!
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			</div>
-			<div class="modal-body">
-				{% for tag in tags %}
-					<div class="tag inactiveTag" id="{{tag}}">#{{tag}}</div>
-				{%endfor%}
-			</div>
-		</div>
-	</div>
-</div>
+{% include "places/tagSelect.html" %}
 
 
 <script type = "text/javascript">
