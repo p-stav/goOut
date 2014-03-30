@@ -112,6 +112,8 @@
 <br/><br/>
 <!--add button to add another tag, breh-->
 
+<!--modal-->
+{% include "places/tagSelect.html" %}
 
 <script>
 $(document).ready(function() {
@@ -168,6 +170,11 @@ $(document).ready(function() {
 	$(document).on("click",".removeTag", function(){
 		$(this).parent().remove();
 
+	});
+
+
+	$('.createTag').click(function(){
+		$('.personalTag').focus();
 	});
 
 	//perform checks to make sure that custom tags are in correct fomat

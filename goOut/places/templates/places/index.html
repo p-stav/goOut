@@ -26,17 +26,7 @@
 			//link to next page. Search into how this interfaces with django
 			location.href = './venue/'+$(this).attr('id');
 		});
-
-
-		$('.tag').click(function() {
-			if ($(this).hasClass('inactiveTag'))
-			{
-				$(this).css('background-color','#c0c0c0');
-				location.href='/tag/' + $(this).attr('id');
-			}
-		});
 	});
-
 
 </script>
 {% endblock %}

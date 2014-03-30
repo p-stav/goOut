@@ -64,7 +64,7 @@ def index(request):
 	cutoffTime = date + timeDeltaForCutoff
 	#get curLong + curLat, or redirect to get info
 	if request.POST.get('position'):
-			curLoc = request.POST['position']
+		curLoc = request.POST['position']
 	else: return HttpResponseRedirect('/')
 
 
@@ -77,7 +77,7 @@ def index(request):
 	category_id =  '4bf58dd8d48988d116941735,50327c8591d4c4b30a586d5d,4bf58dd8d48988d11e941735,4bf58dd8d48988d118941735,4bf58dd8d48988d1d8941735,4bf58dd8d48988d120941735,4bf58dd8d48988d121941735,4bf58dd8d48988d11f941735,4bf58dd8d48988d11b941735,4bf58dd8d48988d1d4941735,4bf58dd8d48988d11d941735,4bf58dd8d48988d122941735,4bf58dd8d48988d123941735'
 	radius = '1000'	
 
-	term = request.POST['search']
+	term = request.POST.get("search","")
 
 	url = 'https://api.foursquare.com/v2/venues/search?ll=' + curLoc + '&radius=' + radius + '&intent=browse&categoryId=' + category_id 
 	url += '&client_id=' + client_id + '&client_secret=' + client_secret + '&v=20140306'
@@ -266,7 +266,7 @@ def index(request):
 		userName = ''
 
 	sortMethod = ''
-	context = {'tags':tags, 'sort':sortMethod, 'url':url, 'search':request.POST['search'], 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'headerUIAdditions':'hi' }
+	context = {'tags':tags, 'sort':sortMethod, 'url':url, 'search':term, 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'headerUIAdditions':'hi' }
 
 
 	return render(request, 'places/index.html', context)
