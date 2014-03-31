@@ -541,8 +541,8 @@ def submit_submitReview(request):
 		newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.utcnow(), score = 50)
 		
 		#log new user action
-		if newVenueReview.tag not in newAction.tags.all()
-		newAction.tags.add(newVenueReview.tag)
+		if newVenueReview.tag not in newAction.tags.all():
+			newAction.tags.add(newVenueReview.tag)
 		
 
 		newVenueReview.save()
