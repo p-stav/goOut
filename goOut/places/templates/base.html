@@ -58,7 +58,20 @@
 	      // The response object is returned with a status field that lets the app know the current
 	      // login status of the person. In this case, we're handling the situation where they 
 	      // have logged in to the app.
-	      testAPI();
+	      FB.api(
+	    "/100007493620551/picture",
+	    {
+            "redirect": false,
+            "height": "100",
+            "type": "normal",
+            "width": "100"
+	    },
+	    function (response) {
+	      if (response && !response.error) {
+	        $('.profilePicture').append("<img width=" + response.data['width'] + "px height=" + response.data['height'] + "px src=" + response.data['url'] + " /img>");
+	      }
+	    }
+	);
 	    } else if (response.status === 'not_authorized') {
 	      // In this case, the person is logged into Facebook, but not into the app, so we call
 	      // FB.login() to prompt them to do so. 
@@ -88,14 +101,6 @@
 	   ref.parentNode.insertBefore(js, ref);
 	  }(document));
 
-	  // Here we run a very simple test of the Graph API after login is successful. 
-	  // This testAPI() function is only called in those cases. 
-	  function testAPI() {
-	    console.log('Welcome!  Fetching your information.... ');
-	    FB.api('/me', function(response) {
-	      console.log('Good to see you, ' + response.name + '.');
-	    });
-	  }
     </script>
 
 
@@ -218,6 +223,8 @@
 	<script>
 		
 		$(document).ready(function() {	
+
+
 			// We need to check if the browser has the correct capabilities.
 			if (navigator.geolocation) {
 				// If so, get the current position and feed it to exportPosition (or errorPosition if there was a problem)
