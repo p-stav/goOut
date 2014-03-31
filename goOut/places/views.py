@@ -366,8 +366,9 @@ def placeDetail(request,place_id):
 			fontSizePercentage = 220
 		fontSizes.append(fontSizePercentage)
 	
-		venueTags = UserAction.objects.filter(place__placeID= place['id'], tag__text=placeTag.tag.text, time__gte = cutoffTime)
-		tagsFreq.append(len(venueTags))
+		userActionsCorrectTag = placeTag.tag.useraction_set.filter(place__placeID= place['id'], time__gte = cutoffTime)
+		#venueTags = UserAction.objects.filter(place__placeID= place['id'], tag__text=placeTag.tag.text, time__gte = cutoffTime)
+		tagsFreq.append(len(userActionsCorrectTag))
 
 	tagsWithFonts = zip(tags, fontSizes, tagsFreq)
 
@@ -501,11 +502,22 @@ def submit_submitReview(request):
 
 	#Filter for all instances of Places with same placeId and tag within alotted time
 	filterPlace = PlaceTag.objects.filter(place=newPlace)
+
+	# check if existing UserAction otherwise add new one
+	#for testing purposes, hardcode datetime                                                                                                                                             
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	timeDeltaForUserActionCutoff = timedelta(minutes=-5)
+	cutoffUserActionTime = date + timeDeltaForUserActionCutoff
+	existingAction = UserAction.objects.filter(userID=curUser, time__gte=cutoffUserActionTime,place=newPlace)
+	if existingAction:
+		newAction = existingAction[0]
+	else:
+		newAction = UserAction.objects.create(userID=curUser, time = datetime.utcnow(), place = newPlace)
 	
 	if len(filterPlace)>0:
 		#check to see if tag exists
 		for placeTag in filterPlace:
-			if placeTag.tag.text in tags:
+			if (placeTag.tag.text in tags) and (placeTag.tag not in newAction.tags.all()):
 				placeTag.freq += 1
 
 				#update score
@@ -519,10 +531,8 @@ def submit_submitReview(request):
 				position = tags.index(placeTag.tag.text)
 				tags.pop(position)
 
-
-				#add new User Action
-				newAction = UserAction.objects.create(userID=curUser, time = datetime.utcnow(), place = newPlace , tag = placeTag.tag)
-				newAction.save()
+				newAction.tags.add(placeTag.tag)
+				
 				placeTag.save()
 
 			
@@ -531,8 +541,8 @@ def submit_submitReview(request):
 		newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.utcnow(), score = 50)
 		
 		#log new user action
-		newAction = UserAction.objects.create(userID=curUser, time = datetime.utcnow(), place = newPlace , tag = Hashtag.objects.get(text=hashtag))
-		newAction.save()
+		if newVenueReview.tag not in newAction.tags.all():
+			newAction.tags.add(newVenueReview.tag)
 		
 
 		newVenueReview.save()
@@ -540,6 +550,8 @@ def submit_submitReview(request):
 	#add a point to the user
 	curUser.points += 1
 	curUser.save()
+
+	newAction.save()
 
 	#get personalized hashtags:
 	personalTags = request.POST.getlist('personalTag')
@@ -688,7 +700,7 @@ def view_profile(request):
 	
 	
 	#last places reviewed, in order of time 
-	lastVisited = UserAction.objects.filter(userID=User.objects.get(id=request.user.id)).order_by('-time', 'tag__text')
+	lastVisited = UserAction.objects.filter(userID=User.objects.get(id=request.user.id)).order_by('-time')
 	
 	#get list of last 5 Places reviewed 
 	count=0
