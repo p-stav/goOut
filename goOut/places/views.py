@@ -737,12 +737,13 @@ def add_fav(request, place_name, placeId):
 		
 	return HttpResponseRedirect('/venue/'+placeId+'/')
 	
-@login_required()	
-def view_profile(request):
+
+def view_profile(request, user_id):
 	#get username, favorites list, last activity
-	userName = getUsername(request.user.id)
+	curUser = getUserProfile(user_id)
+	userName = getUsername(user_id)
 	
-	
+	"""
 	#last places reviewed, in order of time 
 	lastVisited = UserAction.objects.filter(userID=User.objects.get(id=request.user.id)).order_by('-time')
 	
@@ -760,8 +761,10 @@ def view_profile(request):
 			unique += 1
 			
 		count +=1 # in case there are less than five unique places visited. 
-	
-	context = {'userName':userName,'firstName': curUser.user.first_name, 'favorites':placeList}
+	"""
+
+	favPlaceList = curUser.favoritePlaces
+	context = {'userName':userName,'firstName': curUser.user.first_name, 'favorites':favPlaceList.all()}
 	return render(request, 'places/view_profile.html', context)
 	
 def search(request):
@@ -906,10 +909,14 @@ def isBlacklistedCategory(place):
 		return False
 
 def getUsername(uid):
-	curUser=UserProfile.objects.get(user=User.objects.get(id=uid))
-	userName = curUser.user.username
+	#curUser=UserProfile.objects.get(user=User.objects.get(id=uid))
+	userName = (User.objects.get(id=uid)).username
 
 	return userName
+
+def getUserProfile(uid):
+	curUser = UserProfile.objects.get(user=User.objects.get(id=uid))
+	return curUser
 
 
 ############################################################################################
