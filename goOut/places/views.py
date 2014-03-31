@@ -517,7 +517,7 @@ def submit_submitReview(request):
 	if len(filterPlace)>0:
 		#check to see if tag exists
 		for placeTag in filterPlace:
-			if placeTag.tag.text in tags:
+			if (placeTag.tag.text in tags) and (placeTag.tag not in newAction.tags.all()):
 				placeTag.freq += 1
 
 				#update score
@@ -531,8 +531,7 @@ def submit_submitReview(request):
 				position = tags.index(placeTag.tag.text)
 				tags.pop(position)
 
-				if placeTag.tag not in newAction.tags.all()
-					newAction.tags.add(placeTag.tag)
+				newAction.tags.add(placeTag.tag)
 				
 				placeTag.save()
 
