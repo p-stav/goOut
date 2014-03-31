@@ -47,13 +47,29 @@
 	<br/>
 	<div class="curTags">
 		{% if tagsWithFonts %}
+
+		<table class='tagsTable'>
 			{% for tag,fontSize,freq in tagsWithFonts %}
-				<p style="font-size:{{fontSize}}%; color:rgb({{color}}); font-family:'Roboto', sans-serif;">
-					#{{tag.tag}}
-					<span class='freqTag' >({{freq}}x)</span>
-					<span class="didUserTag glyphicon glyphicon-ok freqTag hidden"></span>
-				</p>
+				<tr>
+					<td>
+						<p style="font-size:{{fontSize}}%; font-family:'Roboto', sans-serif;">
+							#{{tag.tag}}
+							<span class='freqTag' style="font-size:40%;" >({{freq}}x)</span>
+							<span class="didUserTag glyphicon glyphicon-ok freqTag hidden"></span>
+						</p>
+					</td>
+				</tr>
+				
+				<tr class='tableSeparator'>
+					<td>
+						<span class='freqTag' >Username</span>
+					</td>
+				</tr>
+
+				<tr ><td><p style="font-size:7px;">&nbsp;</p></td></tr>
+
 			{% endfor %}
+		</table>
 
 		{%elif oldTags %}
 			<!--<div class='h4'>Are you here? <a href="/review/{{ name }}/{{ id }}">Get the party started!</a></div>

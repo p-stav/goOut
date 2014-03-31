@@ -43,11 +43,13 @@ class UserAction (models.Model):
 	def __unicode__(self):
 		return self.userID.user.username + " " + self.place.placeName
 		
-class UserComment(models.Model):
-	comment = models.CharField(max_length=140)
-	time = models.DateTimeField()
-	User = models.ForeignKey(UserProfile)
-	Place = models.ForeignKey(Place)
+class UserTag(models.Model):
+	user = models.OneToOneField(User)
+	place = models.ForeignKey(Place)
+	tag = models.TextField(max_length=40)
+	freq = models.IntegerField()
+	lastUpdate = models.DateTimeField()
+	score = models.FloatField()
 
 	def __unicode__(self):
 		return self.Place.placeName + "  " + self.comment

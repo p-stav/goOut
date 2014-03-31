@@ -9,7 +9,7 @@ from django.shortcuts import render
 from urllib import urlopen
 import json, pprint
 from datetime import datetime, timedelta
-from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction, UserFeedback, UserComment
+from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction, UserFeedback, UserTag
 import sets
 from math import exp, log10, floor, trunc
 from collections import Counter
@@ -24,6 +24,7 @@ timeDecayExponent = 0.00001
 minFontPercentage = 100
 maxFontPercentage = 150
 highestScore = 50
+initialScore = 50
 
 CategoryBlacklist = ['4bf58dd8d48988d1e0931735',
 '4bf58dd8d48988d1d5941735']
@@ -329,46 +330,84 @@ def placeDetail(request,place_id):
 	req = urlopen(apiCall).read()
 	place = json.loads(req).get("result")
 	"""
-	#####get PlaceTags in our database
-	if len(PlaceTag.objects.filter(place__placeID= place['id'], lastUpdate__gte = cutoffTime)) >0:
+	#####get PlaceTags and UserTags in our database
+	if len(PlaceTag.objects.filter(place__placeID= place['id'], lastUpdate__gte = cutoffTime)) or len(UserTag.objects.filter(place__PlaceID=place['id'], lastUpdate__gte = cutoffTime)) >0:
 		tags = PlaceTag.objects.filter(place__placeID= place['id'], lastUpdate__gte = cutoffTime).order_by('-score')
+		userTags = UserTag.objects.filter(place__placeID=place['id'], lastUpdate__gte=cutoffTime).order_by('-score')
+
 		oldTags=[]
-	else:
-	#len(PlaceTag.objects.filter(place__placeID= place['id'])) > 0:
+	else: #no PlaceTags or UserTags
 		getOldTags = PlaceTag.objects.filter(place__placeID= place['id'],lastUpdate__lt = cutoffTime).order_by('-score')
 		allOldTags = [i.tag.text for i in getOldTags]
 		oldTags = []
+
 		if len(allOldTags) >5:
 			for i in range (0,5):
 				oldTags.append(allOldTags[i])
 		else:
 			oldTags=allOldTags
+		
 		tags=[]
+		userTags=[]
+
 	#send relevant information to templates
 	#check to see if all keys exist. If not, assign 'NA' values
 
+	#Place userTags and tags data in same lists. Define fontSizes and frequenceis
+	allTags = []
+
+	for tag in tags:
+		tagObject = {}
+		tagObject["tagText"] = tag.tag.text
+		tagObject["freq"] = tag.freq
+		tagObject["score"] = tag.score
+		tagObject["lastUpdate"] = tag.lastUpdate
+
+		allTags.append(tagObject)
+
+	for tag in userTags:
+		tagObject = {}
+		tagObject["tagText"] = tag.tag
+		tagObject["freq"] = tag.freq
+		tagObject["score"] = tag.score
+		tagObject["lastUpdate"] = tag.lastUpdate
+
+		allTags.append(tagObject)
+		
+
+	#sort allTags in order of score
+	allTags.sort(key=lambda x:x['score'])
+
 	#update scores
-	for placeTag in tags:
-		timeNow = datetime.utcnow()
-		timeDelta = timeNow - placeTag.lastUpdate
-		placeTag.score *= exp(-1 * timeDecayExponent * timeDelta.total_seconds())
-		placeTag.lastUpdate = timeNow
+	timeNow = datetime.utcnow()
+	for placeTag in allTags:
+		timeDelta = timeNow - placeTag["lastUpdate"]
+		placeTag["score"] *= exp(-1 * timeDecayExponent * timeDelta.total_seconds())
+		placeTag["lastUpdate"] = timeNow
 		#placeTag.save()
 
-
-	#calculate font sizes
+	#define lists to zip together
+	tags = []
 	fontSizes = []
-	tagsFreq=[]
+	tagsFreq =[]
+
+	#calculate + grab font sizes, freq and tags
 	totalScore = 0.0
-	for placeTag in tags:
-		fontSizePercentage = (placeTag.score / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
+	for placeTag in allTags:
+		tags.append(placeTag["tagText"])
+
+		fontSizePercentage = (placeTag["score"] / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
 		if fontSizePercentage > 220:
 			fontSizePercentage = 220
 		fontSizes.append(fontSizePercentage)
 	
-		userActionsCorrectTag = placeTag.tag.useraction_set.filter(place__placeID= place['id'], time__gte = cutoffTime)
+		#grab frequency
+		
+		#userActionsCorrectTag = placeTag["tag"].useraction_set.filter(place__placeID= place['id'], time__gte = cutoffTime)
 		#venueTags = UserAction.objects.filter(place__placeID= place['id'], tag__text=placeTag.tag.text, time__gte = cutoffTime)
-		tagsFreq.append(len(userActionsCorrectTag))
+		#tagsFreq.append(len(userActionsCorrectTag))
+
+		tagsFreq.append(placeTag["freq"])
 
 	tagsWithFonts = zip(tags, fontSizes, tagsFreq)
 
@@ -396,6 +435,7 @@ def placeDetail(request,place_id):
 	color=getColorTheme(place['id'])
 
 	#get comments from last two hours
+	"""
 	comments=[]
 	if Place.objects.filter(placeID=place['id']).exists():
 		comments = UserComment.objects.filter(Place=Place.objects.get(placeID=place['id']), time__gte=cutoffTime)
@@ -417,7 +457,7 @@ def placeDetail(request,place_id):
 	comments = zip(comments,commentTimestamps)
 
 	comments.reverse()
-
+	"""
 	#get all hashtags to display on header
 	tags = Hashtag.objects.all()
 
@@ -538,7 +578,7 @@ def submit_submitReview(request):
 			
 	#create a new review with remaining tags that didn't match
 	for hashtag in tags: 
-		newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.utcnow(), score = 50)
+		newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.utcnow(), score = initialScore)
 		
 		#log new user action
 		if newVenueReview.tag not in newAction.tags.all():
@@ -566,11 +606,15 @@ def submit_submitReview(request):
 			if " " in tag:
 				tag = tag.replace(" ", "")
 
-			tagText += "#" + tag + "\n\r"
-	if tagText != "":
-		newTag = UserComment.objects.create(User=curUser, time = datetime.utcnow(), Place = newPlace, comment=tagText)
-		newTag.save()
+			newTag = UserTag.objects.create(user=curUser, lastUpdate = datetime.utcnow(), place = newPlace, tag=tag, score = initialScore, freq = 1)
+			newTag.save()
 
+
+	"""		
+		tagText += "#" + tag + "\n\r"
+	if tagText != "":
+	"""
+	
 
 	redirectURL = "/venue/" + request.POST["venueId"]
 

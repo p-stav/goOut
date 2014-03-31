@@ -59,7 +59,11 @@ font-size: .85em;
 
 .freqTag{
   color: #999999;
-  font-size:40%;
+  font-size:10px; 
+}
+
+.tagsTable .tableSeparator {
+  padding-bottom:100px;
 
 }
 
