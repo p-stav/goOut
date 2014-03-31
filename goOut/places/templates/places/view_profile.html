@@ -6,6 +6,7 @@
 
 <h3 align='center'>{{firstName}}</h3>
 <div align='center' class='profilePicture'></div>
+<button id="galButton">Gal Button</button>
 <div class='favorites'>
 
 </div>
@@ -27,23 +28,25 @@
 
 <script type='text/javascript'>
 $(document).ready(function() {
-	alert('hi');
-	FB.api(
-	    "/me/picture",
-	    {
-	        "object": {
-	            "redirect": false,
-	            "height": "200",
-	            "type": "normal",
-	            "width": "200"
-	        }
-	    },
-	    function (response) {
-	      if (response && !response.error) {
-	        $('.profilePicture').append("<img width=" + response.data['width'] + "px height=" + response.data['height'] + "px src=" + response.data['url'] + " /img>");
-	      }
-	    }
-	);
+	
+	$('#galButton').click(function() {
+		FB.api(
+		    "/me/picture",
+		    {
+		        "object": {
+		            "redirect": false,
+		            "height": "200",
+		            "type": "normal",
+		            "width": "200"
+		        }
+		    },
+		    function (response) {
+		      if (response && !response.error) {
+		        $('.profilePicture').append("<img width=" + response.data['width'] + "px height=" + response.data['height'] + "px src=" + response.data['url'] + " /img>");
+		      }
+		    }
+		);
+	});
 });
 </script>
 
