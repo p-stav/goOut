@@ -26,22 +26,24 @@
 </div>
 
 <script type='text/javascript'>
-FB.api(
-    "/me/picture",
-    {
-        "object": {
-            "redirect": false,
-            "height": "200",
-            "type": "normal",
-            "width": "200"
-        }
-    },
-    function (response) {
-      if (response && !response.error) {
-        $('.profilePicture').append("<img width=" + response.data['width'] + "px height=" + response.data['height'] + "px src=" + response.data['url'] + " /img>");
-      }
-    }
-);
+$(document).ready(function() {
+	FB.api(
+	    "/me/picture",
+	    {
+	        "object": {
+	            "redirect": false,
+	            "height": "200",
+	            "type": "normal",
+	            "width": "200"
+	        }
+	    },
+	    function (response) {
+	      if (response && !response.error) {
+	        $('.profilePicture').append("<img width=" + response.data['width'] + "px height=" + response.data['height'] + "px src=" + response.data['url'] + " /img>");
+	      }
+	    }
+	);
+});
 </script>
 
 {% include "places/tagSelect.html" %}
