@@ -6,47 +6,39 @@
 
 <h3 align='center'>{{firstName}}</h3>
 <div align='center' class='profilePicture'></div>
-<button id="galButton">Gal Button</button>
+
 <div class='favorites'>
-
-</div>
-
-<div class='history'>
-	<h4>Last Visits:</h4>
+	<h4>Favorite places:</h4>
 	{% for place in favorites %}
 		{{place}} <br/>
 	{% endfor %}
 </div>
 
-<div class='tagFreq'>
+<!--<div class='tagFreq'>
 	<h4> Your most common tags: </h4>
 </div>
 
 <div class='placeFreq'>
 	<h4> Your most visited places: </h4>
-</div>
+</div>-->
 
 <script type='text/javascript'>
 $(document).ready(function() {
 	
-	$('#galButton').click(function() {
-		FB.api(
-		    "/100007493620551/picture",
-		    {
-		        "object": {
-		            "redirect": false,
-		            "height": "200",
-		            "type": "normal",
-		            "width": "200"
-		        }
-		    },
-		    function (response) {
-		      if (response && !response.error) {
-		        $('.profilePicture').append("<img width=" + response.data['width'] + "px height=" + response.data['height'] + "px src=" + response.data['url'] + " /img>");
-		      }
-		    }
-		);
-	});
+	FB.api(
+	    "/100007493620551/picture",
+	    {
+            "redirect": false,
+            "height": "100",
+            "type": "normal",
+            "width": "100"
+	    },
+	    function (response) {
+	      if (response && !response.error) {
+	        $('.profilePicture').append("<img width=" + response.data['width'] + "px height=" + response.data['height'] + "px src=" + response.data['url'] + " /img>");
+	      }
+	    }
+	);
 });
 </script>
 

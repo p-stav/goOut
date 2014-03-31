@@ -50,21 +50,7 @@
 			);
 			$('#galDiv').append("<p>Galileo</p>");
 
-			FB.api(
-		    "/100007493620551/picture",
-		    {
-		            "redirect": false,
-		            "height": "200",
-		            "type": "normal",
-		            "width": "200"
-
-		    },
-		    function (response) {
-		      if (response && !response.error) {
-		        $('.profilePicture').append("<img width=" + response.data['width'] + "px height=" + response.data['height'] + "px src=" + response.data['url'] + " /img>");
-		      }
-		    }
-		);
+			
 		});
 
 
