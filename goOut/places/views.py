@@ -503,8 +503,16 @@ def submit_submitReview(request):
 	#Filter for all instances of Places with same placeId and tag within alotted time
 	filterPlace = PlaceTag.objects.filter(place=newPlace)
 
-	#add new User Action
-	newAction = UserAction.objects.create(userID=curUser, time = datetime.utcnow(), place = newPlace)
+	# check if existing UserAction otherwise add new one
+	#for testing purposes, hardcode datetime                                                                                                                                             
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	timeDeltaForUserActionCutoff = timedelta(minutes=-5)
+	cutoffUserActionTime = date + timeDeltaForUserActionCutoff
+	existingAction = UserAction.objects.filter(userID=curUser, time__gte=cutoffUserActionTime,place=newPlace)
+	if existingAction:
+		newAction = existingAction[0]
+	else:
+		newAction = UserAction.objects.create(userID=curUser, time = datetime.utcnow(), place = newPlace)
 	
 	if len(filterPlace)>0:
 		#check to see if tag exists
@@ -523,7 +531,8 @@ def submit_submitReview(request):
 				position = tags.index(placeTag.tag.text)
 				tags.pop(position)
 
-				newAction.tags.add(placeTag.tag)
+				if placeTag.tag not in newAction.tags.all()
+					newAction.tags.add(placeTag.tag)
 				
 				placeTag.save()
 
@@ -533,6 +542,7 @@ def submit_submitReview(request):
 		newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.utcnow(), score = 50)
 		
 		#log new user action
+		if newVenueReview.tag not in newAction.tags.all()
 		newAction.tags.add(newVenueReview.tag)
 		
 
