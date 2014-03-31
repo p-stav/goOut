@@ -27,6 +27,8 @@
 
 <script type = "text/javascript">
 
+	var i = 0;
+
 	$(document).ready(function() {
 		$('.venue').click(function(){
 			//link to next page. Search into how this interfaces with django
@@ -39,7 +41,8 @@
 			    "/me/friends",
 			    function (response) {
 			      if (response && !response.error) {
-			        /* handle the result */
+			        $('#galDiv').append("<p>" + response.data[i].name + "</p>");
+			        i = i + 1;
 			      }
 			    }
 			);
