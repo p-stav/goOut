@@ -45,17 +45,14 @@
 	</div>
 
 	<br/>
-	<div>
-		<!--
-		{% for tag in tags %}
-		<p style="font-size:200%">tags: {{ tag.tag }}</p>
-		{% endfor %} -->
-		<!--<p>{{photos}}</p>-->
-
-
+	<div class="curTags">
 		{% if tagsWithFonts %}
 			{% for tag,fontSize,freq in tagsWithFonts %}
-			<p style="font-size:{{fontSize}}%; color:rgb({{color}}); font-family:'Roboto', sans-serif;">#{{tag.tag}} <span class='freqTag' style="font-size:40%;">({{freq}}x)</span></p>
+				<p style="font-size:{{fontSize}}%; color:rgb({{color}}); font-family:'Roboto', sans-serif;">
+					#{{tag.tag}}
+					<span class='freqTag' >({{freq}}x)</span>
+					<span class="didUserTag glyphicon glyphicon-ok freqTag hidden"></span>
+				</p>
 			{% endfor %}
 
 		{%elif oldTags %}
