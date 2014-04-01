@@ -542,15 +542,6 @@ def submit_submitReview(request):
 	#listTags = request.body
 	tags = request.POST.getlist('tagNames')
 
-	"""[]
-	tagCount = 0
-	tagName = 'tag'+str(tagCount)
-	while (tagName in request.POST):
-		tags.append(request.POST[tagName])
-		tagCount += 1
-		tagName = 'tag' + str(tagCount)
-	"""
-
 	#Filter for all instances of Places with same placeId and tag within alotted time
 	filterPlace = PlaceTag.objects.filter(place=newPlace)
 
@@ -559,7 +550,8 @@ def submit_submitReview(request):
 	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
 	timeDeltaForUserActionCutoff = timedelta(minutes=-5)
 	cutoffUserActionTime = date + timeDeltaForUserActionCutoff
-	existingAction = UserAction.objects.filter(userID=curUser, time__gte=cutoffUserActionTime,place=newPlace)
+	existingAction = UserAction.objects.filter(userID=curUser, time__gte=cutoffUserActionTime, place=newPlace)
+	
 	if existingAction:
 		newAction = existingAction[0]
 	else:
@@ -586,7 +578,10 @@ def submit_submitReview(request):
 				
 				placeTag.save()
 
-			
+			elif (placeTag.tag.text in tags):
+				position = tags.index(placeTag.tag.text)
+				tags.pop(position)
+
 	#create a new review with remaining tags that didn't match
 	for hashtag in tags: 
 		newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.utcnow(), score = initialScore)
@@ -612,42 +607,47 @@ def submit_submitReview(request):
 	userActionPersonalTags = newAction.userTags.all()
 	lowerUserActionPersonalTags = [i.tag.lower() for i in userActionPersonalTags]
 
-	for userTag in existingUserTag:
-		if (userTag.tag.lower() in lowerPersonalTags) and (userTag.tag.lower() not in lowerUserActionPersonalTags):
-			userTag.freq += 1
+	if len(personalTags)>0:
+		for userTag in existingUserTag:
+			if (userTag.tag.lower() in lowerPersonalTags) and (userTag.tag.lower() not in lowerUserActionPersonalTags):
+				userTag.freq += 1
 
-			#update score
-			timeNow = datetime.utcnow()
-			timeDelta = timeNow - userTag.lastUpdate
-			userTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
-			userTag.score += 50
-			userTag.lastUpdate = timeNow
+				#update score
+				timeNow = datetime.utcnow()
+				timeDelta = timeNow - userTag.lastUpdate
+				userTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
+				userTag.score += 50
+				userTag.lastUpdate = timeNow
 
-			#take out hashtag from the list
-			position = personalTags.index(userTag.tag)
-			personalTags.pop(position)
+				#take out hashtag from the list
+				position = lowerPersonalTags.index(userTag.tag)
+				personalTags.pop(position)
 
-			newAction.userTags.add(userTag)
-			
-			userTag.save()
+				newAction.userTags.add(userTag)
+				
+				userTag.save()
 
-	#create new object for userTag
-	for hashtag in personalTags: 
-		if hashtag != '':
-			if "#" in hashtag:
-				hashtag = hashtag.replace("#", "")
+			elif (userTag.tag.lower() in lowerPersonalTags):
+				position = lowerPersonalTags.index(userTag.tag)
+				personalTags.pop(position)	
 
-			if " " in hashtag:
-				hashtag = hashtag.replace(" ", "")
+		#create new object for userTag
+		for hashtag in personalTags: 
+			if hashtag != '':
+				if "#" in hashtag:
+					hashtag = hashtag.replace("#", "")
 
-		newVenueReview = UserTag.objects.create(userID = curUser, place=newPlace, tag = hashtag, freq=1, lastUpdate=datetime.utcnow(), score = initialScore)
-		newVenueReview.save()
-		
-		#log new user action
-		if newVenueReview.tag not in newAction.userTags.all():
-			newAction.userTags.add(newVenueReview)
+				if " " in hashtag:
+					hashtag = hashtag.replace(" ", "")
 
-			newAction.save()
+				newVenueReview = UserTag.objects.create(userID = curUser, place=newPlace, tag = hashtag, freq=1, lastUpdate=datetime.utcnow(), score = initialScore)
+				newVenueReview.save()
+				
+				#log new user action
+				if newVenueReview.tag not in newAction.userTags.all():
+					newAction.userTags.add(newVenueReview)
+
+					newAction.save()
 
 
 	

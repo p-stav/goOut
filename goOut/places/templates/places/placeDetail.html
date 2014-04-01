@@ -126,17 +126,17 @@
 		});
 
 
-		$('.tagNode').click(function(){
+		$('.tagText').click(function(){
 			//pass different information
-			tagText = $(this).find(".tagText").attr("id");
+			tagText = $(this);
 			var place = "{{id}}";
 
-			if ($(this).find(".username").val() =="Kefi") {
-				$(this).html('&nbsp;').load("/placeTagUpdate?tagText=" + tagText + "&place=" + place);
+			if ($(this).parent().find(".username").val() =="Kefi") {
+				$(this).parent().html('&nbsp;').load("/placeTagUpdate?tagText=" + tagText + "&place=" + place);
 			}
 
 			else {
-				$(this).html('&nbsp;').load("/userTagUpdate?tagText=" + tagText + "&place=" + place);
+				$(this).parent().html('&nbsp;').load("/userTagUpdate?tagText=" + tagText + "&place=" + place);
 			}
 
 		});
