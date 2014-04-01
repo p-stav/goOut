@@ -30,6 +30,10 @@ urlpatterns = patterns('places.views',
 
 	url(r'^tag$', 'tag', name='tag'),
 
+	url(r'^placeTagUpdate$', 'placeTagUpdate', name='placeTagUpdate'),
+
+	url(r'^userTagUpdate$', 'userTagUpdate', name='userTagUpdate'),
+
 	#url(r'^feedback$', 'feedback', name='feedback'),
 	#url(r'^feedback/submit$', 'feedback_submit', name='feedback_submit'),
 	#url(r'^(?P<joke_id>\d+)/up/$', 'up', name='up'),

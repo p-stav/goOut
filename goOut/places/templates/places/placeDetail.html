@@ -47,29 +47,25 @@
 	<br/>
 	<div class="curTags">
 		{% if tagsWithFonts %}
-
-		<table class='tagsTable'>
-			{% for tag,fontSize,freq in tagsWithFonts %}
-				<tr>
-					<td>
-						<p style="font-size:{{fontSize}}%; font-family:'Roboto', sans-serif;">
-							#{{tag.tag}}
-							<span class='freqTag' style="font-size:40%;" >({{freq}}x)</span>
-							<span class="didUserTag glyphicon glyphicon-ok freqTag hidden"></span>
-						</p>
-					</td>
-				</tr>
-				
-				<tr class='tableSeparator'>
-					<td>
-						<span class='freqTag' >Username</span>
-					</td>
-				</tr>
-
-				<tr ><td><p style="font-size:7px;">&nbsp;</p></td></tr>
-
+		
+			{% for tag,fontSize,freq,username in tagsWithFonts %}
+			<div class="tagNode">
+				<span class="tagText" style="font-size:{{fontSize}}%; font-family:'Roboto', sans-serif;" id="{{tag}}">
+					#{{tag}}
+					<span class="freqTag" style="font-size:40%;" >({{freq}}x)</span>
+					<span class="didUserTag glyphicon glyphicon-ok freqTag hidden"></span>
+				</span>
+					
+				<div class='tagUsername'>
+					{% if username == "Kefi" %}
+						<span class="username kefiTag" >{{username}}</span>
+					{%else%}
+						<span class="username freqTag" >{{username}}</span>
+					{%endif%}
+				</div>		
+			</div>
 			{% endfor %}
-		</table>
+		
 
 		{%elif oldTags %}
 			<!--<div class='h4'>Are you here? <a href="/review/{{ name }}/{{ id }}">Get the party started!</a></div>
@@ -127,6 +123,22 @@
 				$(this).css('background-color','#c0c0c0');
 				location.href='/tag/' + $(this).attr('id');
 			}
+		});
+
+
+		$('.tagNode').click(function(){
+			//pass different information
+			tagText = $(this).find(".tagText").attr("id");
+			var place = "{{id}}";
+
+			if ($(this).find(".username").val() =="Kefi") {
+				$(this).html('&nbsp;').load("/placeTagUpdate?tagText=" + tagText + "&place=" + place);
+			}
+
+			else {
+				$(this).html('&nbsp;').load("/userTagUpdate?tagText=" + tagText + "&place=" + place);
+			}
+
 		});
 	});
 </script>

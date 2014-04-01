@@ -33,18 +33,9 @@ class PlaceTag(models.Model):
 	
 	def __unicode__(self):
 		return self.place.placeName + " " + self.tag.text
-
-class UserAction (models.Model):
-	userID = models.ForeignKey(UserProfile)
-	place = models.ForeignKey(Place)
-	tags = models.ManyToManyField(Hashtag, blank=True)
-	time = models.DateTimeField()
-	
-	def __unicode__(self):
-		return self.userID.user.username + " " + self.place.placeName
 		
 class UserTag(models.Model):
-	user = models.OneToOneField(User)
+	userID = models.ForeignKey(UserProfile)
 	place = models.ForeignKey(Place)
 	tag = models.TextField(max_length=40)
 	freq = models.IntegerField()
@@ -52,7 +43,17 @@ class UserTag(models.Model):
 	score = models.FloatField()
 
 	def __unicode__(self):
-		return self.Place.placeName + "  " + self.comment
+		return self.place.placeName + "  " + self.tag
+
+class UserAction (models.Model):
+	userID = models.ForeignKey(UserProfile)
+	place = models.ForeignKey(Place)
+	tags = models.ManyToManyField(Hashtag, blank=True)
+	userTags = models.ManyToManyField(UserTag, blank = True)
+	time = models.DateTimeField()
+	
+	def __unicode__(self):
+		return self.userID.user.username + " " + self.place.placeName
 
 class UserFeedback(models.Model):
 	feedback = models.TextField(max_length=2000)
