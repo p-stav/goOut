@@ -543,7 +543,7 @@ def submit_submitReview(request):
 	tags = request.POST.getlist('tagNames')
 
 	#Filter for all instances of Places with same placeId and tag within alotted time
-	filterPlace = PlaceTag.objects.filter(place=newPlace)
+	filterPlace = PlaceTag.objects.filter(place=newPlace, lastUpdate__gte=cutoffTime)
 
 	# check if existing UserAction otherwise add new one
 	#for testing purposes, hardcode datetime                                                                                                                                             

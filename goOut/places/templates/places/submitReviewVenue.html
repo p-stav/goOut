@@ -103,7 +103,7 @@
 			------------------------------>
 			
 			<div class="form-group">
-				<button type="submit" id='submitButton' class="btn btn-primary" name="submit_tags_form">Submit</button>
+				<button type="submit" id='submitButton' class="btn btn-primary" name="submit_tags_form" data-loading-text="Submitting...">Submit</button>
 			</div>
 		</div>	
 	</form>
@@ -178,12 +178,11 @@ $(document).ready(function() {
 	});
 
 	//perform checks to make sure that custom tags are in correct fomat
-	$('#submitButton').click(function(event){
-		//alert('hi');
+	$('#submitButton').click(function(event){		
 		
-		
+		/*
 		$('.createTag input').each(function(){
-			if ($(this).val() =='insert case here')
+			if ($(this).val() =='')
 			{
 				$(this).parent().addClass('has-error');
 				alert('Oops! Please select a tag to associate with this venue!');
@@ -202,6 +201,10 @@ $(document).ready(function() {
 				tagList.push($(this).val());
 			}
 		});
+		*/
+		
+		//make button inactive to only send 1 instance, and continue
+		$(this).button('loading');
 	});
 
 	/*
