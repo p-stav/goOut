@@ -58,9 +58,9 @@
 					
 				<div class='tagUsername'>
 					{% if username == "Kefi" %}
-						<span class="username kefiTag" >{{username}}</span>
+						<span class="username kefiTag" id="{{username}}" >{{username}}</span>
 					{%else%}
-						<span class="username freqTag" >{{username}}</span>
+						<span class="username freqTag" id="{{username}}">{{username}}</span>
 					{%endif%}
 				</div>		
 			</div>
@@ -128,10 +128,10 @@
 
 		$('.tagText').click(function(){
 			//pass different information
-			tagText = $(this);
+			tagText = $(this).attr("id");
 			var place = "{{id}}";
 
-			if ($(this).parent().find(".username").val() =="Kefi") {
+			if ($(this).parent().find(".username").attr("id") =="Kefi") {
 				$(this).parent().html('&nbsp;').load("/placeTagUpdate?tagText=" + tagText + "&place=" + place);
 			}
 

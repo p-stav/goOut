@@ -931,7 +931,7 @@ def placeTagUpdate(request):
 		cutoffTime = getCutoffTime()
 	
 
-		if tagText is not None and place is not None:
+		if (tagText is not None) and (place is not None):
 			placeTag = PlaceTag.objects.get(place__placeID = place, tag__text = tagText)
 
 			#if user took this action, then we subtract
@@ -1048,12 +1048,7 @@ def userTagUpdate(request):
 
 #####################################functions to call in views!#############################
 def getColorTheme(id):
-    ##find today's date to find items close to it in db                                                                                                                                  
-	date = datetime.utcnow()
-    #for testing purposes, hardcode datetime                                                                                                                                             
-    #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
-	timeDeltaForCutoff = timedelta(hours=-2)
-	cutoffTime = date + timeDeltaForCutoff
+	cutoffTime = getCutoffTime()
 	color = '127,127,127'
 	
 	if Place.objects.filter(placeID=id).exists():
@@ -1074,7 +1069,7 @@ def getCutoffTime():
     timeDeltaForCutoff = timedelta(hours=-2)
     cutoffTime = date + timeDeltaForCutoff
 
-    return cutoffTIme
+    return cutoffTime
 
 def isBlacklistedCategory(place):
 	if place['categories'][0]['id'] in CategoryBlacklist:
