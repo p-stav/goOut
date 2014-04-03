@@ -280,7 +280,11 @@ def placeDetail(request,place_id):
 	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
 	timeDeltaForCutoff = timedelta(hours=-2)
 	cutoffTime = date + timeDeltaForCutoff
+	
+	#booleans for favorited and curUser for which tags submitted
 	placeFavorited = False
+	curUser = False
+
 	#get username
 	if request.user.is_authenticated():
 		curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
@@ -303,7 +307,8 @@ def placeDetail(request,place_id):
 
 	"""YELP API"""
 	# Values for access
-	"""consumer_key = 'nee5cvfcAEBHCg3wSGSdKw'
+	"""
+	consumer_key = 'nee5cvfcAEBHCg3wSGSdKw'
 	consumer_secret = '3FmOuF9CLBGjyITGF66hbKmbgho'
 	token = 'Ta-DBi45PaqkBhBnPJ1xpv1mmIjkVmxP'
 	token_secret = 'ngCe85K7Xk6Sq37hI-4T-rE1Xtw'
@@ -319,7 +324,8 @@ def placeDetail(request,place_id):
 	signed_url = oauth_request.to_url()
 
 	req = urlopen(signed_url).read()
-	place = json.loads(req)"""
+	place = json.loads(req)
+	"""
 
 	
 
@@ -361,6 +367,9 @@ def placeDetail(request,place_id):
 		tagObject["freq"] = Tag.freq
 		tagObject["score"] = Tag.score
 		tagObject["lastUpdate"] = Tag.lastUpdate
+		
+		checkTag = Hashtag.objects.get(text=tagObject["tagText"])
+		tagObject["wasTagged"] = checkTag.useractionHashtag_set.filter(userID = curUser, place__placeID = place['id'], time__gte = cutoffTime).exists()
 
 		allTags.append(tagObject)
 
@@ -371,7 +380,10 @@ def placeDetail(request,place_id):
 		tagObject["score"] = Tag.score
 		tagObject["lastUpdate"] = Tag.lastUpdate
 		tagObject["username"] = Tag.userID.user.username
-
+		
+		checkTag = Hashtag.objects.get(text=tagObject["tagText"])
+		tagObject["wasTagged"] =checkTag.useractionUserTag_set.filter(userID = curUser, place__placeID = place['id'], time__gte = cutoffTime).exists()
+		
 		allTags.append(tagObject)
 		
 
@@ -383,28 +395,33 @@ def placeDetail(request,place_id):
 	fontSizes = []
 	tagsFreq = []
 	username = []
+	wasTagged = []
 
 	#update scores
 	timeNow = datetime.utcnow()
 	for placeTag in allTags:
-		timeDelta = timeNow - placeTag["lastUpdate"]
-		placeTag["score"] *= exp(-1 * timeDecayExponent * timeDelta.total_seconds())
-		placeTag["lastUpdate"] = timeNow
+		if placeTag["freq"] > 0:
+			timeDelta = timeNow - placeTag["lastUpdate"]
+			placeTag["score"] *= exp(-1 * timeDecayExponent * timeDelta.total_seconds())
+			placeTag["lastUpdate"] = timeNow
 
-		if "username" not in placeTag.keys():
-			placeTag["username"] = "Kefi"
-		#placeTag.save()
+			if "username" not in placeTag.keys():
+				placeTag["username"] = "Kefi"
+			#placeTag.save()
 
-		tagText.append(placeTag["tagText"])
+			tagText.append(placeTag["tagText"])
 
-		fontSizePercentage = (placeTag["score"] / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
-		if fontSizePercentage > 220:
-			fontSizePercentage = 220
-		fontSizes.append(fontSizePercentage)
-	
-		tagsFreq.append(placeTag["freq"])
+			fontSizePercentage = (placeTag["score"] / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
+			if fontSizePercentage > 220:
+				fontSizePercentage = 220
 
-		username.append(placeTag["username"])
+			fontSizes.append(fontSizePercentage)
+		
+			tagsFreq.append(placeTag["freq"])
+
+			username.append(placeTag["username"])
+
+			wasTagged.append(placeTag["wasTagged"])
 
 	'''#calculate + grab font sizes, freq and tags
 	totalScore = 0.0
@@ -419,7 +436,7 @@ def placeDetail(request,place_id):
 
 		
 
-	tagsWithFonts = zip(tagText, fontSizes, tagsFreq, username)
+	tagsWithFonts = zip(tagText, fontSizes, tagsFreq, username, wasTagged)
 	tagsWithFonts.reverse()
 
 
@@ -936,35 +953,42 @@ def placeTagUpdate(request):
 
 			#if user took this action, then we subtract
 			if UserAction.objects.filter(userID = curUser, place__placeID = place, tags__text = tagText, time__gte = cutoffTime ).exists():
-				#update with correct information
-				#####USERACTION
+				#remove instance from user action
+				tagToRemove = Hashtag.objects.get(text = tagText)
+				useraction = UserAction.objects.get(userID = curUser, place__placeID = place, tags__text = tagText, time__gte = cutoffTime)
 
-
-				placeTag.freq -= 1
+				useraction.tags.remove(tagToRemove)
 
 				#update score
-				timeNow = datetime.utcnow()
-				timeDelta = timeNow - placeTag.lastUpdate
-				placeTag.score /= exp(-timeDecayExponent * timeDelta.total_seconds())
-				placeTag.score -= 50
-				placeTag.lastUpdate = timeNow
+				fontSizePercentage = 0
+				freq = 0
 
-				placeTag.save()
+				if placeTag.freq > 0:
+					placeTag.freq -= 1
 
-				#gnerate html for tagNode. Need font size as well
+					timeNow = datetime.utcnow()
+					timeDelta = timeNow - placeTag.lastUpdate
+					placeTag.score /= exp(-timeDecayExponent * timeDelta.total_seconds())
+					placeTag.score -= 50
+					placeTag.lastUpdate = timeNow
 
-				fontSizePercentage = (placeTag.score / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
-				if fontSizePercentage > 220:
-					fontSizePercentage = 220
+					placeTag.save()
+
+					#generate html for tagNode. Need font size as well
+					fontSizePercentage = (placeTag.score / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
+					if fontSizePercentage > 220:
+						fontSizePercentage = 220
 
 			else:
-				#update with correct information
-				#####USERACTION
+				#add instance to user action
+				tagToAdd = Hashtag.objects.get(text = tagText)
+				useraction = UserAction.objects.get(userID = curUser, place__placeID = place, tags__text = tagText, time__gte = cutoffTime)
 
-
-				placeTag.freq += 1
+				useraction.tags.add(tagToAdd)
 
 				#update score
+				placeTag.freq += 1
+
 				timeNow = datetime.utcnow()
 				timeDelta = timeNow - placeTag.lastUpdate
 				placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())

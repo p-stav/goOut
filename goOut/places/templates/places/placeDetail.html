@@ -48,12 +48,18 @@
 	<div class="curTags">
 		{% if tagsWithFonts %}
 		
-			{% for tag,fontSize,freq,username in tagsWithFonts %}
+			{% for tag,fontSize,freq,username, wasTagged in tagsWithFonts %}
 			<div class="tagNode">
 				<span class="tagText" style="font-size:{{fontSize}}%; font-family:'Roboto', sans-serif;" id="{{tag}}">
 					#{{tag}}
 					<span class="freqTag" style="font-size:40%;" >({{freq}}x)</span>
-					<span class="didUserTag glyphicon glyphicon-ok freqTag hidden"></span>
+
+					{% if wasTagged %}
+						<span class="didUserTag glyphicon glyphicon-ok freqTag"></span>
+					{% else %}
+						<span class="didUserTag glyphicon glyphicon-ok freqTag hidden"></span>
+
+					{% endif %}
 				</span>
 					
 				<div class='tagUsername'>

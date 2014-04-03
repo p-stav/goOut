@@ -48,8 +48,8 @@ class UserTag(models.Model):
 class UserAction (models.Model):
 	userID = models.ForeignKey(UserProfile)
 	place = models.ForeignKey(Place)
-	tags = models.ManyToManyField(Hashtag, blank=True)
-	userTags = models.ManyToManyField(UserTag, blank = True)
+	tags = models.ManyToManyField(Hashtag, blank=True, related_name="useractionHashtag_set")
+	userTags = models.ManyToManyField(UserTag, blank = True, related_name="useractionUserTag_set")
 	time = models.DateTimeField()
 	
 	def __unicode__(self):

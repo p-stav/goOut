@@ -1,11 +1,16 @@
-<div class="tagNode">
-	<span class="tagText" style="font-size:{{fontSize}}%; font-family:'Roboto', sans-serif;" id="{{tag}}">
-		#{{tag}}
-		<span class="freqTag" style="font-size:40%;" >({{freq}}x)</span>
-		<span class="didUserTag glyphicon glyphicon-ok freqTag hidden"></span>
-	</span>
-		
-	<div class='tagUsername'>
-		<span class="username freqTag" >{{username}}</span>
-	</div>		
-</div>
+{% if freq >  %}
+	<div class="tagNode">
+		<span class="tagText" style="font-size:{{fontSize}}%; font-family:'Roboto', sans-serif;" id="{{tag}}">
+			#{{tag}}
+			<span class="freqTag" style="font-size:40%;" >({{freq}}x)</span>
+			<span class="didUserTag glyphicon glyphicon-ok freqTag hidden"></span>
+		</span>
+			
+		<div class='tagUsername'>
+			<span class="username freqTag" >{{username}}</span>
+		</div>		
+	</div>
+
+{% else %}
+
+{% endif %}
