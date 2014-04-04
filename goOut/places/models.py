@@ -16,13 +16,21 @@ class UserProfile(models.Model):
 	
 	def __unicode__(self):
 		return self.user.username
+
+class HashtagCategory(models.Model):
+	name = models.CharField(max_length=50)
+
+	def __unicode__(self):
+		return self.name
 		
 class Hashtag(models.Model):
 	text = models.CharField(max_length=50)
-	#mapping = 
+	category = models.ForeignKey(HashtagCategory)
 	
 	def __unicode__(self):
 		return self.text
+
+
 
 class PlaceTag(models.Model):
 	place = models.ForeignKey(Place)

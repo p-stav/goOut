@@ -10,7 +10,7 @@ from django.template import RequestContext
 from urllib import urlopen
 import json, pprint
 from datetime import datetime, timedelta
-from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction, UserFeedback, UserTag
+from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction, UserFeedback, UserTag, HashtagCategory
 import sets
 from math import exp, log10, floor, trunc
 from collections import Counter
