@@ -5,7 +5,8 @@ from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
+from django.template import RequestContext
 from urllib import urlopen
 import json, pprint
 from datetime import datetime, timedelta
@@ -560,19 +561,10 @@ def submit_submitReview(request):
 	tags = request.POST.getlist('tagNames')
 
 	#Filter for all instances of Places with same placeId and tag within alotted time
-	filterPlace = PlaceTag.objects.filter(place=newPlace, lastUpdate__gte=cutoffTime)
+	filterPlace = PlaceTag.objects.filter(place=newPlace)
 
-	# check if existing UserAction otherwise add new one
-	#for testing purposes, hardcode datetime                                                                                                                                             
-	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
-	timeDeltaForUserActionCutoff = timedelta(minutes=-5)
-	cutoffUserActionTime = date + timeDeltaForUserActionCutoff
-	existingAction = UserAction.objects.filter(userID=curUser, time__gte=cutoffUserActionTime, place=newPlace)
+	newAction = checkExistingAction(curUser, newPlace)
 	
-	if existingAction:
-		newAction = existingAction[0]
-	else:
-		newAction = UserAction.objects.create(userID=curUser, time = datetime.utcnow(), place = newPlace)
 	
 	if len(filterPlace)>0:
 		#check to see if tag exists
@@ -862,10 +854,7 @@ def tag(request):
 		userName = ''
 
 	##find today's date to find items close to it in db                                                                                                                                  
-	date = datetime.utcnow()                                                                                                                              
-	timeDeltaForCutoff = timedelta(hours=-2)
-	cutoffTime = date + timeDeltaForCutoff
-
+	cutoffTime = getCutoffTime()
 
 	if request.POST.get('position'):
 		curLoc = request.POST['position']
@@ -941,6 +930,8 @@ def tag(request):
 def placeTagUpdate(request):
 	if request.is_ajax():
 		tagText = request.GET.get('tagText')
+		hashtag = Hashtag.objects.get(text = tagText)
+
 		place = request.GET.get('place')
 
 		#get User and cutoffTime
@@ -952,15 +943,17 @@ def placeTagUpdate(request):
 			placeTag = PlaceTag.objects.get(place__placeID = place, tag__text = tagText)
 
 			#if user took this action, then we subtract
-			if UserAction.objects.filter(userID = curUser, place__placeID = place, tags__text = tagText, time__gte = cutoffTime ).exists():
+			if (hashtag.useractionHashtag_set.filter(userID = curUser, place__placeID = place, time__gte = cutoffTime).exists()):
+			
 				#remove instance from user action
-				tagToRemove = Hashtag.objects.get(text = tagText)
-				useraction = UserAction.objects.get(userID = curUser, place__placeID = place, tags__text = tagText, time__gte = cutoffTime)
+				userAction = hashtag.useractionHashtag_set.filter(userID = curUser, place__placeID = place, time__gte = cutoffTime)[0]
 
-				useraction.tags.remove(tagToRemove)
+				userAction.tags.remove(hashtag)
+				userAction.save()
 
 				#update score
 				fontSizePercentage = 0
+				wasTagged = False
 				freq = 0
 
 				if placeTag.freq > 0:
@@ -979,12 +972,16 @@ def placeTagUpdate(request):
 					if fontSizePercentage > 220:
 						fontSizePercentage = 220
 
-			else:
-				#add instance to user action
-				tagToAdd = Hashtag.objects.get(text = tagText)
-				useraction = UserAction.objects.get(userID = curUser, place__placeID = place, tags__text = tagText, time__gte = cutoffTime)
+					
 
-				useraction.tags.add(tagToAdd)
+			else:
+		
+				#create user action for user if one does not exist
+				placeObject = Place.objects.get(placeID = place)
+				userAction = checkExistingAction(curUser, placeObject)
+
+				
+				userAction.tags.add(hashtag)
 
 				#update score
 				placeTag.freq += 1
@@ -1003,9 +1000,13 @@ def placeTagUpdate(request):
 				if fontSizePercentage > 220:
 					fontSizePercentage = 220
 
-			data = {"tag": tagText, "freq":place.freq, "username":"Kefi", "fontSize":fontSizePercentage}
+				wasTagged = "True"
 
-			return render_to_response("tagNode.html", data, context_instance=RequestContext(request))
+			userAction.save()
+			#check if 
+			data = {"tag": tagText, "freq":placeTag.freq, "username":"Kefi", "fontSize":fontSizePercentage, "wasTagged":wasTagged}
+
+			return render_to_response("places/tagNode.html", data, context_instance=RequestContext(request))
 	
 
 def userTagUpdate(request):
@@ -1087,13 +1088,13 @@ def getColorTheme(id):
 
 def getCutoffTime():
 	 ##find today's date to find items close to it in db                                                                                                                                  
-    date = datetime.utcnow()
-    #for testing purposes, hardcode datetime                                                                                                                                             
-    #date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
-    timeDeltaForCutoff = timedelta(hours=-2)
-    cutoffTime = date + timeDeltaForCutoff
+	date = datetime.utcnow()
+	#for testing purposes, hardcode datetime                                                                                                                                             
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	timeDeltaForCutoff = timedelta(hours=-2)
+	cutoffTime = date + timeDeltaForCutoff
 
-    return cutoffTime
+	return cutoffTime
 
 def isBlacklistedCategory(place):
 	if place['categories'][0]['id'] in CategoryBlacklist:
@@ -1112,4 +1113,20 @@ def getUserProfile(uid):
 	return curUser
 
 
+def checkExistingAction(curUser, newPlace):
+	# check if existing UserAction otherwise add new one
+	#for testing purposes, hardcode datetime                                                                                                                                             
+	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
+	date = datetime.utcnow()
+	timeDeltaForUserActionCutoff = timedelta(minutes=-5)
+	cutoffUserActionTime = date + timeDeltaForUserActionCutoff
+	existingAction = UserAction.objects.filter(userID=curUser, time__gte=cutoffUserActionTime, place = newPlace)
+	
+	if existingAction:
+		newAction = existingAction[0]
+	else:
+		newAction = UserAction.objects.create(userID=curUser, time = datetime.utcnow(), place =  newPlace)
+	newAction.save()
+
+	return newAction
 ############################################################################################
