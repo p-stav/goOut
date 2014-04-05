@@ -27,7 +27,7 @@ maxFontPercentage = 150
 highestScore = 50
 initialScore = 50
 
-maxFontSizePercentage = 195
+maxFontSizePercentage = 180
 minFontSizePercentage = 100
 
 CategoryBlacklist = ['4bf58dd8d48988d1e0931735',
