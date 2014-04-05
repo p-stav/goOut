@@ -178,7 +178,7 @@ font-size: .85em;
   -moz-border-radius: 5px;
   color:#fff;
 
-  padding: 10px 10px 0px 8px;
+  padding: 3px 10px 15px 8px;
   font-family: 'Roboto', sans-serif;
 =
 }
@@ -186,7 +186,7 @@ font-size: .85em;
 .venue{
   padding-left:5px;
   padding-right:5px;
-  margin-top:10px;
+  margin-top:7px;
 }
 
 .venue-left{
@@ -204,6 +204,11 @@ font-size: .85em;
   font-size:18px;
   margin-top: 15px;
   margin-left:10px;
+}
+
+.curTag {
+  margin-bottom: 20px;
+
 }
 
 .indexTag {
@@ -232,12 +237,9 @@ font-size: .85em;
 
 }
 
-.venueInternalRight {
-  margin-top:5px;
-
-  margin-right:5px;
-  margin-bottom: 10px;
-  color: #999999;
+.venueDistance {
+  margin-right:15px;
+  color: #fff;
   font-size:10px;
 
 }
@@ -253,12 +255,12 @@ font-size: .85em;
   margin-right:1%;
   padding-top:10px;
   font-size: 18px;
-  margin-top:5px;
+  margin-top:0px;
 }
 
 .separator{
   border-bottom: 1px solid #c0c0c0;
-  margin-top:20px;
+  margin-top:7px;
 }
 
 .right{
