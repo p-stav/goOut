@@ -27,6 +27,9 @@ maxFontPercentage = 150
 highestScore = 50
 initialScore = 50
 
+maxFontSizePercentage = 195
+minFontSizePercentage = 100
+
 CategoryBlacklist = ['4bf58dd8d48988d1e0931735',
 '4bf58dd8d48988d1d5941735']
 
@@ -382,9 +385,14 @@ def placeDetail(request,place_id):
 		tagObject["lastUpdate"] = Tag.lastUpdate
 		tagObject["username"] = Tag.userID.user.username
 		
-		checkTag = Hashtag.objects.get(text=tagObject["tagText"])
-		tagObject["wasTagged"] =checkTag.useractionUserTag_set.filter(userID = curUser, place__placeID = place['id'], time__gte = cutoffTime).exists()
 		
+		tagObject["wasTagged"] = False
+
+		if UserTag.objects.filter(tag=tagObject["tagText"]).exists():
+			checkTag = UserTag.objects.get(tag=tagObject["tagText"])
+			tagObject["wasTagged"] =checkTag.useractionUserTag_set.filter(userID = curUser, place__placeID = place['id'], time__gte = cutoffTime).exists()
+		
+
 		allTags.append(tagObject)
 		
 
@@ -413,8 +421,10 @@ def placeDetail(request,place_id):
 			tagText.append(placeTag["tagText"])
 
 			fontSizePercentage = (placeTag["score"] / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
-			if fontSizePercentage > 220:
-				fontSizePercentage = 220
+			
+			if maxFontSizePercentage < fontSizePercentage or minFontSizePercentage > fontSizePercentage:
+				fontSizePercentage = checkFontSizePercentage(fontSizePercentage)
+			
 
 			fontSizes.append(fontSizePercentage)
 		
@@ -606,7 +616,6 @@ def submit_submitReview(request):
 	###################get personalized hashtags:##########################
 	personalTags = request.POST.getlist('personalTag')
 	lowerPersonalTags = [i.lower() for i in personalTags]
-	tagText = ""
 	
 	#grab all UserTags associated with place to see if this one exists
 	existingUserTag = UserTag.objects.filter(place = newPlace, lastUpdate__gte = cutoffTime)
@@ -618,7 +627,8 @@ def submit_submitReview(request):
 
 	if len(personalTags)>0:
 		for userTag in existingUserTag:
-			if (userTag.tag.lower() in lowerPersonalTags) and (userTag.tag.lower() not in lowerUserActionPersonalTags):
+			#if existing tag not in a user action of curUser, and that existing tag was submitted by user:
+			if (userTag.tag.lower() not in lowerUserActionPersonalTags) and (userTag.tag.lower() in lowerPersonalTags):
 				userTag.freq += 1
 
 				#update score
@@ -629,16 +639,17 @@ def submit_submitReview(request):
 				userTag.lastUpdate = timeNow
 
 				#take out hashtag from the list
-				position = lowerPersonalTags.index(userTag.tag)
+				position = lowerPersonalTags.index(userTag.tag.lower())
 				personalTags.pop(position)
 
 				newAction.userTags.add(userTag)
 				
 				userTag.save()
 
+			#If this tag is in an existing userAction, meaning you can't submit a like:
 			elif (userTag.tag.lower() in lowerPersonalTags):
-				position = lowerPersonalTags.index(userTag.tag)
-				personalTags.pop(position)	
+					position = lowerPersonalTags.index(userTag.tag)
+					personalTags.pop(position)	
 
 		#create new object for userTag
 		for hashtag in personalTags: 
@@ -951,6 +962,7 @@ def placeTagUpdate(request):
 				userAction.tags.remove(hashtag)
 				userAction.save()
 
+				#grab necessary information to undo score
 				#update score
 				fontSizePercentage = 0
 				wasTagged = False
@@ -969,10 +981,8 @@ def placeTagUpdate(request):
 
 					#generate html for tagNode. Need font size as well
 					fontSizePercentage = (placeTag.score / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
-					if fontSizePercentage > 220:
-						fontSizePercentage = 220
-
-					
+					if maxontSizePercentage < fontSizePercentage or minFontSizePercentage > fontSizePercentage:
+						fontSizePercentage = checkFontSizePercentage(fontSizePercentage)
 
 			else:
 		
@@ -997,10 +1007,10 @@ def placeTagUpdate(request):
 				#gnerate html for tagNode. Need font size as well
 
 				fontSizePercentage = (placeTag.score / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
-				if fontSizePercentage > 220:
-					fontSizePercentage = 220
+				if maxFontSizePercentage < fontSizePercentage or minFontSizePercentage > fontSizePercentage:
+					fontSizePercentage = checkFontSizePercentage(fontSizePercentage)
 
-				wasTagged = "True"
+				wasTagged = True
 
 			userAction.save()
 			#check if 
@@ -1012,6 +1022,8 @@ def placeTagUpdate(request):
 def userTagUpdate(request):
 	if request.is_ajax():
 		tagText = request.GET.get('tagText')
+		hashtag = UserTag.objects.get(tag = tagText)
+
 		place = request.GET.get('place')
 
 		#get User and cutoffTime
@@ -1020,56 +1032,70 @@ def userTagUpdate(request):
 	
 
 		if tagText is not None and place is not None:
-			placeTag = PlaceTag.objects.get(place__placeID = place, tag__text = tagText)
+			userTag = UserTag.objects.get(place__placeID = place, tag = tagText)
 
 			#if user took this action, then we subtract
-			if UserAction.objects.filter(userID = curUser, place__placeID = place, tags__text = tagText, time__gte = cutoffTime ).exists():
+			if UserAction.objects.filter(userID = curUser, place__placeID = place, userTags__tag = tagText, time__gte = cutoffTime).exists():
 				#update with correct information
 				#####USERACTION
+				
+				#remove instance from user action
+				userAction = hashtag.useractionUserTag_set.filter(userID = curUser, place__placeID = place, time__gte = cutoffTime)[0]
 
+				userAction.userTags.remove(hashtag)
+				userAction.save()
 
-				placeTag.freq -= 1
+				userTag.freq -= 1
 
 				#update score
 				timeNow = datetime.utcnow()
-				timeDelta = timeNow - placeTag.lastUpdate
-				placeTag.score /= exp(-timeDecayExponent * timeDelta.total_seconds())
-				placeTag.score -= 50
-				placeTag.lastUpdate = timeNow
+				timeDelta = timeNow - userTag.lastUpdate
+				userTag.score /= exp(-timeDecayExponent * timeDelta.total_seconds())
+				userTag.score -= 50
+				userTag.lastUpdate = timeNow
 
-				placeTag.save()
+				userTag.save()
 
 				#gnerate html for tagNode. Need font size as well
 
-				fontSizePercentage = (placeTag.score / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
-				if fontSizePercentage > 220:
-					fontSizePercentage = 220
+				fontSizePercentage = (userTag.score / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
+				if maxFontSizePercentage < fontSizePercentage or minFontSizePercentage > fontSizePercentage:
+					fontSizePercentage = checkFontSizePercentage(fontSizePercentage)
+				
+				wasTagged = False
 
 			else:
-				#update with correct information
-				#####USERACTION
+				#create user action for user if one does not exist
+				placeObject = Place.objects.get(placeID = place)
+				userAction = checkExistingAction(curUser, placeObject)
+
+				
+				userAction.userTags.add(hashtag)
 
 
-				placeTag.freq += 1
+				userTag.freq += 1
 
 				#update score
 				timeNow = datetime.utcnow()
-				timeDelta = timeNow - placeTag.lastUpdate
-				placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
-				placeTag.score += 50
-				placeTag.lastUpdate = timeNow
+				timeDelta = timeNow - userTag.lastUpdate
+				userTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
+				userTag.score += 50
+				userTag.lastUpdate = timeNow
 
-				placeTag.save()
+				userTag.save()
 
 				#gnerate html for tagNode. Need font size as well
 
-				fontSizePercentage = (placeTag.score / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
-				if fontSizePercentage > 220:
-					fontSizePercentage = 220
+				fontSizePercentage = (userTag.score / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
+				if maxFontSizePercentage < fontSizePercentage or minFontSizePercentage > fontSizePercentage:
+					fontSizePercentage = checkFontSizePercentage(fontSizePercentage)
 
-			data = {"tag": tagText, "freq":place.freq, "username":"Kefi", "fontSize":fontSizePercentage}
+				wasTagged = True
 
-			return render_to_response("tagNode.html", data, context_instance=RequestContext(request))		
+			userAction.save()
+			data = {"tag": tagText, "freq":userTag.freq, "username": userTag.userID.user.username, "fontSize":fontSizePercentage, "wasTagged":wasTagged}
+
+			return render_to_response("places/tagNode.html", data, context_instance=RequestContext(request))		
 
 #####################################functions to call in views!#############################
 def getColorTheme(id):
@@ -1129,4 +1155,12 @@ def checkExistingAction(curUser, newPlace):
 	newAction.save()
 
 	return newAction
+
+def checkFontSizePercentage(fontSizePercentage):
+	if fontSizePercentage > maxFontSizePercentage:
+		fontSizePercentage = maxFontSizePercentage
+	if fontSizePercentage < minFontSizePercentage:
+		fontSizePercentage = minFontSizePercentage
+
+	return fontSizePercentage
 ############################################################################################

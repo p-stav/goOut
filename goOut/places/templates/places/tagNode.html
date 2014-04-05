@@ -13,7 +13,11 @@
 		</span>
 			
 		<div class='tagUsername'>
-			<span class="username freqTag" >{{username}}</span>
+			{% if username == "Kefi" %}
+				<span class="username kefiTag" id="{{username}}" >{{username}}</span>
+			{%else%}
+				<span class="username freqTag" id="{{username}}">{{username}}</span>
+			{%endif%}
 		</div>		
 	</div>
 

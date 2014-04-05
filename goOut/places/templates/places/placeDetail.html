@@ -134,7 +134,7 @@
 		});
 
 
-		$('.tagText').click(function(){
+		$(document).on("click",".tagText", function(){
 			//pass different information
 			tagText = $(this).attr("id");
 			var place = "{{id}}";
