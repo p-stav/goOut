@@ -51,22 +51,18 @@ def getCurLoc(request):
 	return render(request, 'places/getCurLoc.html', context)
 
 
-def getCurLocHashtag(request):
-
-	context = {'hashtag':request.POST.get('hashtag')}
-
-	return render(request, 'places/getCurLocHashtag.html', context)
-
-	
-	
 #index page. 
 def index(request):
 	#find today's date to find items close to it in db                                                                                                                                  
-	date = datetime.utcnow()
-	#for testing purposes, hardcode datetime                                                                                                                                             
-	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
-	timeDeltaForCutoff = timedelta(hours=-2)
-	cutoffTime = date + timeDeltaForCutoff
+	cutoffTime = getCutoffTime()
+
+	#get username
+	if request.user.is_authenticated():
+		curUser = getUserProfile(request.user.id)
+		userName = getUsername(curUser)
+	else:
+		userName = ''
+	
 	#get curLong + curLat, or redirect to get info
 	if request.POST.get('position'):
 		curLoc = request.POST['position']
@@ -77,6 +73,7 @@ def index(request):
 		curLoc = '47.6159392,-122.3268701' #Seattle Pine/Bellevue
 		#SF chestnut/VanNess.798542,-122.422345'
 
+	#foursquare data for api call
 	client_id = 'T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O'
 	client_secret = '0P1EQQ3NH102D0R3GNGTG0ZAL0S5T41YDB2NPOOMRMO2I2EO'
 	category_id =  '4bf58dd8d48988d116941735,50327c8591d4c4b30a586d5d,4bf58dd8d48988d11e941735,4bf58dd8d48988d118941735,4bf58dd8d48988d1d8941735,4bf58dd8d48988d120941735,4bf58dd8d48988d121941735,4bf58dd8d48988d11f941735,4bf58dd8d48988d11b941735,4bf58dd8d48988d1d4941735,4bf58dd8d48988d11d941735,4bf58dd8d48988d122941735,4bf58dd8d48988d123941735'
@@ -135,7 +132,8 @@ def index(request):
 
 
 
-	"""GOOGLE PLACES API:
+	"""
+	GOOGLE PLACES API:
 
 	apiCall = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+curLoc+"&radius=550&types=bar|casino|night_club&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"
 
@@ -215,12 +213,6 @@ def index(request):
 			orderHashtags = Counter(hashtags)
 			topTags = orderHashtags.most_common(5)
 			topHashtags = [i[0] for i in topTags]
-								
-			#check if price_level and rating exist and append
-			#if 'rating' not in place.keys():
-			#	place['rating'] = 'N/A'
-			#if 'price_level' not in place.keys():
-			#	place['price_level'] = 'N/A'
 			
 			#round distance, list of categories, and location
 			distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
@@ -246,16 +238,10 @@ def index(request):
 			distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
 			category = category = place['categories'][0]['name']
 			#address = []
-			"""try: address.append(place['location']['address'][0])
-			except: continue
-
-			try: address.append(place['location']['cross_streets']) 
-			except: continue
-			"""
+			
 			image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
 
 			temp = {'picture': image_url, 'name': place['name'], 'id': place['id'], 'types': category, 'distance':distance, 'color':'127,127,127'}
-			
 			
 			#append
 			placeNoMatch.append(temp)
@@ -263,12 +249,6 @@ def index(request):
 	#get all hashtags to display
 	tags = Hashtag.objects.all()
 
-	#get username
-	if request.user.is_authenticated():
-		curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
-		userName = curUser.user.username
-	else:
-		userName = ''
 
 	sortMethod = ''
 	context = {'tags':tags, 'sort':sortMethod, 'url':url, 'search':term, 'userName':userName, 'placeMatch': placeMatch, 'placeMatchOld':placeMatchOld, 'placeNoMatch': placeNoMatch, 'headerUIAdditions':'hi' }
@@ -279,11 +259,7 @@ def index(request):
 	
 def placeDetail(request,place_id):
 	##find today's date to find items close to it in db                                                                                                                                  
-	date = datetime.utcnow()
-	#for testing purposes, hardcode datetime                                                                                                                                             
-	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
-	timeDeltaForCutoff = timedelta(hours=-2)
-	cutoffTime = date + timeDeltaForCutoff
+	cutoffTime  = getCutoffTime()
 	
 	#booleans for favorited and curUser for which tags submitted
 	placeFavorited = False
@@ -291,8 +267,8 @@ def placeDetail(request,place_id):
 
 	#get username
 	if request.user.is_authenticated():
-		curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
-		userName = curUser.user.username
+		curUser = getUserProfile(request.user.id)
+		userName = getUsername(curUser)
 		# check if user has favorited this place
 		placeFavorited = curUser.favoritePlaces.filter(placeID=place_id).exists()
 
@@ -439,27 +415,13 @@ def placeDetail(request,place_id):
 	for placeTag in allTags:
 	'''	
 	
-		#grab frequency
 		
-		#userActionsCorrectTag = placeTag["tag"].useraction_set.filter(place__placeID= place['id'], time__gte = cutoffTime)
-		#venueTags = UserAction.objects.filter(place__placeID= place['id'], tag__text=placeTag.tag.text, time__gte = cutoffTime)
-		#tagsFreq.append(len(userActionsCorrectTag))
 
 		
 
 	tagsWithFonts = zip(tagText, fontSizes, tagsFreq, username, wasTagged)
 	tagsWithFonts.reverse()
 
-
-	#edit address:
-	#address = []
-	#if 'cross_streets' not in place['location'].keys():
-	#	place['location']['cross_streets'] = ''
-	#if 'neighborhoods' not in place['location'].keys():
-	##	place['location']['neighborhoods'] = ['','']
-	
-	#address.append(place['location']['address'][0] + '  ' + place['location']['city'] + ',' + place['location']['state_code'])
-	#address.append(place['location']['cross_streets'] + ', ' + place['location']['neighborhoods'][0])
 	address  = []
 
 	if 'address' in place['location'].keys():
@@ -712,8 +674,6 @@ def add_user_add(request):
 		error=1
 		context = {'error':error}
 		return render(request, 'registration/add_user.html', context)
-	
-	
 	
 @login_required()
 def view_fav(request):
@@ -1129,8 +1089,12 @@ def isBlacklistedCategory(place):
 		return False
 
 def getUsername(uid):
-	#curUser=UserProfile.objects.get(user=User.objects.get(id=uid))
-	userName = (User.objects.get(id=uid)).username
+	if UserProfile.objects.filter(user=User.objects.get(id=uid.user.id)).exists():
+		userName = UserProfile.objects.get(user=User.objects.get(id=uid.user.id)).user.username
+	else:
+		userName = ''
+
+	return userName
 
 	return userName
 

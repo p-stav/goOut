@@ -4,7 +4,6 @@ urlpatterns = patterns('places.views',
 	
 	#list of places, search page, and map
 	url(r'^$', 'getCurLoc', name='getCurLoc'),
-	url(r'^getCurLocHashtag$', 'getCurLocHashtag', name='getCurLocHashtag'),
 	url(r'^index$', 'index', name='index'),
 	url(r'^search/(?P<search_term>.+)/$', 'search', name='search'),
 	url(r'^map/$', 'map', name='map'),
