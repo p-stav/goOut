@@ -121,8 +121,7 @@
 <!--yelp button-->
 <!--<div class='right' style="width:95%; position:relative; margin-top:3em;"><img src="http://s3-media1.ak.yelpcdn.com/assets/2/www/img/1589098a542f/developers/Powered_By_Yelp_White.png"></div>-->
 
-<script type = "text/javascript">
-
+<script  type = "text/javascript">
 	$(document).ready(function() {
 
 		$('.tag').click(function() {
@@ -134,19 +133,26 @@
 		});
 
 
-		$(document).on("click",".tagText", function(){
+		$(document).on("click",".tagText", function() {
 			//pass different information
-			tagText = $(this).attr("id");
-			var place = "{{id}}";
+			if ($(".userName").attr("id") == "1")
+			{
+				tagText = $(this).attr("id");
+				var place = "{{id}}";
 
-			if ($(this).parent().find(".username").attr("id") =="Kefi") {
-				$(this).parent().html('&nbsp;').load("/placeTagUpdate?tagText=" + tagText + "&place=" + place);
+				if ($(this).parent().find(".username").attr("id") =="Kefi") {
+					$(this).parent().html('loading...').load("/placeTagUpdate?tagText=" + tagText + "&place=" + place);
+				}
+
+				else {
+					$(this).parent().html('loading...').load("/userTagUpdate?tagText=" + tagText + "&place=" + place);
+				}
 			}
 
-			else {
-				$(this).parent().html('&nbsp;').load("/userTagUpdate?tagText=" + tagText + "&place=" + place);
+			else
+			{
+				alert('uh oh! Please login to quickTag this place!');
 			}
-
 		});
 	});
 </script>

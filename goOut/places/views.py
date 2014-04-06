@@ -977,7 +977,7 @@ def placeTagUpdate(request):
 			data = {"tag": tagText, "freq":placeTag.freq, "username":"Kefi", "fontSize":fontSizePercentage, "wasTagged":wasTagged}
 
 			return render_to_response("places/tagNode.html", data, context_instance=RequestContext(request))
-	
+
 
 def userTagUpdate(request):
 	if request.is_ajax():

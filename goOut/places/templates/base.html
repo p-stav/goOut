@@ -19,8 +19,8 @@
 
 	<!-- bootstrap -->
 	{% load staticfiles %}
-	<script src="{{STATIC_URL}}js/jquery.js"> </script>
 	<link type="text/css" href="{{STATIC_URL}}css/goOut/main.css" rel="stylesheet"/>
+	<script src="{{STATIC_URL}}js/jquery.js"> </script>
 	<script src="{{STATIC_URL}}css/bootstrap-3.0.0/dist/js/bootstrap.js"> </script>
 
 	<!--load google fonts!-->
@@ -118,12 +118,12 @@
 			<ul class="dropdown-menu" role='menu'>
 				{% if user.is_authenticated %}
 					<!--<li><a href="/user"><span class  = 'glyphicon glyphicon-user'></span>    {{userName}}</a></li>-->
-					<li><a href="/profile/{{ user.id }}"><span class  = 'glyphicon glyphicon-user'></span>    {{userName}}</a></li>
-					<li><a href="/fav"><span class  = 'glyphicon glyphicon-star'></span>    Favorites</a></li>
+					<li><a href="/profile/{{ user.id }}"><span class='glyphicon glyphicon-user'></span><span  class="userName" id="1">{{userName}}</span></a></li>
+					<li><a href="/fav"><span class='glyphicon glyphicon-star'></span>    Favorites</a></li>
 
 				{% else %}
-					<li><a href="/accounts/login"><span class  = 'glyphicon glyphicon-user'></span>    Sign In</a></li>
-					<li><a href="/accounts/add"><span class  = 'glyphicon glyphicon-plus'></span>    Create Profile</a></li>
+					<li><a href="/accounts/login" ><span class='glyphicon glyphicon-user' ></span><span  class="userName" id="0">Sign In</span></a></li>
+					<li><a href="/accounts/add" ><span class  = 'glyphicon glyphicon-plus'></span><span >Create Profile</span></a></li>
 				{% endif %}
 
 
