@@ -27,8 +27,8 @@ maxFontPercentage = 150
 highestScore = 50
 initialScore = 50
 
-maxFontSizePercentage = 180
-minFontSizePercentage = 100
+maxFontSizePercentage = 167
+minFontSizePercentage = 50
 
 CategoryBlacklist = ['4bf58dd8d48988d1e0931735',
 '4bf58dd8d48988d1d5941735']
@@ -504,11 +504,8 @@ def submitReviewVenue(request, place_name, reference):
 	
 def submit_submitReview(request):
 	##find today's date to find items close to it in db                                                                                                                                  
-	date = datetime.utcnow()
-	#for testing purposes, hardcode datetime                                                                                                                                             
-	#date = datetime(2013, 12, 28, 22, 40, 41, 879000)                                                                                                                                   
-	timeDeltaForCutoff = timedelta(hours=-2)
-	cutoffTime = date + timeDeltaForCutoff
+	cutoffTime = getCutoffTime()
+
 	curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
 
 	#Check if place exists. If not, add place
@@ -542,13 +539,19 @@ def submit_submitReview(request):
 		#check to see if tag exists
 		for placeTag in filterPlace:
 			if (placeTag.tag.text in tags) and (placeTag.tag not in newAction.tags.all()):
-				placeTag.freq += 1
 
 				#update score
 				timeNow = datetime.utcnow()
 				timeDelta = timeNow - placeTag.lastUpdate
 				placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
 				placeTag.score += 50
+
+				#update freq and lastUpdate
+				if timeDelta.total_seconds() > 7200:
+					freq = 1
+				else:
+					freq += 1
+
 				placeTag.lastUpdate = timeNow
 
 				#take out hashtag from the list
@@ -591,13 +594,19 @@ def submit_submitReview(request):
 		for userTag in existingUserTag:
 			#if existing tag not in a user action of curUser, and that existing tag was submitted by user:
 			if (userTag.tag.lower() not in lowerUserActionPersonalTags) and (userTag.tag.lower() in lowerPersonalTags):
-				userTag.freq += 1
-
+				
 				#update score
 				timeNow = datetime.utcnow()
 				timeDelta = timeNow - userTag.lastUpdate
 				userTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
 				userTag.score += 50
+
+				#update freq and lastUpdate
+				if timeDelta.total_seconds() > 7200:
+					freq = 1
+				else:
+					freq += 1
+
 				userTag.lastUpdate = timeNow
 
 				#take out hashtag from the list
@@ -929,12 +938,19 @@ def placeTagUpdate(request):
 				freq = 0
 
 				if placeTag.freq > 0:
-					placeTag.freq -= 1
-
+						
+					#update score
 					timeNow = datetime.utcnow()
 					timeDelta = timeNow - placeTag.lastUpdate
 					placeTag.score /= exp(-timeDecayExponent * timeDelta.total_seconds())
 					placeTag.score -= 50
+
+					#update freq and lastUpdate
+					if timeDelta.total_seconds() > 7200:
+						placeTag.freq = 1
+					else:
+						placeTag.freq -= 1
+
 					placeTag.lastUpdate = timeNow
 
 					placeTag.save()
@@ -982,7 +998,7 @@ def placeTagUpdate(request):
 def userTagUpdate(request):
 	if request.is_ajax():
 		tagText = request.GET.get('tagText')
-		hashtag = UserTag.objects.get(tag = tagText)
+		
 
 		place = request.GET.get('place')
 
@@ -995,23 +1011,27 @@ def userTagUpdate(request):
 			userTag = UserTag.objects.get(place__placeID = place, tag = tagText)
 
 			#if user took this action, then we subtract
-			if UserAction.objects.filter(userID = curUser, place__placeID = place, userTags__tag = tagText, time__gte = cutoffTime).exists():
-				#update with correct information
-				#####USERACTION
+			if (userTag.useractionUserTag_set.filter(userID = curUser, place__placeID = place, time__gte = cutoffTime).exists()):
 				
 				#remove instance from user action
-				userAction = hashtag.useractionUserTag_set.filter(userID = curUser, place__placeID = place, time__gte = cutoffTime)[0]
+				userAction = userTag.useractionUserTag_set.filter(userID = curUser, place__placeID = place, time__gte = cutoffTime)[0]
 
-				userAction.userTags.remove(hashtag)
+				userAction.userTags.remove(userTag)
 				userAction.save()
 
-				userTag.freq -= 1
-
+				
 				#update score
 				timeNow = datetime.utcnow()
 				timeDelta = timeNow - userTag.lastUpdate
 				userTag.score /= exp(-timeDecayExponent * timeDelta.total_seconds())
 				userTag.score -= 50
+
+				#update freq and lastUpdate
+				if timeDelta.total_seconds() > 7200:
+					userTag.freq = 1
+				else:
+					userTag.freq -= 1
+
 				userTag.lastUpdate = timeNow
 
 				userTag.save()
@@ -1029,17 +1049,20 @@ def userTagUpdate(request):
 				placeObject = Place.objects.get(placeID = place)
 				userAction = checkExistingAction(curUser, placeObject)
 
+				userAction.userTags.add(userTag)
 				
-				userAction.userTags.add(hashtag)
-
-
-				userTag.freq += 1
-
 				#update score
 				timeNow = datetime.utcnow()
 				timeDelta = timeNow - userTag.lastUpdate
 				userTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
 				userTag.score += 50
+
+				#update freq and lastUpdate
+				if timeDelta.total_seconds() > 7200:
+					userTag.freq = 1
+				else:
+					userTag.freq += 1
+
 				userTag.lastUpdate = timeNow
 
 				userTag.save()
