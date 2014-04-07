@@ -3426,18 +3426,13 @@ input[type="button"].btn-block {
   z-index: 1000;
   display: none;
   float: left;
-  min-width: 160px;
+  min-width: 150px;
   padding: 5px 0;
   margin: 2px 0 0;
   font-size: 14px;
   list-style: none;
-  background-color: #ffffff;
-  color: #333333;
-  border: 1px solid #cccccc;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-image: linear-gradient(to top, #3c3c3c 0%, #222222 100%);
+  color: #ffffff;
   background-clip: padding-box;
 }
 
@@ -3459,7 +3454,7 @@ input[type="button"].btn-block {
   clear: both;
   font-weight: normal;
   line-height: 1.428571429;
-  color: #000000;
+  color: #fff;
   white-space: nowrap;
 }
 
@@ -4695,7 +4690,6 @@ padding-bottom: 15px;
 
 .navbar-inverse {
   background-color: #222222;
-  border-color: #080808;
 }
 
 .navbar-inverse .navbar-brand {

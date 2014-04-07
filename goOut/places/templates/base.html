@@ -115,25 +115,33 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<ul class="dropdown-menu" role='menu'>
+			<ul class="dropdown-menu mainMenu" role='menu'>
+				<br/>
 				{% if user.is_authenticated %}
 					<!--<li><a href="/user"><span class  = 'glyphicon glyphicon-user'></span>    {{userName}}</a></li>-->
-					<li><a href="/profile/{{ user.id }}"><span class='glyphicon glyphicon-user'></span><span  class="userName" id="1">{{userName}}</span></a></li>
-					<li><a href="/fav"><span class='glyphicon glyphicon-star'></span>    Favorites</a></li>
-
+					<li><a href="/profile/{{ user.id }}"><span class='glyphicon glyphicon-user'></span><span  class="userName" id="1">&nbsp; &nbsp; {{userName}}</span></a></li>
+					<br/>
+					<li><a href="/fav"><span class='glyphicon glyphicon-star'></span>&nbsp; &nbsp; Favorites</a></li>
+					<br/>
 				{% else %}
-					<li><a href="/accounts/login" ><span class='glyphicon glyphicon-user' ></span><span  class="userName" id="0">Sign In</span></a></li>
-					<li><a href="/accounts/add" ><span class  = 'glyphicon glyphicon-plus'></span><span >Create Profile</span></a></li>
+					<li><a href="/accounts/login" ><span class='glyphicon glyphicon-user' ></span><span  class="userName" id="0">&nbsp; &nbsp; Sign In</span></a></li>
+					<br/>
+					<li><a href="/accounts/add" ><span class  = 'glyphicon glyphicon-plus'></span><span >&nbsp; &nbsp; Create Profile</span></a></li>
+					<br/>
 				{% endif %}
 
 
 
 				{% if user.is_authenticated %}
-					<li><a href="/accounts/logout"><span class  = 'glyphicon glyphicon-minus-sign'></span>    logout</a></li>
+					<li><a href="/accounts/logout"><span class  = 'glyphicon glyphicon-minus-sign'></span>&nbsp; &nbsp; logout</a></li>
+					<br/>
 				{% else %}
 				{% endif %}
-				<li><a href="/about"><span class  = 'glyphicon glyphicon-unchecked'></span>    About Us</a></li>
-				<li><a href="/feedback"><span class  = 'glyphicon glyphicon-send'></span>    Send Feedback</a></li>
+				<br/><br/>
+				<li><a href="/about"><span class  = 'glyphicon glyphicon-unchecked'></span>&nbsp; &nbsp; About Us</a></li>
+				<br/>
+				<li><a href="/feedback"><span class  = 'glyphicon glyphicon-send'></span>&nbsp; &nbsp; Send Feedback</a></li>
+				<br/>
 
 			</ul>
 		</div>
@@ -220,10 +228,10 @@
 	</header>
 
 
-	<script>
+	<script type="text/javascript">
 		
 		$(document).ready(function() {	
-
+			$(".mainMenu").css("height", $(window).height()+"px");
 
 			// We need to check if the browser has the correct capabilities.
 			if (navigator.geolocation) {
