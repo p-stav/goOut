@@ -580,7 +580,7 @@ def submit_submitReview(request):
 	lowerPersonalTags = [i.lower() for i in personalTags]
 	
 	#grab all UserTags associated with place to see if this one exists
-	existingUserTag = UserTag.objects.filter(place = newPlace, lastUpdate__gte = cutoffTime)
+	existingUserTag = UserTag.objects.filter(place = newPlace)
 
 	#does userTag exist? 
 	#make all strings lower to catch all capitlaization instances
