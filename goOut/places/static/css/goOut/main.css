@@ -1,6 +1,7 @@
 
 @import url('/static/css/bootstrap-3.0.0/dist/css/bootstrap.css');
 @import url('/static/css/bootstrap-3.0.0/dist/css/bootstrap-theme.css');
+@import url('/static/css/goOut/loadingAnimation.css');
 
 /*ADDED MANUALLY*/
 .margins {

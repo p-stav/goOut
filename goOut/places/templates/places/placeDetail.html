@@ -122,6 +122,8 @@
 <!--<div class='right' style="width:95%; position:relative; margin-top:3em;"><img src="http://s3-media1.ak.yelpcdn.com/assets/2/www/img/1589098a542f/developers/Powered_By_Yelp_White.png"></div>-->
 
 <script  type = "text/javascript">
+	var loadingState = '<div id="ballsWaveG"><div id="ballsWaveG_1" class="ballsWaveG"></div><div id="ballsWaveG_2" class="ballsWaveG"></div><div id="ballsWaveG_3" class="ballsWaveG"></div><div id="ballsWaveG_4" class="ballsWaveG"></div><div id="ballsWaveG_5" class="ballsWaveG"></div><div id="ballsWaveG_6" class="ballsWaveG"></div><div id="ballsWaveG_7" class="ballsWaveG"></div><div id="ballsWaveG_8" class="ballsWaveG"></div></div>';
+
 	$(document).ready(function() {
 
 		$('.tag').click(function() {
@@ -141,11 +143,11 @@
 				var place = "{{id}}";
 
 				if ($(this).parent().find(".username").attr("id") =="Kefi") {
-					$(this).parent().html('loading...').load("/placeTagUpdate?tagText=" + tagText + "&place=" + place);
+					$(this).parent().html(loadingState).load("/placeTagUpdate?tagText=" + tagText + "&place=" + place);
 				}
 
 				else {
-					$(this).parent().html('loading...').load("/userTagUpdate?tagText=" + tagText + "&place=" + place);
+					$(this).parent().html(loadingState).load("/userTagUpdate?tagText=" + tagText + "&place=" + place);
 				}
 			}
 

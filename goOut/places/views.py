@@ -941,7 +941,7 @@ def placeTagUpdate(request):
 
 					#generate html for tagNode. Need font size as well
 					fontSizePercentage = (placeTag.score / highestScore) * (maxFontPercentage - minFontPercentage) + minFontPercentage
-					if maxontSizePercentage < fontSizePercentage or minFontSizePercentage > fontSizePercentage:
+					if maxFontSizePercentage < fontSizePercentage or minFontSizePercentage > fontSizePercentage:
 						fontSizePercentage = checkFontSizePercentage(fontSizePercentage)
 
 			else:
