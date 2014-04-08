@@ -3432,7 +3432,7 @@ input[type="button"].btn-block {
   font-size: 14px;
   list-style: none;
   background: linear-gradient(to top, #3c3c3c 0%, #222222 100%);
-  color: #ffffff;
+  color: #000000;
   background-clip: padding-box;
 }
 
