@@ -3431,7 +3431,7 @@ input[type="button"].btn-block {
   margin: 2px 0 0;
   font-size: 14px;
   list-style: none;
-  background-image: linear-gradient(to top, #3c3c3c 0%, #222222 100%);
+  background: linear-gradient(to top, #3c3c3c 0%, #222222 100%);
   color: #ffffff;
   background-clip: padding-box;
 }
