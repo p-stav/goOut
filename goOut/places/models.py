@@ -30,8 +30,6 @@ class Hashtag(models.Model):
 	def __unicode__(self):
 		return self.text
 
-
-
 class PlaceTag(models.Model):
 	place = models.ForeignKey(Place)
 	tag = models.ForeignKey(Hashtag)

@@ -3,14 +3,15 @@
 		<div class="venue" id="{{ place.id }}">
 			
 
-			<div class="colorWrapper" style="background-color:rgb({{place.color}});" >
+			<div class="colorWrapper"> <!-- style="border:1px solid rgb({{place.color}});" >-->
 				
-				<div align="right" class="venueDistance">{{place.distance}} mi</div>
+				
 				<img class="venuePic"  src="{{place.picture}}"></img>
 				<div class='venueTitle'>{{ place.name }}</div>
 				<div class='venueType'>
 					{{place.types}}
 				</div>
+				<div  class="venueDistance">{{place.distance}} mi</div>
 			</div>
 
 			
@@ -29,13 +30,13 @@
 
 	{% for place in placeMatchOld %}
 		<div class="venue" id="{{ place.id }}">
-			<div class="colorWrapper" style="background-color:rgb({{place.color}});" >
-				<div align="right" class="venueDistance">{{place.distance}} mi</div>
+			<div class="colorWrapper"> <!-- style="color:rgb({{place.color}});" >-->
 				<img class="venuePic"  src="{{place.picture}}"></img>
 				<div class='venueTitle'>{{ place.name }}</div>
 				<div class='venueType'>
 					{{ place.types}}		
 				</div>
+				<div class="venueDistance">{{place.distance}} mi</div>
 
 			</div>
 
@@ -54,13 +55,14 @@
 	<!--List for items with no data in our DB -->
 	{% for place in placeNoMatch %}
 		<div class="venue" id="{{ place.id }}">
-			<div class="colorWrapper" style="background-color:rgb({{place.color}});" >
-				<div align="right" class="venueDistance">{{place.distance}} mi</div>
+			<div class="colorWrapper" ><!--style="background-color:rgb({{place.color}});" >-->
+				
 				<img class="venuePic"  src="{{place.picture}}"></img>
 				<div class='venueTitle'>{{ place.name }}</div>
 				<div class='venueType'>
 					{{place.types}}
 				</div>
+				<div  class="venueDistance">{{place.distance}} mi</div>
 
 			</div>
 			

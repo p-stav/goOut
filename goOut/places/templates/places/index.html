@@ -5,9 +5,15 @@
 {% block content %}
 
 
-
+<div class="indexHeader" style="background-image: url('{{STATIC_URL}}indexImage/indexImage1.jpg');">
+	<div class="imgText">
+		<div class="imgTextContainer">
+			<p class="indexKefi" style="font-family:'Roboto', sans-serif; font-size:28px;">Kefi</p>
+			<p class="indexTagline" style="font-family:'Roboto', sans-serif; font-size:12px;">Find your Scene.</p>
+		</div>
+	</div>
+</div>
 <div class="placeList" id='match'>	
-	
 	{% include "places/indexContent.html" %}
 	
 	<br/><br/><br/>
@@ -29,17 +35,28 @@
 	var i = 0;
 
 	$(document).ready(function() {
+		//change header until get to right scrolling place
+		$('header').css("background-color","rgba(0,0,0,0)");
+		$('.goToIndex').css("display","none");
+		$('.content').css("margin-top","0px");
+		
 		$('.venue').click(function(){
 			//link to next page. Search into how this interfaces with django
 			location.href = './venue/'+$(this).attr('id');
 		});
-
-		
-
-
 	});
 
+	$(document).on("scroll", function(){
+		if ($(document).scrollTop() > 212) {
+			$('header').css("background-color", "#222222");
+			$('.goToIndex').css("display","inline");
+		}
 
+		else {
+			$('header').css("background-color", "rgba(0,0,0,0)");
+			$('.goToIndex').css("display","none");
+		}
+	});
 
 </script>
 {% endblock %}

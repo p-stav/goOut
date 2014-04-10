@@ -188,7 +188,7 @@ def index(request):
 			distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
 			category = place['categories'][0]['name']
 			
-			image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
+			image_url = place['categories'][0]['icon']['prefix'] + 'bg_64' + place['categories'][0]['icon']['suffix']
 
 			color=getColorTheme(place['id'])
 
@@ -218,7 +218,7 @@ def index(request):
 			distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
 			category = place['categories'][0]['name']
 			
-			image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
+			image_url = place['categories'][0]['icon']['prefix'] + 'bg_64' + place['categories'][0]['icon']['suffix']
 
 
 				
@@ -239,7 +239,7 @@ def index(request):
 			category = category = place['categories'][0]['name']
 			#address = []
 			
-			image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
+			image_url = place['categories'][0]['icon']['prefix'] + 'bg_64' + place['categories'][0]['icon']['suffix']
 
 			temp = {'picture': image_url, 'name': place['name'], 'id': place['id'], 'types': category, 'distance':distance, 'color':'127,127,127'}
 			
