@@ -17,7 +17,7 @@
 
 			
 
-			<div class='venue-info curTag' style="color:rgb({{place.color}});">
+			<div class='venue-info curTag' style="color:rgb({{place.color}});  background-color:rgba({{place.color}},0.05);">
 				{% for tag in place.hashtags %}
 					<span class='indexTag'>#{{ tag }}</span>
 				{% endfor %}
@@ -41,7 +41,7 @@
 
 			</div>
 
-			<div class='venue-info curTag' style="color:rgb({{place.color}});">
+			<div class='venue-info curTag' style="color:rgb({{place.color}}); background-color:rgba({{place.color}},0.15);">
 				Known For:<br/>
 				{% for tag in place.hashtags %}
 					<span class='indexTag'>#{{ tag }}</span>
@@ -56,7 +56,7 @@
 	<!--List for items with no data in our DB -->
 	{% for place in placeNoMatch %}
 		<div class="venue" id="{{ place.id }}">
-			<div class="colorWrapper" ><!--style="background-color:rgb({{place.color}});" >-->
+			<div class="colorWrapper" >
 				
 				<img class="venuePic"  src="{{place.picture}}"></img>
 				<div class='venueTitle'>{{ place.name }}</div>
@@ -68,10 +68,8 @@
 			</div>
 			
 			<div class='venue-info curTag' style="color:rgb({{place.color}});">
-				<div>#NoTags!</div>
-				<div class='noReviewsAddress'>
-					Be the first to Tag!
-					<br/>
+				<div>
+					No Tags!<br/>Be the first to Tag!
 				</div>
 			</div>
 			

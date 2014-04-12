@@ -31,7 +31,7 @@ maxFontSizePercentage = 167
 minFontSizePercentage = 50
 
 CategoryBlacklist = ['4bf58dd8d48988d1e0931735',
-'4bf58dd8d48988d1d5941735']
+'4bf58dd8d48988d1d5941735', '4bf58dd8d48988d103941735']
 
 
 
@@ -161,90 +161,91 @@ def index(request):
 
 	
 	for place in venues:
-		if place['id'] in curRevList:
-			#iterate over curRev and find all instances to append to dict to append to json
-			hashtags = {}
-			for placeTag in curRev:
-				if placeTag.place.placeID == place['id']:
-					timeNow = datetime.utcnow()
-					timeDelta = timeNow - placeTag.lastUpdate
-					placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
-					placeTag.lastUpdate = timeNow
-					#placeTag.save()
-					hashtags[placeTag.tag.text] = placeTag.score
-					
-			#sort hashtag scores, and pick 3
-			orderHashtags = Counter(hashtags)
-			topTags = orderHashtags.most_common(5)
-			topHashtags = [i[0] for i in topTags]
-			
-			#check if price_level and rating exist and append
-			#if 'rating' not in place.keys():
-			#	place['rating'] = 'N/A'
-			#if 'price_level' not in place.keys():
-			#	place['price_level'] = 'N/A'
-			
-			#round distance, list of categories, and location
-			distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
-			category = place['categories'][0]['name']
-			
-			image_url = place['categories'][0]['icon']['prefix'] + 'bg_64' + place['categories'][0]['icon']['suffix']
-
-			color=getColorTheme(place['id'])
-
+		if 'address' in place['location'].keys():
+			if place['id'] in curRevList:
+				#iterate over curRev and find all instances to append to dict to append to json
+				hashtags = {}
+				for placeTag in curRev:
+					if placeTag.place.placeID == place['id']:
+						timeNow = datetime.utcnow()
+						timeDelta = timeNow - placeTag.lastUpdate
+						placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
+						placeTag.lastUpdate = timeNow
+						#placeTag.save()
+						hashtags[placeTag.tag.text] = placeTag.score
+						
+				#sort hashtag scores, and pick 3
+				orderHashtags = Counter(hashtags)
+				topTags = orderHashtags.most_common(5)
+				topHashtags = [i[0] for i in topTags]
 				
-			temp = {'picture': image_url ,'name': place['name'], 'id': place['id'], 'types': category, 'hashtags': topHashtags, 'distance':distance, 'color':color}
-			
-			#append
-			placeMatch.append(temp)
-		
-		elif place['id'] in otherRevList:
-			hashtags = {} #will show top two hashtags
-			for placeTag in otherRev:
-				if placeTag.place.placeID == place['id']:
-					timeNow = datetime.utcnow()
-					timeDelta = timeNow - placeTag.lastUpdate
-					placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
-					placeTag.lastUpdate = timeNow
-					#placeTag.save()
-					hashtags[placeTag.tag.text] = placeTag.score
-					
-			#sort hashtag scores, and pick 3
-			orderHashtags = Counter(hashtags)
-			topTags = orderHashtags.most_common(5)
-			topHashtags = [i[0] for i in topTags]
-			
-			#round distance, list of categories, and location
-			distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
-			category = place['categories'][0]['name']
-			
-			image_url = place['categories'][0]['icon']['prefix'] + 'bg_64' + place['categories'][0]['icon']['suffix']
-
-
+				#check if price_level and rating exist and append
+				#if 'rating' not in place.keys():
+				#	place['rating'] = 'N/A'
+				#if 'price_level' not in place.keys():
+				#	place['price_level'] = 'N/A'
 				
-			temp = {'picture': image_url ,'name': place['name'], 'id': place['id'], 'types': category, 'hashtags': topHashtags, 'distance':distance, 'color':'46,117,182'}
-			
-			#append
-			placeMatchOld.append(temp)
-			
-		else:
-			#check to see if price level and rating exist
-			##if 'rating' not in place.keys():
-			#	place['rating'] = 'N/A'
-			#if 'price_level' not in place.keys():
-			#	place['price_level'] = 'N/A'
+				#round distance, list of categories, and location
+				distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
+				category = place['categories'][0]['name']
+				
+				image_url = place['categories'][0]['icon']['prefix'] + 'bg_64' + place['categories'][0]['icon']['suffix']
 
-			#round distance, list of categories, and location
-			distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
-			category = category = place['categories'][0]['name']
-			#address = []
-			
-			image_url = place['categories'][0]['icon']['prefix'] + 'bg_64' + place['categories'][0]['icon']['suffix']
+				color=getColorTheme(place['id'])
 
-			temp = {'picture': image_url, 'name': place['name'], 'id': place['id'], 'types': category, 'distance':distance, 'color':'127,127,127'}
+					
+				temp = {'picture': image_url ,'name': place['name'], 'id': place['id'], 'types': category, 'hashtags': topHashtags, 'distance':distance, 'color':color}
+				
+				#append
+				placeMatch.append(temp)
 			
-			#append
-			placeNoMatch.append(temp)
+			elif place['id'] in otherRevList:
+				hashtags = {} #will show top two hashtags
+				for placeTag in otherRev:
+					if placeTag.place.placeID == place['id']:
+						timeNow = datetime.utcnow()
+						timeDelta = timeNow - placeTag.lastUpdate
+						placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
+						placeTag.lastUpdate = timeNow
+						#placeTag.save()
+						hashtags[placeTag.tag.text] = placeTag.score
+						
+				#sort hashtag scores, and pick 3
+				orderHashtags = Counter(hashtags)
+				topTags = orderHashtags.most_common(5)
+				topHashtags = [i[0] for i in topTags]
+				
+				#round distance, list of categories, and location
+				distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
+				category = place['categories'][0]['name']
+				
+				image_url = place['categories'][0]['icon']['prefix'] + 'bg_64' + place['categories'][0]['icon']['suffix']
+
+
+					
+				temp = {'picture': image_url ,'name': place['name'], 'id': place['id'], 'types': category, 'hashtags': topHashtags, 'distance':distance, 'color':'46,117,182'}
+				
+				#append
+				placeMatchOld.append(temp)
+				
+			else:
+				#check to see if price level and rating exist
+				##if 'rating' not in place.keys():
+				#	place['rating'] = 'N/A'
+				#if 'price_level' not in place.keys():
+				#	place['price_level'] = 'N/A'
+
+				#round distance, list of categories, and location
+				distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
+				category = category = place['categories'][0]['name']
+				#address = []
+				
+				image_url = place['categories'][0]['icon']['prefix'] + 'bg_64' + place['categories'][0]['icon']['suffix']
+
+				temp = {'picture': image_url, 'name': place['name'], 'id': place['id'], 'types': category, 'distance':distance, 'color':'127,127,127'}
+				
+				#append
+				placeNoMatch.append(temp)
 
 	#get all hashtags to display
 	tags = Hashtag.objects.all()
@@ -364,8 +365,8 @@ def placeDetail(request,place_id):
 		
 		tagObject["wasTagged"] = False
 
-		if UserTag.objects.filter(tag=tagObject["tagText"]).exists():
-			checkTag = UserTag.objects.get(tag=tagObject["tagText"])
+		if UserTag.objects.filter(tag=tagObject["tagText"], place__placeID=place['id']).exists():
+			checkTag = UserTag.objects.get(tag=tagObject["tagText"], place__placeID=place['id'])
 			tagObject["wasTagged"] =checkTag.useractionUserTag_set.filter(userID = curUser, place__placeID = place['id'], time__gte = cutoffTime).exists()
 		
 
