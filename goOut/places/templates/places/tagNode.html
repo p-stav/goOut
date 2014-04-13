@@ -1,6 +1,6 @@
 {% if freq > 0  %}
 	<div class="tagNode">
-		<span class="tagText" style="font-size:{{fontSize}}%; font-family:'Roboto', sans-serif;" id="{{tag}}">
+		<span class="tagText" style="font-size:{{fontSize}}%; font-family:'Roboto', sans-serif; color:rgb(46,117,182);" id="{{tag}}">
 			#{{tag}}
 			<span class="freqTag" style="font-size:40%;" >({{freq}}x)</span>
 			
@@ -14,9 +14,9 @@
 			
 		<div class='tagUsername'>
 			{% if username == "Kefi" %}
-				<span class="username freqTag" id="{{username}}" >{{username}}</span>
+				<span class="username kefiTag" id="{{username}}" >{{username}}</span>
 			{%else%}
-				<span class="username kefiTag" id="{{username}}">{{username}}</span>
+				<span class="username usernameTag" id="{{username}}">{{username}}</span>
 			{%endif%}
 		</div>		
 	</div>

@@ -212,7 +212,7 @@ def index(request):
 						
 				#sort hashtag scores, and pick 3
 				orderHashtags = Counter(hashtags)
-				topTags = orderHashtags.most_common(5)
+				topTags = orderHashtags.most_common(4)
 				topHashtags = [i[0] for i in topTags]
 				
 				#round distance, list of categories, and location
@@ -830,7 +830,8 @@ def about(request):
 def tag(request):
 	#get username
 	if request.user.is_authenticated():
-		userName = getUsername(request.user.id)
+		curUser = getUserProfile(request.user.id)
+		userName = getUsername(curUser)
 	else:
 		userName = ''
 
@@ -846,7 +847,7 @@ def tag(request):
 	
 
 	placetagsWithTag = PlaceTag.objects.filter(tag__text=hashtag, lastUpdate__gte = cutoffTime)
-	placeTagList = []
+	placeMatch = []
 
 	"""YELP API
 	# Values for access
@@ -896,15 +897,15 @@ def tag(request):
 
 
 
-		placeTagList.append({'id' : placeTag.place.placeID, 'name' : placeTag.place.placeName, 'picture' : image_url, 'types' : category, 'distance' : distance, 'finalScore' : finalScore, 'hashtags':topHashtags, 'color':color})
+		placeMatch.append({'id' : placeTag.place.placeID, 'name' : placeTag.place.placeName, 'picture' : image_url, 'types' : category, 'distance' : distance, 'finalScore' : finalScore, 'hashtags':topHashtags, 'color':color})
 	
 
-	placeTagList.sort(key=lambda x:x['finalScore'])
+	placeMatch.sort(key=lambda x:x['finalScore'])
 
 	#get all hashtags to display on header
 	tags = Hashtag.objects.all()
 
-	context = {'placeTagList' : placeTagList, 'hashtag':hashtag, 'headerUIAdditions':'hi', 'username':userName, 'tags':tags}
+	context = {'placeMatch' : placeMatch, 'hashtag':hashtag, 'headerUIAdditions':'hi', 'username':userName, 'tags':tags}
 	return render(request, 'places/tag.html', context)
 
 
@@ -1084,16 +1085,17 @@ def userTagUpdate(request):
 #####################################functions to call in views!#############################
 def getColorTheme(id):
 	cutoffTime = getCutoffTime()
-	color = '127,127,127'
+	color = '255,255,255'
 	
 	if Place.objects.filter(placeID=id).exists():
 		numRecentReviews = UserAction.objects.filter(place=Place.objects.get(placeID=id), time__gte = cutoffTime)
 
-		color = '46,117,182'
+		colorBase = "46,117,182"
+		color =  colorBase + ",0.1"
 		if len(numRecentReviews) >= 5:
-			color = '255,80,80'
+			color = colorBase +", 0.4"
 		elif len(numRecentReviews) >= 2:
-			color = '128,0,128'
+			color = colorBase + ",0.25"
 	return color
 
 def getCutoffTime():

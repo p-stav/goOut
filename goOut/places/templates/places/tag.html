@@ -10,67 +10,20 @@
 		<br/>
 	</div>
 </div>
-	{% for place in placeTagList %}
-		<div class="venue" id="{{ place.id }}">
-			<div align="right" class="venueInternalRight">
-				{{place.distance}} mi
-			</div>
-
-			<div class='venue-info curTag' style="color:rgb({{place.color}});">
-				{% for tag in place.hashtags %}
-					<span class='indexTag'>#{{ tag }}</span>
-				{% endfor %}
-			</div>
-
-			<br/>
-			<div class="colorWrapper" style="background-color:rgb({{place.color}});" >
-				<img class="venuePic"  src="{{place.picture}}"></img>
-				<div class='venueTitle'>{{ place.name }}</div>
-				<div class='venueType'>
-					{{place.types}}
-				</div>
-				<br/>
-			</div>
-
-			
-			<div class="separator">
-			</div>
-		</div>
-	{% empty %}
-		<br/>
-		<p class="h4" style="font-family:'Roboto', sans-serif; text-align:center;">
-			No places are #{{hashtag}}! Get it started.
-		</p>
-	{% endfor %}
 	
+<div class="list">
+	{% include "places/indexContent.html" %}
+</div>
 
-	<!--modal-->
-	<div class="modal fade bs-example-modal-sm" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content" style="font-family:'Roboto', sans-serif;">
-				<div class="modal-header">
-					Pick a tag to see matched venues!
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body">
-					{% for tag in tags %}
-						<div class="tag inactiveTag" id="{{tag}}">#{{tag}}</div>
-					{%endfor%}
-				</div>
-			</div>
-		</div>
-	</div>
 
-<script>
-	$(document).ready(function() {
-		$('.tag').click(function() {
-				if ($(this).hasClass('inactiveTag'))
-				{
-					$(this).css('background-color','#c0c0c0');
-					location.href='/tag/' + $(this).attr('id');
-				}
-			});
-	});
-</script>
+{% if placeMatch|length == 0 %}
+	<br/>
+	<p class="h4" style="font-family:'Roboto', sans-serif; text-align:center;">
+		No places tagged with #{{hashtag}}!
+	</p>
+{% endif %}
+
+<!--modal-->
+{% include "places/tagSelect.html" %}
 
 {% endblock %}

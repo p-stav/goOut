@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class='container'>
-	<div class="jumbotron" style="background-color:rgb({{color}}); font-family:'Roboto', sans-serif;">
+	<div class="jumbotron" style="background-color:rgb(127,0,127); font-family:'Roboto', sans-serif;">
 		<p class="jumboTitle whiteText" align="center">{{name}}</p>
 		<!--<div class='intro'>-->
 		<div class = 'introInfo whiteText'>
@@ -27,7 +27,7 @@
 
 		<br/>
 	  	<div class='btn-group buttonsPlaceDetail' style='width:100%'>
-			<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span><p style="font-size: 10px;">Tag it</p></button></a>
+			<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span><p style="font-size: 10px;">Tag</p></button></a>
 			
 			{% if placeFavorited %}
 				<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-info buttonPlaceDetail active'><span class="glyphicon glyphicon-star"></span><p style="font-size: 10px;">Fav</p></button></a>
@@ -50,7 +50,7 @@
 		
 			{% for tag,fontSize,freq,username, wasTagged in tagsWithFonts %}
 			<div class="tagNode">
-				<span class="tagText" style="font-size:{{fontSize}}%; font-family:'Roboto', sans-serif;" id="{{tag}}">
+				<span class="tagText" style="font-size:{{fontSize}}%; font-family:'Roboto', sans-serif; color:rgb(46,117,182);" id="{{tag}}">
 					#{{tag}}
 					<span class="freqTag" style="font-size:40%;" >({{freq}}x)</span>
 
@@ -64,9 +64,9 @@
 					
 				<div class='tagUsername'>
 					{% if username == "Kefi" %}
-						<span class="username freqTag" id="{{username}}" >{{username}}</span>
+						<span class="username kefiTag" id="{{username}}" >{{username}}</span>
 					{%else%}
-						<span class="username kefiTag" id="{{username}}">{{username}}</span>
+						<span class="username usernameTag" id="{{username}}">{{username}}</span>
 					{%endif%}
 				</div>		
 			</div>
@@ -76,9 +76,9 @@
 		{%elif oldTags %}
 			<!--<div class='h4'>Are you here? <a href="/review/{{ name }}/{{ id }}">Get the party started!</a></div>
 			</br><br/>-->
-			<h4 id='titleOldTags'>What happened here lately?</h4>
+			<h4 id='titleOldTags'>No Tags now. Most known for:</h4>
 			{% for tag in oldTags %}
-				<p style="font-size:16px; font-family:'Roboto', sans-serif;">#{{tag}}</p>
+				<p style="font-size:16px; font-family:'Roboto', sans-serif; color:rgb(46,117,182)">#{{tag}}</p>
 			{%endfor%}
 
 		{% else%}

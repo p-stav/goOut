@@ -63,14 +63,18 @@ font-size: .85em;
   font-size:11px; 
 }
 
-.kefiTag {
+.usernameTag{   
   font-size:11px;
   color: #fff;
   background-color: #999999;
   border-radius: 4px;
   -moz-border-radius: 4px;
   padding: 0px 4px 2px 4px;
+}
 
+.kefiTag {
+  color: #999999;
+  font-size:11px;
 
 }
 
@@ -82,6 +86,12 @@ font-size: .85em;
   border-radius: 10px;
   -moz-border-radius: 10px;
   border: 1px solid #c0c0c0;
+}
+
+.activeTag{
+  color: #ffffff;
+  background-color: rgb(46,117,182);
+
 }
 
 .tagNode{
@@ -202,6 +212,7 @@ font-size: .85em;
   padding: 5px 0px 5px 10px;
   margin-top:10px;
   border-radius: 8px;
+  color:rgb(46,117,182);
 }
 
 

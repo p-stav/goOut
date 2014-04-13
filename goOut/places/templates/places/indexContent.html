@@ -17,7 +17,7 @@
 
 			
 
-			<div class='venue-info curTag' style="color:rgb({{place.color}});  background-color:rgba({{place.color}},0.05);">
+			<div class='venue-info curTag' style="background-color:rgba({{place.color}});">
 				{% for tag in place.hashtags %}
 					<span class='indexTag'>#{{ tag }}</span>
 				{% endfor %}
@@ -41,8 +41,8 @@
 
 			</div>
 
-			<div class='venue-info curTag' style="color:rgb({{place.color}}); background-color:rgba({{place.color}},0.15);">
-				Known For:<br/>
+			<div class='venue-info curTag' style="color:rgb(128,0,128)">
+				No tags now. Most known for:<br/>
 				{% for tag in place.hashtags %}
 					<span class='indexTag'>#{{ tag }}</span>
 				{% endfor %}
@@ -67,7 +67,7 @@
 
 			</div>
 			
-			<div class='venue-info curTag' style="color:rgb({{place.color}});">
+			<div class='venue-info curTag' style="color:rgb(127,127,127);">
 				<div>
 					No Tags!<br/>Be the first to Tag!
 				</div>
