@@ -9,7 +9,7 @@
 		<p class="jumboTitle " align="center">{{name}}</p>
 		<!--<div class='intro'>-->
 		<div class = 'introInfo '>
-			<div style="margin-bottom:10px;" align="center">{{venueTypes}}</div>
+			<div align="center">{{venueTypes}}</div>
 		</div>
 
 		<div class='left introInfo addressPlaceDetail'>
@@ -53,7 +53,6 @@
 	<br/>
 	<div class="curTags">
 		{% if tagsWithFonts %}
-		
 			{% for tag,fontSize,freq,username, wasTagged in tagsWithFonts %}
 			<div class="tagNode">
 				<span class="tagText" style="font-size:{{fontSize}}%; font-family:'Roboto', sans-serif;" id="{{tag}}">

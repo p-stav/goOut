@@ -431,7 +431,7 @@ def placeDetail(request,place_id):
 		address.append(place['location']['crossStreet'])
 	category = category = place['categories'][0]['name']
 
-	image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
+	image_url = place['categories'][0]['icon']['prefix'] + 'bg_64' + place['categories'][0]['icon']['suffix']
 
 	#get color theme
 	color=getColorTheme(place['id'])
@@ -720,7 +720,7 @@ def view_fav(request):
 		
 		#distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
 		category = place['categories'][0]['name']
-		image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
+		image_url = place['categories'][0]['icon']['prefix'] + 'bg_64' + place['categories'][0]['icon']['suffix']
 		color=getColorTheme(placeItem.placeID)
 		
 
@@ -880,7 +880,7 @@ def tag(request):
 		
 		distance = round(place['location']['distance'] * 0.000621371192, -int(floor(log10(place['location']['distance'] * 0.000621371192))))
 		category = place['categories'][0]['name']
-		image_url = place['categories'][0]['icon']['prefix'] + '64' + place['categories'][0]['icon']['suffix']
+		image_url = place['categories'][0]['icon']['prefix'] + 'bg_64' + place['categories'][0]['icon']['suffix']
 		color=getColorTheme(placeTag.place.placeID)
 		finalScore = placeTag.score + 1 / distance
 
