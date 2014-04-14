@@ -549,9 +549,9 @@ def submit_submitReview(request):
 
 				#update freq and lastUpdate
 				if timeDelta.total_seconds() > 7200:
-					freq = 1
+					placeTag.freq = 1
 				else:
-					freq += 1
+					placeTag.freq += 1
 
 				placeTag.lastUpdate = timeNow
 
@@ -604,9 +604,9 @@ def submit_submitReview(request):
 
 				#update freq and lastUpdate
 				if timeDelta.total_seconds() > 7200:
-					freq = 1
+					userTag.freq = 1
 				else:
-					freq += 1
+					userTag.freq += 1
 
 				userTag.lastUpdate = timeNow
 

@@ -5,44 +5,50 @@
 {% block content %}
 
 <div class='container'>
-	<div class="jumbotron" style="background-color:rgb(127,0,127); font-family:'Roboto', sans-serif;">
-		<p class="jumboTitle whiteText" align="center">{{name}}</p>
+	<div class="jumbotron" style="color: rgb(46,117,182); font-family:'Roboto', sans-serif;">
+		<p class="jumboTitle " align="center">{{name}}</p>
 		<!--<div class='intro'>-->
-		<div class = 'introInfo whiteText'>
-			<div  align="center">{{venueTypes}}</div>
-
-			<br/>
-			<div class='left introInfo'>
-				{% for addresses in address %}
-					{{ addresses }}
-					{%if not forloop.last %}<br/> {% endif %}
-				{% endfor %}
-			</div>
+		<div class = 'introInfo '>
+			<div style="margin-bottom:10px;" align="center">{{venueTypes}}</div>
 		</div>
-		<div class='introInfoRight'>
-			<div style="float:right;"><a class="noDecoration whiteText" href="http://foursquare.com/v/{{id}}?ref=T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O">4Square Page</div>
-			
-		</div>
-	<!--</div>-->
 
-		<br/>
-	  	<div class='btn-group buttonsPlaceDetail' style='width:100%'>
-			<a href="/review/{{ name }}/{{ id }}"><button type='button' class='btn btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-edit"></span><p style="font-size: 10px;">Tag</p></button></a>
-			
+		<div class='left introInfo addressPlaceDetail'>
+			<span class="placeDetailSymbols glyphicon glyphicon-map-marker"></span><br/>
+			{% for addresses in address %}
+				{{ addresses }}
+				{%if not forloop.last %}<br/> {% endif %}
+			{% endfor %}
+		</div>
+
+		<div class='introInfoRight' style="float:right;">
 			{% if placeFavorited %}
-				<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-info buttonPlaceDetail active'><span class="glyphicon glyphicon-star"></span><p style="font-size: 10px;">Fav</p></button></a>
+				<span class=" favorited placeDetailSymbols glyphicon glyphicon-star"></span><br/>
+				<div>Favorited!</div>
+				<span class="4sqr">go to 4Sqr page</span>
 			{% else %}
-				<a href="/{{ name }}/{{ id }}/fav"><button type='button' class='btn btn-default buttonPlaceDetail'><span class="glyphicon glyphicon-star"></span><p style="font-size: 10px;">Fav</p></button></a>
+				<span class="favorited placeDetailSymbols glyphicon glyphicon-star-empty"></span><br/>
+				<div>tap star to fav</div>
+				<span class="4sqr">go to 4Sqr page</span>
 			{% endif %}
 
+					
 		</div>
+
+		<div class="tagIt">
+			<span class="tagItIcon glyphicon glyphicon-edit"></span>		
+			<div style="color:rgb(127,0,127);"> tag it</div>
+		</div>
+
+
+	
+		
+
+	</div>
 		 <!--
 		  <button type='button' class='btn btn-lg btn-default'><a href="#"><span class="glyphicon glyphicon-map-marker"><
 		{%else}/span></a></button>
 		 -->
-	  
-	  <!--short menu to write review, see more history, favorite, etc.-->
-	</div>
+	  	<div class="separator"></div>
 
 	<br/>
 	<div class="curTags">
@@ -50,7 +56,7 @@
 		
 			{% for tag,fontSize,freq,username, wasTagged in tagsWithFonts %}
 			<div class="tagNode">
-				<span class="tagText" style="font-size:{{fontSize}}%; font-family:'Roboto', sans-serif; color:rgb(46,117,182);" id="{{tag}}">
+				<span class="tagText" style="font-size:{{fontSize}}%; font-family:'Roboto', sans-serif;" id="{{tag}}">
 					#{{tag}}
 					<span class="freqTag" style="font-size:40%;" >({{freq}}x)</span>
 
@@ -78,7 +84,7 @@
 			</br><br/>-->
 			<h4 id='titleOldTags'>No Tags now. Most known for:</h4>
 			{% for tag in oldTags %}
-				<p style="font-size:16px; font-family:'Roboto', sans-serif; color:rgb(46,117,182)">#{{tag}}</p>
+				<p style="font-size:16px; font-family:'Roboto', sans-serif;">#{{tag}}</p>
 			{%endfor%}
 
 		{% else%}
@@ -132,7 +138,22 @@
 				$(this).css('background-color','#c0c0c0');
 				location.href='/tag/' + $(this).attr('id');
 			}
+
 		});
+
+		$(".4sqr").click(function(){
+				window.location.href='http://foursquare.com/v/{{id}}?ref=T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O';
+		});
+
+		$(".favorited").click(function(){
+				window.location.href='/{{ name|urlencode }}/{{ id }}/fav'
+		});
+
+		$(".tagIt").click(function(){
+				window.location.href='/review/{{ name|urlencode }}/{{ id }}'
+		});
+						
+
 
 
 		$(document).on(" touchend",".tagText", function() {

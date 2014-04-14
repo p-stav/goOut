@@ -47,10 +47,20 @@ font-size: .85em;
   color:#fff;
 }
 
-.buttonsPlaceDetail {
+.tagIt {
+  font-size: 15px;
   text-align: center;
-  margin-top:15px;
-  margin-bottom: 3px;
+  margin: 30px 35% 3px 35%;
+}
+
+.tagItIcon {
+  font-size: 45px;
+  color: rgb(127,0,127);
+
+  padding: 5px 10px 15px 10px;
+  border: 1px solid rgb(127,0,127);
+  -moz-border-radius: 5px;
+  border-radius: 100px;
 }
 
 .inlineNav li{
@@ -90,7 +100,7 @@ font-size: .85em;
 
 .activeTag{
   color: #ffffff;
-  background-color: rgb(46,117,182);
+  background-color: rgb(127,0,127);
 
 }
 
@@ -166,7 +176,7 @@ font-size: .85em;
 
 .jumboTitle{
   margin:20px 10px 0px 10px;
-  font-size: 24px;
+  font-size: 30px;
 
 }
 
@@ -237,7 +247,7 @@ font-size: .85em;
 }
 
 .venueDistance {
-  margin-left:10px;
+  margin-left:2px;
   color: #000;
   font-size:10px;
 
@@ -260,12 +270,26 @@ font-size: .85em;
 }
 
 .separator{
-  border-bottom: 1px solid #c0c0c0;
+  border-bottom: 1px solid rgb(127,0,127);
   margin-top:7px;
 }
 
 .right{
 float:right;
+}
+
+
+.addressPlaceDetail{
+  width:35%;
+}
+
+.placeDetailSymbols {
+  font-size:25px;
+  margin-bottom:5px;
+  padding:10px;
+  border: 1px solid rgb(46,117,182);
+  -moz-border-radius: 5px;
+  border-radius: 100px;
 }
 
 #tagLabels {

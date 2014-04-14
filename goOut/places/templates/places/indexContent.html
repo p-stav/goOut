@@ -9,7 +9,7 @@
 				<img class="venuePic"  src="{{place.picture}}"></img>
 				<div class='venueTitle'>{{ place.name }}</div>
 				<div class='venueType'>
-					{{ place.types}}		
+				<!--	{{ place.types}}		-->
 					<span class="venueDistance" style="">{{place.distance}} mi</span>
 				</div>
 
@@ -35,14 +35,14 @@
 				<img class="venuePic"  src="{{place.picture}}"></img>
 				<div class='venueTitle'>{{ place.name }}</div>
 				<div class='venueType'>
-					{{ place.types}}		
+				<!--	{{ place.types}}		-->
 					<span class="venueDistance" style="">{{place.distance}} mi</span>
 				</div>
 
 			</div>
 
-			<div class='venue-info curTag' style="color:rgb(128,0,128)">
-				No tags now. Most known for:<br/>
+			<div class='venue-info curTag' style="color:rgb(46,117,182)">
+				<span style="font-size:17.4px;">No tags now. Most known for:</span> <br/>
 				{% for tag in place.hashtags %}
 					<span class='indexTag'>#{{ tag }}</span>
 				{% endfor %}
@@ -61,7 +61,7 @@
 				<img class="venuePic"  src="{{place.picture}}"></img>
 				<div class='venueTitle'>{{ place.name }}</div>
 				<div class='venueType'>
-					{{ place.types}}		
+				<!--	{{ place.types}}		-->
 					<span class="venueDistance" style="">{{place.distance}} mi</span>
 				</div>
 
