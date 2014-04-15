@@ -10,7 +10,8 @@
 				</div>
 				<div class="modal-body">
 					{% for tagCategory, tagList in tags %}
-						<p>{{ tagCategory }}</p>
+						{% if not forloop.first %}<br/>{% endif %}
+						<p class="tagTitle">{{ tagCategory }}</p>
 						{% for tag in tagList %}
 							<div class="searchTag inactiveTag">
 								<input name='hashtag' type="checkbox" class="h4 hidden " value="{{tag}}"> #{{tag}}
@@ -52,7 +53,8 @@
 			{
 				//select and color
 				$(this).find('input').prop('checked', true);
-				$(this).css('background-color','#c0c0c0');
+				$(this).css('background-color','rgb(127,0,127)');
+				$(this).css('color','#fff');
 				$('#tagSearchForm').submit();
 			}
 			

@@ -16,11 +16,15 @@
 	<form role="form" method='post' action={% url "places:submit_submitReview" %}>
 		{% csrf_token %}
 		<div class='add-tags'>
-			{% for tag in tags %}
-				<div class="tag inactiveTag">
-					<input name='tagNames' type="checkbox" class="h4 hidden " value="{{tag.text}}"> #{{tag.text}}
-					<!--<div class='unselectedTag' style='float:right'><span class='glyphicon glyphicon-ok'</span></div>-->
-				</div>
+			{% for tagCategory, tagList in tags %}
+						<br/>
+						<p class="tagTitle">{{ tagCategory }}</p>
+						{% for tag in tagList %}
+							<div class="tag inactiveTag">
+								<input name='tagNames' type="checkbox" class="h4 hidden " value="{{tag}}"> #{{tag}}
+								<!--<div class='unselectedTag' style='float:right'><span class='glyphicon glyphicon-ok'</span></div>-->
+							</div>
+						{% endfor %}
 			{% endfor %}
 		
 
