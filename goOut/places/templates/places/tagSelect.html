@@ -9,11 +9,14 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">
-					{% for tag in tags %}
-						<div class="searchTag inactiveTag">
-							<input name='hashtag' type="checkbox" class="h4 hidden " value="{{tag.text}}"> #{{tag.text}}
-							<!--<div class='unselectedTag' style='float:right'><span class='glyphicon glyphicon-ok'</span></div>-->
-						</div>
+					{% for tagCategory, tagList in tags %}
+						<p>{{ tagCategory }}</p>
+						{% for tag in tagList %}
+							<div class="searchTag inactiveTag">
+								<input name='hashtag' type="checkbox" class="h4 hidden " value="{{tag}}"> #{{tag}}
+								<!--<div class='unselectedTag' style='float:right'><span class='glyphicon glyphicon-ok'</span></div>-->
+							</div>
+						{%endfor%}
 					{%endfor%}
 				</div>
 			</div>

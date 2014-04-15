@@ -248,7 +248,7 @@ def index(request):
 				placeNoMatch.append(temp)
 
 	#get all hashtags to display
-	tags = Hashtag.objects.all()
+	tags = groupTags()
 
 
 	sortMethod = ''
@@ -461,7 +461,7 @@ def placeDetail(request,place_id):
 	comments.reverse()
 	"""
 	#get all hashtags to display on header
-	tags = Hashtag.objects.all()
+	tags = groupTags()
 
 	context = {'userName':userName, 'id':place['id'], 'oldTags':oldTags, 'tagsWithFonts':tagsWithFonts, 'name':place['name'], 'venueTypes':category, 'address':address, 'placeFavorited':placeFavorited, 'color':color, 'picture' : image_url, 'tags':tags}
 	return render(request, 'places/placeDetail.html', context)
@@ -479,7 +479,7 @@ def submitReview(request):
 		userName = ''
 		
 	#grab all hashtags to display
-	tags = Hashtag.objects.all()
+	tags = groupTags()
 	
 	context = {'userName':userName,'tags':tags}
 	return render(request, 'places/submitReview.html', context)
@@ -497,7 +497,7 @@ def submitReviewVenue(request, place_name, reference):
 	color=getColorTheme(reference)
 
 	#grab all hashtags to display
-	tags = Hashtag.objects.all()
+	tags = groupTags()
 	
 	context = {'userName':userName, 'tags':tags, 'id':reference, 'name':place_name, 'color':color}
 	return render(request, 'places/submitReviewVenue.html', context)
@@ -903,7 +903,7 @@ def tag(request):
 	placeMatch.sort(key=lambda x:x['finalScore'])
 
 	#get all hashtags to display on header
-	tags = Hashtag.objects.all()
+	tags = groupTags()
 
 	context = {'placeMatch' : placeMatch, 'hashtag':hashtag, 'headerUIAdditions':'hi', 'username':userName, 'tags':tags}
 	return render(request, 'places/tag.html', context)
@@ -1153,4 +1153,23 @@ def checkFontSizePercentage(fontSizePercentage):
 		fontSizePercentage = minFontSizePercentage
 
 	return fontSizePercentage
+
+
+
+def groupTags():
+	#grab all categories
+	categories = HashtagCategory.objects.all()
+
+	#create dictionary with all categories and tags
+	tags = []
+
+	for category in categories:
+		temp = []
+		
+		hashtags = Hashtag.objects.filter(category=category)
+		temp = [i.text for i in hashtags ]
+		tags.append([category.name, temp])
+
+	return tags
+
 ############################################################################################

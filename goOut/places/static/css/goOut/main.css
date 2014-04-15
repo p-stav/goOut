@@ -269,7 +269,7 @@ font-size: .85em;
 }
 
 .separator{
-  border-bottom: 1px solid rgb(127,0,127);
+  border-bottom: 1px solid #999999;
   margin-top:7px;
 }
 
