@@ -484,14 +484,13 @@ def submitReview(request):
 	context = {'userName':userName,'tags':tags}
 	return render(request, 'places/submitReview.html', context)
 
-@login_required()
 def submitReviewVenue(request, place_name, reference):
 	#get username
 	if request.user.is_authenticated():
 		curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
 		userName = curUser.user.username
 	else:
-		userName = ''
+		userName = False
 	
 	#get color theme
 	color=getColorTheme(reference)
@@ -506,8 +505,9 @@ def submitReviewVenue(request, place_name, reference):
 def submit_submitReview(request):
 	##find today's date to find items close to it in db                                                                                                                                  
 	cutoffTime = getCutoffTime()
-
-	curUser = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+	
+	curUser = getUserProfile(request.user.id)
+	
 
 	#Check if place exists. If not, add place
 	if Place.objects.filter(placeID=request.POST['venueId']).exists():
@@ -528,124 +528,131 @@ def submit_submitReview(request):
 	
 	#get list of tags
 	#listTags = request.body
-	tags = request.POST.getlist('tagNames')
+	if len(request.POST.getlist('tagNames'))>0:
+		tags = request.POST.getlist('tagNames')
 
-	#Filter for all instances of Places with same placeId and tag within alotted time
-	filterPlace = PlaceTag.objects.filter(place=newPlace)
+		#Filter for all instances of Places with same placeId and tag within alotted time
+		filterPlace = PlaceTag.objects.filter(place=newPlace)
 
-	newAction = checkExistingAction(curUser, newPlace)
-	
-	
-	if len(filterPlace)>0:
-		#check to see if tag exists
-		for placeTag in filterPlace:
-			if (placeTag.tag.text in tags) and (placeTag.tag not in newAction.tags.all()):
-
-				#update score
-				timeNow = datetime.utcnow()
-				timeDelta = timeNow - placeTag.lastUpdate
-				placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
-				placeTag.score += 50
-
-				#update freq and lastUpdate
-				if timeDelta.total_seconds() > 7200:
-					placeTag.freq = 1
-				else:
-					placeTag.freq += 1
-
-				placeTag.lastUpdate = timeNow
-
-				#take out hashtag from the list
-				position = tags.index(placeTag.tag.text)
-				tags.pop(position)
-
-				newAction.tags.add(placeTag.tag)
-				
-				placeTag.save()
-
-			elif (placeTag.tag.text in tags):
-				position = tags.index(placeTag.tag.text)
-				tags.pop(position)
-
-	#create a new review with remaining tags that didn't match
-	for hashtag in tags: 
-		newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.utcnow(), score = initialScore)
+		if curUser !=False:
+			newAction = checkExistingAction(curUser, newPlace)
 		
-		#log new user action
-		if newVenueReview.tag not in newAction.tags.all():
-			newAction.tags.add(newVenueReview.tag)
 		
+		if len(filterPlace)>0:
+			#check to see if tag exists
+			for placeTag in filterPlace:
+				if (placeTag.tag.text in tags): #and (placeTag.tag not in newAction.tags.all()):
 
-		newVenueReview.save()
-	
+					#update score
+					timeNow = datetime.utcnow()
+					timeDelta = timeNow - placeTag.lastUpdate
+					placeTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
+					placeTag.score += 50
+
+					#update freq and lastUpdate
+					if timeDelta.total_seconds() > 7200:
+						placeTag.freq = 1
+					else:
+						placeTag.freq += 1
+
+					placeTag.lastUpdate = timeNow
+
+					#take out hashtag from the list
+					position = tags.index(placeTag.tag.text)
+					tags.pop(position)
+
+					if curUser!=False:
+						newAction.tags.add(placeTag.tag)
+					
+					placeTag.save()
+
+				elif (placeTag.tag.text in tags):
+					position = tags.index(placeTag.tag.text)
+					tags.pop(position)
+
+		#create a new review with remaining tags that didn't match
+		for hashtag in tags: 
+			newVenueReview = PlaceTag.objects.create(place=newPlace, tag = Hashtag.objects.get(text=hashtag), freq=1, lastUpdate=datetime.utcnow(), score = initialScore)
+			
+			#log new user action
+			if curUser !=False:
+				if newVenueReview.tag not in newAction.tags.all():
+					newAction.tags.add(newVenueReview.tag)
+					newAction.save()
+			
+
+			newVenueReview.save()
+		
 
 	###################get personalized hashtags:##########################
-	personalTags = request.POST.getlist('personalTag')
-	lowerPersonalTags = [i.lower() for i in personalTags]
-	
-	#grab all UserTags associated with place to see if this one exists
-	existingUserTag = UserTag.objects.filter(place = newPlace)
+	if curUser != False and len(request.POST.getlist('personalTag')) > 0:
+		personalTags = request.POST.getlist('personalTag')
+		lowerPersonalTags = [i.lower() for i in personalTags]
+		
+		#grab all UserTags associated with place to see if this one exists
+		existingUserTag = UserTag.objects.filter(place = newPlace)
 
-	#does userTag exist? 
-	#make all strings lower to catch all capitlaization instances
-	userActionPersonalTags = newAction.userTags.all()
-	lowerUserActionPersonalTags = [i.tag.lower() for i in userActionPersonalTags]
+		#does userTag exist? 
+		#make all strings lower to catch all capitlaization instances
+		userActionPersonalTags = newAction.userTags.all()
+		lowerUserActionPersonalTags = [i.tag.lower() for i in userActionPersonalTags]
 
-	if len(personalTags)>0:
-		for userTag in existingUserTag:
-			#if existing tag not in a user action of curUser, and that existing tag was submitted by user:
-			if (userTag.tag.lower() not in lowerUserActionPersonalTags) and (userTag.tag.lower() in lowerPersonalTags):
-				
-				#update score
-				timeNow = datetime.utcnow()
-				timeDelta = timeNow - userTag.lastUpdate
-				userTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
-				userTag.score += 50
+		if len(personalTags)>0:
+			for userTag in existingUserTag:
+				#if existing tag not in a user action of curUser, and that existing tag was submitted by user:
+				if (userTag.tag.lower() not in lowerUserActionPersonalTags) and (userTag.tag.lower() in lowerPersonalTags):
+					
+					#update score
+					timeNow = datetime.utcnow()
+					timeDelta = timeNow - userTag.lastUpdate
+					userTag.score *= exp(-timeDecayExponent * timeDelta.total_seconds())
+					userTag.score += 50
 
-				#update freq and lastUpdate
-				if timeDelta.total_seconds() > 7200:
-					userTag.freq = 1
-				else:
-					userTag.freq += 1
+					#update freq and lastUpdate
+					if timeDelta.total_seconds() > 7200:
+						userTag.freq = 1
+					else:
+						userTag.freq += 1
 
-				userTag.lastUpdate = timeNow
+					userTag.lastUpdate = timeNow
 
-				#take out hashtag from the list
-				position = lowerPersonalTags.index(userTag.tag.lower())
-				personalTags.pop(position)
+					#take out hashtag from the list
+					position = lowerPersonalTags.index(userTag.tag.lower())
+					personalTags.pop(position)
 
-				newAction.userTags.add(userTag)
-				
-				userTag.save()
+					newAction.userTags.add(userTag)
+					
+					userTag.save()
 
-			#If this tag is in an existing userAction, meaning you can't submit a like:
-			elif (userTag.tag.lower() in lowerPersonalTags):
-					position = lowerPersonalTags.index(userTag.tag)
-					personalTags.pop(position)	
+				#If this tag is in an existing userAction, meaning you can't submit a like:
+				elif (userTag.tag.lower() in lowerPersonalTags):
+						position = lowerPersonalTags.index(userTag.tag)
+						personalTags.pop(position)	
 
-		#create new object for userTag
-		for hashtag in personalTags: 
-			if hashtag != '':
-				if "#" in hashtag:
-					hashtag = hashtag.replace("#", "")
+			#create new object for userTag
+			for hashtag in personalTags: 
+				if hashtag != '':
+					if "#" in hashtag:
+						hashtag = hashtag.replace("#", "")
 
-				if " " in hashtag:
-					hashtag = hashtag.replace(" ", "")
+					if " " in hashtag:
+						hashtag = hashtag.replace(" ", "")
 
-				newVenueReview = UserTag.objects.create(userID = curUser, place=newPlace, tag = hashtag, freq=1, lastUpdate=datetime.utcnow(), score = initialScore)
-				newVenueReview.save()
-				
-				#log new user action
-				if newVenueReview.tag not in newAction.userTags.all():
-					newAction.userTags.add(newVenueReview)
+					newVenueReview = UserTag.objects.create(userID = curUser, place=newPlace, tag = hashtag, freq=1, lastUpdate=datetime.utcnow(), score = initialScore)
+					newVenueReview.save()
+					
+					#log new user action
+					if newVenueReview.tag not in newAction.userTags.all():
+						newAction.userTags.add(newVenueReview)
 
-					newAction.save()
+						newAction.save()
 
 
-	
+		
 	#add a point to the user
-	curUser.points += 1
-	curUser.save()
+	if curUser!=False:
+		curUser.points += 1
+		curUser.save()
 
 	redirectURL = "/venue/" + request.POST["venueId"]
 
@@ -1115,17 +1122,20 @@ def isBlacklistedCategory(place):
 		return False
 
 def getUsername(uid):
-	if UserProfile.objects.filter(user=User.objects.get(id=uid.user.id)).exists():
-		userName = UserProfile.objects.get(user=User.objects.get(id=uid.user.id)).user.username
+	if uid==False:
+		userName=False
 	else:
-		userName = ''
-
-	return userName
+		if UserProfile.objects.filter(user=User.objects.get(id=uid.user.id)).exists():
+			userName = UserProfile.objects.get(user=User.objects.get(id=uid.user.id)).user.username
+		else:
+			userName = ""
 
 	return userName
 
 def getUserProfile(uid):
-	curUser = UserProfile.objects.get(user=User.objects.get(id=uid))
+	try: curUser = UserProfile.objects.get(user=User.objects.get(id=uid))
+	except: curUser = False
+	
 	return curUser
 
 

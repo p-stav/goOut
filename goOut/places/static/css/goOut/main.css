@@ -258,8 +258,8 @@ font-size: .85em;
 
 .venuePic {
   height: 64px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
   float:right;
   margin-top:10px;
 }

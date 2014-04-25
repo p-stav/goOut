@@ -13,7 +13,7 @@
 		</div>
 
 		<div class='left introInfo addressPlaceDetail'>
-			<span class="placeDetailSymbols glyphicon glyphicon-map-marker"></span><br/>
+			<span class="placeDetailSymbols map glyphicon glyphicon-map-marker"></span><br/>
 			{% for addresses in address %}
 				{{ addresses }}
 				{%if not forloop.last %}<br/> {% endif %}
@@ -23,12 +23,12 @@
 		<div class='introInfoRight' style="float:right;">
 			{% if placeFavorited %}
 				<span class=" favorited placeDetailSymbols glyphicon glyphicon-star"></span><br/>
-				<div>Favorited!</div>
-				<span class="4sqr">go to 4Sqr page</span>
+				<br/>
+				<span class="4sqr">4square Page</span>
 			{% else %}
 				<span class="favorited placeDetailSymbols glyphicon glyphicon-star-empty"></span><br/>
-				<div>tap star to fav</div>
-				<span class="4sqr">go to 4Sqr page</span>
+				<br/>
+				<span class="4sqr">4square Page</span>
 			{% endif %}
 
 					
@@ -153,6 +153,9 @@
 		});
 						
 
+		$(".map").click(function(){
+			alert("Oops! Map functionality coming soon.");
+		});
 
 
 		$(document).on(" touchend",".tagText", function() {

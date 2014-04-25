@@ -7,10 +7,10 @@
 				
 				
 				<img class="venuePic"  src="{{place.picture}}"></img>
-				<div class='venueTitle'>{{ place.name }}</div>
+				<div class='venueTitle' style="color:rgb(46,117,182);">{{ place.name }}</div>
 				<div class='venueType'>
 				<!--	{{ place.types}}		-->
-					<span class="venueDistance" style="">{{place.distance}} mi</span>
+					<span class="venueDistance" style="color:rgb(46,117,182);">{{place.distance}} mi</span>
 				</div>
 
 			</div>
@@ -35,14 +35,11 @@
 				<img class="venuePic"  src="{{place.picture}}"></img>
 				<div class='venueTitle'>{{ place.name }}</div>
 				<div class='venueType'>
-				<!--	{{ place.types}}		-->
-					<span class="venueDistance" style="">{{place.distance}} mi</span>
+					<span class="venueDistance" >{{place.distance}} mi</span>
 				</div>
-
 			</div>
 
-			<div class='venue-info curTag' style="color:rgb(46,117,182)">
-				<span style="font-size:17.4px;">No tags now. Most known for:</span> <br/>
+			<div class='venue-info curTag' style="color:#999999;">
 				{% for tag in place.hashtags %}
 					<span class='indexTag'>#{{ tag }}</span>
 				{% endfor %}
@@ -64,12 +61,11 @@
 				<!--	{{ place.types}}		-->
 					<span class="venueDistance" style="">{{place.distance}} mi</span>
 				</div>
-
 			</div>
 			
-			<div class='venue-info curTag' style="color:rgb(127,127,127);">
+			<div class='venue-info curTag' style="color:#000;">
 				<div>
-					No Tags!<br/>Be the first to Tag!
+					No Tags! Tap to explore. 
 				</div>
 			</div>
 			
