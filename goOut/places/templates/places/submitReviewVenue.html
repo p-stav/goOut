@@ -8,6 +8,12 @@
 	<div class="jumbotron" style="color:rgb(127,0,127); font-family:'Roboto',sans-serif;">
 		<p class='jumboTitle' style="margin-bottom:20px;">{{ name }}</p>
 		<p style="font-size:12px; margin-left:10px;">How is this place?</p>
+
+		{% if user.is_authenticated %}
+			<div></div>
+		{% else %}
+			<p style="font-size:12px; margin-left:10px; color:rgb(46,117,182);">Login or Create an Account to create your own tags! </p>			
+		{% endif %}
 	</div>
 </div>
 
@@ -29,22 +35,25 @@
 		
 
 			<br/>
-			<br/>
-			<div class="personalTags">
-				<p class='' style="font-family:'Roboto',sans-serif; font-size:14px;">Can't find what you're looking for?</p>
-				<div class="createTag">
-					#<input class="personalTag" name='personalTag' type="text" placeholder="YourCustomTag (20 char limit)" maxlength="20">
-					<div class="removeTag" style='float:right'><span>&times;</span></div>
+
+			{% if user.is_authenticated %}
+				<div class="personalTags">
+					<p class='' style="font-family:'Roboto',sans-serif; font-size:14px;">Can't find what you're looking for?</p>
+					<div class="createTag">
+						#<input class="personalTag" name='personalTag' type="text" placeholder="YourCustomTag (20 char limit)" maxlength="20">
+						<div class="removeTag" style='float:right'><span>&times;</span></div>
+					</div>
+
 				</div>
 
-			</div>
-
-			<div>
-				<div class="addCustomTag btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span></button>
-			</div>
+				<div>
+					<div class="addCustomTag btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span></button>
+				</div>
 
 				<br/>
-			
+
+
+			{% endif %}
 			<!--
 				<textarea class="form-control commentBox" name='venueComment' id='comment'  rows="3" style="resize:none;" placeholder="Add your own tags!" maxlength="140"></textarea>
 				<div class='charLenCheck'><span class='numLength'>140</span> Characters Left</div>

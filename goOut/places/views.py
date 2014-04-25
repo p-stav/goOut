@@ -524,7 +524,8 @@ def submit_submitReview(request):
 	if recentUserActions:
 		return HttpResponseRedirect('/')
 	"""
-
+	if curUser !=False:
+		newAction = checkExistingAction(curUser, newPlace)
 	
 	#get list of tags
 	#listTags = request.body
@@ -533,9 +534,6 @@ def submit_submitReview(request):
 
 		#Filter for all instances of Places with same placeId and tag within alotted time
 		filterPlace = PlaceTag.objects.filter(place=newPlace)
-
-		if curUser !=False:
-			newAction = checkExistingAction(curUser, newPlace)
 		
 		
 		if len(filterPlace)>0:
@@ -924,7 +922,7 @@ def placeTagUpdate(request):
 		place = request.GET.get('place')
 
 		#get User and cutoffTime
-		curUser=UserProfile.objects.get(user=User.objects.get(id=request.user.id))		
+		curUser = getUserProfile(request.user.id)
 		cutoffTime = getCutoffTime()
 	
 
