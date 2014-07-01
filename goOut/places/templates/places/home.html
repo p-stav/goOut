@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta property="og:image" content="http://www.getkefi.com{{STATIC_URL}}KefiSmall.png">
+	<meta property="og:title" content="Kefi">
+	<meta property="og:url" content="www.getkefi.com">
+
+	<!--Google Maps and Google Places APIs-->
+
+	<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>-->
+
+	<!-- bootstrap -->
+	{% load staticfiles %}
+	<link type="text/css" href="{{STATIC_URL}}css/goOut/main.css" rel="stylesheet"/>
+	<script src="{{STATIC_URL}}js/jquery.js"> </script>
+	<script src="{{STATIC_URL}}css/bootstrap-3.0.0/dist/js/bootstrap.js"> </script>
+
+	<!--load google fonts!-->
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+
+	
+
+	<title>Kefi</title>
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-49651565-1', 'getkefi.com');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+
+<body>
+	
+	<!--header-->
+	<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav">
+		<div class="navbar-header">
+			<!--dropdown for account stuff-->
+			<div class='btn-group'>
+				<button class="navbar-toggle" type="button" data-toggle="dropdown">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<ul class="dropdown-menu mainMenu" role='menu'>
+					<br/>
+					<li><a href="/about"><span class = 'glyphicon glyphicon-unchecked'></span>&nbsp; &nbsp; About Us</a></li>
+					<br/>
+					<li><a href="/contactUs"><span class = 'glyphicon glyphicon-envelope'></span>&nbsp; &nbsp; Contact Us</a></li>
+					<br/>
+					<li><a href="/feedback"><span class = 'glyphicon glyphicon-send'></span>&nbsp; &nbsp; Send Feedback</a></li>
+					<br/>
+				</ul>
+			</div>
+			<!--Brand name-->
+			<img class = "goToIndex" src="{{STATIC_URL}}Kefi.png" alt="Kefi" width="60.4px" height="25px">
+		</div>
+
+	    <ul class="nav navbar-nav pull-right navbar-right">
+
+		</ul>
+	</header>
+
+	<!--carousel-->
+	
+
+
+
+
+
+</body>

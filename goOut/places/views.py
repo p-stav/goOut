@@ -33,7 +33,10 @@ minFontSizePercentage = 50
 CategoryBlacklist = ['4bf58dd8d48988d1e0931735',
 '4bf58dd8d48988d1d5941735', '4bf58dd8d48988d103941735']
 
+def homeView(request):
+	context = {}
 
+	return render(request, 'places/home.html', context)
 
 def getCurLoc(request):
 	if request.POST.get('sortMethod'):
