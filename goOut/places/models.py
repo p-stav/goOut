@@ -69,4 +69,11 @@ class UserFeedback(models.Model):
 	def __unicode__(self):
 		return self.feedback
 
+class JoinBeta(models.Model):
+	name = models.CharField(max_length=40)
+	email = models.CharField(max_length = 100);
+	date = models.DateTimeField()
+	note = models.TextField(max_length=2000)
 
+	def __unicode__(self):
+		return self.name

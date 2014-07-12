@@ -10,7 +10,7 @@ from django.template import RequestContext
 from urllib import urlopen
 import json, pprint
 from datetime import datetime, timedelta
-from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction, UserFeedback, UserTag, HashtagCategory
+from places.models import UserProfile, Place, Hashtag, PlaceTag, UserAction, UserFeedback, UserTag, HashtagCategory, JoinBeta
 import sets
 from math import exp, log10, floor, trunc
 from collections import Counter
@@ -37,6 +37,19 @@ def homeView(request):
 	context = {}
 
 	return render(request, 'places/home.html', context)
+
+
+def getKefi(request):
+	context = {}
+
+	return render(request, 'places/getkefi.html', context)
+
+
+def getKefi_submit(request):
+	newBeta = JoinBeta.objects.create(name=request.POST['name'], email=request.POST['email'], date=datetime.today(),  note=request.POST['note'])
+	newBeta.save()
+
+	return render(request, 'places/getkefi.html')
 
 def getCurLoc(request):
 	if request.POST.get('sortMethod'):

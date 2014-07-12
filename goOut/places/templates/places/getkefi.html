@@ -49,7 +49,7 @@
 	<!--header-->
 	<header class="navbar-transparent">
 			<!--Brand name-->
-			<a href="/home"> <img class = "goToIndex" src="{{STATIC_URL}}Kefi.png" alt="Kefi" width="120.8px" height="50px"></img></a>
+			<a href="/home"><img class = "goToIndex" src="{{STATIC_URL}}Kefi.png" alt="Kefi" width="120.8px" height="50px"></img></a>
 	</header>
 
 	<!--carousel-->
@@ -96,77 +96,46 @@
 				<a href="/getkefi"><button type="button" class="actionBtn btn btn-primary ">Join our email list</button></a>
 			</div>
 		</div>
-	</div>	
+	</div>
 
-	<div class='pillarSection'>
-		<div class="pillars" id="pillar1">
-			<div class="pillar">
-				<div class='pillarHeader'>Find</div>
-				<p class='pillarTxt'>Looking for #LustyIntentions?<br/>Found it. </p>
-				<img class="pillarImg" src="{{STATIC_URL}}Pictures/kefiLV.jpg" alt="pillar-img">
-				<p class="description"><br>Use Kefi to find the place near you that matches your mood, no matter what it may be.</p>
-			</div>
-			
-		</div>
 
-		<div class="pillars" id="pillar2">	
-			<div class="pillar">
-				<div class='pillarHeader'>Share</div>
-				<p class='pillarTxt'> Because Jennifer Lawrence just walked into the bar and others need to know.</p>
-				<img class="pillarImg" src="{{STATIC_URL}}Pictures/margharita.jpg" alt="pillar-img">
-				<p class="description"><br>Update your friends and the Kefi network with the cool things you're doing.</p>
-			</div>
-		</div>
-
-		<div class="pillars" id="pillar3">
-			<div class="pillar">
-				<div class='pillarHeader'>Here n' now</div>
-				<p class='pillarTxt'>That bar down the street that you never go to? Tonight, it's the place to be. </p>
-				<img class="pillarImg" src="{{STATIC_URL}}Pictures/margharitaNotCentered.jpg" alt="pillar-img">
-				<p class="description"><br>Venues have constanly changing vibes. Find the right one for tonight.</p>
-			</div>
-		</div>
-
-		<div class="pillars">
-			<div class="pillarLast">
-				<div class='pillarHeader'>Join Us!</div>
-				<p class='pillarTxt'>Live in Seattle and want to try Kefi for yourself?</p>
-				<div style="text-align:center;">
-					<button type="button" class="btn btn-primary">Get Kefi</button>
-					<button type="button" class="btn btn-primary">Learn more</button>
+	<div class="pillars" style="background-color:#0A598F;">
+		<div class="pillar" style="font-family:'Roboto', sans-serif; font-size:18px; color: #fff; padding-top:80px;">
+			<p>To beta test Kefi, you must:</p>
+			<ul>
+				<li>Live in the Seattle area.</li>
+				<li>Have an iPhone. Android to be supported soon!</li>
+			</ul>
+			<br/><br/>
+			<p>If you meet these requirements, we'd love to have you be a part of the team!</p>
+			<br/>
+			<form class="form-horizontal" role="form" action="{% url 'places:getKefi_submit' %}" method="post">
+				{% csrf_token %}
+				<div class="form-group">
+					<label class="col-lg-2 control-label" style="font-size:18px;">name:</label>
+						<div class="col-lg-8"><input class="form-control" id="name" name="name" placeholder="Mary Jane Schmutzenheimer"></textarea></div>
 				</div>
 
-				<div class="socialMedia">
-					Follow us on:
-					<ul class="list-inline">
-						<li><a href="https://www.facebook.com/kefiapp"><img class="facebook" src="{{STATIC_URL}}facebook.png"></img></a></li>
-						&nbsp; &nbsp;
-						<li><a href="https://twitter.com/kefiapp"><img class="twitter" src="{{STATIC_URL}}twitter.png"></img></a></li>
-					</ul>
+				<div class="form-group">
+					<label class="col-lg-2 control-label" style="font-size:18px;">email:</label>
+						<div class="col-lg-8"><input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com"></input></div>
 				</div>
-			</div>
+
+				<div class="form-group">
+					<label class="col-lg-2 control-label" style="font-size:18px;">Any questions or something to note?</label>
+						<div class="col-lg-8"><textarea class="form-control" id="note" name="note" rows="4"></textarea></div>
+				</div>
+
+				<div class="form-group">
+					<label class='control-label'><button type="submit" class="btn btn-primary" name="submit_getKefi_form">Submit</button></label>
+				</div>
+			</form>
 		</div>
 	</div>
 
-	<footer>
-		<nav>
-			<ul>
-				<li>
-					<a href="/about">About Us</a>
-				</li>
-				<li>
-					<a href="/beta">Join the beta</a>
-				</li>
-				<li>
-					<a href="/mailingList">Mailing List</a>
-				</li>
-			</ul>
-		</nav>
-	</footer>
 
 
 	<script>
-	
 		$(document).ready(function() {
 			// set logo height and width
 			$('.goToIndex').width($(window).width() / 6);
@@ -188,4 +157,3 @@
 	</script>
 </body>
 </html>
- 
