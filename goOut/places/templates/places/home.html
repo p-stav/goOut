@@ -65,15 +65,15 @@
 
 			<div class="carousel-inner">
 				<div class="item active">
-					<img src="{{STATIC_URL}}ladiesBartender.png" alt="welcome!" width="100%">
+					<img src="{{STATIC_URL}}Pictures/fireworks.jpg" alt="welcome!" width="100%">
 				</div>
 					
 				<div class="item">
-					<img src="{{STATIC_URL}}ladiesBartender.png" alt="we make-a zeh sparkle pahty, ya?" width="100%">
+					<img src="{{STATIC_URL}}Pictures/chips.jpg" alt="we make-a zeh sparkle pahty, ya?" width="100%">
 				</div>
 					
 				<div class="item">
-					<img src="{{STATIC_URL}}ladiesBartender.png" alt="drinks on drinks on drinks" width="100%">
+					<img src="{{STATIC_URL}}Pictures/margaritaBackground.png" alt="drinks on drinks on drinks" width="100%">
 				</div>
 			</div>
 				  
@@ -103,7 +103,7 @@
 			<div class="pillar">
 				<div class='pillarHeader'>Find</div>
 				<p class='pillarTxt'>Looking for #LustyIntentions?<br/>Found it. </p>
-				<img src="pillarPics/01_a_ManySources_04.jpg" alt="pillar-img">
+				<img class="pillarImg" src="{{STATIC_URL}}Pictures/kefiPhone.jpg" alt="pillar-img">
 				<p class="description"><br>Use Kefi to find the place near you that matches your mood, no matter what it may be.</p>
 			</div>
 			
@@ -113,7 +113,7 @@
 			<div class="pillar">
 				<div class='pillarHeader'>Share</div>
 				<p class='pillarTxt'> Because Jennifer Lawrence just walked into the bar and others need to know.</p>
-				<img src="pillarPics/01_e_LearnReading_03.jpg" alt="pillar-img">
+				<img class="pillarImg" src="pillarPics/01_e_LearnReading_03.jpg" alt="pillar-img">
 				<p class="description"><br>Update your friends and the Kefi network with the cool things you're doing.</p>
 			</div>
 		</div>
@@ -122,26 +122,28 @@
 			<div class="pillar">
 				<div class='pillarHeader'>Here and now</div>
 				<p class='pillarTxt'>That bar down the street that you never go to? Tonight, it's the place to be. </p>
-				<img src="pillarPics/01_d_MakeMark_03.jpg" alt="pillar-img">
+				<img class="pillarImg" src="{{STATIC_URL}}Pictures/margharitaNotCentered.jpg" alt="pillar-img">
 				<p class="description"><br>Venues have constanly changing vibes. Find the right one for tonight.</p>
 			</div>
 		</div>
 
 		<div class="pillars">
-			<div class="pillar">
+			<div class="pillarLast">
 				<div class='pillarHeader'>Join Us!</div>
 				<p class='pillarTxt'>Live in Seattle and want to try Kefi for yourself?</p>
 				<div style="text-align:center;">
 					<button type="button" class="btn btn-primary">Get Kefi</button>
 					<button type="button" class="btn btn-primary">Learn more</button>
 				</div>
-			</div>
-			<div class="socialMedia">
-				Follow us on:
-				<ul class="list-inline">
-					<li><a href="/"><img class="socialBtn" src="{{STATIC_URL}}facebook.png"></img></a></li>
-					<li><a href="/"><img class="socialBtn" src="{{STATIC_URL}}twitter.png"></img></a></li>
-				</ul>
+
+				<div class="socialMedia">
+					Follow us on:
+					<ul class="list-inline">
+						<li><a href="https://www.facebook.com/kefiapp"><img class="facebook" src="{{STATIC_URL}}facebook.png"></img></a></li>
+						&nbsp; &nbsp;
+						<li><a href="https://twitter.com/kefiapp"><img class="twitter" src="{{STATIC_URL}}twitter.png"></img></a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

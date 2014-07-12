@@ -31,7 +31,7 @@
   font-size: 13px;
 }
 
-.pillar img{
+.pillar .pillarImg{
   height: 250px;
   margin-left: auto;
   margin-right: auto;
@@ -51,7 +51,15 @@
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
   margin-bottom: 30px;
+  margin-top: 40px;
 }
+
+.pillarLast{
+    width: 80%;
+    margin: 0 auto; 
+    padding-bottom: 50px;
+    padding-top: 25px;  
+  }
 
 @media (min-width: 716px) {
   .pillar{
