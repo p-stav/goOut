@@ -82,7 +82,7 @@ def index(request):
 	#get curLong + curLat, or redirect to get info
 	if request.POST.get('position'):
 		curLoc = request.POST['position']
-	else: return HttpResponseRedirect('/')
+	else: return HttpResponseRedirect('/v0')
 
 
 	if curLoc == '': #hardcode if fails.

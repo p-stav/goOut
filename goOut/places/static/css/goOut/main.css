@@ -44,11 +44,19 @@
 }
 
 #pillar4 {
-  background-color: #2E4272;
+  background-color: #fff;
 }
 
 .pillarHeader {
   color: #fff;
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 55px;
+}
+
+.pillarHeaderInverse {
+  color: #000;
   text-align: center;
   margin-bottom: 10px;
   font-family: 'Roboto', sans-serif;
@@ -68,7 +76,13 @@
     margin: 0 auto; 
     padding-bottom: 50px;
     padding-top: 25px;  
+    color:#000;
   }
+
+.twitter {
+  margin-top: 6px;
+}
+
 
 @media (min-width: 716px) {
   .pillar{
@@ -84,6 +98,15 @@
     text-align: center;
     margin-bottom: 25px;
     font-family: 'Roboto', sans-serif;
+  }
+
+  .pillarTxtInverse {
+    color:#000;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 25px;
+    font-family: 'Roboto', sans-serif;
+  
   }
 
     .pillar .pillarImg{
@@ -121,6 +144,14 @@
 
   .pillarTxt{
     color:#fff;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Roboto',sans-serif;
+    }
+
+    .pillarTxtInverse{
+    color:#000;
     font-size: 18px;
     text-align: center;
     margin-bottom: 20px;
