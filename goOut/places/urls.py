@@ -9,6 +9,7 @@ urlpatterns = patterns('places.views',
 	url(r'^$', 'homeView', name='homeView'),	
 	url(r'^getkefi$', 'getKefi', name='getKefi'),
 	url(r'^getkefi/submit$', 'getKefi_submit', name='getKefi_submit'),
+	url(r'^aboutUs$', 'aboutUs', name='aboutUs'),
 
 	url(r'^v0$', 'getCurLoc', name='getCurLoc'),
 	url(r'^index$', 'index', name='index'),

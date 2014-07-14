@@ -51,6 +51,15 @@ def getKefi_submit(request):
 
 	return render(request, 'places/getkefi.html')
 
+
+def aboutUs(request):
+	context = {}
+	return render(request, 'places/aboutUs.html', context)
+
+
+##########################################################
+######Kefi v 0 ###########################################
+##########################################################
 def getCurLoc(request):
 	if request.POST.get('sortMethod'):
 		method = request.POST['sortMethod']
