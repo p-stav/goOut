@@ -114,6 +114,8 @@
     margin-left: auto;
     margin-right: auto;
     display: block;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
   }
 
 

@@ -49,43 +49,11 @@
 	<!--header-->
 	<header class="navbar-transparent">
 			<!--Brand name-->
-			<a href="/home"> <img class = "goToIndex" src="{{STATIC_URL}}Kefi.png" alt="Kefi" width="120.8px" height="50px"></img></a>
+			<a href="/"> <img class = "goToIndex" src="{{STATIC_URL}}Kefi.png" alt="Kefi" width="120.8px" height="50px"></img></a>
 	</header>
 
-	<!--carousel-->
 	<div class = "pageContent">
-		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-			<!-- Indicators -->
-			<ol class="carousel-indicators hidden">
-				<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-				<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-				<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-			</ol>
-
-
-			<div class="carousel-inner">
-				<div class="item active">
-					<img src="{{STATIC_URL}}fireworks.JPG" alt="welcome!" width="100%">
-				</div>
-					
-				<div class="item">
-					<img src="{{STATIC_URL}}chips.JPG" alt="we make-a zeh sparkle pahty, ya?" width="100%">
-				</div>
-					
-				<div class="item">
-					<img src="{{STATIC_URL}}margaritaBackground.JPG" alt="drinks on drinks on drinks" width="100%">
-				</div>
-			</div>
-				  
-			<!-- Controls -->
-			<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left"></span>
-			</a>
-			<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-				<span class="glyphicon glyphicon-chevron-right"></span>
-			</a>
-		</div>
-		<!--end Carousel------------>
+		<img src="{{STATIC_URL}}ladiesBartender.png" alt="drinks on drinks on drinks" width="100%">
 	</div>
 
 
@@ -102,9 +70,10 @@
 		<div class="pillars" id="pillar1">
 			<div class="pillar">
 				<div class='pillarHeader'>Find</div>
-				<p class='pillarTxt'>Looking for #LustyIntentions?<br/>Found it. </p>
+				<p class='pillarTxt'>Looking for a #chill bar, or a club to #danceYourFaceOff?</p>	  <!--Looking for #LustyIntentions?<br/>Found it. </p>-->
+				<p class="description">Use Kefi to find the place near you that matches your mood, no matter what it may be.</p><br/>
 				<img class="pillarImg" src="{{STATIC_URL}}kefiLV.jpg" alt="pillar-img">
-				<p class="description"><br>Use Kefi to find the place near you that matches your mood, no matter what it may be.</p>
+
 			</div>
 			
 		</div>
@@ -112,9 +81,10 @@
 		<div class="pillars" id="pillar2">	
 			<div class="pillar">
 				<div class='pillarHeader'>Share</div>
-				<p class='pillarTxt'> Because Jennifer Lawrence just walked into the bar and others need to know.</p>
-				<img class="pillarImg" src="{{STATIC_URL}}margharita.JPG" alt="pillar-img">
-				<p class="description"><br>Update your friends and the Kefi network with the cool things you're doing.</p>
+				<p class='pillarTxt'>Because this bartender made a mad Singapore Sling, and your friends need to try it.<!--Because Jennifer Lawrence just walked into the bar and others need to know.--></p>
+				<p class="description">Update your friends and the Kefi network with the cool things you're doing.</p><br/>
+				<img class="pillarImg" src="{{STATIC_URL}}singaporeSling.JPG" alt="pillar-img">
+				
 			</div>
 		</div>
 
@@ -122,8 +92,9 @@
 			<div class="pillar">
 				<div class='pillarHeader'>Here and now</div>
 				<p class='pillarTxt'>That bar down the street that you never go to? Tonight, it's the place to be. </p>
-				<img class="pillarImg" src="{{STATIC_URL}}margharitaNotCentered.JPG" alt="pillar-img">
-				<p class="description"><br>Venues have constanly changing vibes. Find the right one for tonight.</p>
+				<p class="description">Venues constanly change vibes. Find the right one for tonight.</p><br/>
+				<img class="pillarImg" src="{{STATIC_URL}}peopleTalking.jpg" alt="pillar-img">
+				
 			</div>
 		</div>
 
@@ -133,7 +104,7 @@
 				<p class='pillarTxtInverse'>Live in Seattle and want to try Kefi for yourself?</p>
 				<div style="text-align:center;">
 					<a href="/getkefi"><button type="button" class="btn btn-primary">Get Kefi</button></a>
-					<button type="button" class="btn btn-primary">Learn more</button>
+					<a href="/aboutUs"><button type="button" class="btn btn-primary">Learn more</button></a>
 				</div>
 
 				<div class="socialMedia" style="color: #A8A8A8;">

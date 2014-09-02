@@ -35,7 +35,6 @@ CategoryBlacklist = ['4bf58dd8d48988d1e0931735',
 
 def homeView(request):
 	context = {}
-
 	return render(request, 'places/home.html', context)
 
 
@@ -55,6 +54,28 @@ def getKefi_submit(request):
 def aboutUs(request):
 	context = {}
 	return render(request, 'places/aboutUs.html', context)
+
+def redirectIOS(request):
+	context = {}
+
+	#foursquare data for api call
+	client_id = 'T4XPWMEQAID11W0CSQLCP2P0NXGEUSDZRV4COSBJH2QEMC2O'
+	client_secret = '0P1EQQ3NH102D0R3GNGTG0ZAL0S5T41YDB2NPOOMRMO2I2EO'
+	category_id =  '4bf58dd8d48988d116941735,50327c8591d4c4b30a586d5d,4bf58dd8d48988d11e941735,4bf58dd8d48988d118941735,4bf58dd8d48988d1d8941735,4bf58dd8d48988d120941735,4bf58dd8d48988d121941735,4bf58dd8d48988d11f941735,4bf58dd8d48988d11b941735,4bf58dd8d48988d1d4941735,4bf58dd8d48988d11d941735,4bf58dd8d48988d122941735,4bf58dd8d48988d123941735'
+	redirectURI = 'http://www.getkefi.com/redirectIOS'
+
+	if(request.GET.get('code')):
+		code = request.GET['code']
+
+		url = "https://foursquare.com/oauth2/access_token?client_id=" + client_id + "&client_secret=" + client_secret + "&grant_type=authorization_code&redirect_uri="+ redirectURI + "&code=" + code
+
+		#make request and receive json
+		req = urlopen(url).read()
+		access_token = json.loads(req).get("access_token")
+
+		context = {'access_token':access_token, "code":code}
+
+	return render(request, 'places/redirectIOS.html', context)
 
 
 ##########################################################
