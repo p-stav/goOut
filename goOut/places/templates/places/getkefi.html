@@ -59,8 +59,7 @@
 
 	<div class="taglineContainer">
 		<div>
-			<div class="tagline"><span>Kefi. It's your night.</span> &nbsp; &nbsp; &nbsp; &nbsp;  
-				<a href="/getkefi"><button type="button" class="actionBtn btn btn-primary ">Sign up for Kefi Beta</button></a>
+			<div class="tagline"><span>Kefi. It's your night.</span>
 				<!--<a href="/getkefi"><button type="button" class="actionBtn btn btn-primary ">Join our email list</button></a>-->
 			</div>
 		</div>
@@ -73,8 +72,8 @@
 				<li>Live in the Seattle area.</li>
 				<li>Have an iPhone. Android to be supported soon!</li>
 			</ul>
-			<br/><br/>
-			<p>If you meet these requirements, we'd love to have you be a part of the team!</p>
+			<br/>
+			<p> We'd love to have you to try Kefi and provide feedback!</p>
 			<br/>
 			<form class="form-horizontal" role="form" action="{% url 'places:getKefi_submit' %}" method="post">
 				{% csrf_token %}
@@ -126,12 +125,12 @@
 
 			if ($(window).width() < 716) {
 				$('.actionBtn').addClass('btn-xs');
-				var carouselHeight = $(window).width()*0.7;
+				var carouselHeight = $(window).width()*0.6;
 				$('.jumbotronImg').css( "height", carouselHeight);
 			}
 			else {
 				$('.actionBtn').removeClass('btn-xs');
-				var carouselHeight = $(window).width() * 0.4;
+				var carouselHeight = $(window).width() * 0.35;
 				$('.jumbotronImg').css( "height", carouselHeight);
 			}			
 		});
