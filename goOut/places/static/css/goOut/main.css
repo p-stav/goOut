@@ -124,10 +124,10 @@
   }
 
  .taglineTextarea {
-  text-align: center;
-  font-size:18px; 
-  width: 80%;
-  margin: 0 auto; 
+    text-align: center;
+    font-size:18px; 
+    width: 80%;
+    margin: 0 auto; 
 }
 
 
@@ -174,7 +174,7 @@
     }
 
     .pillar .pillarImg{
-    width: 60%;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -197,7 +197,15 @@
     color: yellow;
     text-align: center;
     width: 80%;
+    margin: 0 auto;
   }
+
+  .taglineTextarea {
+    text-align: center;
+    font-size:18px; 
+    width: 80%;
+    margin: 0 auto; 
+
 
 }
 
