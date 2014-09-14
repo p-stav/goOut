@@ -47,9 +47,10 @@
 <body>
 	
 	<!--header-->
-	<header class="navbar-transparent">
+	<header class="navbar-transparent picText">
 			<!--Brand name-->
-			<a href="/"> <img class = "goToIndex" src="{{STATIC_URL}}Kefi.png" alt="Kefi" width="120.8px" height="50px"></img></a>
+			<a href="/"> <img class = "picHeader" src="{{STATIC_URL}}Kefi.png" alt="Kefi" width="120.8px" height="50px"></img></a>
+			<p>It's your night. </p>
 	</header>
 
 	<div class = "pageContent">
@@ -57,21 +58,20 @@
 	</div>
 
 
-	<div class="taglineContainer">
-		<div>
-			<div class="tagline"><span>Kefi. It's your night.</span> &nbsp; &nbsp; &nbsp; &nbsp;  
+	<div class="taglineContainer hidden">
+		<div class="taglineTextarea">
+			<div class="tagline"><span>Take the guessing out of your night.</span> &nbsp; &nbsp; &nbsp; 
 				<a href="/getkefi"><button type="button" class="actionBtn btn btn-primary ">Sign up</button></a>
-				<!--<a href="/getkefi"><button type="button" class="actionBtn btn btn-primary ">Join our email list</button></a>-->
 			</div>
 		</div>
-	</div>	
+	</div>
 
 	<div class='pillarSection'>
 		<div class="pillars" id="pillar1">
 			<div class="pillar">
 				<div class='pillarHeader'>Find</div>
 				<p class='pillarTxt'>Looking for a #chill bar or a club to #danceYourFaceOff?</p>	  <!--Looking for #LustyIntentions?<br/>Found it. </p>-->
-				<p class="description">Use Kefi to find the place near you that matches your mood, no matter what it may be.</p><br/>
+				<p class="description">Kefi helps you find places that match your current mood, no matter what it may be. Find the best places to dance and grab drinks in the moment.</p><br/>
 				<img class="pillarImg" src="{{STATIC_URL}}kefiLV.jpg" alt="pillar-img">
 
 			</div>
@@ -81,8 +81,8 @@
 		<div class="pillars" id="pillar2">	
 			<div class="pillar">
 				<div class='pillarHeader'>Share</div>
-				<p class='pillarTxt'>Because this bartender made a mad Singapore Sling, and your friends need to try it.<!--Because Jennifer Lawrence just walked into the bar and others need to know.--></p>
-				<p class="description">Update your friends and the Kefi network with the cool things you're doing.</p><br/>
+				<p class='pillarTxt'>How do you feel about the bartender and the drink he made you.<br>#GenerousBartender</p>
+				<p class="description">Share your thoughts with the Kefi community; are you having a good time? What's going on? Help others know about nightlife around them.</p><br/>
 				<img class="pillarImg" src="{{STATIC_URL}}singaporeSling.jpg" alt="pillar-img">
 				
 			</div>
@@ -91,8 +91,8 @@
 		<div class="pillars" id="pillar3">
 			<div class="pillar">
 				<div class='pillarHeader'>Here and now</div>
-				<p class='pillarTxt'>That bar down the street that you never go to? Tonight, it's the place to be. </p>
-				<p class="description">Places have everchanging vibes. Find the right one for tonight.</p><br/>
+				<p class='pillarTxt'>That bar down the street that you never go to? It's the place to be right now. </p>
+				<p class="description">Places have everchanging vibes. Use Kefi to see what people think about the current vibe of the bars near you. </p><br/>
 				<img class="pillarImg" src="{{STATIC_URL}}peopleTalking.jpg" alt="pillar-img">
 				
 			</div>
@@ -140,19 +140,57 @@
 	
 		$(document).ready(function() {
 			// set logo height and width
-			$('.goToIndex').width($(window).width() / 6);
-			$('.goToIndex').height($(window).width() / 6 * .41);
+			$('.picHeader').width($(window).width() / 4);
+			$('.picHeader').height($(window).width() / 4 * .41);
 
 
-			if ($(window).width() < 716) {
+			if (($(window).width() < 500) &&  ($(window).width() < $(window).height())) {
 				$('.actionBtn').addClass('btn-xs');
-				var carouselHeight = $(window).width()*0.7;
-				$('.carousel-inner .item img').css( "height", carouselHeight);
+				var carouselHeight = $(window).height()*0.45;
+				$('.pageContent img').css( "height", carouselHeight);
+				$(".picText").css("margin-top", carouselHeight *.68);
+				// $(".taglineContainer").removeClass("hidden");
+				$(".picText").css("margin-left", $(window).width()/10);
+				$(".picText").css("font-size", "20px");
 			}
+
+			else if ($(window).width() < 500) {
+				$('.actionBtn').addClass('btn-xs');
+				var carouselHeight = $(window).height();
+				$('.pageContent img').css( "height", carouselHeight);
+			}
+
+			else if ($(window).width() < 800 && ($(window).width() < $(window).height())) {
+				$('.actionBtn').addClass('btn-xs');
+				//$(".taglineContainer").addClass("hidden");
+
+				var carouselHeight = $(window).height()*0.5;
+				$('.pageContent img').css( "height", carouselHeight);
+				$(".picText").css("margin-top", carouselHeight / 3);
+			}
+
+			else if ($(window).width() < 800) {
+				$('.actionBtn').addClass('btn-xs');
+				//$(".taglineContainer").addClass("hidden");
+
+				var carouselHeight = $(window).height();
+				$('.pageContent img').css( "height", carouselHeight);
+				$(".picText").css("margin-top", carouselHeight *.7);
+				$(".picText").css("margin-left", $(window).width()/10);
+				$(".picText").css("font-size", "40px");
+				$(".picText p").css("padding-left", "12px");
+			}
+
 			else {
 				$('.actionBtn').removeClass('btn-xs');
-				var carouselHeight = $(window).width() * 0.4;
-				$('.carousel-inner .item img').css( "height", carouselHeight);
+				//$(".taglineContainer").addClass("hidden");
+
+				var carouselHeight = $(window).height();
+				$('.pageContent img').css( "height", carouselHeight);
+				$(".picText").css("margin-top", carouselHeight *.68);
+				$(".picText").css("margin-left", $(window).width()/10);
+				$(".picText").css("font-size", "40px");
+				$(".picText p").css("padding-left", "12px");
 			}			
 		});
 

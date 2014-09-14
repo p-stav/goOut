@@ -25,6 +25,11 @@
   position: relative;
 }
 
+.picText {
+  color:#A25886;
+  font-family: "Roboto",arial,verdana,"lucida sans unicode",tahoma,sans-serif;
+}
+
 .pillars {
   margin: 0 auto;
   font-family: "Roboto",arial,verdana,"lucida sans unicode",tahoma,sans-serif;
@@ -118,21 +123,29 @@
     border-radius: 15px;
   }
 
+ .taglineTextarea {
+  text-align: center;
+  font-size:18px; 
+  width: 80%;
+  margin: 0 auto; 
+}
+
 
   .taglineContainer {
     font-family: 'Roboto', sans-serif;
-    font-size:30px; 
     color:#fff;
-    padding: 10px 20px;
+    padding: 20px;
     background-color: #000;
-    text-align: center;
+
   }
 
   .description {
     font-size: 18px;
     font-family: 'Roboto', sans-serif;
-    color: #BDBDBD;
+    color: #D4D26A;
     text-align: center;
+    width: 50%;
+    margin: 0 auto;
   }
 }
 
@@ -181,8 +194,9 @@
   .description {
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
-    color: #A8A8A8;;
+    color: yellow;
     text-align: center;
+    width: 80%;
   }
 
 }
