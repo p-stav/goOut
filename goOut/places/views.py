@@ -33,16 +33,16 @@ minFontSizePercentage = 50
 CategoryBlacklist = ['4bf58dd8d48988d1e0931735',
 '4bf58dd8d48988d1d5941735', '4bf58dd8d48988d103941735']
 
+
+############### getkefi.com home view ###############
 def homeView(request):
 	context = {}
 	return render(request, 'places/home.html', context)
-
 
 def getKefi(request):
 	context = {}
 
 	return render(request, 'places/getkefi.html', context)
-
 
 def getKefi_submit(request):
 	newBeta = JoinBeta.objects.create(name=request.POST['name'], email=request.POST['email'], date=datetime.today(),  note=request.POST['note'])
@@ -50,10 +50,46 @@ def getKefi_submit(request):
 
 	return render(request, 'places/getkefi.html')
 
-
 def aboutUs(request):
 	context = {}
 	return render(request, 'places/aboutUs.html', context)
+
+
+
+############### assassins getkefi.com  view ###############
+def assassins(request):
+	context = {}
+	return render(request, 'places/assassins.html', context)
+
+def assassins_terms(request):
+	context = {}
+	return render(request, 'places/assassins_terms.html', context)
+
+def assassins_privacy(request):
+	context = {}
+	return render(request, 'places/assassins_privacy.html', context)
+
+
+############### ripple getkefi.com  view ###############
+def ripple(request):
+	context = {}
+	return render(request, 'places/assassins.html', context)
+
+def ripple_terms(request):
+	context = {}
+	return render(request, 'places/ripple_terms.html', context)
+
+def ripple_privacy(request):
+	context = {}
+	return render(request, 'places/ripple_privacy.html', context)
+
+
+
+
+
+##########################################################
+######Kefi v 0 ###########################################
+##########################################################
 
 def redirectIOS(request):
 	context = {}
@@ -77,10 +113,6 @@ def redirectIOS(request):
 
 	return render(request, 'places/redirectIOS.html', context)
 
-
-##########################################################
-######Kefi v 0 ###########################################
-##########################################################
 def getCurLoc(request):
 	if request.POST.get('sortMethod'):
 		method = request.POST['sortMethod']

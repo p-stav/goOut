@@ -6,12 +6,28 @@ urlpatterns = patterns('places.views',
 	
 
 
+	# home: menu for Kefi and assasins, and eventually a blurb about Kefi Labs LLC
 	url(r'^$', 'homeView', name='homeView'),	
 	url(r'^getkefi$', 'getKefi', name='getKefi'),
 	url(r'^getkefi/submit$', 'getKefi_submit', name='getKefi_submit'),
 	url(r'^aboutUs$', 'aboutUs', name='aboutUs'),
 	url(r'^redirectIOS$', 'redirectIOS', name='redirectIOS'),
 
+
+	# assassins
+	url(r'^assassins$', 'assassins', name='assassins'),	
+	url(r'^assassins/terms$', 'assassins_terms', name='assassins_terms'),	
+	url(r'^assassins/privacy$', 'assassins_privacy', name='assassins_privacy'),	
+
+
+	# ripple
+	url(r'^ripple$', 'ripple', name='ripple'),	
+	url(r'^ripple/terms$', 'ripple_terms', name='ripple_terms'),	
+	url(r'^ripple/privacy$', 'ripple_privacy', name='ripple_privacy'),	
+
+
+
+	####### v0 of Kefi app ########
 	url(r'^v0$', 'getCurLoc', name='getCurLoc'),
 	url(r'^index$', 'index', name='index'),
 	url(r'^search/(?P<search_term>.+)/$', 'search', name='search'),
