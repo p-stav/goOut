@@ -178,35 +178,37 @@
 
 @media (max-width: 715px) {
   .pillar{
-    width: 80%;
-    margin: 0 auto; 
     padding-bottom: 30px;
     padding-top: 25px;  
   }
 
   .pillarTxt{
+    width: 80%;
+    margin: 0 auto; 
     color:#fff;
     font-size: 18px;
     text-align: center;
     margin-bottom: 20px;
     font-family: 'Roboto',sans-serif;
+
     }
 
     .pillarTxtInverse{
-    color:#000;
-    font-size: 18px;
-    text-align: center;
-    margin-bottom: 20px;
-    font-family: 'Roboto',sans-serif;
+      width: 80%;
+      color:#000;
+      font-size: 18px;
+      text-align: center;
+      margin-bottom: 20px;
+      font-family: 'Roboto',sans-serif;
     }
 
     .pillar .pillarImg{
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
+      height: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      -moz-border-radius: 15px;
+      border-radius: 15px;
   }
   .taglineContainer {
     font-family: 'Roboto', sans-serif;
@@ -219,6 +221,7 @@
   }
 
   .description {
+    width: 80%;
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
     color: #A25886;
@@ -263,6 +266,13 @@ footer a, footer a:visited {
 footer a:hover {
   color:#178FE1;
   text-decoration: none;
+}
+
+.legal{
+  margin:20px;
+}
+.legal p {
+  margin-bottom:20px;
 }
 
 .intro {
