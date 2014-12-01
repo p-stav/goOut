@@ -33,9 +33,14 @@ minFontSizePercentage = 50
 CategoryBlacklist = ['4bf58dd8d48988d1e0931735',
 '4bf58dd8d48988d1d5941735', '4bf58dd8d48988d103941735']
 
-
-############### getkefi.com home view ###############
+############### home view ##########
 def homeView(request):
+	context = {}
+	return render(request, 'places/kefiLabs.html')
+
+
+############### kefi ###############
+def kefiHomeView(request):
 	context = {}
 	return render(request, 'places/home.html', context)
 

@@ -2,16 +2,16 @@ from django.conf.urls import patterns,  url
 
 urlpatterns = patterns('places.views',
 	
-	#list of places, search page, and map
-	
-
-
-	# home: menu for Kefi and assasins, and eventually a blurb about Kefi Labs LLC
+	# kefi labs llc home
 	url(r'^$', 'homeView', name='homeView'),	
-	url(r'^getkefi$', 'getKefi', name='getKefi'),
-	url(r'^getkefi/submit$', 'getKefi_submit', name='getKefi_submit'),
-	url(r'^aboutUs$', 'aboutUs', name='aboutUs'),
-	url(r'^redirectIOS$', 'redirectIOS', name='redirectIOS'),
+
+	# kefi
+	url(r'^kefi^$', 'kefiHomeView', name='kefiHomeView'),	
+	url(r'^kefi/getkefi$', 'getKefi', name='getKefi'),
+	url(r'^kefi/getkefi/submit$', 'getKefi_submit', name='getKefi_submit'),
+	url(r'^kefi/aboutUs$', 'aboutUs', name='aboutUs'),
+	url(r'^kefi/redirectIOS$', 'redirectIOS', name='redirectIOS'),
+
 
 
 	# assassins
