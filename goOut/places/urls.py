@@ -6,7 +6,7 @@ urlpatterns = patterns('places.views',
 	url(r'^$', 'homeView', name='homeView'),	
 
 	# kefi
-	url(r'^kefi^$', 'kefiHomeView', name='kefiHomeView'),	
+	url(r'^kefi$', 'kefiHomeView', name='kefiHomeView'),	
 	url(r'^kefi/getkefi$', 'getKefi', name='getKefi'),
 	url(r'^kefi/getkefi/submit$', 'getKefi_submit', name='getKefi_submit'),
 	url(r'^kefi/aboutUs$', 'aboutUs', name='aboutUs'),
