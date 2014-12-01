@@ -68,6 +68,15 @@
 .twitter {
   margin-top: 6px;
 }
+/*homepage pillars*/
+#homepagePillar {
+  background-color: #0D0C13;
+}
+#homePillarLast{
+  background-color: #fff;
+}
+
+
 
 /*Assassins pillars*/
 #assassinsPillar1 {
@@ -150,12 +159,39 @@
       border-radius: 15px;
   }
 
+  .pillar .buttons{
+    margin-bottom: 50px;
+    height: 300px;
+  }
+
+  .homeButton {
+    width: 100%;
+    display: block;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+  }
+
+  .pillarButtonLeft
+  {
+    float:left; 
+    margin-left: 10%;
+    width:30%;
+
+  }
+
+  .pillarButtonRight
+  {
+    float: right;
+    margin-right: 10%;
+    width: 30%;
+  }
+
  .taglineTextarea {
     text-align: center;
     font-size:18px; 
     width: 80%;
     margin: 0 auto; 
-}
+  }
 
 
   .taglineContainer {
@@ -172,6 +208,14 @@
     color: #A25886;
     text-align: center;
     width: 50%;
+    margin: 0 auto;
+  }
+
+  .descriptionHome {
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    color: #A25886;
+    text-align: center;
     margin: 0 auto;
   }
 
@@ -220,6 +264,34 @@
       -moz-border-radius: 15px;
       border-radius: 15px;
   }
+
+  .pillar .buttons{
+    margin-bottom: 50px;
+    height: 200px;
+  }
+
+  .homeButton {
+    width: 100%;
+    display: block;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+  }
+
+  .pillarButtonLeft
+  {
+    float:left; 
+    margin-left: 10%;
+    width:30%;
+
+  }
+
+  .pillarButtonRight
+  {
+    float: right;
+    margin-right: 10%;
+    width: 30%;
+  }
+
   .taglineContainer {
     font-family: 'Roboto', sans-serif;
     font-size:18px; 
@@ -237,6 +309,14 @@
     color: #A25886;
     text-align: center;
     width: 80%;
+    margin: 0 auto;
+  }
+
+  .descriptionHome {
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    color: #A25886;
+    text-align: center;
     margin: 0 auto;
   }
 
