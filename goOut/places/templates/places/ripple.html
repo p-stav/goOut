@@ -46,16 +46,173 @@
 
 <body>
 	
+		
 	<!--header-->
-	<header class="navbar-transparent picText">
-			<!--Brand name-->
-			<a href="/"> <img class = "picHeader" src="{{STATIC_URL}}Kefi.png" alt="Kefi" width="120.8px" height="50px"></img></a>
-			<p>It's your night. </p>
-	</header>
-
-	<div class = "pageContent">
-		<img src="{{STATIC_URL}}concert.jpg" alt="drinks on drinks on drinks" width="100%">
+	<div class="header">
+		
+		<div class = "picText">
+			<p class="headerText" style="color:#fff;">Ripple</h1>
+			<p style="color:#9E9E9E;">How far will your nipples go?</p>
+		</div>
 	</div>
+
+	<!--pillar section-->
+	<div class='pillarSection'>
+		<div class="pillars" id="assassinsPillar1">
+			<div class="pillar">
+				<div class='pillarHeader'>Start a ripple</div>
+				<p class='pillarTxt'>Share your thought, story or joke .
+</p>
+				<p class="description">The more people like it, the further your ripple spreads</p><br/>
+				<img class="pillarImg" src="{{STATIC_URL}}noelleSnipe.jpg" alt="pillar-img">
+
+			</div>
+			
+		</div>
+
+		<div class="pillars" id="assassinsPillar2">	
+			<div class="pillar">
+				<div class='pillarHeader'>Spread others' ripples</div>
+				<p class="description">Help good ripples reach more people</p><br/>
+				<img class="pillarImg" src="{{STATIC_URL}}userPageGamePage.png" alt="pillar-img">
+				
+			</div>
+		</div>
+
+		<div class="pillars" id="assassinsPillar3">
+			<div class="pillar">
+				<div class='pillarHeader'>Grow levels to spread wider ripples
+</div>
+	<p class="description">You gain score if your ripples are spread by many people
+</p><br/>
+				<img class="pillarImg" src="{{STATIC_URL}}commentSnipe.png" alt="pillar-img">
+				
+			</div>
+		</div>
+
+		<div class="pillars" id="assassinsPillar3">
+			<div class="pillar">
+				<div class='pillarHeader'>Follow your ripples across the world</div>
+
+				<img class="pillarImg" src="{{STATIC_URL}}commentSnipe.png" alt="pillar-img">
+				
+			</div>
+		</div>
+
+		<div class="pillars" id="assassinsPillar4" style="color:#000;" >
+			<div class="pillarLast" >
+				<div class='pillarHeaderInverse'>Are you ready?</div>
+				<p class='pillarTxtInverse'>Coming soon to the iOS app store</p>
+				<!--
+				<div style="text-align:center;">
+					<a href="/getkefi"><button type="button" class="btn btn-primary">Get Kefi</button></a>
+					<a href="/aboutUs"><button type="button" class="btn btn-primary">Learn more</button></a>
+				</div>
+				-->
+
+				<div class="socialMedia" style="color: #A8A8A8;">
+					Follow us on:
+					<ul class="list-inline">
+						<li><a href="https://www.facebook.com/kefiapp"><img class="facebook" src="{{STATIC_URL}}facebook.png"></img></a></li>
+						&nbsp; &nbsp;
+						<li><a href="https://twitter.com/kefiapp"><img class="twitter" src="{{STATIC_URL}}twitter.png"></img></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- foooter -->
+	<footer>
+		<nav>
+			<ul>
+				<li>
+					<a href="/assassins/terms">terms of use</a>
+				</li>
+				<li>
+					<a href="/assassins/privacy">privacy statement</a>
+				</li>
+			</ul>
+		</nav>
+	</footer>
+
+
+	<!--script-->
+	<script>
+	
+		$(document).ready(function() {
+			// set logo height and width
+			$('.picHeader').width($(window).width() / 4);
+			$('.picHeader').height($(window).width() / 4 * .41);
+
+
+			if (($(window).width() < 500) &&  ($(window).width() < $(window).height())) {
+				var carouselHeight = $(window).height() * 0.45;
+				$('.header').css( "height", carouselHeight);
+				$('.header').css("width", $(window).width());
+
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}assassinsHomeHeaderSmall.png)"});
+
+				$(".picText").css({"margin": "0 auto", "width":"80%"});
+				$(".picText").css("font-size", "15px");
+				$(".picText p").css("padding-left", "12px");
+				$(".headerText").css("font-size", "50px");
+			}
+
+			else if ($(window).width() < 500) {
+				var carouselHeight = $(window).height();
+				$('.header').css( "height", carouselHeight) * .5;
+				$('.header').css("width", $(window).width());
+
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}assassinsHomeHeaderSmall.png)"});
+				$(".picText").css({"margin": "0 auto", "width":"80%"});
+				$(".picText p").css("padding-left", "12px");
+
+			}
+
+			else if ($(window).width() < 800 && ($(window).width() < $(window).height())) {
+				var carouselHeight = $(window).height() * 0.8;
+				$('.header').css( "height", carouselHeight);
+				$('.header').css("width", $(window).width());
+
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}assassinsHomeHeader.png)"});
+
+				$(".picText").css({"margin": "0 auto", "width":"80%"});
+				$(".picText").css("font-size", "30px");
+				$(".picText p").css("padding-left", "12px");
+				$(".headerText").css("font-size", "100px");
+
+			}
+
+			else if ($(window).width() < 800) {
+				var carouselHeight = $(window).height();
+				$('.header').css( "height", carouselHeight);
+				$('.header').css("width", $(window).width());
+
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}assassinsHomeHeaderSmall.png)"});
+
+				$(".picText").css({"margin": "0 auto", "width":"80%"});
+				$(".picText").css("font-size", "30px");
+				$(".picText p").css("padding-left", "12px");
+				$(".headerText").css("font-size", "100px");
+			}
+
+			else {
+				var carouselHeight = $(window).height() * 0.8;
+				$('.header').css( "height", carouselHeight);
+				$('.header').css("width", $(window).width());
+
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}assassinsHomeHeader.png)"});
+
+				//$(".picText").css("padding-top", carouselHeight *.1);
+				$(".picText").css({"margin": "0 auto", "width":"80%"});
+				$(".picText").css("font-size", "30px");
+				$(".picText p").css("padding-left", "12px");
+				$(".headerText").css("font-size", "100px");
+			}			
+		});
+
+	</script>
 </body>
 </html>
 
