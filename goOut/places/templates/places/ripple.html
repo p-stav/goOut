@@ -50,9 +50,9 @@
 	<!--header-->
 	<div class="header">
 		
-		<div class = "picText">
+		<div class = "picText" style="float:left; width:200px;">
 			<p class="headerText" style="color:#000;">Ripple</h1>
-			<p style="color:#686868;">How far will your ripples go?</p>
+			<p style="color:#686868; font-size:25px;">How far will your ripples go?</p>
 		</div>
 	</div>
 
@@ -60,37 +60,40 @@
 	<div class='pillarSection'>
 		<div class="pillars" id="ripplePillar1">
 			<div class="pillar">
-				<div class='pillarHeader'>Start a ripple</div>
-				<p class='pillarTxt'>Share your thought, story or joke</p>
-				<p class="rippleDescription">The more people like it, the further your ripple spreads</p><br/>
-				<img class="pillarImg" src="{{STATIC_URL}}noelleSnipe.jpg" alt="pillar-img">
+				<div class='pillarHeader'>Share</div>
+				<p class='pillarTxt'>Share a thought, story, or joke with people near you</p>
+				<p class="rippleDescription">The more people like it, the further it will spread</p><br/>
+				<img class="pillarImg" src="{{STATIC_URL}}startRippleExamples.png" alt="pillar-img">
 
 			</div>
-			
 		</div>
+
 
 		<div class="pillars" id="ripplePillar2">	
 			<div class="pillar">
-				<div class='pillarHeader'>Spread others' ripples</div>
-				<p class="rippleDescription">Help good ripples reach more people</p><br/>
-				<img class="pillarImg" src="{{STATIC_URL}}userPageGamePage.png" alt="pillar-img">
+				<div class='pillarHeader'>Spread</div>
+				<p class="pillarTxt">Help interesting ripples reach a wider audience</p>
+				<p class="rippleDescription">See something you like? Swipe right to pass it to others</p><br/>
+				<img class="pillarImg" src="{{STATIC_URL}}rippleAripple.png" alt="pillar-img">
 				
 			</div>
 		</div>
 
 		<div class="pillars" id="ripplePillar3">
 			<div class="pillar">
-				<div class='pillarHeader'>Grow levels to spread wider ripples</div>
-				<p class="rippleDescription">You gain score if your ripples are spread by many people</p><br/>
-				<img class="pillarImg" src="{{STATIC_URL}}commentSnipe.png" alt="pillar-img">
+				<div class='pillarHeader'>Follow</div>
+				<p class='pillarTxt'>Watch as your ripples spread across the world</p>
+				<img class="pillarImg" src="{{STATIC_URL}}followRipple.png" alt="pillar-img">
+				
 			</div>
 		</div>
 
 		<div class="pillars" id="ripplePillar4">
 			<div class="pillar">
-				<div class='pillarHeader'>Follow your ripples across the world</div>
-				<img class="pillarImg" src="{{STATIC_URL}}commentSnipe.png" alt="pillar-img">
-				
+				<div class='pillarHeader'>Grow</div>
+				<p class='pillarTxt'>Gain levels to increase your "reach", the number of people who receive your ripples</p>
+				<p class="rippleDescription">The more people that get your ripples, the faster content spreads</p><br/>
+				<img class="pillarImg" src="{{STATIC_URL}}levelRipple.png" alt="pillar-img">
 			</div>
 		</div>
 
@@ -98,12 +101,6 @@
 			<div class="pillarLast" >
 				<div class='pillarHeaderInverse'>Are you ready?</div>
 				<p class='pillarTxtInverse'>Coming soon to the iOS app store</p>
-				<!--
-				<div style="text-align:center;">
-					<a href="/getkefi"><button type="button" class="btn btn-primary">Get Kefi</button></a>
-					<a href="/aboutUs"><button type="button" class="btn btn-primary">Learn more</button></a>
-				</div>
-				-->
 
 				<div class="socialMedia" style="color: #A8A8A8;">
 					Follow us on:
@@ -146,7 +143,8 @@
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
 
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}assassinsHomeHeaderSmall.png)"});
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 19%"});
+
 
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
 				$(".picText").css("font-size", "15px");
@@ -159,18 +157,19 @@
 				$('.header').css( "height", carouselHeight) * .5;
 				$('.header').css("width", $(window).width());
 
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}assassinsHomeHeaderSmall.png)"});
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 30%"});
+
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
 				$(".picText p").css("padding-left", "12px");
 
 			}
 
 			else if ($(window).width() < 800 && ($(window).width() < $(window).height())) {
-				var carouselHeight = $(window).height() * 0.8;
+				var carouselHeight = $(window).height() * 0.6;
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
 
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}assassinsHomeHeader.png)"});
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 40%"});
 
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
 				$(".picText").css("font-size", "30px");
@@ -184,7 +183,7 @@
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
 
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}assassinsHomeHeaderSmall.png)"});
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 30%"});
 
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
 				$(".picText").css("font-size", "30px");
@@ -197,7 +196,7 @@
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
 
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogo.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"center"});
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogo.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 30%"});
 
 				//$(".picText").css("padding-top", carouselHeight *.1);
 				$(".picText").css({"margin": "0 auto", "width":"80%"});

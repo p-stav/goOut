@@ -225,7 +225,7 @@
   .rippleDescription {
     font-size: 18px;
     font-family: 'Roboto', sans-serif;
-    color: #FFFF00;
+    color: #DDFB00;
     text-align: center;
     width: 50%;
     margin: 0 auto;
@@ -325,10 +325,19 @@
   }
 
   .descriptionHome {
-    font-size: 18px;
+    font-size: 14px;
     font-family: 'Roboto', sans-serif;
     color: #A25886;
     text-align: center;
+    margin: 0 auto;
+  }
+
+  .rippleDescription {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    color: #DDFB00;
+    text-align: center;
+    width: 50%;
     margin: 0 auto;
   }
 
