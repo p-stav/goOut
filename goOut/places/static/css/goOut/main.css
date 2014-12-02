@@ -95,16 +95,19 @@
 
 /*ripple pillars*/
 #ripplePillar1 {
-  background-color: #0A598F;
+  background-color: #2b84db;
 }
 #ripplePillar2 {
-  background-color: #2E4272;
+  background-color: #0867AB;
 }
 #ripplePillar3 {
-  background-color: #0A598F;
+  background-color: #2b84db;
 }
 #ripplePillar4 {
-  background-color: #fff;
+  background-color: #0867AB;
+}
+#ripplePillar5 {
+  background-color: #fff; 
 }
 
 
@@ -216,6 +219,15 @@
     font-family: 'Roboto', sans-serif;
     color: #A25886;
     text-align: center;
+    margin: 0 auto;
+  }
+
+  .rippleDescription {
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    color: #FFFF00;
+    text-align: center;
+    width: 50%;
     margin: 0 auto;
   }
 
