@@ -78,7 +78,7 @@ def assassins_privacy(request):
 ############### ripple getkefi.com  view ###############
 def ripple(request):
 	context = {}
-	return render(request, 'places/assassins.html', context)
+	return render(request, 'places/ripple.html', context)
 
 def ripple_terms(request):
 	context = {}
