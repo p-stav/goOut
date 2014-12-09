@@ -20,6 +20,7 @@
 	<!-- bootstrap -->
 	{% load staticfiles %}
 	<link type="text/css" href="{{STATIC_URL}}css/goOut/main.css" rel="stylesheet"/>
+	<link rel="shortcut icon" href="{{STATIC_URL}}rippleLogo.png">
 	<script src="{{STATIC_URL}}js/jquery.js"> </script>
 	<script src="{{STATIC_URL}}css/bootstrap-3.0.0/dist/js/bootstrap.js"> </script>
 
@@ -52,7 +53,7 @@
 		
 		<div class = "picText" style="float:left; width:200px;">
 			<p class="headerText" style="color:#000;">Ripple</h1>
-			<p style="color:#686868; font-size:25px;">How far will your ripples go?</p>
+			<p class = "headerSubtext" style="color:#686868; font-size:25px;">How far will your ripples go?</p>
 		</div>
 	</div>
 
@@ -139,17 +140,18 @@
 
 
 			if (($(window).width() < 500) &&  ($(window).width() < $(window).height())) {
-				var carouselHeight = $(window).height() * 0.45;
+				var carouselHeight = $(window).height() * 0.5;
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
 
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 19%"});
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 18%"});
 
 
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
 				$(".picText").css("font-size", "15px");
 				$(".picText p").css("padding-left", "12px");
 				$(".headerText").css("font-size", "50px");
+				$(".headerSubtext").css("font-size", "15px");
 			}
 
 			else if ($(window).width() < 500) {
