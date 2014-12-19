@@ -153,7 +153,7 @@
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
 
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 18%"});
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 25%"});
 
 
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
@@ -168,14 +168,14 @@
 				$('.header').css( "height", carouselHeight) * .5;
 				$('.header').css("width", $(window).width());
 
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 30%"});
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 50%"});
 
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
 				$(".picText p").css("padding-left", "12px");
-
+				$(".headerText").css("font-size", "50px");
 			}
 
-			else if ($(window).width() < 800 && ($(window).width() < $(window).height())) {
+			else if ($(window).width() < 700 && ($(window).width() < $(window).height())) {
 				var carouselHeight = $(window).height() * 0.6;
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
@@ -186,15 +186,14 @@
 				$(".picText").css("font-size", "30px");
 				$(".picText p").css("padding-left", "12px");
 				$(".headerText").css("font-size", "100px");
-
 			}
 
-			else if ($(window).width() < 800) {
+			else if ($(window).width() < 700) {
 				var carouselHeight = $(window).height();
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
 
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 30%"});
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 80%"});
 
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
 				$(".picText").css("font-size", "30px");
@@ -202,7 +201,51 @@
 				$(".headerText").css("font-size", "100px");
 			}
 
-			else {
+			else if ($(window).width() < 1000 && ($(window).width() < $(window).height())) {
+				var carouselHeight = $(window).height() * 0.8;
+				$('.header').css( "height", carouselHeight);
+				$('.header').css("width", $(window).width());
+
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoMedium.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 50%"});
+
+				//$(".picText").css("padding-top", carouselHeight *.1);
+				$(".picText").css({"margin": "0 auto", "width":"80%"});
+				$(".picText").css("font-size", "30px");
+				$(".picText p").css("padding-left", "12px");
+				$(".headerText").css("font-size", "100px");
+			}
+
+			else if ($(window).width() < 1000) {
+				var carouselHeight = $(window).height() * 0.8;
+				$('.header').css( "height", carouselHeight);
+				$('.header').css("width", $(window).width());
+
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 60%"});
+
+				//$(".picText").css("padding-top", carouselHeight *.1);
+				$(".picText").css({"margin": "0 auto", "width":"80%"});
+				$(".picText").css("font-size", "30px");
+				$(".picText p").css("padding-left", "12px");
+				$(".headerText").css("font-size", "100px");	
+			}
+
+			else if ($(window).width() > $(window).height())
+			{
+				var carouselHeight = $(window).height() * 0.5;
+				$('.header').css( "height", carouselHeight);
+				$('.header').css("width", $(window).width());
+
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogo.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 50%"});
+
+				//$(".picText").css("padding-top", carouselHeight *.1);
+				$(".picText").css({"margin": "0 auto", "width":"80%"});
+				$(".picText").css("font-size", "30px");
+				$(".picText p").css("padding-left", "12px");
+				$(".headerText").css("font-size", "100px");
+			}
+
+			else
+			{
 				var carouselHeight = $(window).height() * 0.8;
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
