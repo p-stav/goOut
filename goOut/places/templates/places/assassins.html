@@ -134,6 +134,15 @@
 	<script>
 	
 		$(document).ready(function() {
+			setHeaderSize();			
+		});
+
+		$( window ).resize(function() {
+			setHeaderSize();
+		});
+
+		function setHeaderSize()
+		{
 			// set logo height and width
 			$('.picHeader').width($(window).width() / 4);
 			$('.picHeader').height($(window).width() / 4 * .41);
@@ -202,8 +211,8 @@
 				$(".picText").css("font-size", "30px");
 				$(".picText p").css("padding-left", "12px");
 				$(".headerText").css("font-size", "100px");
-			}			
-		});
+			}
+		}
 
 	</script>
 </body>
