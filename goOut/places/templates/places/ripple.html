@@ -105,8 +105,8 @@
 		<div class="pillars" id="ripplePillar5" style="color:#000;" >
 			<div class="pillarLast" >
 				<div class='pillarHeaderInverse'>
-					<p style="margin-bottom:20px;">Are you ready?</p>
-					<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img src="{{STATIC_URL}}Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>
+					<p style="margin-bottom:20px;">Let it rip!</p>
+					<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="iOS" src="{{STATIC_URL}}Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>
 				<div class="socialMedia">
 					Follow us on:
 					<ul class="list-inline">
@@ -156,7 +156,7 @@
 				var carouselHeight = $(window).height() * 0.5;
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
-
+				$('.iOS').css("width", '150px');
 				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 40%"});
 
 
@@ -171,7 +171,7 @@
 				var carouselHeight = $(window).height();
 				$('.header').css( "height", carouselHeight) * .5;
 				$('.header').css("width", $(window).width());
-
+				$('.iOS').css("width", '150px');
 				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 50%"});
 
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
