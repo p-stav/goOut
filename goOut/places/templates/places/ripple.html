@@ -59,6 +59,9 @@
 
 	<div class="scrollOverFeaturedBar">
 		<!--Featured Bar -->
+		<div class="downloadActionTop" align="center">
+			<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="iOS" src="{{STATIC_URL}}Download_on_the_App_Store_Badge_US-UK_135x40.png" width="150px"></a>
+		</div>
 		<div class="featuredBar">
 			<p class ="featureBarTitle" align="center"> As seen on:</p>
 			<table class="featuredTable">
@@ -175,6 +178,7 @@
 				$('.iOS').css("width", '150px');
 				$('.picHeader').width($(window).width() / 4);
 				$('.picHeader').height($(window).width() / 4 * .41);
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 30%"});
 
 				$("#geekwire").width("50%");
 				$("#rayw").width("20%");
@@ -235,7 +239,7 @@
 				$("#geekwire").width("50%");
 				$("#rayw").width("20%");
 				$("#tuaw").width("40%");
-				
+
 				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 80%"});
 
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
