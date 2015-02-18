@@ -63,7 +63,7 @@
 			<p class ="featureBarTitle" align="center"> As seen on:</p>
 			<table class="featuredTable">
 				<tr>
-					<td><a href="http://www.geekwire.com/2015/ripple/"><img class="featuredImg" id="geekwire" src="{{STATIC_URL}}geekwire.png" width="30%"></a></td>
+					<td><a href="http://www.geekwire.com/2015/ripple/"><img class="featuredImg" id="geekwire" src="{{STATIC_URL}}geekwire.png" width="40%"></a></td>
 
 					<td><a href="http://www.raywenderlich.com/94330/readers-app-reviews-january-2015"><img class="featuredImg" id="rayw" src="{{STATIC_URL}}raywenderlich.png" width="10%"></a></td>
 
@@ -176,10 +176,14 @@
 				$('.picHeader').width($(window).width() / 4);
 				$('.picHeader').height($(window).width() / 4 * .41);
 
+				$("#geekwire").width("50%");
+				$("#rayw").width("20%");
+				$("#tuaw").width("40%");
+
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
 				$(".picText").css("font-size", "15px");
 				$(".picText p").css("padding-left", "12px");
-				$(".headerText").css("font-size", "50px");
+				$(".headerText").css("font-size", "40px");
 				$(".headerSubtext").css("font-size", "15px");
 			}
 
@@ -192,6 +196,10 @@
 				$('.picHeader').width($(window).width() / 4);
 				$('.picHeader').height($(window).width() / 4 * .41);
 
+				$("#geekwire".width("50%"));
+				$("#rayw").width("20%");
+				$("#tuaw").width("40%");
+
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
 				$(".picText p").css("padding-left", "12px");
 				$(".headerText").css("font-size", "50px");
@@ -203,6 +211,10 @@
 				$('.header').css("width", $(window).width());
 				$('.picHeader').width($(window).width() / 4);
 				$('.picHeader').height($(window).width() / 4 * .41);
+
+				$("#geekwire").width("50%");
+				$("#rayw").width("20%");
+				$("#tuaw").width("40%");
 
 				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 40%"});
 
@@ -219,6 +231,11 @@
 				$('.picHeader').width($(window).width() / 4);
 				$('.picHeader').height($(window).width() / 4 * .41);
 
+
+				$("#geekwire").width("50%");
+				$("#rayw").width("20%");
+				$("#tuaw").width("40%");
+				
 				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 80%"});
 
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
@@ -284,6 +301,10 @@
 				$('.header').css("width", $(window).width());
 				$('.picHeader').width($(window).width() / 4);
 				$('.picHeader').height($(window).width() / 4 * .41);
+
+				$("#geekwire").width("30%");
+				$("#rayw").width("10%");
+				$("#tuaw").width("20%");
 
 				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogo.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 20%"});
 
