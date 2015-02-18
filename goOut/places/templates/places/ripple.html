@@ -20,12 +20,12 @@
 	<!-- bootstrap -->
 	{% load staticfiles %}
 	<link type="text/css" href="{{STATIC_URL}}css/goOut/main.css" rel="stylesheet"/>
-	<link rel="shortcut icon" href="{{STATIC_URL}}rippleLogo.png">
+	<link rel="shortcut icon" href="{{STATIC_URL}}rippleLogo2.png">
 	<script src="{{STATIC_URL}}js/jquery.js"> </script>
 	<script src="{{STATIC_URL}}css/bootstrap-3.0.0/dist/js/bootstrap.js"> </script>
 
 	<!--load google fonts!-->
-	<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:100,300' rel='stylesheet' type='text/css'>
 
 	
 
@@ -52,86 +52,103 @@
 	<div class="header">
 		
 		<div class = "picText" style="float:left; width:200px;">
-			<p class="headerText" style="color:#000;">Ripple</h1>
-			<p class = "headerSubtext" style="color:#686868; font-size:25px;">How far will your ripples go?</p>
+			<p class="headerText" style="color:#fff;">Ripple</p>
+			<p class = "headerSubtext" style="color:#f27995; font-size:25px;">How far will your ripples go?</p>
 		</div>
 	</div>
 
-	<!--pillar section-->
-	<div class='pillarSection'>
-		<div class="pillars" id="ripplePillar1">
-			<div class="pillar">
-				<div class='pillarHeader'>Share</div>
-				<p class='pillarTxt'>Share a thought, story, or joke with people near you</p>
-				<p class="rippleDescription">Want to share your latest idea? Start a ripple.<br/>Want to promote a cool local event? Ripple it.<br/>Want to tell a funny story? Ripple.</p><br/>
-				<img class="pillarImg" src="{{STATIC_URL}}startRippleExamples.png" alt="pillar-img">
+	<div class="scrollOverFeaturedBar">
+		<!--Featured Bar -->
+		<div class="featuredBar">
+			<p class ="featureBarTitle" align="center"> As seen on:</p>
+			<table class="featuredTable">
+				<tr>
+					<td><a href="http://www.geekwire.com/2015/ripple/"><img class="featuredImg" id="geekwire" src="{{STATIC_URL}}geekwire.png" width="30%"></a></td>
 
-			</div>
+					<td><a href="http://www.raywenderlich.com/94330/readers-app-reviews-january-2015"><img class="featuredImg" id="rayw" src="{{STATIC_URL}}raywenderlich.png" width="10%"></a></td>
+
+					<td><a href="http://www.tuaw.com/2015/01/17/spread-kind-messages-far-and-wide-with-the-ripple-effect/"><img class="featuredImg" id="tuaw" src="{{STATIC_URL}}tuaw.png" width="20%"></a></td>
+				</tr>
+			</table>
 		</div>
 
+		<!--pillar section-->
+		<div class='pillarSection'>
+			<div class="pillars" id="ripplePillar1">
+				<div class="pillar">
+					<div class='pillarHeader'>Share</div>
+					<p class='pillarTxt'>Share a thought, story, or joke with people near you</p>
+					<p class="rippleDescription">Want to share your latest idea? Start a ripple.<br/>Want to promote a cool local event? Ripple it.<br/>Want to tell a funny story? Ripple.</p><br/>
+					<img class="pillarImg" src="{{STATIC_URL}}startRippleExamples.png" alt="pillar-img">
 
-		<div class="pillars" id="ripplePillar2">	
-			<div class="pillar">
-				<div class='pillarHeader'>Spread</div>
-				<p class="pillarTxt">Help interesting and relevant ripples reach your community and people across the world</p>
-				<p class="rippleDescription">Swipe right to pass a ripple you like to more people. The more people like a ripple, the further it spreads</p><br/>
-				<img class="pillarImg" src="{{STATIC_URL}}rippleAripple.png" alt="pillar-img">
-				
+				</div>
 			</div>
-		</div>
 
-		<div class="pillars" id="ripplePillar3">
-			<div class="pillar">
-				<div class='pillarHeader'>Follow</div>
-				<p class='pillarTxt'>Watch your ripples spread</p>
-				<img class="pillarImg" src="{{STATIC_URL}}rippleMapExamples.png" alt="pillar-img">
-			<br/>
-				<p class='pillarTxt'>We just started, but ripples are already spreading across the world</p></br>
-				<div align="center">
-					<iframe align="middle" width='80%' height='520' frameborder='0' src='http://galoshri.cartodb.com/viz/d1b9b142-86eb-11e4-9b89-0e4fddd5de28/embed_map' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+
+			<div class="pillars" id="ripplePillar2">	
+				<div class="pillar">
+					<div class='pillarHeader'>Spread</div>
+					<p class="pillarTxt">Help interesting and relevant ripples reach your community and people across the world</p>
+					<p class="rippleDescription">Swipe right to pass a ripple you like to more people. The more people like a ripple, the further it spreads</p><br/>
+					<img class="pillarImg" src="{{STATIC_URL}}rippleAripple.png" alt="pillar-img">
+					
+				</div>
+			</div>
+
+			<div class="pillars" id="ripplePillar3">
+				<div class="pillar">
+					<div class='pillarHeader'>Follow</div>
+					<p class='pillarTxt'>Watch your ripples spread</p>
+					<img class="pillarImg" src="{{STATIC_URL}}rippleMapExamples.png" alt="pillar-img">
+				<br/>
+					<p class='pillarTxt'>We just started, but ripples are already spreading across the world</p></br>
+					<div align="center">
+						<iframe align="middle" width='80%' height='520' frameborder='0' src='http://galoshri.cartodb.com/viz/d1b9b142-86eb-11e4-9b89-0e4fddd5de28/embed_map' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+					</div>
+				</div>
+			</div>
+
+			<div class="pillars" id="ripplePillar4">
+				<div class="pillar">
+					<div class='pillarHeader'>Grow</div>
+					<p class='pillarTxt'>Gain levels to increase your "reach", the number of people who receive your ripples</p>
+					<p class="rippleDescription">The more people that get your ripples, the faster content spreads</p><br/>
+					<img class="pillarImg" src="{{STATIC_URL}}levelRipple.png" alt="pillar-img">
+				</div>
+			</div>
+
+			<div class="pillars" id="ripplePillar5" style="color:#000;" >
+				<div class="pillarLast" >
+					<div class='pillarHeaderInverse'>
+						<p style="margin-bottom:20px;">Start Rippling!</p>
+						<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="iOS" src="{{STATIC_URL}}Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>
+					</div>
+					<div class="socialMedia">
+						Follow us on:
+						<ul class="list-inline">
+							<!--<li><a href="https://www.facebook.com/kefiapp"><img class="facebook" src="{{STATIC_URL}}facebook.png"></img></a></li>
+							&nbsp; &nbsp; -->
+							<li><a href="https://twitter.com/RippleMeThis"><img class="twitter" src="{{STATIC_URL}}twitter.png"></img></a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="pillars" id="ripplePillar4">
-			<div class="pillar">
-				<div class='pillarHeader'>Grow</div>
-				<p class='pillarTxt'>Gain levels to increase your "reach", the number of people who receive your ripples</p>
-				<p class="rippleDescription">The more people that get your ripples, the faster content spreads</p><br/>
-				<img class="pillarImg" src="{{STATIC_URL}}levelRipple.png" alt="pillar-img">
-			</div>
-		</div>
-
-		<div class="pillars" id="ripplePillar5" style="color:#000;" >
-			<div class="pillarLast" >
-				<div class='pillarHeaderInverse'>
-					<p style="margin-bottom:20px;">Start Rippling!</p>
-					<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="iOS" src="{{STATIC_URL}}Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>
-				<div class="socialMedia">
-					Follow us on:
-					<ul class="list-inline">
-						<!--<li><a href="https://www.facebook.com/kefiapp"><img class="facebook" src="{{STATIC_URL}}facebook.png"></img></a></li>
-						&nbsp; &nbsp; -->
-						<li><a href="https://twitter.com/RippleMeThis"><img class="twitter" src="{{STATIC_URL}}twitter.png"></img></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
+		<!-- foooter -->
+		<footer>
+			<nav>
+				<ul>
+					<li>
+						<a href="/assassins/terms">terms of use</a>
+					</li>
+					<li>
+						<a href="/assassins/privacy">privacy statement</a>
+					</li>
+				</ul>
+			</nav>
+		</footer>
 	</div>
-
-	<!-- foooter -->
-	<footer>
-		<nav>
-			<ul>
-				<li>
-					<a href="/assassins/terms">terms of use</a>
-				</li>
-				<li>
-					<a href="/assassins/privacy">privacy statement</a>
-				</li>
-			</ul>
-		</nav>
-	</footer>
 
 
 	<!--script-->
@@ -148,8 +165,7 @@
 		function setHeaderSize()
 		{
 			// set logo height and width
-			$('.picHeader').width($(window).width() / 4);
-			$('.picHeader').height($(window).width() / 4 * .41);
+			$('.header').css("background-color", "#055a93");
 
 
 			if (($(window).width() < 500) &&  ($(window).width() < $(window).height())) {
@@ -157,6 +173,8 @@
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
 				$('.iOS').css("width", '150px');
+				$('.picHeader').width($(window).width() / 4);
+				$('.picHeader').height($(window).width() / 4 * .41);
 
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
 				$(".picText").css("font-size", "15px");
@@ -171,6 +189,8 @@
 				$('.header').css("width", $(window).width());
 				$('.iOS').css("width", '150px');
 				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 50%"});
+				$('.picHeader').width($(window).width() / 4);
+				$('.picHeader').height($(window).width() / 4 * .41);
 
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
 				$(".picText p").css("padding-left", "12px");
@@ -181,6 +201,8 @@
 				var carouselHeight = $(window).height() * 0.6;
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
+				$('.picHeader').width($(window).width() / 4);
+				$('.picHeader').height($(window).width() / 4 * .41);
 
 				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 40%"});
 
@@ -194,6 +216,8 @@
 				var carouselHeight = $(window).height();
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
+				$('.picHeader').width($(window).width() / 4);
+				$('.picHeader').height($(window).width() / 4 * .41);
 
 				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 80%"});
 
@@ -207,6 +231,9 @@
 				var carouselHeight = $(window).height() * 0.8;
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
+				$('.picHeader').width($(window).width() / 4);
+				$('.picHeader').height($(window).width() / 4 * .41);
+
 
 				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoMedium.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 50%"});
 
@@ -221,8 +248,10 @@
 				var carouselHeight = $(window).height() * 0.8;
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
+				$('.picHeader').width($(window).width() / 4);
+				$('.picHeader').height($(window).width() / 4 * .41);
 
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 60%"});
+				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoMedium.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 60%"});
 
 				//$(".picText").css("padding-top", carouselHeight *.1);
 				$(".picText").css({"margin": "0 auto", "width":"80%"});
@@ -236,6 +265,8 @@
 				var carouselHeight = $(window).height() * 0.5;
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
+				$('.picHeader').width($(window).width() / 4);
+				$('.picHeader').height($(window).width() / 4 * .41);
 
 				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogo.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 50%"});
 
@@ -251,6 +282,8 @@
 				var carouselHeight = $(window).height() * 0.8;
 				$('.header').css( "height", carouselHeight);
 				$('.header').css("width", $(window).width());
+				$('.picHeader').width($(window).width() / 4);
+				$('.picHeader').height($(window).width() / 4 * .41);
 
 				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogo.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 20%"});
 
