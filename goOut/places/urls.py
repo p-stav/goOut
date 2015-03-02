@@ -21,7 +21,8 @@ urlpatterns = patterns('places.views',
 
 
 	# ripple
-	url(r'^ripple$', 'ripple', name='ripple'),	
+	url(r'^ripple$', 'ripple', name='ripple'),
+	url(r'^Ripple$', 'ripple', name='ripple'),	
 	url(r'^ripple/terms$', 'ripple_terms', name='ripple_terms'),	
 	url(r'^ripple/privacy$', 'ripple_privacy', name='ripple_privacy'),	
 
