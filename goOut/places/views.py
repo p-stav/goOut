@@ -88,6 +88,9 @@ def ripple_privacy(request):
 	context = {}
 	return render(request, 'places/ripple_privacy.html', context)
 
+def ripple_ambassador(request):
+	context = {}
+	return render(request, 'places/ripple_ambassador.html', context)
 
 
 
