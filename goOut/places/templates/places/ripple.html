@@ -58,7 +58,7 @@
 		<div class = "picText" style="float:left; width:200px;">
 			<img class="rippleImg" id="rippleImg" src="{{STATIC_URL}}rippleHeaderLogo.png" style="float:left;padding:20px 20px 0px 20px;" width="200px;">
 			<p class="headerText" style="color:#fff; margin-left:10%; margin-bottom:-10px;">Ripple<span style="font-size:15px"> &#153</span></p>
-			<p class = "headerSubtext" style="color:#aaa; font-size:25px; margin-left:10%;">spread your thoughts</p>
+			<p class = "headerSubtext" style="color:#aaa; font-size:25px; margin-left:10%;">explore your world</p>
 		</div>
 
 		<!-- featured image -->
@@ -66,10 +66,14 @@
 
 		<!--Featured Bar -->
 		<div class="downloadActionBar">
+			<div class="explanatoryBarTitle" style="margin-bottom:60px;">
+				Start a ripple.<br/>Watch it spread across the world.
+			</div>
+
 			<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="iOS" src="{{STATIC_URL}}Download_on_the_App_Store_Badge_US-UK_135x40.png" width="300px"></a>
 
 			<div class="androidSignup">
-				<p id="androidText" style="color:#ddd; font-size:30px; font-family:'Roboto', sans-serif;">Our Android version is coming soon!<br/><span id="androidSubtext" style="font-size:20px; color:#aaa">We'll let you know when it's here:</span></p>
+				<p id="androidText" style="color:#ddd; font-size:18px; font-family:'Roboto'; font-weight:100; sans-serif;">Android is coming soon!<br/><span id="androidSubtext" style="font-size:12px; font-weight:300;color:#aaa">We'll let you know when it's here:</span></p>
 
 				<div id="inputGroup" style="width:70%">
 				    <div class="input-group">
@@ -86,7 +90,7 @@
 
 	<div class="scrollOverFeaturedBar">
 		<div class="featuredBar">
-			<p class ="featureBarTitle" align="center"> As seen on:</p>
+			<p class ="featureBarTitle" align="center">As seen on:</p>
 			<table class="featuredTable">
 				<tr>
 					<td><a href="http://www.geekwire.com/2015/ripple/"><img class="featuredImg" id="geekwire" src="{{STATIC_URL}}geekwire.png" width="40%"></a></td>
@@ -213,7 +217,16 @@
 		function setHeaderSize()
 		{
 			$('.header').css("background-color", "#055a93");
+			var carouselHeight = $(window).height();
+			
+			if (carouselHeight <700)
+				$('.header').css( "height", 700);
+			else
+				$('.header').css( "height", carouselHeight);
+
+
 			if ($(window).width() < 500) {
+				$('.header').css( "height",900);
 				$('#rippleFeaturedImg').css({"float":"none", "display":"block", "margin": "0 auto", "width":"80%", "padding-left":"0%"});
 
 				$('.downloadActionBar').css({"width":"100%", "margin-top":"0%", "padding":"20px", "float":"none"});
@@ -225,7 +238,9 @@
 
 				
 				$('.iOS').css({"width":"150px", "margin-right":"30px"});
-			
+				$('.explanatoryBarTitle').css("margin-bottom","60px");
+				$('.explanatoryBarTitle').css("font-size","25px");
+				
 				$('#androidText').css("font-size","15px");
 				$('#androidSubtext').css("font-size","12px");
 				$('.androidSignup').css("margin-top","40px");
@@ -252,10 +267,10 @@
 			}
 
 			else if ($(window).width() < 700) {
-
+				$('.header').css( "height",1000);
 				$('#rippleFeaturedImg').css({"float":"none", "display":"block", "margin": "0 auto", "width":"80%"});
 
-				$('.downloadActionBar').css({"width":"90%", "margin-top":"-15%", "padding":"20px", "float":"none"});
+				$('.downloadActionBar').css({"width":"90%", "margin-top":"-8%", "padding":"20px", "float":"none"});
 
 				$('.picText').css({"position":"absolute", "z-index":"1000"});
 				$('#rippleFeaturedImg').css("z-index", "1");
@@ -263,19 +278,17 @@
 
 
 				
-				$('.iOS').css({"width":"200px", "margin-right":"30px"});
-			
+				$('.iOS').css({"width":"150px", "margin-right":"30px"});
 				$('#androidText').css("font-size","18px");
 				$('#androidSubtext').css("font-size","15px");
-				$('.androidSignup').css("margin-top","40px");
+				$('.androidSignup').css("margin-top","30px");
+				$('.explanatoryBarTitle').css("margin-bottom","60px");
+				$('.explanatoryBarTitle').css("font-size","30px");
 				
-
-
 				$("#geekwire").width("50%");
 				$("#rayw").width("22%");
 				$("#tuaw").width("40%");
 
-				//$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 80%"});
 
 				$(".picText").css({"margin": "0 auto", "width":"100%"});
 				$(".picText").css("font-size", "30px");
@@ -290,14 +303,10 @@
 			}
 
 			else if ($(window).width() < 850) {
-				var carouselHeight = $(window).height()*1.1;
 				$('.picText').css("background-color", "#055a93");
 
 				if (carouselHeight < 800)
 					$('.header').css( "height", 800);
-					
-				 else 	
-					$('.header').css( "height", carouselHeight);
 
 				$('.picText').css({"position":"static", "z-index":"0"});
 				$('#rippleFeaturedImg').css("z-index", "0");
@@ -306,24 +315,22 @@
 				$('.picHeader').width($(window).width() / 4);
 				$('.picHeader').height($(window).width() / 4 * .41);
 
-				$('.downloadActionBar').css("padding-top", "20%");
-				$('.downloadActionBar').css("width", "40%");
+				$('.downloadActionBar').css("padding-top", "5%");
+				$('.downloadActionBar').css("width", "45%");
 				$('#rippleFeaturedImg').css("float", "left");
 				$('.downloadActionBar').css("float", "right");
-				$('#rippleFeaturedImg').css("width", "80%");
+				$('#rippleFeaturedImg').css("width", "60%");
 				$('#rippleFeaturedImg').css("padding-left", "20px");
-				$('#rippleFeaturedImg').css("margin-left", "-20%");
-				
-
+				$('#rippleFeaturedImg').css("margin-left", "-15%");
 				
 				$('#androidText').css("font-size","20px");
 				$('#androidSubtext').css("font-size","14px");
-				$('.androidSignup').css("margin-top","110px");
-				$('.iOS').css("width", "200px");
+				$('.explanatoryBarTitle').css("margin-bottom","130px");
+				$('.explanatoryBarTitle').css("font-size","25px");
+				$('.androidSignup').css("margin-top","40px");
+				$('.iOS').css("width", "150px");
 				$("#rippleImg").css("width", "200px");
-				//$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoMedium.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 60%"});
 
-				//$(".picText").css("padding-top", carouselHeight *.1);
 				$(".picText").css({"margin": "0 auto", "width":"100%"});
 				$(".picText").css("font-size", "30px");
 				$(".picText p").css("padding-left", "12px");
@@ -339,16 +346,8 @@
 	
 
 			else if ($(window).width() < 1000) {
-				var carouselHeight = $(window).height()*1.1;
+				var carouselHeight = $(window).height()*0.95;
 				$('.picText').css("background-color", "#055a93");
-
-				if (carouselHeight < 800)
-				{
-					$('.header').css( "height", 800);
-					
-				}
-				 else 	
-					$('.header').css( "height", carouselHeight);
 
 
 				$('.picText').css({"position":"static", "z-index":"0"});
@@ -358,8 +357,8 @@
 				$('.picHeader').width($(window).width() / 4);
 				$('.picHeader').height($(window).width() / 4 * .41);
 
-				$('.downloadActionBar').css("padding-top", "10%");
-				$('.downloadActionBar').css("width", "40%");
+				$('.downloadActionBar').css("padding-top", "5%");
+				$('.downloadActionBar').css("width", "50%");
 				$('#rippleFeaturedImg').css("float", "left");
 				$('.downloadActionBar').css("float", "right");
 				$('#rippleFeaturedImg').css("width", "50%");
@@ -367,17 +366,18 @@
 
 				
 				$('#androidText').css("font-size","23px");
-				$('#androidSubtext').css("font-size","18px");
-				$('.androidSignup').css("margin-top","110px");
+				$('#androidSubtext').css("font-size","16px");
+				$('.androidSignup').css("margin-top","40px");
 				$('#rippleFeaturedImg').css("margin-left", "0%");
 				$("#rippleImg").css("width", "200px");
-
-				//$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoMedium.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 60%"});
 
 				//$(".picText").css("padding-top", carouselHeight *.1);
 				$(".picText").css({"margin": "0 auto", "width":"100%"});
 				$(".picText").css("font-size", "30px");
+				$('.explanatoryBarTitle').css("margin-bottom","120px");
+				$('.explanatoryBarTitle').css("font-size","28px");
 				$(".picText p").css("padding-left", "12px");
+				$('.iOS').css("width", "180px");
 				$(".headerText").css("font-size", "100px");	
 				$('.picText').css("margin-bottom", "5%");
 
@@ -387,33 +387,28 @@
 
 			else
 			{
-				var carouselHeight = $(window).height();
+				var carouselHeight = $(window).height()*0.95;
 				$('.picText').css("background-color", "#055a93");
-
-				if (carouselHeight < 700)
-				{
-					$('.header').css( "height", 700);
 					
-				}
-				 else 	
-					$('.header').css( "height", carouselHeight);
 
 
 				$('.picText').css({"position":"static", "z-index":"0"});
 				$('#rippleFeaturedImg').css("z-index", "0");
 
 				$('.header').css("width", $(window).width());
-				$('.downloadActionBar').css("padding-top", "10%");
+				$('.downloadActionBar').css("padding-top", "5%");
 				$('.downloadActionBar').css("width", "40%");
 				$('#rippleFeaturedImg').css("float", "left");
 				$('.downloadActionBar').css("float", "right");
 				$('#rippleFeaturedImg').css("width", "55%");
 				
-				$('#androidText').css("font-size","30px");
-				$('#androidSubtext').css("font-size","20px");
-				$('.androidSignup').css("margin-top","90px");
+				$('#androidText').css("font-size","25px");
+				$('.explanatoryBarTitle').css("margin-bottom","150px");
+				$('.explanatoryBarTitle').css("font-size","35px");
+				$('.iOS').css("width", "200px");
+				$('#androidSubtext').css("font-size","17px");
+				$('.androidSignup').css("margin-top","40px");
 				$('#rippleFeaturedImg').css("margin-left", "-10%");
-
 
 				$('.picHeader').width($(window).width() / 4);
 				$('.picHeader').height($(window).width() / 4 * .41);

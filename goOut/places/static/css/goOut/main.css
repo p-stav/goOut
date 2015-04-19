@@ -110,6 +110,21 @@
   background-color: #055a93; 
 }
 
+.explanatoryBar
+{
+  /*background-color: #fff;*/ 
+  width:100%;
+  z-index: 10;
+}
+
+.explanatoryBarTitle
+{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size:35px;
+  color:#fff;
+}
+
 .featuredBar{
   background-color: #222;
   color:#fff;
