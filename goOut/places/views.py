@@ -92,6 +92,10 @@ def ripple_ambassador(request):
 	context = {}
 	return render(request, 'places/ripple_ambassador.html', context)
 
+def ripple_careers(request):
+	context = {}
+	return render(request, 'places/ripple_careers.html', context)
+
 
 
 

@@ -27,7 +27,7 @@ urlpatterns = patterns('places.views',
 	url(r'^ripple/terms$', 'ripple_terms', name='ripple_terms'),	
 	url(r'^ripple/privacy$', 'ripple_privacy', name='ripple_privacy'),
 	url(r'^ambassador$', 'ripple_ambassador', name='ripple_ambassador'),
-
+	url(r'^careers$', 'ripple_careers', name='ripple_careers'),
 
 
 	####### v0 of Kefi app ########
