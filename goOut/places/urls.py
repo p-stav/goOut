@@ -3,7 +3,7 @@ from django.conf.urls import patterns,  url
 urlpatterns = patterns('places.views',
 	
 	# kefi labs llc home
-	url(r'^$', 'homeView', name='homeView'),	
+	url(r'^kefiHome$', 'homeView', name='homeView'),	
 
 	# kefi
 	url(r'^kefi$', 'kefiHomeView', name='kefiHomeView'),	
@@ -21,10 +21,13 @@ urlpatterns = patterns('places.views',
 
 
 	# ripple
-	url(r'^ripple$', 'ripple', name='ripple'),	
+	url(r'^$', 'ripple', name='ripple'),
+	url(r'^ripple$', 'ripple', name='ripple'),
+	url(r'^Ripple$', 'ripple', name='ripple'),	
 	url(r'^ripple/terms$', 'ripple_terms', name='ripple_terms'),	
-	url(r'^ripple/privacy$', 'ripple_privacy', name='ripple_privacy'),	
-
+	url(r'^ripple/privacy$', 'ripple_privacy', name='ripple_privacy'),
+	url(r'^ambassador$', 'ripple_ambassador', name='ripple_ambassador'),
+	url(r'^careers$', 'ripple_careers', name='ripple_careers'),
 
 
 	####### v0 of Kefi app ########
