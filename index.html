@@ -8,9 +8,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<!--<meta property="og:image" content="http://www.getkefi.com{{STATIC_URL}}rippleHeaderLogoSmall.png">-->
-	<meta property="og:title" content="Kefi">
-	<meta property="og:url" content="www.getkefi.com">
+	<meta property="og:image" content="http://www.getripple.io/rippleHeaderLogoSmall.png">
+	<meta property="og:title" content="Ripple">
+	<meta property="og:url" content="www.getripple.io">
 
 	<!--Google Maps and Google Places APIs-->
 
@@ -59,93 +59,161 @@
 	<div class="header">
 		
 		<div class = "picText" style="float:left; width:200px;">
-			<p class="headerText" style="color:#000;">Ripple</h1>
-			<p class = "headerSubtext" style="color:#686868; font-size:25px;">How far will your ripples go?</p>
+			<img class="rippleImg" id="rippleImg" src="rippleHeaderLogo.png" style="float:left;padding:20px 20px 0px 20px;" width="200px;">
+			<p class="headerText" style="color:#fff; margin-left:10%; margin-bottom:-10px;">Ripple<span style="font-size:15px"> &#153</span></p>
+			<p class = "headerSubtext" style="color:#aaa; font-size:25px; margin-left:10%;">explore your world</p>
 		</div>
+
+		<!-- featured image -->
+		<img class="rippleFeature" id="rippleFeaturedImg" src="RippleFeedPage.png" style="padding-left:10%">
+
+		<!--Featured Bar -->
+		<div class="downloadActionBar">
+			<div class="explanatoryBarTitle" style="margin-bottom:60px;">
+				Start a ripple.<br/>Watch it spread across the world.
+			</div>
+
+			<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="iOS" src="Download_on_the_App_Store_Badge_US-UK_135x40.png" width="300px"></a>
+
+			<div class="androidSignup">
+				<p id="androidText" style="color:#ddd; font-size:18px; font-family:'Roboto'; font-weight:300; sans-serif;">Android is coming soon!<br/><span id="androidSubtext" style="font-size:12px; font-weight:300;color:#aaa">We'll let you know when it's here:</span></p>
+
+				<div id="inputGroup" style="width:70%">
+				    <div class="input-group">
+				      <input type="text" id="emailForAndroid" class="form-control" placeholder="enter your email">
+				      <span class="input-group-btn">
+				        <button class="btn btn-default" id="submitEmailAndroid" type="button">Go!</button>
+				      </span>
+				    </div>
+				</div>
+			 </div>
+		</div>
+			
 	</div>
 
-	<!--pillar section-->
-	<div class='pillarSection'>
-		<div class="pillars" id="ripplePillar1">
-			<div class="pillar">
-				<div class='pillarHeader'>Share</div>
-				<p class='pillarTxt'>Share a thought, story, or joke with people near you</p>
-				<p class="rippleDescription">Want to share your latest idea? Start a ripple.<br/>Want to tell people about a cool local event? Ripple it.<br/>Want to tell a funny story? Ripple.</p><br/>
-				<img class="pillarImg" src="startRippleExamples.png" alt="pillar-img">
+	<div class="scrollOverFeaturedBar">
+		<div class="featuredBar">
+			<p class ="featureBarTitle" align="center">As seen on:</p>
+			<table class="featuredTable">
+				<tr>
+					<td><a href="http://www.geekwire.com/2015/ripple/"><img class="featuredImg" id="geekwire" src="geekwire.png" width="40%"></a></td>
 
-			</div>
+					<td><a href="http://www.raywenderlich.com/94330/readers-app-reviews-january-2015"><img class="featuredImg" id="rayw" src="raywenderlich.png" width="10%"></a></td>
+
+					<td><a href="http://www.tuaw.com/2015/01/17/spread-kind-messages-far-and-wide-with-the-ripple-effect/"><img class="featuredImg" id="tuaw" src="tuaw.png" width="20%"></a></td>
+				</tr>
+			</table>
 		</div>
 
+		<!--pillar section-->
+		<div class='pillarSection'>
+			<div class="pillars" id="ripplePillar1">
+				<div class="pillar">
+					<div class='pillarHeader'>Share</div>
+					<p class='pillarTxt'>Share a thought, local event, or joke with people near you</p>
+					<p class="rippleDescription">Took a cool picture? Ripple it<br/>Have an idea? Start a ripple<br/>Got a funny story? Ripple</p><br/>
+					<img class="pillarImg" src="startRippleExamples.png" alt="pillar-img">
 
-		<div class="pillars" id="ripplePillar2">	
-			<div class="pillar">
-				<div class='pillarHeader'>Spread</div>
-				<p class="pillarTxt">Help interesting and relevant ripples reach your community and people across the world</p>
-				<p class="rippleDescription">Swipe right to pass a ripple you like to more people. The more people like a ripple, the further it spreads</p><br/>
-				<img class="pillarImg" src="rippleAripple.png" alt="pillar-img">
-				
+				</div>
 			</div>
-		</div>
 
-		<div class="pillars" id="ripplePillar3">
-			<div class="pillar">
-				<div class='pillarHeader'>Follow</div>
-				<p class='pillarTxt'>Watch your ripples spread</p>
-				<img class="pillarImg" src="rippleMapExamples.png" alt="pillar-img">
-		<!--	<br/>
-				<p class='pillarTxt'>We just started, but ripples are already spreading across the world</p></br>
-				<div align="center">
-					<iframe align="middle" width='80%' height='520' frameborder='0' src='http://galoshri.cartodb.com/viz/d1b9b142-86eb-11e4-9b89-0e4fddd5de28/embed_map' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
-				</div> -->
+
+			<div class="pillars" id="ripplePillar2">	
+				<div class="pillar">
+					<div class='pillarHeader'>Spread</div>
+					<p class="pillarTxt">Help interesting and relevant ripples reach your community and people all over the globe</p>
+					<p class="rippleDescription">The more people spread a ripple, the further it travels</p><br/>
+					<img class="pillarImg" src="rippleAripple.png" alt="pillar-img">
+					
+				</div>
 			</div>
-		</div>
 
-		<div class="pillars" id="ripplePillar4">
-			<div class="pillar">
-				<div class='pillarHeader'>Grow</div>
-				<p class='pillarTxt'>Gain levels to increase your "reach", the number of people who receive your ripples</p>
-				<p class="rippleDescription">The more people that get your ripples, the faster content spreads</p><br/>
-				<img class="pillarImg" src="levelRipple.png" alt="pillar-img">
+			<div class="pillars" id="ripplePillar3">
+				<div class="pillar">
+					<div class='pillarHeader'>Follow</div>
+					<p class='pillarTxt'>Watch your ripples spread</p>
+					<img class="pillarImg" src="rippleMapExamples.png" alt="pillar-img">
+				<br/><br/>
+				<!--	<p class='pillarTxt'>We just started, but ripples are already spreading worldwide.</p></br>
+					<div align="center">
+						<iframe align="middle" width='80%' height='520' frameborder='0' src='http://galoshri.cartodb.com/viz/d1b9b142-86eb-11e4-9b89-0e4fddd5de28/embed_map' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+					</div> -->
+				</div>
 			</div>
-		</div>
 
-		<div class="pillars" id="ripplePillar5" style="color:#000;" >
-			<div class="pillarLast" >
-				<div class='pillarHeaderInverse'>
-					<p style="margin-bottom:20px;">How far will your ripples go?</p>
-					<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="iOS" src="Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>
-				<div class="socialMedia">
-					Follow us on:
-					<ul class="list-inline">
-						<!--<li><a href="https://www.facebook.com/kefiapp"><img class="facebook" src="{{STATIC_URL}}facebook.png"></img></a></li>
-						&nbsp; &nbsp; -->
-						<li><a href="https://twitter.com/RippleMeThis"><img class="twitter" src="twitter.png"></img></a></li>
-					</ul>
+			<!--
+			<div class="pillars" id="ripplePillar4">
+				<div class="pillar">
+					<div class='pillarHeader'>Grow</div>
+					<p class='pillarTxt'>Gain levels to increase your "reach", the number of people who receive your ripples</p>
+					<p class="rippleDescription">The more people that get your ripples, the faster content spreads</p><br/>
+					<img class="pillarImg" src="{{STATIC_URL}}levelRipple.png" alt="pillar-img">
+				</div>
+			</div>
+		-->
+
+			<div class="pillars" id="ripplePillar5" style="color:#000;" >
+				<div class="pillarLast" >
+					<div class='pillarHeaderInverse'>
+						<p style="margin-bottom:20px;">Start Rippling!</p>
+						<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="iOS" src="Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>
+					</div>
+					<div class="socialMedia">
+						Follow us on:
+						<ul class="list-inline">
+							<!--<li><a href="https://www.facebook.com/kefiapp"><img class="facebook" src="{{STATIC_URL}}facebook.png"></img></a></li>
+							&nbsp; &nbsp; -->
+							<li><a href="https://twitter.com/RippleMeThis"><img class="twitter" src="twitter.png"></img></a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- foooter -->
-	<footer>
-		<nav>
-			<ul>
-				<li>
-					<a href="/assassins/terms">terms of use</a>
-				</li>
-				<li>
-					<a href="/assassins/privacy">privacy statement</a>
-				</li>
-			</ul>
-		</nav>
-	</footer>
+		<!-- foooter -->
+		<footer>
+			<nav>
+				<ul style="font-size:10px;">
+					<li>
+						<a href="ripple_careers.html">careers</a>
+					</li>
+					<li>
+						<a href="ripple_ambassador.html">ambassador</a>
+					</li>
+					<li>
+						<a href="ripple_terms.html">terms</a>
+					</li>
+					<li>
+						<a href="ripple_privacy.html">privacy</a>
+					</li>
+				</ul>
+			</nav>
+		</footer>
+	</div>
 
 
 	<!--script-->
 	<script>
 	
 		$(document).ready(function() {
-			setHeaderSize();			
+			setHeaderSize();
+
+			Parse.initialize("oXaRo5X3EtGIcGOBJ99XrjKOOoRx0uNmmImozk0f", "NM1TZBA8m3Spe5WlNhqjKotIzN0RKmyJyTcuLhv0");
+
+			$('#submitEmailAndroid').on('click', function () {
+				// call cloud function on Kefi App
+				Parse.Cloud.run('submitEmailAndroid', {email: $('#emailForAndroid').val()}, {
+				  success: function(result) {
+				    alert("Thanks! We'll let you know when Ripple is on Android!");
+
+				    // clear email
+				    document.getElementById("emailForAndroid").value = "";
+				  },
+				  error: function(error) {
+				  	alert("uh oh! That didn't work. Please try again.");
+				  }
+				});
+			});			
 		});
 
 		$( window ).resize(function() {
@@ -154,118 +222,217 @@
 
 		function setHeaderSize()
 		{
-			// set logo height and width
-			$('.picHeader').width($(window).width() / 4);
-			$('.picHeader').height($(window).width() / 4 * .41);
-
-
-			if (($(window).width() < 500) &&  ($(window).width() < $(window).height())) {
-				var carouselHeight = $(window).height() * 0.5;
+			$('.header').css("background-color", "#055a93");
+			var carouselHeight = $(window).height();
+			
+			if (carouselHeight <700)
+				$('.header').css( "height", 850);
+			else
 				$('.header').css( "height", carouselHeight);
-				$('.header').css("width", $(window).width());
-				$('.iOS').css("width", '150px');
 
-				$(".picText").css({"margin": "0 auto", "width":"80%"});
-				$(".picText").css("font-size", "15px");
+
+			if ($(window).width() < 500) {
+				$('.header').css( "height",820);
+				$('#rippleFeaturedImg').css({"float":"none", "display":"block", "margin": "0 auto", "width":"80%", "padding-left":"0%"});
+
+				$('.downloadActionBar').css({"width":"100%", "margin-top":"0%", "padding":"20px", "float":"none"});
+
+				$('.picText').css({"position":"absolute", "z-index":"1000"});
+				$('#rippleFeaturedImg').css("z-index", "1");
+				$('.picText').css("background-color", "#034977");
+
+
+				
+				$('.iOS').css({"width":"150px", "margin-right":"30px"});
+				$('.explanatoryBarTitle').css("margin-bottom","70px");
+				$('.explanatoryBarTitle').css("font-size","25px");
+				
+				$('#androidText').css("font-size","18px");
+				$('#androidSubtext').css("font-size","14px");
+				$('.androidSignup').css("margin-top","30px");
+				
+
+
+				$("#geekwire").width("50%");
+				$("#rayw").width("22%");
+				$("#tuaw").width("40%");
+
+				//$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 80%"});
+
+				$(".picText").css({"margin": "0 auto", "width":"100%"});
+				$(".picText").css("font-size", "30px");
 				$(".picText p").css("padding-left", "12px");
 				$(".headerText").css("font-size", "50px");
 				$(".headerSubtext").css("font-size", "15px");
-			}
+				$("#rippleImg").css("width", "100px");
+				$("#rippleImg").css("padding", "10px 10px 5px 10px");
+				$('.picText').css("margin-bottom", "-30%");
 
-			else if ($(window).width() < 500) {
-				var carouselHeight = $(window).height();
-				$('.header').css( "height", carouselHeight) * .5;
-				$('.header').css("width", $(window).width());
-				$('.iOS').css("width", '150px');
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 50%"});
-
-				$(".picText").css({"margin": "0 auto", "width":"80%"});
-				$(".picText p").css("padding-left", "12px");
-				$(".headerText").css("font-size", "50px");
-			}
-
-			else if ($(window).width() < 700 && ($(window).width() < $(window).height())) {
-				var carouselHeight = $(window).height() * 0.6;
-				$('.header').css( "height", carouselHeight);
-				$('.header').css("width", $(window).width());
-
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 40%"});
-
-				$(".picText").css({"margin": "0 auto", "width":"80%"});
-				$(".picText").css("font-size", "30px");
-				$(".picText p").css("padding-left", "12px");
-				$(".headerText").css("font-size", "100px");
+				$("footer nav ul li ").css("margin-right", "100px");
+				$("footer a").css("font-size", "18px");
 			}
 
 			else if ($(window).width() < 700) {
-				var carouselHeight = $(window).height();
-				$('.header').css( "height", carouselHeight);
+				$('.header').css( "height",900);
+				$('#rippleFeaturedImg').css({"float":"none", "display":"block", "margin": "0 auto", "width":"80%"});
+
+				$('.downloadActionBar').css({"width":"90%", "margin-top":"-8%", "padding":"20px", "float":"none"});
+
+				$('.picText').css({"position":"absolute", "z-index":"1000"});
+				$('#rippleFeaturedImg').css("z-index", "1");
+				$('.picText').css("background-color", "#034977");
+
+
+				
+				$('.iOS').css({"width":"150px", "margin-right":"30px"});
+				$('#androidText').css("font-size","18px");
+				$('#androidSubtext').css("font-size","15px");
+				$('.androidSignup').css("margin-top","30px");
+				$('.explanatoryBarTitle').css("margin-bottom","60px");
+				$('.explanatoryBarTitle').css("font-size","30px");
+				
+				$("#geekwire").width("50%");
+				$("#rayw").width("22%");
+				$("#tuaw").width("40%");
+
+
+				$(".picText").css({"margin": "0 auto", "width":"100%"});
+				$(".picText").css("font-size", "30px");
+				$(".picText p").css("padding-left", "12px");
+				$(".headerText").css("font-size", "80px");
+				$(".headerSubtext").css("font-size", "25px");
+				$("#rippleImg").css("width", "150px");
+				$('.picText').css("margin-bottom", "-30%");
+
+				$("footer nav ul li ").css("margin-right", "100px");
+				$("footer a").css("font-size", "18px");
+			}
+
+			else if ($(window).width() < 850) {
+				$('.picText').css("background-color", "#055a93");
+
+				if (carouselHeight < 800)
+					$('.header').css( "height", 800);
+
+				$('.picText').css({"position":"static", "z-index":"0"});
+				$('#rippleFeaturedImg').css("z-index", "0");
+
 				$('.header').css("width", $(window).width());
+				$('.picHeader').width($(window).width() / 4);
+				$('.picHeader').height($(window).width() / 4 * .41);
 
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 80%"});
+				$('.downloadActionBar').css("padding-top", "5%");
+				$('.downloadActionBar').css("width", "45%");
+				$('#rippleFeaturedImg').css("float", "left");
+				$('.downloadActionBar').css("float", "right");
+				$('#rippleFeaturedImg').css("width", "60%");
+				$('#rippleFeaturedImg').css("padding-left", "20px");
+				$('#rippleFeaturedImg').css("margin-left", "-15%");
+				
+				$('#androidText').css("font-size","20px");
+				$('#androidSubtext').css("font-size","14px");
+				$('.explanatoryBarTitle').css("margin-bottom","130px");
+				$('.explanatoryBarTitle').css("font-size","25px");
+				$('.androidSignup').css("margin-top","40px");
+				$('.iOS').css("width", "150px");
+				$("#rippleImg").css("width", "200px");
 
-				$(".picText").css({"margin": "0 auto", "width":"80%"});
+				$(".picText").css({"margin": "0 auto", "width":"100%"});
 				$(".picText").css("font-size", "30px");
 				$(".picText p").css("padding-left", "12px");
 				$(".headerText").css("font-size", "100px");
+				$(".headerSubtext").css("font-size", "25px");
+				$('.picText').css("margin-bottom", "8%");
+				$('#rippleFeaturedImg').css("padding-left", "20px");
+
+				$("footer nav ul li ").css("margin-right", "100px");
+				$("footer a").css("font-size", "18px");
 			}
 
-			else if ($(window).width() < 1000 && ($(window).width() < $(window).height())) {
-				var carouselHeight = $(window).height() * 0.8;
-				$('.header').css( "height", carouselHeight);
-				$('.header').css("width", $(window).width());
-
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoMedium.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 50%"});
-
-				//$(".picText").css("padding-top", carouselHeight *.1);
-				$(".picText").css({"margin": "0 auto", "width":"80%"});
-				$(".picText").css("font-size", "30px");
-				$(".picText p").css("padding-left", "12px");
-				$(".headerText").css("font-size", "100px");
-			}
+	
 
 			else if ($(window).width() < 1000) {
-				var carouselHeight = $(window).height() * 0.8;
-				$('.header').css( "height", carouselHeight);
-				$('.header').css("width", $(window).width());
+				var carouselHeight = $(window).height()*0.95;
+				$('.picText').css("background-color", "#055a93");
 
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 60%"});
+
+				$('.picText').css({"position":"static", "z-index":"0"});
+				$('#rippleFeaturedImg').css("z-index", "0");
+
+				$('.header').css("width", $(window).width());
+				$('.picHeader').width($(window).width() / 4);
+				$('.picHeader').height($(window).width() / 4 * .41);
+
+				$('.downloadActionBar').css("padding-top", "5%");
+				$('.downloadActionBar').css("width", "50%");
+				$('#rippleFeaturedImg').css("float", "left");
+				$('.downloadActionBar').css("float", "right");
+				$('#rippleFeaturedImg').css("width", "50%");
+				$('#rippleFeaturedImg').css("padding-left", "20px");
+
+				
+				$('#androidText').css("font-size","23px");
+				$('#androidSubtext').css("font-size","16px");
+				$('.androidSignup').css("margin-top","40px");
+				$('#rippleFeaturedImg').css("margin-left", "0%");
+				$("#rippleImg").css("width", "200px");
 
 				//$(".picText").css("padding-top", carouselHeight *.1);
-				$(".picText").css({"margin": "0 auto", "width":"80%"});
+				$(".picText").css({"margin": "0 auto", "width":"100%"});
 				$(".picText").css("font-size", "30px");
+				$('.explanatoryBarTitle').css("margin-bottom","120px");
+				$('.explanatoryBarTitle').css("font-size","28px");
 				$(".picText p").css("padding-left", "12px");
+				$('.iOS').css("width", "180px");
 				$(".headerText").css("font-size", "100px");	
-			}
+				$('.picText').css("margin-bottom", "5%");
 
-			else if ($(window).width() < $(window).height())
-			{
-				var carouselHeight = $(window).height() * 0.5;
-				$('.header').css( "height", carouselHeight);
-				$('.header').css("width", $(window).width());
-
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogo.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 50%"});
-
-				//$(".picText").css("padding-top", carouselHeight *.1);
-				$(".picText").css({"margin": "0 auto", "width":"80%"});
-				$(".picText").css("font-size", "30px");
-				$(".picText p").css("padding-left", "12px");
-				$(".headerText").css("font-size", "100px");
+				$("footer nav ul li ").css("margin-right", "100px");
+				$("footer a").css("font-size", "18px");
 			}
 
 			else
 			{
-				var carouselHeight = $(window).height() * 0.8;
-				$('.header').css( "height", carouselHeight);
-				$('.header').css("width", $(window).width());
+				var carouselHeight = $(window).height()*0.95;
+				$('.picText').css("background-color", "#055a93");
+					
 
-				$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogo.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 30%"});
+
+				$('.picText').css({"position":"static", "z-index":"0"});
+				$('#rippleFeaturedImg').css("z-index", "0");
+
+				$('.header').css("width", $(window).width());
+				$('.downloadActionBar').css("padding-top", "5%");
+				$('.downloadActionBar').css("width", "40%");
+				$('#rippleFeaturedImg').css("float", "left");
+				$('.downloadActionBar').css("float", "right");
+				$('#rippleFeaturedImg').css("width", "55%");
+				
+				$('#androidText').css("font-size","25px");
+				$('.explanatoryBarTitle').css("margin-bottom","150px");
+				$('.explanatoryBarTitle').css("font-size","35px");
+				$('.iOS').css("width", "200px");
+				$('#androidSubtext').css("font-size","17px");
+				$('.androidSignup').css("margin-top","40px");
+				$('#rippleFeaturedImg').css("margin-left", "-10%");
+
+				$('.picHeader').width($(window).width() / 4);
+				$('.picHeader').height($(window).width() / 4 * .41);
+
+				$("#geekwire").width("35%");
+				$("#rayw").width("12%");
+				$("#tuaw").width("25%");
+
+				//$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoMedium.png)", "background-repeat":"no-repeat", "background-position":"4% 70%"});
 
 				//$(".picText").css("padding-top", carouselHeight *.1);
-				$(".picText").css({"margin": "0 auto", "width":"80%"});
+				$(".picText").css({"margin": "0 auto", "width":"100%"});
 				$(".picText").css("font-size", "30px");
 				$(".picText p").css("padding-left", "12px");
 				$(".headerText").css("font-size", "100px");
+
+				$("footer nav ul li ").css("margin-right", "100px");
+				$("footer a").css("font-size", "18px");
 			}
 		}
 	</script>

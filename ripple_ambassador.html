@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta property="og:image" content="http://www.getripple.io{{STATIC_URL}}rippleHeaderLogoSmall.png">
+	<meta property="og:title" content="Ripple Ambassador Program">
+	<meta property="og:url" content="www.getkefi.com">
+
+	<!--Google Maps and Google Places APIs-->
+
+	<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>-->
+
+	<!-- bootstrap -->
+	{% load staticfiles %}
+	<link type="text/css" href="{{STATIC_URL}}css/goOut/main.css" rel="stylesheet"/>
+	<script src="{{STATIC_URL}}js/jquery.js"> </script>
+	<script src="{{STATIC_URL}}css/bootstrap-3.0.0/dist/js/bootstrap.js"> </script>
+
+	<!--load google fonts!-->
+	<link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+
+	
+
+	<title>Ripple Ambassadors</title>
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-49651565-1', 'getkefi.com');
+	  ga('send', 'pageview');
+
+	</script>
+</head>
+
+<body>
+	<!--header-->
+	<div class="header">
+		
+		<div class = "header" style="padding-top:8%;">
+			<p class="centerText" align="center" style="color:#fff; font-size:50px; font-family: 'Roboto', sans-serif;
+">Ripple Ambassador</p>
+			<p class = "centerSubtext" align="center" style="color:#f27995; font-size:30px;font-family: 'Roboto', sans-serif;
+">explore your world</p>
+		</div>
+	</div>
+
+
+	<div class="ambassadorExplanation">
+		<!--Share with people near you - and beyond<br/> See what people on campus and around the world are thinking and doing <br/> Get out of your bubble. <br/>-->
+
+		Hi. <br/>
+		Ripple is growing and quickly spreading to people and campuses across the world. <br/>We are looking for awesome student and community leaders to be the face of Ripple and get more people rippling. <br/><br/>
+		<br/><br/>
+		<blockquote>
+			<p style="font-size:25px; color:#F03661;"><em>Ripple is for people who want to be spontaneous and connected to others on campus and the world beyond</em></p>
+		</blockquote>
+		<br/>
+		You:<br/>
+		<ul id="youAre">
+			<li>Want to know what people are doing and thinking around you.</li>
+			<li>Are curious about people and places you have never been to</li>
+			<li>Love your campus and community</li>
+			<li>Are involved in many activites and clubs on campus</li>
+		</ul>
+
+		<br/><br/>
+		Sound familiar? We want you. <!--<br/>This is not a job;  this is you living the Ripple brand and sharing it with your peers. --><br/>Here are the perks of being a Ripple ambassador:
+		<ul id="perks">
+			<li>Adding your experience with Ripple to your resume</li>
+			<li>Upon successful completion of your time with us, a personalized recommendation letter signed by the Ripple Team</li>
+			<li>Create a network of other Ripple Ambassadors across the world</li>
+			<li>Unparalleled experience in marketing, branding, entrepreneurship, and strategy. We wish we had this experience in college.</li>
+			<li>Free gifts and merchandise from Ripple </li>
+		</ul>
+
+	</div>
+
+
+	<iframe class="formIframe" src="https://docs.google.com/forms/d/1EPMtCNOim9YfGxSuNLezzoSCZYa40tNBe01zDPkTPWM/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+
+
+	<script>
+	
+		$(document).ready(function() {
+			setHeaderSize();			
+		});
+
+		$( window ).resize(function() {
+			setHeaderSize();
+		});
+
+		function setHeaderSize()
+		{
+			// set logo height and width
+			$('.header').css("background-color", "#055a93");
+			var carouselHeight = $(window).height() * 0.5;
+			$('.header').css( "height", carouselHeight);
+			$('.header').css("width", $(window).width());
+			$('.formIframe').css("width", $(window).width());
+			$('.formIframe').css("height", '1500px');
+
+			if ($(window).width() < 500) 
+			{
+				$(".centerText").css("font-size", "50px");
+				$(".centerSubtext").css("font-size", "20px");
+
+			}
+			else
+			{
+				$(".centerText").css("font-size", "80px");
+				$(".centerSubtext").css("font-size", "40px");	
+			}
+		}
+	</script>
+</body>
+</html>
