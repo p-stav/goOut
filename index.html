@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<meta property="og:image" content="http://www.getkefi.com{{STATIC_URL}}rippleHeaderLogoSmall.png">
+	<!--<meta property="og:image" content="http://www.getkefi.com{{STATIC_URL}}rippleHeaderLogoSmall.png">-->
 	<meta property="og:title" content="Kefi">
 	<meta property="og:url" content="www.getkefi.com">
 
@@ -18,11 +18,18 @@
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>-->
 
 	<!-- bootstrap -->
-	{% load staticfiles %}
-	<link type="text/css" href="{{STATIC_URL}}css/goOut/main.css" rel="stylesheet"/>
-	<link rel="shortcut icon" href="{{STATIC_URL}}rippleLogo.png">
-	<script src="{{STATIC_URL}}js/jquery.js"> </script>
-	<script src="{{STATIC_URL}}css/bootstrap-3.0.0/dist/js/bootstrap.js"> </script>
+	<link type="text/css" href="main.css" rel="stylesheet"/>
+	<link rel="shortcut icon" href="rippleLogo2.png">
+	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 	<!--load google fonts!-->
 	<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
@@ -64,7 +71,7 @@
 				<div class='pillarHeader'>Share</div>
 				<p class='pillarTxt'>Share a thought, story, or joke with people near you</p>
 				<p class="rippleDescription">Want to share your latest idea? Start a ripple.<br/>Want to tell people about a cool local event? Ripple it.<br/>Want to tell a funny story? Ripple.</p><br/>
-				<img class="pillarImg" src="{{STATIC_URL}}startRippleExamples.png" alt="pillar-img">
+				<img class="pillarImg" src="startRippleExamples.png" alt="pillar-img">
 
 			</div>
 		</div>
@@ -75,7 +82,7 @@
 				<div class='pillarHeader'>Spread</div>
 				<p class="pillarTxt">Help interesting and relevant ripples reach your community and people across the world</p>
 				<p class="rippleDescription">Swipe right to pass a ripple you like to more people. The more people like a ripple, the further it spreads</p><br/>
-				<img class="pillarImg" src="{{STATIC_URL}}rippleAripple.png" alt="pillar-img">
+				<img class="pillarImg" src="rippleAripple.png" alt="pillar-img">
 				
 			</div>
 		</div>
@@ -84,12 +91,12 @@
 			<div class="pillar">
 				<div class='pillarHeader'>Follow</div>
 				<p class='pillarTxt'>Watch your ripples spread</p>
-				<img class="pillarImg" src="{{STATIC_URL}}rippleMapExamples.png" alt="pillar-img">
-			<br/>
+				<img class="pillarImg" src="rippleMapExamples.png" alt="pillar-img">
+		<!--	<br/>
 				<p class='pillarTxt'>We just started, but ripples are already spreading across the world</p></br>
 				<div align="center">
 					<iframe align="middle" width='80%' height='520' frameborder='0' src='http://galoshri.cartodb.com/viz/d1b9b142-86eb-11e4-9b89-0e4fddd5de28/embed_map' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
-				</div>
+				</div> -->
 			</div>
 		</div>
 
@@ -98,7 +105,7 @@
 				<div class='pillarHeader'>Grow</div>
 				<p class='pillarTxt'>Gain levels to increase your "reach", the number of people who receive your ripples</p>
 				<p class="rippleDescription">The more people that get your ripples, the faster content spreads</p><br/>
-				<img class="pillarImg" src="{{STATIC_URL}}levelRipple.png" alt="pillar-img">
+				<img class="pillarImg" src="levelRipple.png" alt="pillar-img">
 			</div>
 		</div>
 
@@ -106,13 +113,13 @@
 			<div class="pillarLast" >
 				<div class='pillarHeaderInverse'>
 					<p style="margin-bottom:20px;">How far will your ripples go?</p>
-					<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="iOS" src="{{STATIC_URL}}Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>
+					<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="iOS" src="Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>
 				<div class="socialMedia">
 					Follow us on:
 					<ul class="list-inline">
 						<!--<li><a href="https://www.facebook.com/kefiapp"><img class="facebook" src="{{STATIC_URL}}facebook.png"></img></a></li>
 						&nbsp; &nbsp; -->
-						<li><a href="https://twitter.com/RippleMeThis"><img class="twitter" src="{{STATIC_URL}}twitter.png"></img></a></li>
+						<li><a href="https://twitter.com/RippleMeThis"><img class="twitter" src="twitter.png"></img></a></li>
 					</ul>
 				</div>
 			</div>
