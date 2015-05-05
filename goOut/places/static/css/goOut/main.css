@@ -309,6 +309,13 @@
     width: 50%;
     margin: 0 auto; 
   }
+
+  .innerImage
+  {
+    width:60%;
+    padding-top:250px; 
+    margin:0 auto;
+  } 
 }
 
 @media (max-width: 715px) {

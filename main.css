@@ -24,10 +24,6 @@
   position: absolute;
 }
 
-.picText {  
-  font-family: "Roboto",arial,verdana,"lucida sans unicode",tahoma,sans-serif;
-}
-
 .pillars {
   margin: 0 auto;
   font-family: "Roboto",arial,verdana,"lucida sans unicode",tahoma,sans-serif;
@@ -117,14 +113,6 @@
   z-index: 10;
 }
 
-.explanatoryBarTitle
-{
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  font-size:35px;
-  color:#fff;
-}
-
 .featuredBar{
   background-color: #222;
   color:#fff;
@@ -192,6 +180,61 @@
 }
 
 @media (min-width: 716px) {
+
+  .innerImage
+  {
+    width:60%;
+    padding-top:50px; 
+    margin:0 auto;
+  } 
+
+  #androidText {
+    font-size: 22px;
+  }
+
+  #geekwire {
+    width:50%;
+  }
+
+  #rayw {
+    width:22%
+  }
+
+  #tuaw {
+    width:40%;
+  }
+
+  .picText {
+    margin: 0 auto;
+    width:100%;
+    font-size: 50px;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .title {
+    font-family: 'Roboto', sans-serif;
+    color:#fff;
+    font-size: 35px;
+  }
+
+  .downloadActionBar {
+    font-size: 100px;
+  }
+
+  .downloadActionBarSubtext
+{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color:#fff;
+  font-size: 40px;
+}
+
+
+  #androidSubtext {
+    font-size:15px;
+  }
+
+
   .pillar{
     width: 80%;
     margin: 0 auto; 
@@ -216,13 +259,13 @@
   
   }
 
-    .pillar .pillarImg{
-      height: 550px; 
-      margin-left: auto;
-      margin-right: auto;
-      display: block;
-      -moz-border-radius: 15px;
-      border-radius: 15px;
+  .pillar .pillarImg{
+    height: 550px; 
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
   }
 
   .pillar .buttons{
@@ -312,6 +355,60 @@
 }
 
 @media (max-width: 715px) {
+
+  .innerImage
+  {
+    width:60%;
+    padding-top:200px; 
+    margin:0 auto;
+  } 
+
+  #androidText {
+    font-size: 22px;
+  }
+
+  #geekwire {
+    width:50%;
+  }
+
+  #rayw {
+    width:22%
+  }
+
+  #tuaw {
+    width:40%;
+  }
+
+  .picText {
+    margin: 0 auto;
+    width:100%;
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .title {
+    font-family: 'Roboto', sans-serif;
+    color:#fff;
+    font-size: 35px;
+  }
+
+  .downloadActionBar {
+    font-size: 40px;
+  }
+
+  .downloadActionBarSubtext
+  {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color:#fff;
+    font-size: 18px;
+  }
+
+
+  #androidSubtext {
+    font-size:15px;
+  }
+
   .pillar{
     padding-bottom: 30px;
     padding-top: 25px;  
