@@ -172,17 +172,17 @@
   background-color: #fff;
 }
 
-@media (min-width: 716px) {
+@media (min-width: 1000px) {
 
   .innerImage
   {
-    width:60%;
-    padding-top:50px; 
+    width:70%;
+    padding-top:200px; 
     margin:0 auto;
   } 
 
   #androidText {
-    font-size: 22px;
+    font-size: 28px;
   }
 
   #geekwire {
@@ -223,7 +223,7 @@
 }
 
   #androidSubtext {
-    font-size:15px;
+    font-size:18px;
   }
 
   .pillar{
@@ -358,11 +358,197 @@
   }
 }
 
-@media (max-width: 715px) {
+@media (min-width:701px) and (max-width: 1000px) {
+  .innerImage
+  {
+    width:70%;
+    padding-top:100px; 
+    margin:0 auto;
+  } 
+
+  #androidText {
+    font-size: 22px;
+  }
+
+  #geekwire {
+    width:50%;
+  }
+
+  #rayw {
+    width:22%
+  }
+
+  #tuaw {
+    width:40%;
+  }
+
+  .picText {
+    margin: 0 auto;
+    width:100%;
+    font-size: 40px;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .title {
+    font-family: 'Roboto', sans-serif;
+    color:#fff;
+    font-size: 35px;
+  }
+
+  .downloadActionBar {
+    font-size: 70px;
+  }
+
+  .downloadActionBarSubtext
+  {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color:#fff;
+    font-size: 40px;
+  }
+
+  #androidSubtext {
+    font-size:18px;
+  }
+
+  .pillar{
+    width: 80%;
+    margin: 0 auto; 
+    padding-bottom: 50px;
+    padding-top: 20px;  
+  }
+
+  .pillarHeader {
+  color: #000;
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 55px;
+  }
+  .pillarTxt{
+    color:#111;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 25px;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .pillarTxtInverse {
+    color:#000;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 25px;
+    font-family: 'Roboto', sans-serif;
+  
+  }
+
+  .pillar .pillarImg{
+    height: 550px; 
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+  }
+
+  .pillar .buttons{
+    margin-bottom: 100px;
+    height: 370px;
+  }
+
+  .homeButton {
+    width: 100%;
+    display: block;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+  }
+
+  .homeButton2 {
+    width: 100%;
+    display: block;
+  }
+
+  .pillarButtonLeft
+  {
+    float:left; 
+    margin-left: 10%;
+    width:30%;
+
+  }
+
+  .pillarButtonRight
+  {
+    float: right;
+    margin-right: 10%;
+    width: 30%;
+  }
+
+ .taglineTextarea {
+    text-align: center;
+    font-size:18px; 
+    width: 80%;
+    margin: 0 auto; 
+  }
+
+
+  .taglineContainer {
+    font-family: 'Roboto', sans-serif;
+    color:#fff;
+    padding: 20px;
+    background-color: #000;
+
+  }
+
+  .description {
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    color: #A25886;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .descriptionHome {
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    color: #A25886;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .rippleDescription {
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #F03661;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .descriptionKefi
+  {
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    color: #E6D833;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto; 
+  }
+
+  footer nav ul li {
+    font-size: 18px;
+    display: inline;
+    margin-right: 50px;
+  }
+
+}
+
+@media (max-width: 700px) {
 
   .innerImage
   {
-    padding-top:150px; 
+    padding-top:270px; 
     margin:0 auto;
   } 
 

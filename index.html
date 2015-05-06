@@ -58,7 +58,7 @@
 	
 		
 	<!--header-->
-	<div class="header" style="background-color:#055a93;">
+	<div class="header" style="background-color:#031017;">
 		
 		<div class = "picText" style="float:left; width:100%;background-color:#034977; ">
 			<img class="rippleImg" id="rippleImg" src="rippleHeaderLogo.png" style="float:left; padding:5px 5px 5px 5px;" width="100px;">
@@ -73,11 +73,11 @@
 		
 		<!--Featured Bar -->
 		<div class="title" style="width:100%; float:none">
-			<div class="explanatoryBarTitle" style="padding: 0px 0px 70px 0px; font-size:35px;">
-				<p class="downloadActionBar"align="center" style="padding-top:40px;">
-					<span><b><br/>Explore your world</b></span><br/>
+			<div class="explanatoryBarTitle" style="padding: 0px 0px 70px 0px; font-size:15px;">
+				<div class="downloadActionBar"align="center">
+					<span><b>Explore your world</b></span><br/>
 					<span class="downloadActionBarSubtext">Spread your thoughts around the globe</span>
-				</p>
+				</div>
 			</div>
 		</div>
 
@@ -91,8 +91,8 @@
 			<div class="androidSignup">
 				<div id="androidText" style="color:#ddd; font-family:'Roboto'; font-weight:300;">
 					<p align="center">
-						Android is coming soon!<br/>
-						<span id="androidSubtext" style="font-weight:300;color:#aaa"><b>We'll let you know when it's here:</b></span>
+						<span><b>Android is coming soon!</b><br/>
+						<span id="androidSubtext" style="font-weight:300;color:#fff"><b>We'll let you know when it's here:</b></span>
 					</p>
 				</div>
 
@@ -244,11 +244,9 @@
 		function setHeaderSize()
 		{
 			
-			if ($(window).width() > 700) 
+			if ($(window).width() > 1000) 
 			{
-				$('.header').css( "height",800);
-
-				//$('.header').css({"backgroundImage": "url({{STATIC_URL}}rippleHeaderLogoSmall.png)", "background-repeat":"no-repeat", "background-attachment":"fixed", "background-position":"50% 80%"});
+				$('.header').css( "height",850);
 
 				$("footer nav ul li ").css("margin-right", "100px");
 				$("footer a").css("font-size", "18px");
@@ -257,13 +255,32 @@
 				$('.androidSignup').css("float","right");
 				$('.androidSignup').css("width","35%");
 				$(".inputGroup").css("width","100px");
+				$('.header').css({"backgroundImage": "url(headerBackground.png)", "background-repeat":"no-repeat", "background-position":"40% 90%"});
 
 			}
+
+			else if ($(window).width() > 700) 
+			{
+				$('.header').css( "height",850);
+
+				$(".ios").css("float","none");
+				$('.androidSignup').css("float","none");
+				$('.androidSignup').css({"float":"none", "width":"50%","margin":"0 auto","display":"block", "padding-top":"40px"});
+				$(".ios").css({"margin-bottom":"30px"});
+				$(".iosImage").css({"width":"40%", "margin":"0 auto", "display":"block"});
+
+				$("footer nav ul li ").css("margin-right", "100px");
+				$("footer a").css("font-size", "18px");
+
+				$(".rippleImg").css({"width":"50px", "padding":"18px 5px 5px 10px"});
+
+				$('.header').css({"backgroundImage": "url(headerBackground.png)", "background-repeat":"no-repeat", "background-position":"40% 90%"});
+			}
+
 
 			else
 			{
 				$('.header').css( "height",800);
-
 				$(".ios").css("float","none");
 				$('.androidSignup').css("float","none");
 
@@ -271,8 +288,9 @@
 				$(".ios").css({"margin-bottom":"30px"});
 				$(".iosImage").css({"width":"200px", "margin":"0 auto", "display":"block"});
 
-
 				$(".rippleImg").css({"width":"50px", "padding":"18px 5px 5px 10px"});
+
+				$('.header').css({"backgroundImage": "url(headerBackgroundSmall.png)", "background-repeat":"no-repeat", "background-position":"60% 47%"});
 
 
 			}
