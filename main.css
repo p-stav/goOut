@@ -552,7 +552,7 @@
 
   .innerImage
   {
-    padding-top:270px; 
+    padding-top:300px; 
     margin:0 auto;
   } 
 
@@ -577,6 +577,7 @@
     width:100%;
     font-size: 30px;
     font-family: 'Roboto', sans-serif;
+    margin-bottom:20px;
   }
 
   .title {
