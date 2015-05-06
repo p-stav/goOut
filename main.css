@@ -350,6 +350,12 @@
     width: 50%;
     margin: 0 auto; 
   }
+
+  footer nav ul li {
+    font-size: 18px;
+    display: inline;
+    margin-right: 50px;
+  }
 }
 
 @media (max-width: 715px) {
@@ -514,7 +520,7 @@
     font-weight: 300;
     color: #F03661;
     text-align: center;
-    width: 50%;
+    width: 80%;
     margin: 0 auto;
   }
 
@@ -525,7 +531,13 @@
     margin: 0 auto; 
   }
 
+  footer nav ul li {
+    font-size: 12px;
+    display: inline;
+    margin-right: 20px;
+  }
 }
+
 
 footer {
   background: #000;
@@ -539,14 +551,8 @@ footer nav ul {
   text-align: left;
 }
 
-footer nav ul li {
-  display: inline;
-  margin-right: 100px;
-}
-
 footer a, footer a:visited {
   text-decoration: none;
-  font-size: 18px;
   color:#fff;
 }
 
