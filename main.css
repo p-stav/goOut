@@ -30,13 +30,6 @@
   font-size: 13px;
 }
 
-.pillarHeader {
-  color: #000;
-  text-align: center;
-  margin-bottom: 10px;
-  font-family: 'Roboto', sans-serif;
-  font-size: 55px;
-}
 .pillarHeaderInverse {
   color: #fff;
   text-align: center;
@@ -229,11 +222,9 @@
   font-size: 40px;
 }
 
-
   #androidSubtext {
     font-size:15px;
   }
-
 
   .pillar{
     width: 80%;
@@ -242,6 +233,13 @@
     padding-top: 20px;  
   }
 
+  .pillarHeader {
+  color: #000;
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 55px;
+  }
   .pillarTxt{
     color:#111;
     font-size: 24px;
@@ -358,7 +356,7 @@
 
   .innerImage
   {
-    padding-top:200px; 
+    padding-top:150px; 
     margin:0 auto;
   } 
 
@@ -411,6 +409,14 @@
   .pillar{
     padding-bottom: 30px;
     padding-top: 25px;  
+  }
+
+  .pillarHeader {
+  color: #000;
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 35px;
   }
 
   .pillarTxt{
