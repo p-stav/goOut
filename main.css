@@ -212,6 +212,8 @@
 
   .downloadActionBar {
     font-size: 100px;
+    font-family: 'Roboto', sans-serif;
+    font-weight:100;
   }
 
   .downloadActionBarSubtext
@@ -397,6 +399,8 @@
 
   .downloadActionBar {
     font-size: 70px;
+    font-family: 'Roboto', sans-serif;
+    font-weight:100;
   }
 
   .downloadActionBarSubtext
@@ -583,6 +587,8 @@
 
   .downloadActionBar {
     font-size: 40px;
+    font-family: 'Roboto', sans-serif;
+    font-weight:100;
   }
 
   .downloadActionBarSubtext
