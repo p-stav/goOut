@@ -59,11 +59,9 @@
 		
 	<!--header-->
 	<div class="header" style="background-color:#031017;">
-		
 		<div class = "picText" style="float:left; width:100%;background-color:#034977; ">
 			<img class="rippleImg" id="rippleImg" src="rippleHeaderLogo.png" style="float:left; padding:5px 5px 5px 5px;" width="100px;">
-			<p class="headerText" style="color:#fff; margin-top:16px;">Ripple<span style="font-size:10px"> &#153</span></p>
-			
+			<p class="headerText" style="color:#fff; margin-top:16px;">Ripple<span style="font-size:10px"> &#153</span></p>	
 		</div>
 		<!--<p class = "headerSubtext" style="color:#aaa; font-size:25px; margin-left:10%;">explore your world</p>-->
 
@@ -88,22 +86,11 @@
 				</a>
 			</div>
 
-			<div class="androidSignup">
-				<div id="androidText" style="color:#ddd; font-family:'Roboto'; font-weight:300;">
-					<p align="center">
-						<span><b>Android is coming soon!</b><br/>
-						<span id="androidSubtext" style="font-weight:300;color:#fff"><b>We'll let you know when it's here:</b></span>
-					</p>
-				</div>
-
-				<div id="inputGroup">
-				    <div class="input-group">
-				      <input type="text" id="emailForAndroid" class="form-control" placeholder="enter your email">
-				      <span class="input-group-btn">
-				        <button class="btn btn-default" id="submitEmailAndroid" type="button">Go!</button>
-				      </span>
-				    </div>
-				</div>
+			<div class="android">
+				<a href="https://play.google.com/store/apps/details?id=com.KefiLabs.Ripple">
+				  <img class="androidImage" alt="Get it on Google Play"
+				       src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Get_it_on_Google_play.svg/1280px-Get_it_on_Google_play.svg.png" />
+				</a>
 			</div>
 		</div>
 			
@@ -252,9 +239,10 @@
 				$("footer a").css("font-size", "18px");
 
 				$(".ios").css("float","left");
-				$('.androidSignup').css("float","right");
-				$('.androidSignup').css("width","35%");
-				$(".inputGroup").css("width","100px");
+				$(".iosImage").css({"width":"100%", "margin":"0 auto", "display":"block"});
+				$('.android').css("float","right");
+				$('.android').css("width","25%");
+				$('.androidImage').css("width","100%");
 				$('.header').css({"backgroundImage": "url(headerBackground.png)", "background-repeat":"no-repeat", "background-position":"40% 90%"});
 
 			}
@@ -264,10 +252,12 @@
 				$('.header').css( "height",850);
 
 				$(".ios").css("float","none");
-				$('.androidSignup').css("float","none");
-				$('.androidSignup').css({"float":"none", "width":"50%","margin":"0 auto","display":"block", "padding-top":"40px"});
+				$('.android').css("float","none");
+				$('.android').css({"float":"none", "width":"50%","margin":"0 auto","display":"block", "padding-top":"40px"});
 				$(".ios").css({"margin-bottom":"30px"});
 				$(".iosImage").css({"width":"40%", "margin":"0 auto", "display":"block"});
+				$('.android').css("width","100%");
+				$('.androidImage').css({"width":"40%", "margin":"0 auto", "display":"block"});
 
 				$("footer nav ul li ").css("margin-right", "100px");
 				$("footer a").css("font-size", "18px");
@@ -282,9 +272,12 @@
 			{
 				$('.header').css( "height",850);
 				$(".ios").css("float","none");
-				$('.androidSignup').css("float","none");
+				$('.android').css("float","none");
+				$('.android').css("width","100%");
+				$('.androidImage').css({"width":"180px", "margin":"0 auto", "display":"block"});
 
-				$('.androidSignup').css({"width":"250px","margin":"0 auto","display":"block", "padding-top":"40px"});
+
+				$('.android').css({"width":"250px","margin":"0 auto","display":"block", "padding-top":"40px"});
 				$(".ios").css({"margin-bottom":"30px"});
 				$(".iosImage").css({"width":"200px", "margin":"0 auto", "display":"block"});
 
