@@ -59,9 +59,9 @@
 		
 	<!--header-->
 	<div class="header" style="background-color:#031017;">
-		<div class = "picText" style="float:left; width:100%;background-color:#034977; ">
-			<img class="rippleImg" id="rippleImg" src="rippleHeaderLogo.png" style="float:left; padding:5px 5px 5px 5px;" width="100px;">
-			<p class="headerText" style="color:#fff; margin-top:16px;">Ripple<span style="font-size:10px"> &#153</span></p>	
+		<div class = "picText" style="width:100%;background-color:#034977;">
+			<img class="rippleImg" id="rippleImg" src="rippleHeaderLogo.png" style="float:left; margin:12px;" width="100px;">
+			<p class="headerText" style="color:#fff;  padding-top:20px;">Ripple<span style="font-size:10px;"> &#153</span></p>	
 		</div>
 		<!--<p class = "headerSubtext" style="color:#aaa; font-size:25px; margin-left:10%;">explore your world</p>-->
 
@@ -70,10 +70,10 @@
 
 		
 		<!--Featured Bar -->
-		<div class="title" style="width:100%; float:none">
+		<div class="title" style="width:100%;">
 			<div class="explanatoryBarTitle" style="padding: 0px 0px 70px 0px; font-size:15px; font-family:'Roboto', sans-serif;">
-				<div class="downloadActionBar"align="center">
-					<span><b>Explore your world</b></span><br/>
+				<div class="downloadActionBar" align="center" style="text-shadow:2px 2px #111">
+					<span class="downloadActionBarSpan"><b>Explore your world</b></span><br/>
 					<span class="downloadActionBarSubtext">Spread your thoughts around the globe</span>
 				</div>
 			</div>
@@ -92,6 +92,10 @@
 				       src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Get_it_on_Google_play.svg/1280px-Get_it_on_Google_play.svg.png" />
 				</a>
 			</div>
+		</div>
+		<br/>
+		<div class="photoCredit">
+			<p style="color:#aaa">*photo shared by Ripple user 'wentip'</p>
 		</div>
 			
 	</div>
@@ -238,22 +242,27 @@
 			if ($(window).width() > 1000) 
 			{
 				$('.header').css( "height",850);
+				$('.picText').css( "height", 120);
 
 				$("footer nav ul li ").css("margin-right", "100px");
 				$("footer a").css("font-size", "18px");
 
 				$(".ios").css("float","left");
 				$(".iosImage").css({"width":"100%", "margin":"0 auto", "display":"block"});
-				$('.android').css("float","right");
-				$('.android').css("width","25%");
+				$('.android').css({"float":"right","width":"25%"});
 				$('.androidImage').css("width","100%");
-				$('.header').css({"backgroundImage": "url(headerBackground.png)", "background-repeat":"no-repeat", "background-position":"40% 90%"});
+	
+				$('.header').css({"backgroundImage": "url(scottsdaleSunset.jpg)", "background-repeat":"no-repeat", "background-position":"40% 90%", "background-size":"110%"});
+				$('.downloadActionBar').css({"padding-top":"200px"});
+				$('.downloadActionBarSpan').css({"font-size":"100px"});
+				$('.photoCredit').css({"margin-top":"200px", "margin-left":"5px"});
 
 			}
 
 			else if ($(window).width() > 700) 
 			{
 				$('.header').css( "height",850);
+				$('.picText').css( "height", 90);
 
 				$(".ios").css("float","none");
 				$('.android').css("float","none");
@@ -268,13 +277,16 @@
 
 				$(".rippleImg").css({"width":"50px", "padding":"18px 5px 5px 10px"});
 
-				$('.header').css({"backgroundImage": "url(headerBackground.png)", "background-repeat":"no-repeat", "background-position":"40% 90%"});
+				$('.header').css({"backgroundImage": "url(scottsdaleSunset.jpg)", "background-repeat":"no-repeat", "background-position":"50% 0%", "background-size":"200%"});
+				$('.photoCredit').css({"margin-top":"120px", "margin-left":"5px"});
 			}
 
 
 			else
 			{
 				$('.header').css( "height",850);
+				$('.picText').css( "height", 75);
+
 				$(".ios").css("float","none");
 				$('.android').css("float","none");
 				$('.android').css("width","100%");
@@ -285,9 +297,12 @@
 				$(".ios").css({"margin-bottom":"30px"});
 				$(".iosImage").css({"width":"200px", "margin":"0 auto", "display":"block"});
 
-				$(".rippleImg").css({"width":"50px", "padding":"18px 5px 5px 10px"});
+				$(".rippleImg").css({"width":"50px", "padding":"10px 5px 5px 10px"});
+				$('.downloadActionBar').css({"padding-top":"40px"});
+			
 
-				$('.header').css({"backgroundImage": "url(headerBackgroundSmall.png)", "background-repeat":"no-repeat", "background-position":"60% 47%"});
+				$('.header').css({"backgroundImage": "url(scottsdaleSunset.jpg)", "background-repeat":"no-repeat", "background-position":"50% 0%", "background-size":"300%"});
+				$('.photoCredit').css({"margin-top":"120px", "margin-left":"5px"});
 
 
 			}
