@@ -57,17 +57,17 @@
 
 <body style="font-weight:100; background-color:#fff; font-family:'roboto',sans-serif;width:100%;">
 
-	<div class = "pictureText" style="width:100%;background-color:#034977; height:100px;">
+	<div class = "picText" style="width:100%;background-color:#034977; height:100px;">
 			<a src="http://getrippl.io"><img class="rippleImg" id="rippleImg" src="http://i.imgur.com/vA22ZX9.png" style="float:left; padding:10px;" height="100px"></a>
 			<br/>
 	</div>
 
-	<div class="header" style="height:500px;">
-		<p align="center" style="padding-top:50px;"><span class="eyw" style="color:#fff; text-shadow: 2px 2px #000000; font-family:sans-serif">explore your world</span></p>
+	<div class="header" style="height:500px;background-image:url('http://i.imgur.com/M5GYPlm.jpg');background-size:100%;">
+		<p align="center" style="padding-top:50px;"><span style="font-size:80px; color:#fff; text-shadow: 2px 2px #000000; font-family:sans-serif;">explore your world</span></p>
 
 
-		<div style="font-size:22px; margin-top:250px; margin-left:15px; color:#fff; font-shadow: 2px 2px #00000">
-			Share your thoughts with people in<br/> Seattle - and around the world.
+		<div style="font-size:25px; margin-top:280px; margin-left:15px; color:#fff; font-shadow: 2px 2px #000000">
+			Spread your thoughts to people in Seattle - and around the world.
 		</div>
 	</div>
 
@@ -98,7 +98,7 @@
 		
 			<p align="center">
 				<a href="https://www.facebook.com/events/472231959604441/"><b>Join us for Happy Hour on Thursday!</b></a><br/>
-				<a href="https://www.facebook.com/events/472231959604441/"><img class="happyhour" src="http://i.imgur.com/OPevB3W.jpg"; /></a><br/><br/>
+				<a href="https://www.facebook.com/events/472231959604441/"><img src="http://i.imgur.com/OPevB3W.jpg" width="500px"; /></a><br/><br/>
 
 				<a style="margin-top:100px;" href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8">
 					<img class="iosImage" src="http://www.getripple.io/Download_on_the_App_Store_Badge_US-UK_135x40.png" width="230px">
@@ -135,7 +135,7 @@
 	<script>
 	
 		$(document).ready(function() {
-			setHeaderSize();			
+			//alert("hi"); 			
 		});
 
 		$( window ).resize(function() {
@@ -144,21 +144,24 @@
 
 		function setHeaderSize()
 		{
-			
-			$('.header').css( "height", "500px");
+			// set logo height and width
+			$('.header').css("background-color", "#055a93");
+			var carouselHeight = $(window).height() * 0.5;
+			$('.header').css( "height", carouselHeight);
 			$('.header').css("width", $(window).width());
+			$('.formIframe').css("width", $(window).width());
+			$('.formIframe').css("height", '1500px');
 
-			if ($(window).width() < 825) 
+			if ($(window).width() < 500) 
 			{
-				$(".eyw").css({"font-size":"40px"});
-				$('.header').css({"background-image":"url('http://i.imgur.com/M5GYPlm.jpg')", "background-size":"200%", "background-position":"50% 0%"});
-				$('.happyhour').css("width","95%");
+				$(".centerText").css("font-size", "50px");
+				$(".centerSubtext").css("font-size", "20px");
+
 			}
 			else
 			{
-				$(".eyw").css({"font-size":"80px"});
-				$('.header').css({"background-image":"url('http://i.imgur.com/M5GYPlm.jpg')", "background-size":"100%", "background-position":"50% 0%"});
-				$('.happyhour').css("width","500px");
+				$(".centerText").css("font-size", "80px");
+				$(".centerSubtext").css("font-size", "40px");	
 			}
 		}
 	</script>
