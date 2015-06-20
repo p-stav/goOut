@@ -116,8 +116,7 @@
 
 .featureBarTitle {
   font-family: 'Roboto', sans-serif;
-  padding: 10px 0px 10px 0px;
-  font-size: 18px;
+  padding: 10px 0px 0px 0px;
 }
 
 .featuredTable {
@@ -179,15 +178,15 @@
   }
 
   #geekwire {
-    width:50%;
+    width:25%;
   }
 
   #rayw {
-    width:22%
+    width:10%;
   }
 
   #tuaw {
-    width:40%;
+    width:20%;
   }
 
   .picText {
@@ -590,7 +589,7 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     color:#fff;
-    font-size: 15px;
+    font-size: 13px;
   }
 
 
