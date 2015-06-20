@@ -77,9 +77,9 @@
 
 	<div class="header">
 		<div class="floats" style="height:350px;">
-			<div class="floatLeft" style="float:left; width:25%; margin:20px 0px 0px 20px; padding-top:30px;">
+			<div class="floatLeft" style="float:left; width:28%; margin:20px 0px 0px 20px; padding-top:30px;">
 				<div class='carouselHolder'>
-					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="width:70%; margin:0 auto;">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner" role="listbox">
 							<div class="item active">
@@ -102,32 +102,21 @@
 
 			<div class="explanation" style="width:70%; float:right">
 				<p class="downloadActionBarSpan" >Explore your world</p>
-				<p class="downloadActionBarSubtext">start a ripple. Then follow your ripple as people spread it across the world. You don't need friends or followers to get your message out there. No boundaries. No noise. Just ripples.</p>
-			</div>
-		</div>
-
-		<div  class="innerImage" style="height: 500px; padding-top:100px; margin-top: 10px;">
-			<p style="font-size:25px;color:#fff" align="center">Start Rippling!</p>
-			<div class="ios" style="padding-top:10px;">
-				<a style="margin-top:100px;" href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8">
-					<img class="iosImage" src="Download_on_the_App_Store_Badge_US-UK_135x40.png">
-				</a>
-			</div>
-			<br/>
-			<div class="android">
-				<a href="https://play.google.com/store/apps/details?id=com.KefiLabs.Ripple">
-				  <img class="androidImage" alt="Get it on Google Play"
-				       src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Get_it_on_Google_play.svg/1280px-Get_it_on_Google_play.svg.png" />
-				</a>
-			</div>
-		</div>
-
-		<div class="photoCredit">
-			<p style="color:#fff; font-family:sans-serif;">photo rippled by izziejewel: "Colorado makes quite the playground."</p>
-		</div>
-	
+				<p class="downloadActionBarSubtext">Start a ripple. Then follow it as people spread it across the world. You don't need friends or followers to get your message out there.<br/><br/> No boundaries. No noise. Just ripples.</p>
 			
+				<div class="actions" style="margin-left:40px; margin-top:100px;"> 
+					<a class="ios" href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img src="Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>
+					<a class="android" href="https://play.google.com/store/apps/details?id=com.KefiLabs.Ripple"> <img width="100%" alt="Get it on Google Play" src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Get_it_on_Google_play.svg/1280px-Get_it_on_Google_play.svg.png" /></a>
+				</div>
+			</div>
+			
+		</div>
+		<div class="photoCredit">
+			<p style="color:#999; font-family:sans-serif;">photo rippled by anthonyfuchsel: "Come with me, I promise we'll get lost. #Bozo #Hyalite #Earnyourturns"</p>
+		</div>
 	</div>
+
+		
 
 
 
@@ -187,7 +176,7 @@
 			
 			if ($(window).width() > 1000) 
 			{
-				$('.header').css( "height",950);
+				$('.header').css( "height",700);
 				$('.picText').css( "height", 120);
 				$('.socialMedia').css('margin-top', 35);
 				$('.headerText').css("padding-top","25px");
@@ -196,15 +185,14 @@
 				$("footer a").css("font-size", "18px");
 
 
-				$(".iosImage").css({"width":"30%", "margin":"0 auto", "display":"block"});
-				$('.android').css({"width":"30%","margin":"0 auto", "display":"block"});
-				$('.androidImage').css("width","100%");
+				$(".ios").css({"width":"30%", "display":"block", "float":"left"});
+				$('.android').css({"width":"27%","margin":"0 auto", "display":"block"});
+			
 	
-				$('.header').css({"backgroundImage": "url(ashlee_hanson.jpg)", "background-repeat":"no-repeat", "background-position":"40% 20%", "background-size":"110%"});
-				$('.downloadActionBar').css({"padding-top":"250px"});
-				$('.downloadActionBarSpan').css({"font-size":"100px", "color":"#fff", "margin-top":"50px", "padding-left":"40px"});
-				$('.downloadActionBarSubtext').css({"padding":"40px 40px 0px 40px"});
-				$('.photoCredit').css({"margin-top":"150px", "margin-left":"5px"});
+				$('.header').css({"backgroundImage": "url(fuchsel.jpg)", "background-repeat":"no-repeat", "background-position":"40% 30%", "background-size":"110%"});
+				$('.downloadActionBarSpan').css({"font-size":"70px", "color":"#fff", "margin-top":"50px", "padding-left":"40px"});
+				$('.downloadActionBarSubtext').css({"padding":"30px 40px 0px 40px"});
+				$('.photoCredit').css({"margin-top":"320px", "margin-left":"25px"});
 
 			}
 

@@ -170,16 +170,8 @@
 
   .innerImage
   {
-    width:30%;
     padding-top: 0px; 
     margin:0 auto;
-    background-image: url("blueCircleBackground.png");
-    background-size: 90%;
-    background-repeat: no-repeat;
-    background-position: 50% 0%;
-    z-index: 1000; 
-    overflow: visible;
-    background-clip: inherent;
   } 
 
   #androidText {
@@ -399,7 +391,7 @@
   }
 
   .downloadActionBar {
-    font-size: 70px;
+
     font-family: 'Roboto', sans-serif;
     font-weight:100;
   }
@@ -588,7 +580,7 @@
   }
 
   .downloadActionBar {
-    font-size: 35px;
+
     font-family: 'Roboto', sans-serif;
     font-weight:100;
   }
