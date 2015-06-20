@@ -65,19 +65,19 @@
 				<p class="headerText" style="color:#fff;">Ripple<span style="font-size:10px;"> &#153</span></p>	
 			</div>
 
-			<div style="float:right;margin-right:22px;" class="socialMedia">
-				<a href="https://twitter.com/RippleMeThis"><img src="http://www.soilsolutions.com.au/images/twitter-circle-white.png" width="40px"></a>
+			<div class="socialMedia">
+				<a href="https://twitter.com/RippleMeThis"><img class="socialMediaBtn" href src="http://www.soilsolutions.com.au/images/twitter-circle-white.png" ></a>
 
-				<a href="https://www.facebook.com/exploreRipple"><img src="http://uploads.webflow.com/53865454d40d2b7b391f1ed0/53d1d12b3f2dcf7f4495908c_pastor-facebook.png" width="50px"></a>
+				<a href="https://www.facebook.com/exploreRipple"><img class="socialMediaBtn" href src="http://www.soilsolutions.com.au/images/facebook-circle-white.png" ></a>
 
-				<a href="http://instagram.com/ripple.app"><img src="http://milestonepreschool.com.ph/wp-content/uploads/2014/10/instagram.png" width="40px"></a>
+				<a ="http://instagram.com/ripple.app"><img class="socialMediaBtn" href src="http://milestonepreschool.com.ph/wp-content/uploads/2014/10/instagram.png" ></a>
 			</div>
 		</div>
 	</div>
 
 	<div class="header">
 		<div class="floats" style="height:350px;">
-			<div class="floatLeft" style="float:left; width:28%; margin:20px 0px 0px 20px; padding-top:30px;">
+			<div class="floatLeft">
 				<div class='carouselHolder'>
 					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="width:70%; margin:0 auto;">
 						<!-- Wrapper for slides -->
@@ -100,13 +100,14 @@
 				</div>
 			</div>
 
-			<div class="explanation" style="width:70%; float:right">
-				<p class="downloadActionBarSpan" >Explore your world</p>
-				<p class="downloadActionBarSubtext">Start a ripple. Then follow it as people spread it across the world. You don't need friends or followers to get your message out there.<br/><br/> No boundaries. No noise. Just ripples.</p>
-			
-				<div class="actions" style="margin-left:40px; margin-top:100px;"> 
-					<a class="ios" href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img src="Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>
-					<a class="android" href="https://play.google.com/store/apps/details?id=com.KefiLabs.Ripple"> <img width="100%" alt="Get it on Google Play" src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Get_it_on_Google_play.svg/1280px-Get_it_on_Google_play.svg.png" /></a>
+			<div class="explanation" style="width:70%;">
+				<div class="words">
+					<p class="downloadActionBarSpan" >Explore your world</p>
+					<p class="downloadActionBarSubtext">Start a ripple. Then follow it as people spread it across the world. You don't need friends or followers to get your message out there.<br/><br/> No boundaries. No noise. Just ripples.</p>
+				</div>
+				<div class="actions"> 
+					<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="ios" src="Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>
+					<a href="https://play.google.com/store/apps/details?id=com.KefiLabs.Ripple"> <img class="android" alt="Get it on Google Play" src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Get_it_on_Google_play.svg/1280px-Get_it_on_Google_play.svg.png" /></a>
 				</div>
 			</div>
 			
@@ -164,6 +165,10 @@
 	
 		$(document).ready(function() {
 			setHeaderSize();
+
+			$('.carousel').carousel({
+				interval:2500
+			});
 		
 		});
 
@@ -178,21 +183,28 @@
 			{
 				$('.header').css( "height",700);
 				$('.picText').css( "height", 120);
-				$('.socialMedia').css('margin-top', 35);
 				$('.headerText').css("padding-top","25px");
 
 				$("footer nav ul li ").css("margin-right", "100px");
 				$("footer a").css("font-size", "18px");
 
+				// ios, android, and social media
+				$('.explanation').css({"float":"right", "margin":"0 auto"});
+				$('.actions').css({"margin":"100px 0px 0px 40px"});
+				$(".ios").css({"width":"260px", "display":"block", "float":"left"});
+				$('.android').css({"width":"230px","margin":"0 auto", "display":"block"});
 
-				$(".ios").css({"width":"30%", "display":"block", "float":"left"});
-				$('.android').css({"width":"27%","margin":"0 auto", "display":"block"});
+
+				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"40px"});
+				$('.socialMediaBtn').css({"width": "40px"});
+
+				$('.floatLeft').css({"float":"left", "width":"28%", "margin":"20px 0px 0px 20px", "padding-top":"30px"});
 			
 	
 				$('.header').css({"backgroundImage": "url(fuchsel.jpg)", "background-repeat":"no-repeat", "background-position":"40% 30%", "background-size":"110%"});
 				$('.downloadActionBarSpan').css({"font-size":"70px", "color":"#fff", "margin-top":"50px", "padding-left":"40px"});
 				$('.downloadActionBarSubtext').css({"padding":"30px 40px 0px 40px"});
-				$('.photoCredit').css({"margin-top":"320px", "margin-left":"25px"});
+				$('.photoCredit').css({"margin-top":"325px", "margin-left":"20px", "font-size":"11px"});
 
 			}
 
@@ -216,32 +228,42 @@
 
 				$(".rippleImg").css({"width":"50px", "padding":"18px 5px 5px 10px"});
 
-				$('.header').css({"backgroundImage": "url(izziejewel.jpg)", "background-repeat":"no-repeat", "background-position":"50% 0%", "background-size":"200%"});
+				$('.header').css({"backgroundImage": "url(fuchsel.jpg)", "background-repeat":"no-repeat", "background-position":"50% 0%", "background-size":"200%"});
 				$('.photoCredit').css({"margin-top":"90px", "margin-left":"5px"});
 			}
 
 
 			else
 			{
-				$('.header').css( "height",850);
-				$('.picText').css( "height", 75);
+				$('.header').css( "height",950);
+				$('.picText').css( "height", 55);
+				$('.headerText').css("padding-top","15px");
+				$(".rippleImg").css({"width":"50px"});
 
-				$(".ios").css("float","none");
-				$('.android').css("float","none");
-				$('.android').css("width","100%");
-				$('.androidImage').css({"width":"180px", "margin":"0 auto", "display":"block"});
+				//ios + android image
+				$('.actions').css({"margin":"0px 0px 0px 0px"});
+				$(".ios").css({"width":"180px", "margin":"0 auto","display":"block", "float":"none", "margin-bottom":"20px"});
+				$('.android').css({"width":"180px","margin":"0 auto","float":"none", "display":"block"});
+				
+				
+				// social media
+				$('.actions').css({"margin-left":"0px", "margin-top":"20px;"});
+				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"20px"});
+				$('.socialMediaBtn').css({"width":"30px"});
 
+				// explanation
+				$('.explanation').css({"float":"none", "margin":"0 auto", "width":"90%"});
+				$('.downloadActionBarSpan').css({"font-size":"30px", "color":"#fff", "margin":"0 auto", "text-align":"center"});
+				$('.downloadActionBarSubtext').css({"padding":"30px 40px 0px 40px"});
 
-				$('.android').css({"width":"250px","margin":"0 auto","display":"block", "padding-top":"40px"});
-				$(".ios").css({"margin-bottom":"30px"});
-				$(".iosImage").css({"width":"180px", "margin":"0 auto", "display":"block"});
+				$('.photoCredit').css({"margin-top":"325px", "margin-left":"20px", "font-size":"11px"});
 
-				$(".rippleImg").css({"width":"50px", "padding":"10px 5px 5px 10px"});
+				$('.floatLeft').css({"float":"none", "width":"80%", "margin":"0 auto", "padding-top":"30px"	});
 				$('.downloadActionBar').css({"padding-top":"90px"});
 			
 
-				$('.header').css({"backgroundImage": "url(izziejewel.jpg)", "background-repeat":"no-repeat", "background-position":"50% 0%", "background-size":"400%"});
-				$('.photoCredit').css({"margin-top":"60px", "margin-left":"5px"});
+				$('.header').css({"backgroundImage": "url(fuchsel.jpg)", "background-repeat":"no-repeat", "background-position":"35% 30%", "background-size":"400%"});
+				$('.photoCredit').css({"margin-top":"560px", "margin-left":"5px"});
 
 
 			}
