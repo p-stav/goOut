@@ -176,7 +176,7 @@
     background-image: url("blueCircleBackground.png");
     background-size: 90%;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 50% 0%;
     z-index: 1000; 
     overflow: visible;
     background-clip: inherent;
@@ -220,11 +220,12 @@
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   color:#fff;
-  font-size: 40px;
+  font-size: 27px;
 }
 
   #androidSubtext {
     font-size:18px;
+
   }
 
   .pillar{
