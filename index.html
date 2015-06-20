@@ -59,33 +59,63 @@
 		
 	<!--header-->
 	<div class="header" style="background-color:#031017;">
-		<div class = "picText" style="width:100%;background-color:#034977;">
-			<img class="rippleImg" id="rippleImg" src="rippleHeaderLogo.png" style="float:left; margin:12px;" width="100px;">
-			<p class="headerText" style="color:#fff;  padding-top:20px;">Ripple<span style="font-size:10px;"> &#153</span></p>	
+		<div class = "picText" style="background-color:#034977;">
+			<div style="float:left; width:400px;">
+				<img class="rippleImg" id="rippleImg" src="rippleHeaderLogo.png" style="float:left; margin:12px;" width="100px;">
+				<p class="headerText" style="color:#fff;">Ripple<span style="font-size:10px;"> &#153</span></p>	
+			</div>
+
+			<div style="float:right;margin-right:22px;" class="socialMedia">
+				<a href="https://twitter.com/RippleMeThis"><img src="http://www.soilsolutions.com.au/images/twitter-circle-white.png" width="40px"></a>
+
+				<a href="https://www.facebook.com/exploreRipple"><img src="http://uploads.webflow.com/53865454d40d2b7b391f1ed0/53d1d12b3f2dcf7f4495908c_pastor-facebook.png" width="50px"></a>
+
+				<a href="http://instagram.com/ripple.app"><img src="http://milestonepreschool.com.ph/wp-content/uploads/2014/10/instagram.png" width="40px"></a>
+			</div>
 		</div>
-		<!--<p class = "headerSubtext" style="color:#aaa; font-size:25px; margin-left:10%;">explore your world</p>-->
 
-		<!-- featured image -->
-		<!--<img class="rippleFeature" id="rippleFeaturedImg" src="RippleFeedPage.png" style="padding-left:10%">-->
 
-		
-		<!--Featured Bar -->
-		<div class="title" style="width:100%;">
-			<div class="explanatoryBarTitle" style="padding: 0px 0px 70px 0px; font-size:15px; font-family:'Roboto', sans-serif;">
-				<div class="downloadActionBar" align="center" style="text-shadow:1px 1px #111;">
-					<span class="downloadActionBarSpan"><b>Explore your world</b></span><br/>
-					<span class="downloadActionBarSubtext">Spread your thoughts around the globe</span>
+		<div class='carouselHolder' style=" float:left;width:25%; margin:20px 0px 0px 20px;">
+			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox">
+					<div class="item active">
+				  		<img src="rippleFeed.png" alt="ripple feed"/>
+				  		<div class="carousel-caption">
+				    		Start a ripple
+				  		</div>
+					</div>
+					
+					<div class="item">
+				 		<img src="map.png" alt="ripple map and comment page">
+				  		<div class="carousel-caption">
+				    		Watch it spread across the world. 
+				  		</div>
+					</div>
+					<div class="item">
+				 		<img src="trendingRipples.png" alt="profile page">
+				  		<div class="carousel-caption">
+				    		Free your story
+				  		</div>
+					</div>
 				</div>
 			</div>
 		</div>
 
-		<div  class="innerImage">
-			<div class="ios">
+		<div class="explaination" style="width:70%; float:right">
+			dsfasdfasfssadfasdsfasdfasfssadfasdsfasdfasfssadfasdsfasdfasfssadfasdsfasdfasfssadfasdsfasdfasfssadfasdsfasdfasfssadfasdsfasdfasfssadfasdsfasdfasfssadfas
+		</div>
+
+
+		<div  class="innerImage" style="height:500px; padding-top:150px;margin-top:0px;">
+
+			<p style="font-size:25px;color:#fff" align="center">Start Rippling!</p>
+			<div class="ios" style="padding-top:10px;">
 				<a style="margin-top:100px;" href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8">
 					<img class="iosImage" src="Download_on_the_App_Store_Badge_US-UK_135x40.png">
 				</a>
 			</div>
-
+			<br/>
 			<div class="android">
 				<a href="https://play.google.com/store/apps/details?id=com.KefiLabs.Ripple">
 				  <img class="androidImage" alt="Get it on Google Play"
@@ -93,7 +123,7 @@
 				</a>
 			</div>
 		</div>
-		<br/>
+
 		<div class="photoCredit">
 			<p style="color:#fff; font-family:sans-serif;">photo rippled by izziejewel: "Colorado makes quite the playground."</p>
 		</div>
@@ -117,6 +147,7 @@
 		</div>
 
 		<!--pillar section-->
+		<!--
 		<div class='pillarSection'>
 			<div class="pillars" id="ripplePillar1">
 				<div class="pillar">
@@ -143,23 +174,13 @@
 					<p class='pillarTxt'>See where ripples have spread & what people have commented along the way.</p>
 					<img class="pillarImg" src="rippleMapExamples.png" alt="pillar-img">
 				<br/><br/>
+			-->
 				<!--	<p class='pillarTxt'>We just started, but ripples are already spreading worldwide.</p></br>
 					<div align="center">
 						<iframe align="middle" width='80%' height='520' frameborder='0' src='http://galoshri.cartodb.com/viz/d1b9b142-86eb-11e4-9b89-0e4fddd5de28/embed_map' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
 					</div> -->
-				</div>
+			<!--	</div>
 			</div>
-
-			<!--
-			<div class="pillars" id="ripplePillar4">
-				<div class="pillar">
-					<div class='pillarHeader'>Grow</div>
-					<p class='pillarTxt'>Gain levels to increase your "reach", the number of people who receive your ripples</p>
-					<p class="rippleDescription">The more people that get your ripples, the faster content spreads</p><br/>
-					<img class="pillarImg" src="{{STATIC_URL}}levelRipple.png" alt="pillar-img">
-				</div>
-			</div>
-		-->
 
 			<div class="pillars" id="ripplePillar5" style="color:#000;" >
 				<div class="pillarLast" >
@@ -169,6 +190,8 @@
 						<a href="https://play.google.com/store/apps/details?id=com.KefiLabs.Ripple">  			  <img height="85px"  alt="Get it on Google Play"
 				       src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Get_it_on_Google_play.svg/1280px-Get_it_on_Google_play.svg.png" />
 				</a>
+
+			
 			
 					</div>
 					<div class="socialMedia">
@@ -182,7 +205,7 @@
 				</div>
 			</div>
 		</div>
-
+		-->
 		<!-- foooter -->
 		<footer>
 			<nav>
@@ -213,23 +236,7 @@
 	
 		$(document).ready(function() {
 			setHeaderSize();
-
-			Parse.initialize("oXaRo5X3EtGIcGOBJ99XrjKOOoRx0uNmmImozk0f", "NM1TZBA8m3Spe5WlNhqjKotIzN0RKmyJyTcuLhv0");
-
-			$('#submitEmailAndroid').on('click', function () {
-				// call cloud function on Kefi App
-				Parse.Cloud.run('submitEmailAndroid', {email: $('#emailForAndroid').val()}, {
-				  success: function(result) {
-				    alert("Thanks! We'll let you know when Ripple is on Android!");
-
-				    // clear email
-				    document.getElementById("emailForAndroid").value = "";
-				  },
-				  error: function(error) {
-				  	alert("uh oh! That didn't work. Please try again.");
-				  }
-				});
-			});			
+		
 		});
 
 		$( window ).resize(function() {
@@ -241,15 +248,17 @@
 			
 			if ($(window).width() > 1000) 
 			{
-				$('.header').css( "height",850);
+				$('.header').css( "height",950);
 				$('.picText').css( "height", 120);
+				$('.socialMedia').css('margin-top', 35);
+				$('.headerText').css("padding-top","25px");
 
 				$("footer nav ul li ").css("margin-right", "100px");
 				$("footer a").css("font-size", "18px");
 
-				$(".ios").css("float","left");
-				$(".iosImage").css({"width":"100%", "margin":"0 auto", "display":"block"});
-				$('.android').css({"float":"right","width":"25%"});
+
+				$(".iosImage").css({"width":"30%", "margin":"0 auto", "display":"block"});
+				$('.android').css({"width":"30%","margin":"0 auto", "display":"block"});
 				$('.androidImage').css("width","100%");
 	
 				$('.header').css({"backgroundImage": "url(izziejewel.jpg)", "background-repeat":"no-repeat", "background-position":"40% 20%", "background-size":"110%"});
@@ -263,6 +272,8 @@
 			{
 				$('.header').css( "height",850);
 				$('.picText').css( "height", 90);
+				$('.socialMedia').css('margin-top', '25px');
+				$('.headerText').css("padding-top","20px");
 
 				$(".ios").css("float","none");
 				$('.android').css("float","none");
