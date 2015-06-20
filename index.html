@@ -77,7 +77,7 @@
 
 	<div class="header">
 		<div class="floats" style="height:350px;">
-			<div class="explanation" style="width:70%;">
+			<div class="explanation">
 				<div class="words">
 					<p class="downloadActionBarSpan" >Explore your world</p>
 					<p class="downloadActionBarSubtext">Start a ripple. Then follow it as people spread it across the world. You don't need friends or followers to get your message out there.<br/><br/> No boundaries. No noise. Just ripples.</p>
@@ -215,32 +215,37 @@
 
 			else if ($(window).width() > 700) 
 			{
-				$('.header').css( "height",850);
+				$('.header').css( "height",1050);
 				$('.picText').css( "height", 90);
 				$('.socialMedia').css('margin-top', '25px');
-				$('.headerText').css("padding-top","20px");
+				$('.headerText').css("padding-top","25px");
+				$(".rippleImg").css({"width":"50px", "padding":"18px 0px 0px 0px"});
+				$('.header').css({"backgroundImage": "url(fuchsel.jpg)", "background-repeat":"no-repeat", "background-position":"70% 40%", "background-size":"200%"});
+				$('.photoCredit').css({"margin-top":"670px", "margin-left":"15px"});
 
-				$(".ios").css("float","none");
-				$('.android').css("float","none");
-				$('.android').css({"float":"none", "width":"50%","margin":"0 auto","display":"block", "padding-top":"40px"});
-				$(".ios").css({"margin-bottom":"30px"});
-				$(".iosImage").css({"width":"40%", "margin":"0 auto", "display":"block"});
-				$('.android').css("width","100%");
-				$('.androidImage').css({"width":"40%", "margin":"0 auto", "display":"block"});
-				$('.downloadActionBar').css({"padding-top":"100px"});
-				$("footer nav ul li ").css("margin-right", "100px");
-				$("footer a").css("font-size", "18px");
+				// social media
+				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"30px"});
+				$('.socialMediaBtn').css({"width": "40px"});
 
-				$(".rippleImg").css({"width":"50px", "padding":"18px 5px 5px 10px"});
+				$('.explanation').css({"float":"right", "margin":"0 auto", "width":"70%"});
+				$('.actions').css({"margin":"40px 0px 0px 40px"});
+				$('.downloadActionBarSpan').css({"font-size":"40px", "color":"#fff", "margin-top":"0px", "padding-left":"0px","text-align":"center"});
+				$('.downloadActionBarSubtext').css({"font-size":"20px","padding":"20px 40px 0px 40px", "text-align":"center"});
 
-				$('.header').css({"backgroundImage": "url(fuchsel.jpg)", "background-repeat":"no-repeat", "background-position":"50% 0%", "background-size":"200%"});
-				$('.photoCredit').css({"margin-top":"90px", "margin-left":"5px"});
+				$('.floatLeft').css({"float":"none", "width":"450px", "margin":"0 auto", "padding-top":"30px"	});
+
+				//ios + android image
+				$(".ios").css({"width":"200px", "margin":"0 auto","display":"block", "float":"left", "margin-bottom":"20px"});
+				$('.android').css({"width":"185px","margin":"0 auto","float":"right", "display":"block"});
+				
+				
+
 			}
 
 
 			else
 			{
-				$('.header').css( "height",750);
+				$('.header').css( "height",800);
 				$('.picText').css( "height", 35);
 				$('.headerText').css({"padding-top":"22px", "font-size":"12px"});
 				$(".rippleImg").css({"width":"40px"});
@@ -262,12 +267,12 @@
 
 				$('.photoCredit').css({"margin-top":"325px", "margin-left":"20px", "font-size":"11px"});
 
-				$('.floatLeft').css({"float":"none", "width":"80%", "margin":"0 auto", "padding-top":"30px"	});
+				$('.floatLeft').css({"float":"none", "width":"300px", "margin":"0 auto", "padding-top":"30px"	});
 				$('.downloadActionBar').css({"padding-top":"90px"});
 			
 
 				$('.header').css({"backgroundImage": "url(fuchsel.jpg)", "background-repeat":"no-repeat", "background-position":"35% 30%", "background-size":"400%"});
-				$('.photoCredit').css({"margin-top":"360px", "margin-left":"5px"});
+				$('.photoCredit').css({"margin-top":"410px", "margin-left":"5px"});
 
 
 			}
