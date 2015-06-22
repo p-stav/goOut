@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta property="og:image" content="http://www.getripple.io/rippleHeaderLogoSmall.png">
+	<meta property="og:title" content="Ripple Careers">
+	<meta property="og:url" content="www.getkefi.com">
+
+	<!--Google Maps and Google Places APIs-->
+
+	<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>-->
+
+	<!-- bootstrap -->
+	<link type="text/css" href="main.css" rel="stylesheet"/>
+	<link rel="shortcut icon" href="rippleLogo2.png">
+	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+	<script src="http://timeago.yarp.com/jquery.timeago.js"></script>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+	<!--load google fonts!-->
+	<link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+
+	
+
+	<title>Ripple Careers</title>
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-49651565-1', 'getkefi.com');
+	  ga('send', 'pageview');
+
+	</script>
+</head>
+
+<body>
+	<!--header-->
+	<div class="header" style="padding-bottom:5px;">
+		<div class = "header" style="padding-top:1%;">
+			<p class="centerText" align="center" style="color:#fff; font-size:10px; font-family: 'Roboto', sans-serif;">Ripple</p>
+
+		</div>
+	</div>
+
+
+	<div class="ripple" style="padding:10px 5px 20px 5px;">
+
+			<div style="width:90%; margin:0 auto;">
+				<img id="ripple_image" style="margin:0 auto; display:block;" width="50%">
+				<div id="ripple_num_propagated" style="margin:0 auto; background:#055a93; height:30px; padding:8px; color:#fff; width:50%">
+					
+				</div>
+			</br>
+				<p id="ripple_text" style="font-size:20px;padding-bottom:50px; padding:8px; width:50%; margin:0 auto;" ></p>
+			</br>
+				<div  style="margin: 0 auto; width:90%; font-size:0.8em; width:50%;" class="username">
+				<div style="float:left; color:#777"><span style="color:#055a93;"><b id="ripple_creator"></b></span> &nbsp; &nbsp; <span id="ripple_location"></span></div>
+				<div id="ripple_created_at" style="float:right; color:#777"></div>
+			</div>
+			</div>
+
+			<div style="margin: 0 auto; width:90%">
+				
+			</div>
+			
+
+
+
+			
+			<br/>
+		</div>
+
+
+	<!-- foooter -->
+	<footer>
+		<nav>
+			<ul>
+				<li>
+					<a href="http://getripple.io">home</a>
+				</li>
+				<li>
+					<a href="https://medium.com/@RippleMeThis">blog</a>
+				</li>
+				<li>
+					<a href="ambassador.html">ambassador</a>
+				</li>
+				<li>
+					<a href="ripple_terms.html">terms</a>
+				</li>
+				<li>
+					<a href="ripple_privacy.html">privacy</a>
+				</li>
+			</ul>
+		</nav>
+	</footer>
+
+
+	<script>
+
+	function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+	
+		$(document).ready(function() {
+
+			Parse.initialize("NYPXQtFR0BBY0TEbfcpgn61l2IGHJXQkrY1bu8PM", "5CS8buPIcMHVrSIeJuzPNkrVpjQsy9l6D2bvw5Aw");
+
+
+
+			setHeaderSize();
+			
+        	
+
+        	var rippleId = getParameterByName('id');
+
+        	var Ripple = Parse.Object.extend("Ripple");
+			var query = new Parse.Query(Ripple);
+			query.get(rippleId, {
+			  success: function(ripple) {
+			    // The object was retrieved successfully.
+			    
+			    $("#ripple_text").text(ripple.get("text"));
+			    $("#ripple_image").attr("src", ripple.get("image").url());
+			    $("#ripple_num_propagated").text("spread " + ripple.get("numPropagated") + " times");
+			    $("#ripple_creator").text(ripple.get("creatorName"));
+			    if (ripple.get("city"))
+			    {
+			    	if (ripple.get("state"))
+			    		$("#ripple_location").text(ripple.get("city") + ", " + ripple.get("state"));
+			    	else
+			    		$("#ripple_location").text(ripple.get("city"));
+			    }
+			    
+			    $("#ripple_created_at").text($.timeago(ripple.createdAt));
+			  },
+			  error: function(object, error) {
+			    // The object was not retrieved successfully.
+			    // error is a Parse.Error with an error code and message.
+			    alert('error');
+			  }
+			});		
+		});
+
+		$( window ).resize(function() {
+			setHeaderSize();
+		});
+
+		function setHeaderSize()
+		{
+			// set logo height and width
+			$('.header').css("background-color", "#055a93");
+			$('.header').css("width", $(window).width());
+			$('.formIframe').css("width", $(window).width());
+			$('.formIframe').css("height", '1500px');
+
+			if ($(window).width() < 500) 
+			{
+				$(".centerText").css("font-size", "20px");
+				$(".centerSubtext").css("font-size", "20px");
+
+				$("footer nav ul li ").css("font-family", "'Roboto', sans-serif");
+				$("footer nav ul li ").css("margin-left", "10px");
+				$("footer a").css("font-size", "12px");
+
+			}
+			else
+			{
+				$(".centerText").css("font-size", "50px");
+				$(".centerSubtext").css("font-size", "40px");	
+
+				$("footer nav ul li ").css("font-family", "'Roboto', sans-serif");
+				$("footer nav ul li ").css("margin-left", "10px");
+				$("footer a").css("font-size", "15px");
+			}
+		}
+	</script>
+</body>
+</html>
