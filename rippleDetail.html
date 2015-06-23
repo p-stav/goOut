@@ -9,8 +9,8 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta property="og:image" content="http://www.getripple.io/rippleHeaderLogoSmall.png">
-	<meta property="og:title" content="Ripple Careers">
-	<meta property="og:url" content="www.getkefi.com">
+	<meta property="og:title" content="Ripple">
+	<meta property="og:url" content="www.getripple.io">
 
 	<!--Google Maps and Google Places APIs-->
 
@@ -24,6 +24,8 @@
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
 	<script src="http://timeago.yarp.com/jquery.timeago.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+	<script>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -36,10 +38,17 @@
 	<!--load google fonts!-->
 	<link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
 
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+	<style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
 
+	
 
-	<title>Ripple Careers</title>
+	<title>Ripple</title>
 
 	<script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -70,51 +79,50 @@
 			<div id="ripple_num_propagated" style="margin:0 auto; background:#055a93; height:30px; padding:8px; color:#fff; width:50%">
 
 			</div>
-			</br>
-			<p id="ripple_text" style="font-size:20px;padding-bottom:50px; padding:8px; width:50%; margin:0 auto;" ></p>
-			</br>
-			<div  style="margin: 0 auto; width:90%; font-size:0.8em; width:50%;" class="username">
-				<div style="float:left; color:#777"><span style="color:#055a93;"><b id="ripple_creator"></b></span> &nbsp; &nbsp; <span id="ripple_location"></span></div>
-				<div id="ripple_created_at" style="float:right; color:#777"></div>
-
-			</div>
-
-			<br/>
-			<br/>
-			<div style="height : 600px; width : 1000px; margin-left : 150px" id="map-canvas"></div>
-
-			
-		</div>
-
-	<br/>
-	
+		</br>
+		<p id="ripple_text" style="font-size:20px;padding-bottom:50px; padding:8px; width:50%; margin:0 auto;" ></p>
+	</br>
+	<div  style="margin: 0 auto; width:90%; font-size:0.8em; width:50%;" class="username">
+		<div style="float:left; color:#777"><span style="color:#055a93;"><b id="ripple_creator"></b></span> &nbsp; &nbsp; <span id="ripple_location"></span></div>
+		<div id="ripple_created_at" style="float:right; color:#777"></div>
 	</div>
+	<div id="map-canvas"></div>
+</div>
 
-	
+<div style="margin: 0 auto; width:90%">
+
+</div>
 
 
-	<!-- foooter -->
-	<footer>
-		<nav>
-			<ul>
-				<li>
-					<a href="http://getripple.io">home</a>
-				</li>
-				<li>
-					<a href="https://medium.com/@RippleMeThis">blog</a>
-				</li>
-				<li>
-					<a href="ambassador.html">ambassador</a>
-				</li>
-				<li>
-					<a href="ripple_terms.html">terms</a>
-				</li>
-				<li>
-					<a href="ripple_privacy.html">privacy</a>
-				</li>
-			</ul>
-		</nav>
-	</footer>
+
+
+
+<br/>
+</div>
+
+
+<!-- foooter -->
+<footer>
+	<nav>
+		<ul>
+			<li>
+				<a href="http://getripple.io">home</a>
+			</li>
+			<li>
+				<a href="https://medium.com/@RippleMeThis">blog</a>
+			</li>
+			<li>
+				<a href="ambassador.html">ambassador</a>
+			</li>
+			<li>
+				<a href="ripple_terms.html">terms</a>
+			</li>
+			<li>
+				<a href="ripple_privacy.html">privacy</a>
+			</li>
+		</ul>
+	</nav>
+</footer>
 
 
 <script>
@@ -126,122 +134,57 @@ function getParameterByName(name) {
 	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+// First, create an object containing LatLng and population for each city.
+var citymap = {};
+citymap['chicago'] = {
+	center: new google.maps.LatLng(41.878113, -87.629798),
+	population: 2714856
+};
+citymap['newyork'] = {
+	center: new google.maps.LatLng(40.714352, -74.005973),
+	population: 8405837
+};
+citymap['losangeles'] = {
+	center: new google.maps.LatLng(34.052234, -118.243684),
+	population: 3857799
+};
+citymap['vancouver'] = {
+	center: new google.maps.LatLng(49.25, -123.1),
+	population: 603502
+};
 
+var cityCircle;
 
-function drawLine(latitude, longitude, miniRipple, map) {
+function initialize() {
+	  // Create the map.
+	  var mapOptions = {
+	  	zoom: 2,
+	  	center: new google.maps.LatLng(37.09024, -95.712891),
+	  	mapTypeId: google.maps.MapTypeId.TERRAIN
+	  };
 
-	var lineCoordinates = [
-		new google.maps.LatLng(latitude, longitude),
-		new google.maps.LatLng(miniRipple["geoPoint"].latitude, miniRipple["geoPoint"].longitude)
-	];
+	  var map = new google.maps.Map(document.getElementById('map-canvas'),
+	  	mapOptions);
 
-	var linePath = new google.maps.Polyline({
-    path: lineCoordinates,
-    geodesic: true,
-    strokeColor: '#FF0000',
-    strokeOpacity: 1.0,
-    strokeWeight: 2,
-    zIndex: 3
-  });
-
-
-  linePath.setMap(map);
+	  // Construct the circle for each value in citymap.
+	  // Note: We scale the area of the circle based on the population.
+	  for (var city in citymap) {
+	  	var populationOptions = {
+	  		strokeColor: '#FF0000',
+	  		strokeOpacity: 0.8,
+	  		strokeWeight: 2,
+	  		fillColor: '#FF0000',
+	  		fillOpacity: 0.35,
+	  		map: map,
+	  		center: citymap[city].center,
+	  		radius: Math.sqrt(citymap[city].population) * 100
+	  	};
+	    // Add the circle for this city to the map.
+	    cityCircle = new google.maps.Circle(populationOptions);
+	}
 }
 
-function initialize(latitude, longitude, graph) {
-  // Create the map.
-  var mapOptions = {
-    zoom: 4,
-    center: new google.maps.LatLng(latitude, longitude),
-    mapTypeId: google.maps.MapTypeId.TERRAIN
-  };
-
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
-
-  // Add ripple ground zero
-  var populationOptions = {
-      strokeColor: '#FFAA3F',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#FFAA3F',
-      fillOpacity: 0.9,
-      map: map,
-      center: new google.maps.LatLng(latitude, longitude),
-      radius: 100000,
-      zIndex: 2
-    };
-    // Add the circle for this city to the map.
-    cityCircle = new google.maps.Circle(populationOptions);
-
-
-
-  // Construct the circle for each value in citymap.
-  // Note: We scale the area of the circle based on the population.
-  for (var i = 0; i < graph.length; i++) {
-  	var miniRipple = graph[i];
-
-    var populationOptions = {
-      strokeColor: '#2B84DB',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#2B84DB',
-      fillOpacity: 0.6,
-      map: map,
-      center: new google.maps.LatLng(miniRipple["geoPoint"].latitude, miniRipple["geoPoint"].longitude),
-      radius: 100000,
-      zIndex: 1
-    };
-    // Add the circle for this city to the map.
-    cityCircle = new google.maps.Circle(populationOptions);
-  }
-
-
-
-
-  // Add the lines ------------------
-  var frontier = [];
-
-  for (var i = 0; i < graph.length; i++)
-  {
-  	var miniRipple = graph[i];
-  	if (miniRipple["isFirstWave"])
-  	{
-  		frontier.push(miniRipple);
-  		miniRipple["depth"] = 1;
-  		drawLine(latitude, longitude, miniRipple, map);
-  	}
-  }
-
-  while (frontier.length > 0)
-  {
-  	var miniRipple = frontier[0];
-  	for (var i = 0; i < miniRipple["children"].length; i++)
-  	{
-  		var child = miniRipple["children"][i];
-  		for (var j = 0; j < graph.length; j++)
-  		{
-  			var nextMiniRipple = graph[j];
-  			if (child == nextMiniRipple["miniRippleId"])
-  			{
-  				frontier.push(nextMiniRipple);
-  				nextMiniRipple.depth = miniRipple.depth + 1;
-  				// TODO: if nextMiniRipple.deth > max -> Increase
-  				drawLine(miniRipple["geoPoint"].latitude, miniRipple["geoPoint"].longitude, nextMiniRipple, map);
-  				break;
-  			}
-  		}
-  	}
-  	frontier.splice(0,1);
-  }
-
-
-
-
-  // --------------------------------
-
-}
-
+google.maps.event.addDomListener(window, 'load', initialize);
 
 $(document).ready(function() {
 
@@ -252,6 +195,9 @@ $(document).ready(function() {
 	setHeaderSize();
 
 	
+
+
+
 
 	var rippleId = getParameterByName('id');
 
@@ -274,20 +220,6 @@ $(document).ready(function() {
 			    }
 			    
 			    $("#ripple_created_at").text($.timeago(ripple.createdAt));
-
-			    var geoPoint = ripple.get("startLocation");
-
-			    Parse.Cloud.run('getMiniRipplesGraph', { rippleId: rippleId }, {
-				  success: function(graph) {
-				    google.maps.event.addDomListener(window, 'load', initialize(geoPoint.latitude, geoPoint.longitude, graph));
-				  },
-				  error: function(error) {
-				  }
-				});
-
-			    
-
-
 			},
 			error: function(object, error) {
 			    // The object was not retrieved successfully.
