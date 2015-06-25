@@ -8,8 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<meta property="og:image" content="http://www.getripple.io/rippleHeaderLogoSmall.png">
-	<meta property="og:title" content="Ripple Careers">
+	<meta property="og:title" content="Ripple">
 	<meta property="og:url" content="www.getkefi.com">
 
 	<!--Google Maps and Google Places APIs-->
@@ -19,11 +18,12 @@
 
 	<!-- bootstrap -->
 	<link type="text/css" href="main.css" rel="stylesheet"/>
-	<link rel="shortcut icon" href="rippleLogo2.png">
+	<link rel="shortcut icon" href="http://www.getripple.io/rippleHeaderLogo.png">
 	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
 	<script src="http://timeago.yarp.com/jquery.timeago.js"></script>
+
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -34,12 +34,12 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 	<!--load google fonts!-->
-	<link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
 
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
 
 
-	<title>Ripple Careers</title>
+	<title>Ripple</title>
 
 	<script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -55,17 +55,25 @@
 
 <body>
 	<!--header-->
-	<div class="header" style="padding-bottom:5px;">
-		<div class = "header" style="padding-top:1%;">
-			<p class="centerText" align="center" style="color:#fff; font-size:10px; font-family: 'Roboto', sans-serif;">Ripple</p>
+	<div class="headerTitle" style="padding-bottom:5px;">
+		<div style="padding-top:10px;">
+			<p class="centerSubtext" align="center" style="color:#fff; font-family: 'Roboto', sans-serif;"><span class="centerText">Ripple</span><br/>explore your world</p>
 
 		</div>
 	</div>
 
+	<div class="explanation" style="font-family:'Roboto'; font-size:12px; padding:10px; padding-bottom:10px; background:#ededed; margin: 0 auto;">
+		<p align="center"><a href="http://getRipple.io">Ripple</a> lets you explore the world by spreading the most engaging posts to users around the world. Visualize ripples on a map as they travel across the globe. </p>
+		<div class="actions" style="margin:0 auto;width:40%;"> 
+			<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="ios" src="Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>&nbsp; &nbsp;
+			<a href="https://play.google.com/store/apps/details?id=com.KefiLabs.Ripple"> <img class="android" alt="Get it on Google Play" src="http://i.imgur.com/pWic5cg.png?1" /></a>
+		</div>
 
-	<div class="ripple" style="padding:10px 5px 20px 5px;">
+	</div>
 
-		<div style="width:90%; margin:0 auto;">
+	<div class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
+
+		<div class="innerRipple" style="width:70%; margin:0 auto; padding:50px;">
 			<img id="ripple_image" style="margin:0 auto; display:block;" width="50%">
 			<div id="ripple_num_propagated" style="margin:0 auto; background:#055a93; height:30px; padding:8px; color:#fff; width:50%">
 
@@ -73,15 +81,15 @@
 			</br>
 			<p id="ripple_text" style="font-size:20px;padding-bottom:50px; padding:8px; width:50%; margin:0 auto;" ></p>
 			</br>
-			<div  style="margin: 0 auto; width:90%; font-size:0.8em; width:50%;" class="username">
-				<div style="float:left; color:#777"><span style="color:#055a93;"><b id="ripple_creator"></b></span> &nbsp; &nbsp; <span id="ripple_location"></span></div>
+			<div  style="margin: 0 auto; width:70%;" class="username">
+				<div style="color:#777;"><span style="color:#055a93;"><b id="ripple_creator"></b></span><span id="ripple_location"></span></div>
 				<div id="ripple_created_at" style="float:right; color:#777"></div>
 
 			</div>
 
 			<br/>
 			<br/>
-			<div style="height : 600px; width : 1000px; margin-left : 150px" id="map-canvas"></div>
+			<div style="height : 600px; width: 70%; margin:0 auto; padding-top:100px;" id="map-canvas"></div>
 
 			
 		</div>
@@ -153,51 +161,11 @@ function initialize(latitude, longitude, graph) {
   var mapOptions = {
     zoom: 4,
     center: new google.maps.LatLng(latitude, longitude),
-    mapTypeId: google.maps.MapTypeId.TERRAIN
+    mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
   var map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
-
-  // Add ripple ground zero
-  var populationOptions = {
-      strokeColor: '#FFAA3F',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#FFAA3F',
-      fillOpacity: 0.9,
-      map: map,
-      center: new google.maps.LatLng(latitude, longitude),
-      radius: 100000,
-      zIndex: 2
-    };
-    // Add the circle for this city to the map.
-    cityCircle = new google.maps.Circle(populationOptions);
-
-
-
-  // Construct the circle for each value in citymap.
-  // Note: We scale the area of the circle based on the population.
-  for (var i = 0; i < graph.length; i++) {
-  	var miniRipple = graph[i];
-
-    var populationOptions = {
-      strokeColor: '#2B84DB',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#2B84DB',
-      fillOpacity: 0.6,
-      map: map,
-      center: new google.maps.LatLng(miniRipple["geoPoint"].latitude, miniRipple["geoPoint"].longitude),
-      radius: 100000,
-      zIndex: 1
-    };
-    // Add the circle for this city to the map.
-    cityCircle = new google.maps.Circle(populationOptions);
-  }
-
-
-
 
   // Add the lines ------------------
   var frontier = [];
@@ -235,11 +203,42 @@ function initialize(latitude, longitude, graph) {
   	frontier.splice(0,1);
   }
 
+  // Add ripple ground zero
+  var populationOptions = {
+      strokeColor: '#FFAA3F',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#FFAA3F',
+      fillOpacity: 0.9,
+      map: map,
+      center: new google.maps.LatLng(latitude, longitude),
+      radius: 100000,
+      zIndex: 2
+    };
+    // Add the circle for this city to the map.
+    cityCircle = new google.maps.Circle(populationOptions);
 
 
 
-  // --------------------------------
+  // Construct the circle for each value in citymap.
+  // Note: We scale the area of the circle based on the population.
+  for (var i = 0; i < graph.length; i++) {
+  	var miniRipple = graph[i];
 
+    var populationOptions = {
+      strokeColor: '#2B84DB',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#2B84DB',
+      fillOpacity: 0.6,
+      map: map,
+      center: new google.maps.LatLng(miniRipple["geoPoint"].latitude, miniRipple["geoPoint"].longitude),
+      radius: 100000,
+      zIndex: 1
+    };
+    // Add the circle for this city to the map.
+    cityCircle = new google.maps.Circle(populationOptions);
+  }
 }
 
 
@@ -304,29 +303,37 @@ $( window ).resize(function() {
 function setHeaderSize()
 {
 			// set logo height and width
-			$('.header').css("background-color", "#055a93");
-			$('.header').css("width", $(window).width());
-			$('.formIframe').css("width", $(window).width());
-			$('.formIframe').css("height", '1500px');
+			$('.headerTitle').css({"background-color":"#0867ab","width":$(window).width()});
+			$('.formIframe').css({"width":$(window).width(),"height":'1500px'});
+
+			$("footer nav ul li ").css("font-family", "'Roboto', sans-serif");
+			$("footer nav ul li ").css("margin-left", "10px");
+
+			$('.ripple').css({"background":"#eee"});
+			$('body').css({"background":"#eee"});
+			$('.innerRipple').css({"background":"#fff"});
 
 			if ($(window).width() < 500) 
 			{
 				$(".centerText").css("font-size", "20px");
-				$(".centerSubtext").css("font-size", "20px");
+				$(".centerSubtext").css("font-size", "10px");
 
-				$("footer nav ul li ").css("font-family", "'Roboto', sans-serif");
-				$("footer nav ul li ").css("margin-left", "10px");
+				
 				$("footer a").css("font-size", "12px");
 
 			}
 			else
 			{
-				$(".centerText").css("font-size", "50px");
-				$(".centerSubtext").css("font-size", "40px");	
+				$(".centerText").css("font-size", "60px");
+				$(".centerSubtext").css("font-size", "20px");	
 
-				$("footer nav ul li ").css("font-family", "'Roboto', sans-serif");
-				$("footer nav ul li ").css("margin-left", "10px");
+				//ios + android image
+				$(".ios").css({"width":"180px", "float":"left"});
+				$('.android').css({"width":"160px", "float":"right"});
+				$('.actions').css({"height":"60px"});
+				
 				$("footer a").css("font-size", "15px");
+				
 			}
 		}
 		</script>
