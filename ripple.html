@@ -91,7 +91,7 @@
 
 		<p class="mapIntro" style="color:#055a93;" align="center">Where did this ripple travel?</p>
 
-		<div style="height:500px; 	; margin:0 auto; border-radius:25px;" id="map-canvas"></div>
+		<div style="margin:0 auto; border-radius:25px;" id="map-canvas"></div>
 
 
 
@@ -357,9 +357,10 @@ function setHeaderSize()
 				$('#ripple_text').css({"font-size":"15px", "padding-bottom":"20px"});
 				$(".ripple").css({"width":"100%", "margin":"0 auto"});
 				$(".innerRipple").css({"width":"100%", "padding": "15px"});
-				$(".metadata").css({"font-size":"12px", "padding-left": "8px"});
+				$(".metadata").css({"font-size":"12px", "padding-left": "8px", "height": "10px"});
 				$(".mapIntro").css({"margin-top":"40px", "margin-bottom":"5px", "font-size":"12px"});
 				$('#ripple_num_propagated').css({"height":"20px", "font-size":"12px", "padding":"2px 0px 0px 4px"});
+				$("#map-canvas").css("height", 250);
 
 
 				$("footer a").css("font-size", "15px");	
@@ -390,6 +391,7 @@ function setHeaderSize()
 				$(".metadata").css({"font-size":"16px", "padding-left": "8px"});
 				$(".mapIntro").css({"margin-top":"100px", "margin-bottom":"20px", "font-size":"25px"});
 				$('#ripple_num_propagated').css({"height":"35px", "font-size":"16px", "padding":"8px"});
+				$("#map-canvas").css("height", 500);
 
 
 				$("footer a").css("font-size", "15px");				
