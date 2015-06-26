@@ -55,10 +55,10 @@
 
 <body>
 	<!--header-->
-	<div class="topHeader" style="background-color:#2b84db; padding-bottom:5px;">
-		<div class = "picText" style="background-color:#2b84db;">
+	<div class="topHeader" style="background-color:#0867ab; padding-bottom:5px;">
+		<div class = "picText" style="background-color:#0867ab;">
 			<div style="width:45%;float:left;">
-				<a href="http://getRipple.io"><img class="rippleImg" id="rippleImg" src="http://i.imgur.com/s5HHumg.png" style="float:left; margin:12px;" width="100px;"></a>
+				<a href="http://getRipple.io"><img class="rippleImg" id="rippleImg" src="rippleBlueBcknd.png" style="float:left; margin:12px;" width="100px;"></a>
 				<p class="headerText" style="color:#fff;"></p>	
 			</div>
 
@@ -76,7 +76,7 @@
 	<div class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
 		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
-			<p id="ripple_text" style="font-size:20px; padding-bottom:50px; width:100; margin:0 auto;" ></p>
+			<p id="ripple_text" style="font-size:20px; padding-bottom:50px; width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
 			<img id="ripple_image" style="margin:0 auto; display:block;" width="100%">
 
 			<div id="ripple_num_propagated" style="margin:0 auto; background:#055a93; height:35px; padding:8px; color:#fff;"></div>
@@ -89,18 +89,20 @@
 			</div>
 		</div>
 
-		<p class="mapIntro" style="color:#055a93;">Where did this ripple travel?</p>
+		<p class="mapIntro" style="color:#055a93;" align="center">Where did this ripple travel?</p>
 
-		<div style="height:800px; width: 100%; margin:0 auto; border-radius:25px;" id="map-canvas"></div>
+		<div style="height:500px; 	; margin:0 auto; border-radius:25px;" id="map-canvas"></div>
 
 
 
-		<div class="explanation" style="font-family:'Roboto'; font-size:14px; padding:10px; padding-bottom:10px; margin: 0 auto;">
+		<div class="explanation" style="width:100%; font-family:'Roboto'; padding:10px; padding-bottom:10px; margin: 0 auto; wid">
 			<p align="center"><a href="http://getRipple.io">Ripple</a> lets you explore the world by spreading the most engaging posts to users around the world. Visualize ripples on a map as they travel across the globe. </p>
-			<div class="actions" style="margin:0 auto;width:40%;"> 
+			
+			<div class="actions" style="margin:0 auto; width:100%;"> 
 				<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="ios" src="Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>&nbsp; &nbsp;
 				<a href="https://play.google.com/store/apps/details?id=com.KefiLabs.Ripple"> <img class="android" alt="Get it on Google Play" src="http://i.imgur.com/pWic5cg.png?1" /></a>
 			</div>
+
 		</div>
 
 			<br/>
@@ -144,19 +146,26 @@ function getParameterByName(name) {
 
 
 function drawLine(latitude, longitude, miniRipple, map) {
-
+	console.log("drawing line");
 	var lineCoordinates = [
 		new google.maps.LatLng(latitude, longitude),
 		new google.maps.LatLng(miniRipple["geoPoint"].latitude, miniRipple["geoPoint"].longitude)
 	];
 
+	var strokecolor = "#999"
+
+	if (miniRipple["isFirstWave"]) 
+		strokecolor ="#a31efc"
+
+
+
 	var linePath = new google.maps.Polyline({
     path: lineCoordinates,
     geodesic: true,
-    strokeColor: '#FF0000',
+    strokeColor: strokecolor,
     strokeOpacity: 1.0,
     strokeWeight: 2,
-    zIndex: 3
+    zIndex: 0
   });
 
 
@@ -203,28 +212,13 @@ function initialize(latitude, longitude, graph) {
   				nextMiniRipple.depth = miniRipple.depth + 1;
   				// TODO: if nextMiniRipple.deth > max -> Increase
   				drawLine(miniRipple["geoPoint"].latitude, miniRipple["geoPoint"].longitude, nextMiniRipple, map);
+
   				break;
   			}
   		}
   	}
   	frontier.splice(0,1);
-  } 
-
-  // Add ripple ground zero
-  var populationOptions = {
-      strokeColor: '#FFAA3F',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#FFAA3F',
-      fillOpacity: 0.9,
-      map: map,
-      center: new google.maps.LatLng(latitude, longitude),
-      radius: 100000,
-      zIndex: 2
-    };
-    // Add the circle for this city to the map.
-    cityCircle = new google.maps.Circle(populationOptions);
-
+  }
 
 
   // Construct the circle for each value in citymap.
@@ -233,19 +227,39 @@ function initialize(latitude, longitude, graph) {
   	var miniRipple = graph[i];
 
     var populationOptions = {
-      strokeColor: '#2B84DB',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#2B84DB',
+      strokeColor: '#055a93',
+      strokeOpacity: 0.9,
+      strokeWeight: 1,
+      fillColor: '#055a93',
       fillOpacity: 0.6,
       map: map,
       center: new google.maps.LatLng(miniRipple["geoPoint"].latitude, miniRipple["geoPoint"].longitude),
-      radius: 100000,
+      radius: 200000,
       zIndex: 1
     };
     // Add the circle for this city to the map.
     cityCircle = new google.maps.Circle(populationOptions);
+
+    console.log("drawing circle");
   }
+
+
+  // Add ripple ground zero
+  var populationOptions = {
+      strokeColor: '#a31efc',
+      strokeOpacity: 0.9,
+      strokeWeight: 1,
+      fillColor: '#a31efc',
+      fillOpacity: 0.9,
+      map: map,
+      center: new google.maps.LatLng(latitude, longitude),
+      radius: 200000,
+      zIndex: 2
+    };
+    // Add the circle for this city to the map.
+    cityCircle = new google.maps.Circle(populationOptions);
+
+    console.log("drawing ground zero circle");
 }
 
 
@@ -268,9 +282,16 @@ $(document).ready(function() {
 			    // The object was retrieved successfully.
 			    
 			    $("#ripple_text").text(ripple.get("text"));
-			    $("#ripple_image").attr("src", ripple.get("image").url());
+
+			    if (ripple.get("image"))
+			    	$("#ripple_image").attr("src", ripple.get("image").url());
+
+			    else
+			    	$('#ripple_text').css("border", "1px solid #ccc");
+
 			    $("#ripple_num_propagated").text("spread " + ripple.get("numPropagated") + " times");
 			    $("#ripple_creator").text(ripple.get("creatorName"));
+
 			    if (ripple.get("city"))
 			    {
 			    	if (ripple.get("state"))
@@ -347,13 +368,14 @@ function setHeaderSize()
 				//ios + android image
 				$(".ios").css({"width":"180px", "float":"left"});
 				$('.android').css({"width":"160px", "float":"right"});
-				$('.actions').css({"height":"60px"});
+				$('.explanation').css({"margin-top":"100px","font-size":"16px"});
+				$('.actions').css({"width":"60%", "margin-top":"30px"});
 				
 
 				// all other content
 				$('#ripple_text').css({"font-size":"25px"});
-				$(".ripple").css({"width":"60%", "margin":"0 auto"});
-				$(".innerRipple").css({"width":"80%", "padding": "50px"});
+				$(".ripple").css({"width":"70%", "margin":"0 auto"});
+				$(".innerRipple").css({"width":"100%", "padding": "50px"});
 				$(".metadata").css({"font-size":"16px"});
 				$(".mapIntro").css({"margin-top":"100px", "margin-bottom":"20px", "font-size":"25px"});
 
