@@ -55,51 +55,58 @@
 
 <body>
 	<!--header-->
-	<div class="headerTitle" style="padding-bottom:5px;">
-		<div style="padding-top:10px;">
-			<p class="centerSubtext" align="center" style="color:#fff; font-family: 'Roboto', sans-serif;"><span class="centerText">Ripple</span><br/>explore your world</p>
+	<div class="topHeader" style="background-color:#2b84db; padding-bottom:5px;">
+		<div class = "picText" style="background-color:#2b84db;">
+			<div style="width:45%;float:left;">
+				<a href="http://getRipple.io"><img class="rippleImg" id="rippleImg" src="http://i.imgur.com/s5HHumg.png" style="float:left; margin:12px;" width="100px;"></a>
+				<p class="headerText" style="color:#fff;"></p>	
+			</div>
 
+			<div class="socialMedia">
+				<a href="https://twitter.com/RippleMeThis"><img class="socialMediaBtn" href src="http://i.imgur.com/h7oyTeL.png?1" ></a>
+
+				<a href="https://www.facebook.com/exploreRipple"><img class="socialMediaBtn" href src="http://i.imgur.com/CtfEYps.png?1" ></a>
+
+				<a href="http://instagram.com/ripple.app"><img class="socialMediaBtn" href src="http://i.imgur.com/w90mpS8.png?1" ></a>
+			</div>
 		</div>
 	</div>
 
-	<div class="explanation" style="font-family:'Roboto'; font-size:12px; padding:10px; padding-bottom:10px; background:#ededed; margin: 0 auto;">
-		<p align="center"><a href="http://getRipple.io">Ripple</a> lets you explore the world by spreading the most engaging posts to users around the world. Visualize ripples on a map as they travel across the globe. </p>
-		<div class="actions" style="margin:0 auto;width:40%;"> 
-			<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="ios" src="Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>&nbsp; &nbsp;
-			<a href="https://play.google.com/store/apps/details?id=com.KefiLabs.Ripple"> <img class="android" alt="Get it on Google Play" src="http://i.imgur.com/pWic5cg.png?1" /></a>
-		</div>
-
-	</div>
 
 	<div class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
-		<div class="innerRipple" style="width:70%; margin:0 auto; padding:50px;">
-			<img id="ripple_image" style="margin:0 auto; display:block;" width="50%">
-			<div id="ripple_num_propagated" style="margin:0 auto; background:#055a93; height:30px; padding:8px; color:#fff; width:50%">
+		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+			<p id="ripple_text" style="font-size:20px; padding-bottom:50px; width:100; margin:0 auto;" ></p>
+			<img id="ripple_image" style="margin:0 auto; display:block;" width="100%">
 
-			</div>
-			</br>
-			<p id="ripple_text" style="font-size:20px;padding-bottom:50px; padding:8px; width:50%; margin:0 auto;" ></p>
-			</br>
-			<div  style="margin: 0 auto; width:70%;" class="username">
-				<div style="color:#777;"><span style="color:#055a93;"><b id="ripple_creator"></b></span><span id="ripple_location"></span></div>
-				<div id="ripple_created_at" style="float:right; color:#777"></div>
-
-			</div>
-
-			<br/>
-			<br/>
-			<div style="height : 600px; width: 70%; margin:0 auto; padding-top:100px;" id="map-canvas"></div>
-
+			<div id="ripple_num_propagated" style="margin:0 auto; background:#055a93; height:35px; padding:8px; color:#fff;"></div>
 			
+			<br/><br/>
+			
+			<div class="metadata">
+				<div style="color:#777; float:left;"><span style="color:#055a93;"><b id="ripple_creator"></b></span>&nbsp; &nbsp;<span id="ripple_location"></span></div>
+				<div id="ripple_created_at" style="float:right; color:#777"></div>	
+			</div>
 		</div>
 
-	<br/>
-	
+		<p class="mapIntro" style="color:#055a93;">Where did this ripple travel?</p>
+
+		<div style="height:800px; width: 100%; margin:0 auto; border-radius:25px;" id="map-canvas"></div>
+
+
+
+		<div class="explanation" style="font-family:'Roboto'; font-size:14px; padding:10px; padding-bottom:10px; margin: 0 auto;">
+			<p align="center"><a href="http://getRipple.io">Ripple</a> lets you explore the world by spreading the most engaging posts to users around the world. Visualize ripples on a map as they travel across the globe. </p>
+			<div class="actions" style="margin:0 auto;width:40%;"> 
+				<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="ios" src="Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>&nbsp; &nbsp;
+				<a href="https://play.google.com/store/apps/details?id=com.KefiLabs.Ripple"> <img class="android" alt="Get it on Google Play" src="http://i.imgur.com/pWic5cg.png?1" /></a>
+			</div>
+		</div>
+
+			<br/>
+			<br/>
+			
 	</div>
-
-	
-
 
 	<!-- foooter -->
 	<footer>
@@ -201,7 +208,7 @@ function initialize(latitude, longitude, graph) {
   		}
   	}
   	frontier.splice(0,1);
-  }
+  } 
 
   // Add ripple ground zero
   var populationOptions = {
@@ -282,11 +289,7 @@ $(document).ready(function() {
 				  },
 				  error: function(error) {
 				  }
-				});
-
-			    
-
-
+				});	
 			},
 			error: function(object, error) {
 			    // The object was not retrieved successfully.
@@ -311,9 +314,9 @@ function setHeaderSize()
 
 			$('.ripple').css({"background":"#eee"});
 			$('body').css({"background":"#eee"});
-			$('.innerRipple').css({"background":"#fff"});
+			$('.innerRipple').css({"background":"#fff", "margin-top":"20px"});
 
-			if ($(window).width() < 500) 
+			if ($(window).width() < 700) 
 			{
 				$(".centerText").css("font-size", "20px");
 				$(".centerSubtext").css("font-size", "10px");
@@ -324,15 +327,40 @@ function setHeaderSize()
 			}
 			else
 			{
+
+				// header stuff
+				$('.header').css( "height",700);
+				$('.picText').css( "height", 120);
+				$('.headerText').css("padding-top","25px");
+				$(".rippleImg").css({"width":"250px"});
+
+
+				// social media
+				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"40px"});
+				$('.socialMediaBtn').css({"width": "40px"});
+
+
 				$(".centerText").css("font-size", "60px");
 				$(".centerSubtext").css("font-size", "20px");	
+
 
 				//ios + android image
 				$(".ios").css({"width":"180px", "float":"left"});
 				$('.android').css({"width":"160px", "float":"right"});
 				$('.actions').css({"height":"60px"});
 				
+
+				// all other content
+				$('#ripple_text').css({"font-size":"25px"});
+				$(".ripple").css({"width":"60%", "margin":"0 auto"});
+				$(".innerRipple").css({"width":"80%", "padding": "50px"});
+				$(".metadata").css({"font-size":"16px"});
+				$(".mapIntro").css({"margin-top":"100px", "margin-bottom":"20px", "font-size":"25px"});
+
+
 				$("footer a").css("font-size", "15px");
+
+
 				
 			}
 		}
