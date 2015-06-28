@@ -53,7 +53,7 @@
 	</script>
 </head>
 
-<body>
+<body style="font-family:'Roboto', sans-serif;">
 	<!--header-->
 	<div class="topHeader" style="background-color:#0867ab; padding-bottom:5px;">
 		<div class = "picText" style="background-color:#0867ab;">
@@ -73,9 +73,60 @@
 	</div>
 
 	<div class="jumobtron">
-			<p class="centerText" align="center" style="padding-top:50px;color:#0867ab; font-size:50px; font-family: 'Roboto', sans-serif;">How Ripple works</p>
+			<p class="centerText" align="center" style="color:#0867ab;">How Ripple works</p>
 	</div>
 
+
+	<div class="explanation">
+		<div class="section" style="width:100%;">
+			<p class="explainerText" align="center">Start a ripple that is sent to people geographically near you.<br/>
+				<img class="phoneImg" src="startARipple.png"/>
+			</p>
+		</div>
+
+		<div class="section" style="width:100%;">
+			<p class="explainerText" align="center">These people can spread a ripple to more users near them<br/>
+				<img  class="phoneImg1" src="spreadNearby.jpg"/>
+			</p>
+		</div>
+
+		<div class="section" style="width:100%;">
+			<p class="explainerText" align="center">Ripples travel so far and long as they are spread.<br/>
+												Only the most interesting ripples travel across the world<br/>
+				<img class="phoneImg1" src="rippleMapPics.png"/>
+			</p>
+		</div>
+
+		<div class="section" style="width:100%;">
+			<p class="explainerText" align="center">Earn points to increase your reach, or the number of people<br/>your content travels to whenever you spread or start a ripple.<br/>
+				<img class="phoneImg" src="pointsnlevels.png"/>
+			</p>
+		</div>
+	</div>
+
+
+	<!-- foooter -->
+		<footer>
+			<nav>
+				<ul style="font-size:10px;">
+					<li>
+						<a href="careers.html">careers</a>
+					</li>
+					<li>
+						<a href="https://medium.com/@RippleMeThis">blog</a>
+					</li>
+					<li>
+						<a href="ambassador.html">ambassador</a>
+					</li>
+					<li>
+						<a href="ripple_terms.html">terms</a>
+					</li>
+					<li>
+						<a href="ripple_privacy.html">privacy</a>
+					</li>
+				</ul>
+			</nav>
+		</footer>
 
 <script>
 
@@ -103,8 +154,8 @@ $(document).ready(function() {
 			$("footer nav ul li ").css("margin-left", "10px");
 
 			$('.ripple').css({"background":"#eee"});
-			$('body').css({"background":"#eee"});
 			$('.innerRipple').css({"background":"#fff", "margin-top":"20px"});
+
 
 			if ($(window).width() < 700) 
 			{
@@ -117,23 +168,14 @@ $(document).ready(function() {
 				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"8px"});
 				$('.socialMediaBtn').css({"width": "15px"});
 
-				//ios + android image
-				$(".ios").css({"width":"100px", "float":"left"});
-				$('.android').css({"width":"90px", "float":"right"});
-				$('.explanation').css({"margin-top":"100px","font-size":"14px"});
-				$('.actions').css({"width":"90%", "margin-top":"30px"});
-				
-				// all other content
-				$('#ripple_text').css({"font-size":"18px", "padding-bottom":"20px"});
-				$(".ripple").css({"width":"100%", "margin":"0 auto"});
-				$(".innerRipple").css({"width":"100%", "padding": "15px"});
-				$(".metadata").css({"font-size":"12px", "padding-left": "8px", "height": "10px"});
-				$(".mapIntro").css({"margin-top":"40px", "margin-bottom":"5px", "font-size":"15px"});
-				$('#ripple_num_propagated').css({"height":"20px", "font-size":"12px", "padding":"2px 0px 0px 4px"});
-				$("#map-canvas").css("height", 300);
+				$('.explanation').css({"padding":"20px 0px 20px 0px", "font-size":"14px"});
+				$('.jumobtron').css("font-size", 30);
+				$('.phoneImg').css("width","50%");
+				$('.phoneImg1').css("width","90%");
+				$('.section').css({"padding-bottom":"60px"});
+				$("footer a").css("font-size", "15px");	
 
-
-				$("footer a").css("font-size", "10px");	
+				$("footer a").css("font-size", "9px");	
 			}
 
 			else
@@ -148,23 +190,14 @@ $(document).ready(function() {
 				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"40px"});
 				$('.socialMediaBtn').css({"width": "40px"});
 
-				//ios + android image
-				$(".ios").css({"width":"180px", "float":"left"});
-				$('.android').css({"width":"160px", "float":"right"});
-				$('.explanation').css({"margin-top":"100px","font-size":"16px"});
-				$('.actions').css({"width":"60%", "margin-top":"30px"});
-				
-				// all other content
-				$('#ripple_text').css({"font-size":"25px", "padding-bottom":"50px"});
-				$(".ripple").css({"width":"60%", "margin":"0 auto"});
-				$(".innerRipple").css({"width":"80%", "padding": "30px"});
-				$(".metadata").css({"font-size":"16px", "padding-left": "8px"});
-				$(".mapIntro").css({"margin-top":"50px", "margin-bottom":"20px", "font-size":"25px"});
-				$('#ripple_num_propagated').css({"height":"35px", "font-size":"16px", "padding":"8px"});
-				$("#map-canvas").css("height", 500);
 
-
-				$("footer a").css("font-size", "15px");				
+				$('.explanation').css({"padding":"60px 50px 0px 50px", "font-size":"24px"});
+				$('.jumobtron').css("font-size", 60);
+				$('.phoneImg').css("width","20%");
+				$('.phoneImg1').css("width","40%");
+				$('.section').css({"padding-bottom":"130px"});
+				$("footer a").css("font-size", "15px");	
+				$(".centerText").css({"padding":"20px 0px 20px 0px"});			
 			}
 		}
 		</script>
