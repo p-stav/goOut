@@ -96,7 +96,7 @@
 
 
 		<div class="explanation" style="width:100%; font-family:'Roboto'; padding:10px; padding-bottom:10px; margin: 0 auto; wid">
-			<p align="center"><a href="http://getRipple.io">Ripple</a> spreads the most engaging posts around the world. Share your story and visualize it spreads. <br/><br/>Explore your world.</p>
+			<p align="center"><a href="http://getRipple.io">Ripple</a> spreads the most engaging posts around the world. Share your story and visualize it spread. <br/><br/>Explore your world.</p>
 			
 			<div class="actions" style="margin:0 auto; width:100%;"> 
 				<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="ios" src="Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>&nbsp; &nbsp;
@@ -284,7 +284,10 @@ $(document).ready(function() {
 			    	$("#ripple_image").attr("src", ripple.get("image").url());
 
 			    else
+			    {
 			    	$('#ripple_text').css("border", "1px solid #ccc");
+			    	$('#ripple_text').css("padding","10px");
+			    }
 
 			    $("#ripple_num_propagated").text("spread " + ripple.get("numPropagated") + " times");
 			    $("#ripple_creator").text(ripple.get("creatorName"));
@@ -383,10 +386,10 @@ function setHeaderSize()
 				
 				// all other content
 				$('#ripple_text').css({"font-size":"25px", "padding-bottom":"50px"});
-				$(".ripple").css({"width":"70%", "margin":"0 auto"});
+				$(".ripple").css({"width":"60%", "margin":"0 auto"});
 				$(".innerRipple").css({"width":"100%", "padding": "30px"});
 				$(".metadata").css({"font-size":"16px", "padding-left": "8px"});
-				$(".mapIntro").css({"margin-top":"100px", "margin-bottom":"20px", "font-size":"25px"});
+				$(".mapIntro").css({"margin-top":"50px", "margin-bottom":"20px", "font-size":"25px"});
 				$('#ripple_num_propagated').css({"height":"35px", "font-size":"16px", "padding":"8px"});
 				$("#map-canvas").css("height", 500);
 
