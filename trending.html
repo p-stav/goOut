@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Meta, title, CSS, favicons, etc. -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta property="og:title" content="Ripple">
+	<meta property="og:url" content="www.getkefi.com">
+
+	<!--Google Maps and Google Places APIs-->
+
+	<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>-->
+
+	<!-- bootstrap -->
+	<link type="text/css" href="main.css" rel="stylesheet"/>
+	<link rel="shortcut icon" href="http://www.getripple.io/rippleHeaderLogo.png">
+	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+	<script src="http://timeago.yarp.com/jquery.timeago.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+	<!--load google fonts!-->
+	<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+
+
+	<title>Ripple</title>
+
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-49651565-1', 'getkefi.com');
+	ga('send', 'pageview');
+
+	</script>
+</head>
+
+<body>
+	<!--header-->
+	<div class="topHeader" style="background-color:#0867ab; padding-bottom:5px;">
+		<div class = "picText" style="background-color:#0867ab;">
+			<div style="width:45%;float:left;">
+				<a href="http://getRipple.io"><img class="rippleImg" id="rippleImg" src="rippleBlueBcknd.png" style="float:left;" width="100px;"></a>
+				<p class="headerText" style="color:#fff;"></p>	
+			</div>
+
+			<div class="socialMedia">
+				<a href="https://twitter.com/RippleMeThis"><img class="socialMediaBtn" href src="http://i.imgur.com/h7oyTeL.png?1" ></a>
+
+				<a href="https://www.facebook.com/exploreRipple"><img class="socialMediaBtn" href src="http://i.imgur.com/CtfEYps.png?1" ></a>
+
+				<a href="http://instagram.com/ripple.app"><img class="socialMediaBtn" href src="http://i.imgur.com/w90mpS8.png?1" ></a>
+			</div>
+		</div>
+	</div>
+
+	<h2 style="padding-left:50px; font-family:sans-serif">Trending Ripples</h2>
+
+<!-- Ripple One -->
+	<div id="ripple_div1" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
+
+		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+			<p id="ripple_text1" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
+			<img id="ripple_image1" style="margin:0 auto; display:block;" width="100%">
+
+			<div id="ripple_num_propagated1" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			
+			<br/><br/>
+			
+			<div class="metadata">
+				<div style="color:#777; float:left;"><span style="color:#055a93;"><b id="ripple_creator1"></b></span>&nbsp; &nbsp;<span id="ripple_location1"></span></div>
+				<div id="ripple_created_at1" style="float:right; color:#777"></div>	
+			</div>
+		</div>
+
+			<br/>
+			<br/>
+			
+	</div>
+
+<!-- Ripple Two -->
+	<div id="ripple_div2" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
+
+		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+			<p id="ripple_text2" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
+			<img id="ripple_image2" style="margin:0 auto; display:block;" width="100%">
+
+			<div id="ripple_num_propagated2" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			
+			<br/><br/>
+			
+			<div class="metadata">
+				<div style="color:#777; float:left;"><span style="color:#055a93;"><b id="ripple_creator2"></b></span>&nbsp; &nbsp;<span id="ripple_location2"></span></div>
+				<div id="ripple_created_at2" style="float:right; color:#777"></div>	
+			</div>
+		</div>
+
+			<br/>
+			<br/>
+			
+	</div>
+
+<!-- Ripple Three -->
+	<div id="ripple_div3" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
+
+		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+			<p id="ripple_text3" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
+			<img id="ripple_image3" style="margin:0 auto; display:block;" width="100%">
+
+			<div id="ripple_num_propagated3" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			
+			<br/><br/>
+			
+			<div class="metadata">
+				<div style="color:#777; float:left;"><span style="color:#055a93;"><b id="ripple_creator3"></b></span>&nbsp; &nbsp;<span id="ripple_location3"></span></div>
+				<div id="ripple_created_at3" style="float:right; color:#777"></div>	
+			</div>
+		</div>
+
+			<br/>
+			<br/>
+			
+	</div>
+
+<!-- Ripple Four -->
+	<div id="ripple_div4" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
+
+		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+			<p id="ripple_text4" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
+			<img id="ripple_image4" style="margin:0 auto; display:block;" width="100%">
+
+			<div id="ripple_num_propagated4" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			
+			<br/><br/>
+			
+			<div class="metadata">
+				<div style="color:#777; float:left;"><span style="color:#055a93;"><b id="ripple_creator4"></b></span>&nbsp; &nbsp;<span id="ripple_location4"></span></div>
+				<div id="ripple_created_at4" style="float:right; color:#777"></div>	
+			</div>
+		</div>
+
+			<br/>
+			<br/>
+			
+	</div>
+
+
+<!-- Ripple Five -->
+	<div id="ripple_div5" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
+
+		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+			<p id="ripple_text5" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
+			<img id="ripple_image5" style="margin:0 auto; display:block;" width="100%">
+
+			<div id="ripple_num_propagated5" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			
+			<br/><br/>
+			
+			<div class="metadata">
+				<div style="color:#777; float:left;"><span style="color:#055a93;"><b id="ripple_creator5"></b></span>&nbsp; &nbsp;<span id="ripple_location5"></span></div>
+				<div id="ripple_created_at5" style="float:right; color:#777"></div>	
+			</div>
+		</div>
+
+			<br/>
+			<br/>
+			
+	</div>
+
+
+
+
+
+
+	<!-- foooter -->
+	<footer>
+		<nav>
+			<ul>
+				<li>
+					<a href="http://getripple.io">home</a>
+				</li>
+				<li>
+					<a href="https://getRipple.io/howitworks.html">how it works</a>
+				</li>
+				<li>
+					<a href="https://medium.com/@RippleMeThis">blog</a>
+				</li>
+				<li>
+					<a href="ripple_terms.html">terms</a>
+				</li>
+				<li>
+					<a href="ripple_privacy.html">privacy</a>
+				</li>
+			</ul>
+		</nav>
+	</footer>
+
+
+<script>
+
+function getParameterByName(name) {
+	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+	results = regex.exec(location.search);
+	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+
+
+function drawLine(latitude, longitude, miniRipple, map) {
+	console.log("drawing line");
+	var lineCoordinates = [
+		new google.maps.LatLng(latitude, longitude),
+		new google.maps.LatLng(miniRipple["geoPoint"].latitude, miniRipple["geoPoint"].longitude)
+	];
+
+	var strokecolor = "#999"
+
+	if (miniRipple["isFirstWave"]) 
+		strokecolor ="#a31efc"
+
+
+
+	var linePath = new google.maps.Polyline({
+    path: lineCoordinates,
+    geodesic: true,
+    strokeColor: strokecolor,
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+    zIndex: 0
+  });
+
+
+  linePath.setMap(map);
+}
+
+function initialize(latitude, longitude, graph) {
+  // Create the map.
+  var mapOptions = {
+    zoom: 4,
+    center: new google.maps.LatLng(latitude, longitude),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+  // Add the lines ------------------
+  var frontier = [];
+
+  for (var i = 0; i < graph.length; i++)
+  {
+  	var miniRipple = graph[i];
+  	if (miniRipple["isFirstWave"])
+  	{
+  		frontier.push(miniRipple);
+  		miniRipple["depth"] = 1;
+  		drawLine(latitude, longitude, miniRipple, map);
+  	}
+  }
+
+  while (frontier.length > 0)
+  {
+  	var miniRipple = frontier[0];
+  	for (var i = 0; i < miniRipple["children"].length; i++)
+  	{
+  		var child = miniRipple["children"][i];
+  		for (var j = 0; j < graph.length; j++)
+  		{
+  			var nextMiniRipple = graph[j];
+  			if (child == nextMiniRipple["miniRippleId"])
+  			{
+  				frontier.push(nextMiniRipple);
+  				nextMiniRipple.depth = miniRipple.depth + 1;
+  				// TODO: if nextMiniRipple.deth > max -> Increase
+  				drawLine(miniRipple["geoPoint"].latitude, miniRipple["geoPoint"].longitude, nextMiniRipple, map);
+
+  				break;
+  			}
+  		}
+  	}
+  	frontier.splice(0,1);
+  }
+
+
+  // Construct the circle for each value in citymap.
+  // Note: We scale the area of the circle based on the population.
+  for (var i = 0; i < graph.length; i++) {
+  	var miniRipple = graph[i];
+
+    var populationOptions = {
+      strokeColor: '#055a93',
+      strokeOpacity: 0.9,
+      strokeWeight: 1,
+      fillColor: '#055a93',
+      fillOpacity: 0.6,
+      map: map,
+      center: new google.maps.LatLng(miniRipple["geoPoint"].latitude, miniRipple["geoPoint"].longitude),
+      radius: 200000,
+      zIndex: 1
+    };
+    // Add the circle for this city to the map.
+    cityCircle = new google.maps.Circle(populationOptions);
+
+    console.log("drawing circle");
+  }
+
+
+  // Add ripple ground zero
+  var populationOptions = {
+      strokeColor: '#a31efc',
+      strokeOpacity: 0.9,
+      strokeWeight: 1,
+      fillColor: '#a31efc',
+      fillOpacity: 0.9,
+      map: map,
+      center: new google.maps.LatLng(latitude, longitude),
+      radius: 200000,
+      zIndex: 2
+    };
+    // Add the circle for this city to the map.
+    cityCircle = new google.maps.Circle(populationOptions);
+
+    console.log("drawing ground zero circle");
+}
+
+
+$(document).ready(function() {
+
+	Parse.initialize("NYPXQtFR0BBY0TEbfcpgn61l2IGHJXQkrY1bu8PM", "5CS8buPIcMHVrSIeJuzPNkrVpjQsy9l6D2bvw5Aw");
+
+
+
+	setHeaderSize();
+
+	Parse.Cloud.run('getTopRipples', {}, {
+		success: function(topRipples) {
+			for (var i = 0; i < 5; i++)
+			{
+				var ripple = topRipples[i];
+				var rippleNumber = (i+1).toString();
+
+				
+				$('#ripple_div' + rippleNumber).attr('onclick', "location.href='http://www.getripple.io/ripple.html?id=" + ripple["rippleId"] + "'");
+
+				$("#ripple_text" + rippleNumber).text(ripple["text"]);
+
+			    if (ripple["image"])
+			    	$("#ripple_image" + rippleNumber).attr("src", ripple["image"].url());
+
+			    else
+			    {
+			    	$('#ripple_text' + rippleNumber).css("border", "1px solid #ccc");
+			    	$('#ripple_text' + rippleNumber).css("padding","10px");
+			    }
+
+			    $("#ripple_num_propagated" + rippleNumber).text("spread " + ripple["numPropagated"] + " times");
+			    $("#ripple_creator" + rippleNumber).text(ripple["creatorName"]);
+
+			    if (ripple["city"])
+			    {
+			    	if (ripple["state"])
+			    		$("#ripple_location" + rippleNumber).text(ripple["city"] + ", " + ripple["state"]);
+			    	else
+			    		$("#ripple_location" + rippleNumber).text(ripple["city"]);
+			    }
+			    
+			    $("#ripple_created_at" + rippleNumber).text($.timeago(ripple["createdAt"]));
+			}
+		},
+		error: function(error) {
+
+		}
+	})	;
+
+		
+});
+
+$( window ).resize(function() {
+	setHeaderSize();
+});
+
+function setHeaderSize()
+{
+			// set logo height and width
+			$('.formIframe').css({"width":$(window).width(),"height":'1500px'});
+
+			$("footer nav ul li ").css("font-family", "'Roboto', sans-serif");
+			$("footer nav ul li ").css("margin-left", "10px");
+
+			$('.ripple').css({"background":"#eee"});
+			$('body').css({"background":"#eee"});
+			$('.innerRipple').css({"background":"#fff", "margin-top":"20px"});
+
+			if ($(window).width() < 700) 
+			{
+				// header stuff
+				$('.picText').css( "height", 20);
+				$('.headerText').css("padding-top","10px");
+				$(".rippleImg").css({"width":"80px", "margin":"5px"});
+
+				// social media
+				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"8px"});
+				$('.socialMediaBtn').css({"width": "15px"});
+
+				//ios + android image
+				$(".ios").css({"width":"100px", "float":"left"});
+				$('.android').css({"width":"90px", "float":"right"});
+				$('.explanation').css({"margin-top":"100px","font-size":"14px"});
+				$('.actions').css({"width":"90%", "margin-top":"30px"});
+				
+				// all other content
+				$('#ripple_text').css({"font-size":"18px", "padding-bottom":"20px"});
+				$(".ripple").css({"width":"100%", "margin":"0 auto"});
+				$(".innerRipple").css({"width":"60%", "padding": "15px"});
+				$(".metadata").css({"font-size":"12px", "padding-left": "8px", "height": "10px"});
+				$(".mapIntro").css({"margin-top":"40px", "margin-bottom":"5px", "font-size":"15px"});
+				$('#ripple_num_propagated').css({"height":"20px", "font-size":"12px", "padding":"2px 0px 0px 4px"});
+				$("#map-canvas").css("height", 300);
+
+
+				$("footer a").css("font-size", "10px");	
+			}
+
+			else
+			{
+
+				// header stuff
+				$('.picText').css( "height", 120);
+				$('.headerText').css("padding-top","25px");
+				$(".rippleImg").css({"width":"250px", "margin":"12px"});
+
+				// social media
+				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"40px"});
+				$('.socialMediaBtn').css({"width": "40px"});
+
+				//ios + android image
+				$(".ios").css({"width":"180px", "float":"left"});
+				$('.android').css({"width":"160px", "float":"right"});
+				$('.explanation').css({"margin-top":"100px","font-size":"20px"});
+				$('.actions').css({"width":"60%", "margin-top":"30px"});
+				
+				// all other content
+				$('#ripple_text').css({"font-size":"25px", "padding-bottom":"50px"});
+				$(".ripple").css({"width":"60%", "margin":"0 auto"});
+				$(".innerRipple").css({"width":"50%", "padding": "30px"});
+				$(".metadata").css({"font-size":"16px", "padding-left": "8px"});
+				$(".mapIntro").css({"margin-top":"50px", "margin-bottom":"20px", "font-size":"25px"});
+				$('#ripple_num_propagated').css({"height":"35px", "font-size":"16px", "padding":"8px"});
+				$("#map-canvas").css("height", 500);
+
+
+				$("footer a").css("font-size", "15px");				
+			}
+		}
+		</script>
+	</body>
+	</html>
