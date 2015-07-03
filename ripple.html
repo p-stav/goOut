@@ -331,26 +331,33 @@ $(document).ready(function() {
 
 			    Parse.Cloud.run('getCommentsForRipple', { rippleId: rippleId }, {
 			    	success: function(commentList) {
-			    		for (var i = 0; i < commentList.length; i++)
+
+			    		if (commentList.length == 0)
+			    			$('.comments').css("visibility","hidden");
+
+			    		else
 			    		{
-			    			var comment = commentList[i];
-			    			var firstRow = '<tr><td><hr style="border-top:1px solid #fff;margin:10px 0 20px 0;" size="0"><p class="commentText" style="font-family: sans-serif; font-weight: 100;">' + comment["comment"] + '</p><br/><br/>';
+				    		for (var i = 0; i < commentList.length; i++)
+				    		{
+				    			var comment = commentList[i];
+				    			var firstRow = '<tr><td><hr style="border-top:1px solid #fff;margin:10px 0 20px 0;" size="0"><p class="commentText" style="font-family: sans-serif; font-weight: 100;">' + comment["comment"] + '</p><br/><br/>';
 
-			    			var secondRow = '<span style="float:left;margin-left:10px;">' + comment["username"];
+				    			var secondRow = '<span style="float:left;margin-left:10px;color:#777;">' + comment["username"];
 
-			    			if (comment["city"] == null)
-			    			{
-			    				secondRow = secondRow + '</span><span style="float:right;margin-right:10px">' + $.timeago(comment["createdAt"]) + '</td></tr>';
-			    			}
-			    			else
-			    			{
-			    				secondRow =  secondRow + "&nbsp; &nbsp; &nbsp;"+comment["city"] + '</span><span style="float:right;margin-right:10px;">'  + $.timeago(comment["createdAt"]) + '</td></tr>';
-			    			}
+				    			if (comment["city"] == null)
+				    			{
+				    				secondRow = secondRow + '</span><span style="float:right;margin-right:10px;color:#777;">' + $.timeago(comment["createdAt"]) + '</td></tr>';
+				    			}
+				    			else
+				    			{
+				    				secondRow =  secondRow + "&nbsp; &nbsp; &nbsp;"+comment["city"] + '</span><span style="float:right;margin-right:10px;color:#777">'  + $.timeago(comment["createdAt"]) + '</td></tr>';
+				    			}
 
 
-			    			
-			    			$('#commentTable').append(firstRow + secondRow);
-			    		}
+				    			
+				    			$('#commentTable').append(firstRow + secondRow);
+				    		}
+				    	}
 			    	},
 			    	error: function(error) {
 
