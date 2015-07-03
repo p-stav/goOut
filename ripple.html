@@ -89,6 +89,16 @@
 			</div>
 		</div>
 
+		<br/><br/>
+		<h3 style="margin-bottom : 30px">Comments</h3>
+		<div style="margin:0 auto" id="commentDiv">
+			<table id="commentTable">
+				
+			</table>
+				<!--<ul id="commentList">
+				</ul>-->
+		</div>
+
 		<p class="mapIntro" style="color:#055a93;" align="center">Where did this ripple travel?</p>
 
 		<div style="margin:0 auto; border-radius:25px;" id="map-canvas"></div>
@@ -314,6 +324,36 @@ $(document).ready(function() {
 				  error: function(error) {
 				  }
 				});	
+
+			    Parse.Cloud.run('getCommentsForRipple', { rippleId: rippleId }, {
+			    	success: function(commentList) {
+			    		for (var i = 0; i < commentList.length; i++)
+			    		{
+			    			var comment = commentList[i];
+			    			var firstRow = '<tr><td><p style="font-family: sans-serif; font-weight: 100; font-size: 18px">' + comment["comment"] + '</p></td></tr>';
+			    			var secondRow = '<tr height="15px"><td>' + comment["username"];
+			    			if (comment["city"] == null)
+			    			{
+			    				secondRow = secondRow + '</td><td style="width:100px">' + $.timeago(comment["createdAt"]) + '</td></tr>';
+			    			}
+			    			else
+			    			{
+			    				secondRow = secondRow + comment["city"] + '</td><td style="width:300px">' + $.timeago(comment["createdAt"]) + '</td></tr>';
+			    			}
+
+			    			var thirdRow = '<tr height="30px"><td></td></tr>';
+
+			    			
+			    			$('#commentTable').append(firstRow + secondRow + thirdRow);
+			    		}
+			    	},
+			    	error: function(error) {
+
+			    	}
+			    });
+
+
+
 			},
 			error: function(object, error) {
 			    // The object was not retrieved successfully.
