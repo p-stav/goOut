@@ -90,13 +90,17 @@
 		</div>
 
 		<br/><br/>
-		<h3 style="margin-bottom : 30px">Comments</h3>
-		<div style="margin:0 auto" id="commentDiv">
-			<table id="commentTable">
-				
-			</table>
-				<!--<ul id="commentList">
-				</ul>-->
+
+		<div class="comments">
+			<h3 align="center">Comments</h3>
+			<div style="margin:0 auto" id="commentDiv">
+				<table id="commentTable">
+					
+				</table>
+				<hr style="border-top:1px solid #fff;" size="10">
+					<!--<ul id="commentList">
+					</ul>-->
+			</div>
 		</div>
 
 		<p class="mapIntro" style="color:#055a93;" align="center">Where did this ripple travel?</p>
@@ -330,18 +334,20 @@ $(document).ready(function() {
 			    		for (var i = 0; i < commentList.length; i++)
 			    		{
 			    			var comment = commentList[i];
-			    			var firstRow = '<tr><td><p style="font-family: sans-serif; font-weight: 100; font-size: 18px">' + comment["comment"] + '</p></td></tr>';
-			    			var secondRow = '<tr height="15px"><td>' + comment["username"];
+			    			var firstRow = '<tr><td><hr style="border-top:1px solid #fff;" size="10"><p class="commentText" style="font-family: sans-serif; font-weight: 100;">' + comment["comment"] + '</p><br/><br/>';
+
+			    			var secondRow = '<span style="float:left;margin-left:10px;">' + comment["username"];
+
 			    			if (comment["city"] == null)
 			    			{
-			    				secondRow = secondRow + '</td><td style="width:100px">' + $.timeago(comment["createdAt"]) + '</td></tr>';
+			    				secondRow = secondRow + '</span><span style="float:right;margin-right:10px">' + $.timeago(comment["createdAt"]) + '</td></tr>';
 			    			}
 			    			else
 			    			{
-			    				secondRow = secondRow + comment["city"] + '</td><td style="width:300px">' + $.timeago(comment["createdAt"]) + '</td></tr>';
+			    				secondRow =  secondRow + "&nbsp; &nbsp; &nbsp;"+comment["city"] + '</span><span style="float:right;margin-right:10px;">'  + $.timeago(comment["createdAt"]) + '</td></tr>';
 			    			}
 
-			    			var thirdRow = '<tr height="30px"><td></td></tr>';
+			    			var thirdRow = '<tr height="10px"><td></td></tr>';
 
 			    			
 			    			$('#commentTable').append(firstRow + secondRow + thirdRow);
@@ -400,6 +406,7 @@ function setHeaderSize()
 				$('#ripple_text').css({"font-size":"18px", "padding-bottom":"20px"});
 				$(".ripple").css({"width":"100%", "margin":"0 auto"});
 				$(".innerRipple").css({"width":"100%", "padding": "15px"});
+
 				$(".metadata").css({"font-size":"12px", "padding-left": "8px", "height": "10px"});
 				$(".mapIntro").css({"margin-top":"40px", "margin-bottom":"5px", "font-size":"15px"});
 				$('#ripple_num_propagated').css({"height":"20px", "font-size":"12px", "padding":"2px 0px 0px 4px"});
@@ -407,6 +414,10 @@ function setHeaderSize()
 
 
 				$("footer a").css("font-size", "10px");	
+
+				$('#commentTable').css({"width":"100%"});	
+				$('.comments').css({"width":"90%","margin":"0 auto", "font-size":"11px"});		
+				$('.commentText').css({"font-size":"14px", "margin":"0px"});
 			}
 
 			else
@@ -437,7 +448,12 @@ function setHeaderSize()
 				$("#map-canvas").css("height", 500);
 
 
-				$("footer a").css("font-size", "15px");				
+				$("footer a").css("font-size", "15px");	
+
+
+				$('#commentTable').css({"width":"100%"});	
+				$('.comments').css({"width":"70%","margin":"0 auto", "font-size":"13px"});		
+				$('.commentText').css({"font-size":"16px", "margin":"0px"});	
 			}
 		}
 		</script>
