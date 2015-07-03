@@ -334,7 +334,7 @@ $(document).ready(function() {
 			    		for (var i = 0; i < commentList.length; i++)
 			    		{
 			    			var comment = commentList[i];
-			    			var firstRow = '<tr><td><hr style="border-top:1px solid #fff;" size="10"><p class="commentText" style="font-family: sans-serif; font-weight: 100;">' + comment["comment"] + '</p><br/><br/>';
+			    			var firstRow = '<tr><td><hr style="border-top:1px solid #fff;margin:10px 0 20px 0;" size="0"><p class="commentText" style="font-family: sans-serif; font-weight: 100;">' + comment["comment"] + '</p><br/><br/>';
 
 			    			var secondRow = '<span style="float:left;margin-left:10px;">' + comment["username"];
 
@@ -347,10 +347,9 @@ $(document).ready(function() {
 			    				secondRow =  secondRow + "&nbsp; &nbsp; &nbsp;"+comment["city"] + '</span><span style="float:right;margin-right:10px;">'  + $.timeago(comment["createdAt"]) + '</td></tr>';
 			    			}
 
-			    			var thirdRow = '<tr height="10px"><td></td></tr>';
 
 			    			
-			    			$('#commentTable').append(firstRow + secondRow + thirdRow);
+			    			$('#commentTable').append(firstRow + secondRow);
 			    		}
 			    	},
 			    	error: function(error) {
@@ -452,8 +451,8 @@ function setHeaderSize()
 
 
 				$('#commentTable').css({"width":"100%"});	
-				$('.comments').css({"width":"70%","margin":"0 auto", "font-size":"13px"});		
-				$('.commentText').css({"font-size":"16px", "margin":"0px"});	
+				$('.comments').css({"width":"70%","margin":"0 auto", "font-size":"11px"});		
+				$('.commentText').css({"font-size":"14px", "margin":"0px"});	
 			}
 		}
 		</script>
