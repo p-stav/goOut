@@ -1,0 +1,127 @@
+<html>
+	<head>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+		
+	</head>
+	<style>
+
+
+		rect {
+		  fill: none;
+		  pointer-events: all;
+		  stroke: blue;
+		  stroke-width:5;
+		}
+		
+		circle {
+		  fill: blue;
+		  stroke-width: 2.5px;
+		}
+		
+	</style>
+	<body>
+		<h1>Ripple simulation</h1>
+		
+		
+		
+		<script src="jquery-2.1.3.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+		<script src="Model.js"></script>
+		<script src="SimulatorView.js"></script>
+		<script>
+			function djb2(str){
+			  var hash = 5381;
+			  for (var i = str.length - 1; i >= 0; i--) {
+			    hash = ((hash << 5) + hash) + str.charCodeAt(i); /* hash * 33 + c */
+			  }
+			  return hash;
+			}
+			
+			function hashRippleToColor(ripple) {
+			  var hash = djb2(ripple.text);
+			  var r = (hash & 0xFF0000) >> 16;
+			  var g = (hash & 0x00FF00) >> 8;
+			  var b = hash & 0x0000FF;
+			  return "#" + ("0" + r.toString(16)).substr(-2) + ("0" + g.toString(16)).substr(-2) + ("0" + b.toString(16)).substr(-2);
+			}
+			
+			
+			var startInterval;
+			var spreadInterval;
+			var startCounter = 0;
+			var spreadCounter = 0;
+			
+			function startRipple() {
+				if (startCounter == 50) {
+					clearInterval(startInterval);
+					alert("it's time");
+					spreadInterval = setInterval(spreadRipple, 1000);
+				}
+				// pick random user to start the ripple
+				var userIndex = Math.floor(Math.random() * users.length);
+				var user = users[userIndex];
+				var ripple = user.startRipple("text_" + startCounter.toString());
+				for (var j = 0; j < ripple.receivers.length; j++)
+				{
+					if (ripple.receivers[j] != user)
+						 addSpreadLine(user.name, ripple.receivers[j].name, hashRippleToColor(ripple));
+				}
+				startCounter++;
+			}
+			
+			function spreadRipple() {
+				if (spreadCounter == 50) {
+					clearInterval(spreadInterval);
+				}
+				var rippleIndex = Math.floor(Math.random() * ripples.length);
+				var ripple = ripples[rippleIndex];
+				
+				// attempt to spread
+				var userIndex = Math.floor(Math.random() * ripple.receivers.length);
+				var user = ripple.receivers[userIndex];
+				if (ripple.spread.indexOf(user) == -1) {
+					var newReceivers = user.spreadRipple(ripple);
+					for (var j = 0; j < newReceivers.length; j++) {
+						addSpreadLine(user.name, newReceivers[j].name, hashRippleToColor(ripple));
+							
+					}
+				} 
+			}
+			
+			
+			
+			for (var i = 0; i < 100; i++) {
+				var username = "user_" + i.toString();
+				var user = new User(username);
+				addUserCircle(user.name);
+			}
+			
+			startInterval = setInterval(startRipple, 1000);
+			
+			/*
+			for (var i = 0; i < 50; i++) {
+				var rippleIndex = Math.floor(Math.random() * 50);
+				var ripple = ripples[rippleIndex];
+				
+				// attempt to spread
+				var userIndex = Math.floor(Math.random() * ripple.receivers.length);
+				var user = ripple.receivers[userIndex];
+				if (ripple.spread.indexOf(user) == -1) {
+					var newReceivers = user.spreadRipple(ripple);
+					for (var j = 0; j < newReceivers.length; j++) {
+						addSpreadLine(user.name, newReceivers[j].name);
+							
+					}
+				} 
+			}
+			*/
+		</script>
+	</body>
+</html>
