@@ -59,10 +59,10 @@
 			var spreadCounter = 0;
 			
 			function startRipple() {
-				if (startCounter == 50) {
+				if (startCounter == 1) {
 					clearInterval(startInterval);
-					alert("Finished starting ripples. Let's spread them");
 					spreadInterval = setInterval(spreadRipple, 1000);
+					return;
 				}
 				// pick random user to start the ripple
 				var userIndex = Math.floor(Math.random() * users.length);
@@ -79,6 +79,7 @@
 			function spreadRipple() {
 				if (spreadCounter == 50) {
 					clearInterval(spreadInterval);
+					return;
 				}
 				var rippleIndex = Math.floor(Math.random() * ripples.length);
 				var ripple = ripples[rippleIndex];

@@ -2,6 +2,7 @@ var width = Math.max(940, innerWidth),
 	height = Math.max(500, innerHeight);
 			
 var i = 0;
+var inSimulatorView = true;
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -30,6 +31,8 @@ function particle() {
 
   d3.event.preventDefault();
 }*/
+
+
 
 function addUserCircle(username) {
 	svg.insert("circle", "rect")

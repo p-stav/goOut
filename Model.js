@@ -1,6 +1,49 @@
 var users = [];
 var ripples = [];
 
+var currentUser;
+var currentRipple;
+
+function userSort(userA, userB) {
+	var currentUserCircle = $("#user_" + currentUser.name);
+	// distance between current user and A:
+	var userACircle = $("#user_" + userA.name);
+	var deltaXA = currentUserCircle.attr("cx") - userACircle.attr("cx");
+	deltaXA = deltaXA * deltaXA;
+	var deltaYA = currentUserCircle.attr("cy") - userACircle.attr("cy");
+	deltaYA = deltaYA * deltaYA;
+	var distanceA = Math.sqrt(deltaYA + deltaXA);
+	
+	// distance between current user and B:
+	var userBCircle = $("#user_" + userB.name);
+	var deltaXB = currentUserCircle.attr("cx") - userBCircle.attr("cx");
+	deltaXB = deltaXB * deltaXB;
+	var deltaYB = currentUserCircle.attr("cy") - userBCircle.attr("cy");
+	deltaYB = deltaYB * deltaYB;
+	var distanceB = Math.sqrt(deltaYB + deltaXB);
+	
+	
+	
+	if (distanceA < distanceB) {
+		return -1;
+	}
+	else if (distanceA == distanceB) {
+		return 0;
+	}
+	else {
+		return 1;
+	}
+}
+
+function isReceivedCurrentRipple(user) {
+	if (currentRipple.receivers.indexOf(user) == -1) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 // Ripple
 var Ripple = function(user, text) {
 	this.receivers = [user];
@@ -80,21 +123,39 @@ var User = function(name) {
 	
 	this.getUsersForRippleSpread = function(ripple) {
 		var usersForRippleSpread = []
-		// find user with next highest id. // TODO: Wrap
-		for ( var i = this.index + 1; i < users.length; i++) {
-			if (ripple.receivers.indexOf(users[i]) == -1) {
-				usersForRippleSpread.push(users[i]);
-				
-				break;
+		
+		if (inSimulatorView == true) {
+			// Find the x closest users
+			currentUser = this;
+			currentRipple = ripple;
+			var sortedUserArray = users.slice().filter(isReceivedCurrentRipple);
+			sortedUserArray.sort(userSort);
+			var numUsersToSpread = Math.min(2, sortedUserArray.length);
+			for (var i = 0; i < numUsersToSpread; i++) {
+				usersForRippleSpread.push(sortedUserArray[i]);
+			}
+			
+		}
+		else {
+			// find user with next highest id. // TODO: Wrap
+			for ( var i = this.index + 1; i < users.length; i++) {
+				if (ripple.receivers.indexOf(users[i]) == -1) {
+					usersForRippleSpread.push(users[i]);
+					
+					break;
+				}
+			}
+			for (var i = this.index - 1; i >= 0; i--) {
+				if (ripple.receivers.indexOf(users[i]) == -1) {
+					usersForRippleSpread.push(users[i]);
+					
+					break;
+				}
 			}
 		}
-		for (var i = this.index - 1; i >= 0; i--) {
-			if (ripple.receivers.indexOf(users[i]) == -1) {
-				usersForRippleSpread.push(users[i]);
-				
-				break;
-			}
-		}
+		
 		return usersForRippleSpread;
 	}
+	
+	
 }
