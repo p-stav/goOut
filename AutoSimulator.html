@@ -76,6 +76,16 @@
 				startCounter++;
 			}
 			
+			var currentRippleInSimulator;
+			function isUserPending(user) {
+				if ((currentRippleInSimulator.spread.indexOf(user) == -1) && (currentRippleInSimulator.dismissed.indexOf(user) == -1)) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			
 			function spreadRipple() {
 				if (spreadCounter == 50) {
 					clearInterval(spreadInterval);
@@ -85,15 +95,17 @@
 				var ripple = ripples[rippleIndex];
 				
 				// attempt to spread
-				var userIndex = Math.floor(Math.random() * ripple.receivers.length);
-				var user = ripple.receivers[userIndex];
-				if (ripple.spread.indexOf(user) == -1) {
-					var newReceivers = user.spreadRipple(ripple);
-					for (var j = 0; j < newReceivers.length; j++) {
-						addSpreadLine(user.name, newReceivers[j].name, hashRippleToColor(ripple));
-							
-					}
-				} 
+				currentRippleInSimulator = ripple;
+				var pendingUsers = ripple.receivers.slice().filter(isUserPending);
+				var userIndex = Math.floor(Math.random() * pendingUsers.length);
+				var user = pendingUsers[userIndex];
+				
+				var newReceivers = user.spreadRipple(ripple);
+				for (var j = 0; j < newReceivers.length; j++) {
+					addSpreadLine(user.name, newReceivers[j].name, hashRippleToColor(ripple));
+						
+				}
+				 
 				spreadCounter++;
 			}
 			
