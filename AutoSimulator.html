@@ -61,7 +61,7 @@
 			function startRipple() {
 				if (startCounter == 1) {
 					clearInterval(startInterval);
-					spreadInterval = setInterval(spreadRipple, 1000);
+					spreadInterval = setInterval(spreadRipple, 400);
 					return;
 				}
 				// pick random user to start the ripple
@@ -87,7 +87,7 @@
 			}
 			
 			function spreadRipple() {
-				if (spreadCounter == 50) {
+				if (spreadCounter == 60) {
 					clearInterval(spreadInterval);
 					return;
 				}
@@ -111,13 +111,13 @@
 			
 			
 			
-			for (var i = 0; i < 100; i++) {
+			for (var i = 0; i < 1000; i++) {
 				var username = "user_" + i.toString();
 				var user = new User(username);
 				addUserCircle(user.name);
 			}
 			
-			startInterval = setInterval(startRipple, 1000);
+			startInterval = setInterval(startRipple, 300);
 			
 			/*
 			for (var i = 0; i < 50; i++) {

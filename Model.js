@@ -130,7 +130,7 @@ var User = function(name) {
 			currentRipple = ripple;
 			var sortedUserArray = users.slice().filter(isReceivedCurrentRipple);
 			sortedUserArray.sort(userSort);
-			var numUsersToSpread = Math.min(2, sortedUserArray.length);
+			var numUsersToSpread = Math.min(10, sortedUserArray.length);
 			for (var i = 0; i < numUsersToSpread; i++) {
 				usersForRippleSpread.push(sortedUserArray[i]);
 			}
