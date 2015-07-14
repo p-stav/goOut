@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta property="og:image" content="http://i.imgur.com/J0TxmUd.png">
+	<meta property="og:title" content="Ripple">
+	<meta property="og:url" content="www.getripple.io">
+
+	<!-- bootstrap -->
+	<link rel="shortcut icon" href="rippleHeaderLogo.png">
+	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="//www.parsecdn.com/js/parse-1.3.5.min.js"></script>
+	<script src="http://timeago.yarp.com/jquery.timeago.js"></script>
+
+	<!--simulator files -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+	<script src="Model.js"></script>
+	<script src="simulatorSetup.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<!--load google fonts!-->
+	<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+
+	
+
+	<title>Ripple - who we are</title>
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-49651565-1', 'getkefi.com');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+<body style="font-family:'Roboto', sans-serif;">
+	<div class="jumbotron" style="padding:1%;">
+		<img src="http://i.imgur.com/bfptdfe.png" width="50%"/>
+	</div>
+
+	<!--<div class="title" style="margin: 100px 50px;"><p align="center" style="font-size:100px;">Title</p></div> -->
+
+
+	<div class="part1" style="margin:100px 0px 50px 50px; font-size:30px;">
+		<p>People want to share</p>
+
+ 		<p style="font-size:22px;">
+ 			We have a <a class="tip" href="http://www.pnas.org/content/109/21/8038.full" data-toggle="tooltip" data-placement="bottom" title="This study finds that sharing about yourself with an audience stimulates the same pleasure sensors as when we eat good food or have sex." >natural want</a> to talk about ourselves and have people listen.
+
+ 			<!--<br/><br/>
+
+ 			Marketers, artists, and 'power sharers' are always looking for ways to reach new audiences.-->
+
+ 		</p>
+ 	</div>
+
+
+	<div class="part1" style="margin:0px 0px 150px 50px; font-size:30px;">
+		<!--<h1 style="font-size:50px; margin-bottom:20px;">Current Social Media:</h1>
+
+ 		<hr size="1" style="color:#ddd;">-->
+ 		
+
+ 		<div style="height:450px;">
+ 			<img class="tip" src="https://d262ilb51hltx0.cloudfront.net/max/1087/1*d99nf9cE43juE2URAnXBIw.png" width="40%" style="float:left;" data-toggle="tooltip" data-placement="right" title="'Clustering' leads to the echo chamber effect; thoughts and experiences rarely leave these small clusters and fail to receive exposure"/>
+ 			<div style="float:right;width:50%;margin-top:100px;">
+ 				<p>Current social media constrains information</p>
+		 		<p style="font-size:22px">Information is clustered in friends, followers, and close proximities.</p>
+
+		 		<img class="tip" src="https://www.facebookbrand.com/img/fb-art.jpg" width="80px" data-toggle="tooltip" data-placement="bottom" title="Facebook: a cluster of friends with similar views and experiences with whom you share with. The averave Facebook user has a network of 338 friends." data-original-title="Default tooltip"/> &nbsp; &nbsp;
+		 		<img class="tip" src="http://blog.ifabbo.com/wp-content/uploads/twitter.png" width="80px" data-toggle="tooltip" data-placement="bottom" title="Twitter: a cluster of like-minded followers and news sources. The average user has 208 followers."/> &nbsp; &nbsp;
+		 		<img class="tip" src="http://consociate.marketing/wp-content/uploads/2015/01/snapchat-logo-png-transparent-background.png" width="80px" data-toggle="tooltip" data-placement="bottom" title="Snapchat: a cluster of friends with whom to share disappearing moments" /> &nbsp; &nbsp;
+		 		<img class="tip" src="http://marketingland.com/wp-content/ml-loads/2012/03/Instagram_logo.png" width="80px" data-toggle="tooltip" data-placement="bottom" title="Instagram: a cluster of friends with whom to share moments. The mediun number of followers on instagram is roughly 194."/> &nbsp; &nbsp;
+		 		<img class="tip" src="https://www.cybersmile.org/wp-content/uploads/yik-yak-diy-icon-102.png" width="80px" data-toggle="tooltip" data-placement="bottom" title="Yik Yak: a cluster of people within the same 2-10 mile radius."/> 
+ 				<!--<p style="font-size:22px;padding-right:50px;">
+ 					<span class="tip" data-toggle="tooltip" data-placement="bottom" title="The only way to break outside of this clustering is to be famous; Kim Kardashian's tweets will reach many people, regardless of their content">Thus, it is hard to gain exposure, regardless of how engaging or relevant your message is. <br/><br/></span>
+ 				</p>-->
+ 			</div>
+ 		</div>
+
+ 		<div class="part1.5" style="margin-left:50px;">
+			There are 2 problems:
+
+			<ul>
+				<li>
+					<p>Exposure</p>
+					<p style="font-size:22px;">Peoples' voices are limited to these clusters, and unless they are Kim Kardashian, their voice is bounded.<br/>This is hard for people looking to reach new audiences.<br/></p>
+				</li>
+				<li>
+					<p>Impact</p>
+					<p style="font-size:22px;">People don’t know where their voice has spread, and how their voice has traveled.<br/>Likes, retweets, upvotes, etc are 1-dimensional measurements of impact.
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<hr size="10" style="border-top: 1px solid #0867ab;">
+	<div class="part2" style="margin:150px 50px 150px 50px; font-size:30px;">
+
+		<p style="font-size:30px;" align="center">Our vision is to be the easiest way to<br></p>
+		<p style="font-size:60px;" align="center">Share your story &nbsp; &nbsp; & &nbsp; &nbsp; explore your world</p>
+		
+
+		<div style="float:left; width:50%; border-right:1px solid #ccc; margin-top:20px; padding-left:100px;">
+			<br/>
+			<ul style="font-size:18px;">
+				<li>Broadcast your opinions beyond your circles</li>
+				<li>Visualize the impact you have</li>
+			</ul>
+		</div>
+
+		<div style="float:right; width:50%; margin-top:20px; padding-left:100px;">
+			<br/>
+			<ul style="font-size:18px;">
+				<li>Interact with people outside your circles</li>
+				<li>See the most engaging content being shared from around the world</li>
+			</ul>
+		</div>
+
+		<br/><br/><br/>
+	</div>
+	<hr size="10" style="border-top: 1px solid #0867ab;">
+	<div class="part2" style="margin:150px 50px 150px 50px; font-size:30px;">
+		<div class="howitworks" style="height:700px; margin-bottom:150px; margin-top:80px;">
+			<p style="font-size:50px; margin-bottom:100px;" align="center">How it works:</p>
+
+			<div class="howitworkscarousel" style="float:left;width:30%">
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+				  <!-- Wrapper for slides -->
+				  <div class="carousel-inner" role="listbox">
+				    <div class="item active">
+				      <img src="rippleMapSpreadClose.png" alt="Start a ripple, or post. It goes to people nearby.">
+				      <!--<div class="carousel-caption">
+				        ...
+				      </div>-->
+				    </div>
+
+				    <div class="item">
+				      <img src="rippleMapSpreadMedium.png" alt="Those who receive a ripple can spread it to others near them, or dismiss it.">
+				      <!--<div class="carousel-caption">
+				        ...
+				      </div>-->
+				    </div>
+
+				    <div class="item">
+				      <img src="rippleMapSpreadFar.png" alt="Ripples travel to more people as they continue to spread">
+				     <!-- <div class="carousel-caption">
+				        ...
+				      </div>-->
+				    </div>
+
+				  </div>
+				</div>
+			</div>
+			
+			<!--<img class="howItWorksPic" src="spreadSequence.png" style="float:left;width:50%"/>-->
+
+			<div class="explanation" style="float:right;width:70%;padding: 160px 10px 0px 10px;">
+				<ol>
+					<li>Start a "ripple", or post. It goes to people nearby.</li><br/>
+					<li>Those who receive a ripple can spread it to others near them, or dismiss it.</li><br/>
+					<li>Ripples travel to more people as they continue to spread</li>
+				</ol>
+			</div>
+		</div>
+
+		
+		
+
+		<div class="collapsible" style="width:80%; margin:0 auto;">
+			So what?
+
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom:0px;">
+			  	<div class="panel panel-default">
+			  		<div class="panel-heading" role="tab" id="headingOne" style="background-color:#eee; color:#0867ab;">
+			  			<h4 class="panel-title" style="font-size:22px;">
+	        				<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Ripples are boundless</a>
+	    				</h4>
+			  		</div>
+
+			  		<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+	      				<div class="panel-body" style="font-size:22px;">
+	      					Ripple removes boundaries in how content travels. Information is not stuck in clusters. It simply diffueses through a system:<br/><br/>
+
+	      					<div style="width:50%; margin:0 auto;"><div class="simulator" style="margin: 0 auto;"></div></div>
+
+	      					Ripple for those seeking exposure. Connecting with people across the world is captivating and adventurous; it's like travelling. <br/><br/>
+	      				</div>
+	      			</div>
+				</div>
+			</div>
+
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom:0px;">
+			  	<div class="panel panel-default">
+			  		<div class="panel-heading" role="tab" id="headingZero" style="background-color:#eee; color:#0867ab;">
+			  			<h4 class="panel-title" style="font-size:22px;">
+	        				<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseZero" aria-expanded="true" aria-controls="collapseZero">Ripple propagates the most engaging content</a>
+	    				</h4>
+			  		</div>
+
+			  		<div id="collapseZero" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingZero">
+	      				<div class="panel-body" style="font-size:22px;">
+	      					Users spread engaging ripples to people across the globe, while noise does not travel far. Ripples that reach many people are vetted by ripplers and are very likely to be engaging. 
+	      				</div>
+	      			</div>
+				</div>
+			</div>
+
+			<!--<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="font-size:22px;">
+			  	<div class="panel panel-default">
+			  		<div class="panel-heading" role="tab" id="headingTwo" style="background-color:#0867ab; color:#fff;">
+			  			<h4 class="panel-title" style="font-size:22px;">
+	        				<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Expose engaging content</a>
+	    				</h4>
+			  		</div>
+
+			  		<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+	      				<div class="panel-body">
+	      					Engaging and relevant content is everywhere. People haven't explored new ways to aggregate it to people.  
+	      				</div>
+	      			</div>
+				</div>
+			</div>-->
+
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="font-size:22px;">
+			  	<div class="panel panel-default">
+			  		<div class="panel-heading" role="tab" id="headingThree" style="background-color:#eee; color:#0867ab;">
+			  			<h4 class="panel-title" style="font-size:22px;">
+	        				<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Ripple visualizes your impact</a>
+	    				</h4>
+			  		</div>
+
+			  		<div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+	      				<div class="panel-body">
+	      					Likes, retweets, upvotes, etc are 1-dimensional measures of engagement. 
+							<br/><br/>
+							Ripple visualizes how many times something was spread, where each ripple has gone, and how it got there. 
+							<br/><br/>
+							Users love interacting with these ripple maps to understand how content reached them.
+	      				</div>
+	      			</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<hr size="10" style="border-top: 1px solid #0867ab;">
+
+	<div class="part3" style="margin:150px 0px 150px 50px; font-size:30px;">
+		<p style="font-size:50px;" align="center"><b>Current State</b></p>
+
+		<div class="stats" style="width:50%; margin:0 auto;">
+			<br/><br/>
+			<p align="center">Data Overview</p>
+			<table class="table active table-striped" style="font-size:22px;">
+				<tr><td>Users</td><td>3000</td></tr>
+				<tr><td>Ripples Created</td><td>9000</td></tr>
+				<tr data-toggle="tooltip" data-placement="bottom" title="17% of users open Ripple a day"><td>Daily active users (DAU)</td><td>17%</td></tr>
+				<tr data-toggle="tooltip" data-placement="bottom" title="29% of users open Ripple every week"><td>Weekly Active Users (WAU)</td><td>29%</td></tr>
+				<tr data-toggle="tooltip" data-placement="bottom" title="44% of users open Ripple every month"><td>Monthly active users: (MAU)</td><td>44%</td><br/></tr>
+			</table>
+
+			<br/>
+			
+			<p align="center">Session Data</p>
+			<table class="table active table-striped" style="font-size:22px;">
+				<tr data-toggle="tooltip" data-placement="bottom" title="Of users who use Ripple daily, the median number of times they open the application is 3"><td>median # of sessions for DAU</td><td>2.9</td></tr>
+				<tr data-toggle="tooltip" data-placement="bottom" title="Of users who use Ripple weekly, the median number of times they open the application is 8"><td>median # of sesisons for WAU</td><td>8.0</td></tr>
+				<tr data-toggle="tooltip" data-placement="bottom" title="For every session, users spread an average of 3 ripples"><td>ripples spread/session</td><td>3</td></tr>
+				<tr data-toggle="tooltip" data-placement="bottom" title="For every session, users dismiss an average of 2 ripples"><td>ripples dismissed/session</td><td>2</td></tr>
+				<tr data-toggle="tooltip" data-placement="bottom" title="The median length of every session"><td>median length/session</td><td>58.8 sec</td></tr>
+
+			</table>
+
+			<br/><br/>
+
+			<div class="collapsible" style="margin:0 auto;">
+			<p align="center">Ripple has 2 types of users</p>
+
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom:0px;">
+				  	<div class="panel panel-default">
+				  		<div class="panel-heading" role="tab" id="headingFour" style="background-color:#eee; color:#0867ab;">
+				  			<h4 class="panel-title" style="font-size:22px;">
+		        				<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">"ahsley" - shares moments</a>
+		    				</h4>
+				  		</div>
+
+				  		<div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
+		      				<div class="panel-body" style="font-size:22px;">
+		      					<div>These users ripple images showcasing their in-the-moment experiences. These include scenic views, pets, and other funny things they come across.</div>
+		      					<br/><br/>
+
+		      					<img src="izzie_ashlee_ex.png" style="float:left; width:40%">
+
+		      					<div style="float:right; width:50%;margin-top:100px;">'ashlee' tends to be a young female user in college, or a recent graduate.</div>
+		      				</div>
+		      			</div>
+					</div>
+				</div>
+
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom:0px;">
+				  	<div class="panel panel-default">
+				  		<div class="panel-heading" role="tab" id="headingFive" style="background-color:#eee; color:#0867ab;">
+				  			<h4 class="panel-title" style="font-size:22px;">
+		        				<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">"von" - shares thoughts</a>
+		    				</h4>
+				  		</div>
+
+				  		<div id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">
+		      				<div class="panel-body" style="font-size:22px;">
+		      					These users ripple more quirky thoughts and viewpoints. They want to spark a conversation.<br/><br/>
+
+		      					<img src="eskay_von_ex.png" style="width:50%; margin:0 auto">
+		      				</div>
+		      			</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<hr size="10" style="border-top: 1px solid #0867ab;">
+	<div class="part4" style="margin:150px 0px 150px 50px; font-size:30px;">
+		<p style="font-size:50px;" align="center"><b>Next Steps</b></p>
+
+		<ol style="font-size:50px">
+			<li style="margin-bottom:50px;"><p style="">Build a critical mass</p>
+				<ul style="margin-left:50px; font-size:28px;">
+					<li>Exposure in tech and entertainment blogs</li>
+					<li>Incentivize word-of-mouth growth</li>
+					<li>Targeted social media campaigns</li>
+				</ul>
+			</li>
+
+			<li><p style="">Seek mentorship</p>
+				<p style="margin-left:50px; font-size:28px;">
+					We need an experienced mentor who is well-connected in the social media and entertainment space.<br/><br/>
+					We have <span class="tip" style="color:#0867ab;" data-toggle="tooltip" data-placement="bottom" title="Should we build more features to increase engagement? Do we need to hone in on a more targeted userbase?" >key questions</span> that an experienced individual would have answers for.
+
+				</p>
+			</li>
+		</ol>
+	</div>
+
+	<hr size="10" style="border-top: 1px solid #0867ab;">
+	<div class="part5" style="margin:150px 50px 150px 50px; font-size:30px;">
+		<p style="font-size:50px;" align="center"><b>Timeline</b></p>
+
+		<div style="width:50%; margin:0 auto;">
+			<br/>
+			<table class="table active table-striped" style="font-size:22px;">
+				<tr><td>Beta launch</td><td>2 Jan 2015</td></tr>
+				<tr><td>iOS launch</td><td>22 Feb 2015</td></tr>
+				<tr><td>Android launch</td><td>24 April 2015</td></tr>
+			</table>
+
+			<br/><br/>
+
+			<table class="table active table-striped" style="font-size:22px;">
+				<tr><td>10,000 Users</td><td>15 Aug 2015</td></tr>
+				<tr><td>Filler</td><td>Filler</td></tr>
+				<tr><td>First round of investment</td><td>15 Sept 2015</td></tr>
+			</table>
+
+		</div>
+	</div>
+
+
+	<hr size="10" style="border-top: 1px solid #0867ab;">
+	<div class="part5" style="margin:150px 50px 150px 50px; font-size:30px;">
+		<p style="font-size:50px;" align="center"><b>Investment</b></p>
+		<p style="font-size:30px;margin-bottom:150px;" align="center">An investment would be used to:<br></p>
+		<div style="margin:0 auto;">
+			<ol style="font-size:50px">
+				<li style="margin-bottom:50px;"><p style="">Expand product development team</p>
+					<ul style="margin-left:50px; font-size:28px;">
+						<li>Design and build new features</li>
+						<li>Perform app design overhaul</li>
+						<li>stabilize bugs and codebase</li>
+						<li>scale up the Ripple backend</li>
+					</ul>
+				</li>
+
+			<li><p style="">Growth</p>
+				<ul style="margin-left:50px; font-size:28px;">
+					<li>Partnerships</li>
+					<li>Local promotion events</li>
+					<li>Ambassador Programs</li>
+					<li>server costs for scalability</li>
+				</ul>
+			</li>
+		</ol>
+		</div>
+	</div>
+
+
+
+
+	<style>
+		/*style for simulator */
+		rect {
+		  fill: none;
+		  pointer-events: all;
+		  stroke-width:5;
+		  border-radius: 25px;
+		}
+		
+		circle {
+		  fill: blue;
+		  stroke-width: 2.5px;
+		}
+	</style>
+
+
+	<script>
+		$(document).ready(function() {
+			$('.tip').tooltip();
+			$('.collapse').collapse();
+			$('.carousel').carousel({
+				interval:3000
+			});
+		});
+
+
+		// simulation
+		var width = 400,
+			height = 200;
+					
+		var i = 0;
+		var inSimulatorView = true;
+
+		var svg = d3.select(".simulator").append("svg")
+			    .attr("width", width)
+			    .attr("height", height);
+
+			svg.append("rect")
+			    .attr("width", width)
+			    .attr("height", height);
+
+
+
+		function addUserCircle(username) {
+			svg.insert("circle", "rect")
+			.attr("cx", width / 2.0 + (Math.random() - 0.5) * width / 1.1)
+			.attr("cy", height / 2.0 + (Math.random() - 0.5) * height / 1.1)
+			.attr("r", 5)
+			.attr("id", "user_" + username);
+		}
+
+		function addSpreadLine(sender, receiver, hexColor) {
+			var senderCircle = $("#user_" + sender);
+			var receiverCircle = $("#user_" + receiver);
+
+			
+			svg.insert("line", "rect")
+			.attr("x1", senderCircle.attr("cx"))
+			.attr("y1", senderCircle.attr("cy"))
+			.attr("x2", senderCircle.attr("cx"))
+			.attr("y2", senderCircle.attr("cy"))
+			.attr("stroke-width", 2)
+			.attr("stroke", hexColor)
+		  .transition()
+		  .duration(2000)
+		  .attr("x2", receiverCircle.attr("cx"))
+			.attr("y2", receiverCircle.attr("cy"))
+		  .transition()
+		  .duration(10000)
+		  .attr("stroke-width", 0.5)
+		  .style("stroke-opacity", 0.5);
+		}
+
+		for (var i = 0; i < 200; i++) {
+			var username = "user_" + i.toString();
+			var user = new User(username);
+			addUserCircle(user.name);
+		}
+
+
+
+		function restartSimulation()
+		{
+			$(".simulator").empty();
+
+			var startInterval;
+			var svg = d3.select(".simulator").append("svg")
+			    .attr("width", width)
+			    .attr("height", height);
+
+			svg.append("rect")
+			    .attr("width", width)
+			    .attr("height", height);
+
+			var spreadInterval;
+			var startCounter = 0;
+			var spreadCounter = 0;
+			var currentRippleInSimulator;
+
+			startInterval = setInterval(startRipple, 500);
+		}
+
+	</script>
+
+
+</body>
+</html>
