@@ -14,21 +14,13 @@ function hashRippleToColor(ripple) {
   return "#" + ("0" + r.toString(16)).substr(-2) + ("0" + g.toString(16)).substr(-2) + ("0" + b.toString(16)).substr(-2);
 }
 
-function hashRippleToColor2(ripple) {
-  var hash = djb2(ripple.text);
-  var r = (hash & 0x000000) >> 16;
-  var g = (hash & 0x000000) >> 8;
-  var b = hash & 0x000000;
-  return "#fff";
-}
-
 var startInterval;
 var spreadInterval;
 var startCounter = 0;
 var spreadCounter = 0;
 
 function startRipple() {
-	if (startCounter == 1) {
+	if (startCounter == 3) {
 		clearInterval(startInterval);
 		spreadInterval = setInterval(spreadRipple, 400);
 		return;
@@ -57,7 +49,7 @@ function isUserPending(user) {
 }
 
 function spreadRipple() {
-	if (spreadCounter == 10) {
+	if (spreadCounter == 30) {
 
 		clearInterval(spreadInterval);
 		restartSimulation();
