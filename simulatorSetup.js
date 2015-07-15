@@ -49,7 +49,7 @@ function isUserPending(user) {
 }
 
 function spreadRipple() {
-	if (spreadCounter == 30) {
+	if (spreadCounter == 50) {
 
 		clearInterval(spreadInterval);
 		restartSimulation();
