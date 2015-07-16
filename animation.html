@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta property="og:image" content="http://i.imgur.com/J0TxmUd.png">
+	<meta property="og:title" content="Ripple">
+	<meta property="og:url" content="www.getripple.io">
+
+	<!-- bootstrap -->
+	<link rel="shortcut icon" href="rippleHeaderLogo.png">
+	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="//www.parsecdn.com/js/parse-1.3.5.min.js"></script>
+	<script src="http://timeago.yarp.com/jquery.timeago.js"></script>
+
+	<!--simulator files -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+	<script src="Model.js"></script>
+	<script src="simulatorSetup.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<!--load google fonts!-->
+	<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+
+	
+
+	<title>Ripple - animation</title>
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-49651565-1', 'getkefi.com');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+<body style="font-family:'Roboto', sans-serif;">
+	<div class="jumbotron" style="padding:1%; height:130px;">
+		<img src="http://i.imgur.com/bfptdfe.png" width="20%"/><br/><br/><br/><br/><br/><br/>
+
+	</div>
+	<br/>
+	
+	
+	<div class="simulator-input" style="width:900px; margin-left:100px;">
+		<table>
+			<tr>
+				<td>
+					<input type="number" id="num-users" class="form-control" placeholder="Number of users">
+				</td>
+				<td width=15px></td>
+				<td>
+					<input type="number" id="num-ripples" class="form-control" placeholder="Number of ripples">
+				</td>
+				<td width=15px></td>
+				<td>
+					<input type="number" id="num-spreads" class="form-control" placeholder="Number of spreads">
+				</td>
+			</tr>
+		</table>
+		</br>
+		<span class="input-group-btn">
+			<button class="btn btn-default" id="simulation-submit" type="button">Submit</button>
+		</span>
+	</div>
+	
+	
+	
+
+	 <div class="simulator" style="width:100%; margin-left:200px;"></div>
+
+
+
+	<style>
+		/*style for simulator */
+		rect {
+		  fill: none;
+		  pointer-events: all;
+		  stroke-width:5;
+		  border-radius: 25px;
+		}
+		
+		circle {
+		  fill: blue;
+		  stroke-width: 2.5px;
+		}
+	</style>
+
+
+	<script>
+		$(document).ready(function() {
+			$('.tip').tooltip();
+			$('.collapse').collapse();
+			$('.carousel').carousel({
+				interval:3000
+			});
+			
+			$("#simulation-submit").click(function() {
+				
+				clearInterval(startInterval);
+				clearInterval(spreadInterval);
+				
+				numUsers = $("#num-users").val();
+				numRipples = $("#num-ripples").val();
+				numSpreads = $("#num-spreads").val();
+				
+				
+				restartSimulation();
+				
+			});
+
+		});
+
+
+		// simulation
+		var width = 1000,
+			height = 500;
+					
+		var i = 0;
+		var inSimulatorView = true;
+
+		var svg = d3.select(".simulator").append("svg")
+			    .attr("width", width)
+			    .attr("height", height);
+
+			svg.append("rect")
+			    .attr("width", width)
+			    .attr("height", height);
+
+
+
+		function addUserCircle(username) {
+			svg.insert("circle", "rect")
+			.attr("cx", width / 2.0 + (Math.random() - 0.5) * width / 1.1)
+			.attr("cy", height / 2.0 + (Math.random() - 0.5) * height / 1.1)
+			.attr("r", 5)
+			.attr("id", "user_" + username);
+		}
+
+		function addSpreadLine(sender, receiver, hexColor) {
+			var senderCircle = $("#user_" + sender);
+			var receiverCircle = $("#user_" + receiver);
+
+			
+			svg.insert("line", "rect")
+			.attr("x1", senderCircle.attr("cx"))
+			.attr("y1", senderCircle.attr("cy"))
+			.attr("x2", senderCircle.attr("cx"))
+			.attr("y2", senderCircle.attr("cy"))
+			.attr("stroke-width", 2)
+			.attr("stroke", hexColor)
+		  .transition()
+		  .duration(2000)
+		  .attr("x2", receiverCircle.attr("cx"))
+			.attr("y2", receiverCircle.attr("cy"))
+		  .transition()
+		  .duration(10000)
+		  .attr("stroke-width", 0.5)
+		  .style("stroke-opacity", 0.5);
+		}
+		
+		var numUsers = 300;
+
+		for (var i = 0; i < numUsers; i++) {
+			var username = "user_" + i.toString();
+			var user = new User(username);
+			addUserCircle(user.name);
+		}
+
+
+
+		function restartSimulation()
+		{
+			$("svg").empty();
+
+			startCounter = 0;
+			spreadCounter = 0;
+			users = [];
+			ripples = [];
+			// create users
+			for (var i = 0; i < numUsers; i++) {
+				var username = "user_" + i.toString();
+				var user = new User(username);
+				addUserCircle(user.name);
+			}
+			
+			//users = [];
+			// ripples = [];
+			startInterval = setInterval(startRipple, 500);
+		}
+
+	</script>
+
+
+</body>
+</html>

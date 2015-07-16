@@ -19,12 +19,16 @@ var spreadInterval;
 var startCounter = 0;
 var spreadCounter = 0;
 
+var numRipples = 3;
+
 function startRipple() {
-	if (startCounter == 3) {
+	if (startCounter >= numRipples) {
 		clearInterval(startInterval);
 		spreadInterval = setInterval(spreadRipple, 400);
 		return;
 	}
+	startCounter++;
+	
 	// pick random user to start the ripple
 	var userIndex = Math.floor(Math.random() * users.length);
 	var user = users[userIndex];
@@ -34,7 +38,7 @@ function startRipple() {
 		if (ripple.receivers[j] != user)
 			 addSpreadLine(user.name, ripple.receivers[j].name, hashRippleToColor(ripple));
 	}
-	startCounter++;
+	
 }
 
 
@@ -48,12 +52,17 @@ function isUserPending(user) {
 	}
 }
 
+var numSpreads = 50;
+
 function spreadRipple() {
-	if (spreadCounter == 50) {
+	if (spreadCounter >= numSpreads) {
 
 		clearInterval(spreadInterval);
-		restartSimulation();
+		setTimeout(restartSimulation, 1000);
+		// restartSimulation();
+		return;
 	}
+	spreadCounter++;
 
 	var rippleIndex = Math.floor(Math.random() * ripples.length);
 	var ripple = ripples[rippleIndex];
@@ -70,7 +79,7 @@ function spreadRipple() {
 			
 	}
 	 
-	spreadCounter++;
+	
 }
 
 
