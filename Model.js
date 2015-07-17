@@ -76,6 +76,8 @@ var Ripple = function(user, text) {
 	}
 };
 
+var userReach = 10;
+
 // User
 var User = function(name) {
 	this.name = name;
@@ -130,7 +132,7 @@ var User = function(name) {
 			currentRipple = ripple;
 			var sortedUserArray = users.slice().filter(isReceivedCurrentRipple);
 			sortedUserArray.sort(userSort);
-			var numUsersToSpread = Math.min(10, sortedUserArray.length);
+			var numUsersToSpread = Math.min(userReach, sortedUserArray.length);
 			for (var i = 0; i < numUsersToSpread; i++) {
 				usersForRippleSpread.push(sortedUserArray[i]);
 			}

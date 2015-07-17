@@ -63,6 +63,23 @@
 		<table>
 			<tr>
 				<td>
+					Users:
+				</td>
+				<td width=15px></td>
+				<td>
+					Ripples:
+				</td>
+				<td width=15px></td>
+				<td>
+					Spreads per ripple:
+				</td>
+				<td width=15px></td>
+				<td>
+					User reach:
+				</td>
+			</tr>
+			<tr>
+				<td>
 					<input type="number" id="num-users" class="form-control" placeholder="Number of users">
 				</td>
 				<td width=15px></td>
@@ -72,6 +89,10 @@
 				<td width=15px></td>
 				<td>
 					<input type="number" id="num-spreads" class="form-control" placeholder="Number of spreads">
+				</td>
+				<td width=15px></td>
+				<td>
+					<input type="number" id="num-reach" class="form-control" placeholder="Each user's reach'">
 				</td>
 			</tr>
 		</table>
@@ -114,12 +135,23 @@
 			
 			$("#simulation-submit").click(function() {
 				
+				
+				
+				var numUsersInput = $("#num-users").val();
+			
+				
+				if (numUsersInput > 1000) {
+					alert("Wow there. Take it easy. You probably don't need more than 500 users.");
+					return;
+				}
+				
 				clearInterval(startInterval);
 				clearInterval(spreadInterval);
 				
-				numUsers = $("#num-users").val();
+				numUsers = numUsersInput;
 				numRipples = $("#num-ripples").val();
 				numSpreads = $("#num-spreads").val();
+				userReach = $("#num-reach").val();
 				
 				
 				restartSimulation();
@@ -171,7 +203,8 @@
 		  .attr("x2", receiverCircle.attr("cx"))
 			.attr("y2", receiverCircle.attr("cy"))
 		  .transition()
-		  .duration(10000)
+		  .delay(10000)
+		  .duration(1000)
 		  .attr("stroke-width", 0.5)
 		  .style("stroke-opacity", 0.5);
 		}
