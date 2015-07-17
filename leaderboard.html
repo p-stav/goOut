@@ -72,14 +72,14 @@
 		</div>
 	</div>
 
-	<h2 style="padding-left:50px; font-family:sans-serif">Leaderboard</h2>
+	<p align="center" class="headerTxt" style="font-family:'Roboto',sans-serif; margin:50px 0px 80px 0px;">Leaderboard</p>
 
 	<div id="leaderboard">
-		<ul id="levels">
-		</ul>
+		<div id="levels">
+		</div>
 			
-		<ul id="users">
-		</ul>
+		<div id="users">
+		</div>
 	</div>
 
 
@@ -114,8 +114,6 @@ $(document).ready(function() {
 
 	Parse.initialize("NYPXQtFR0BBY0TEbfcpgn61l2IGHJXQkrY1bu8PM", "5CS8buPIcMHVrSIeJuzPNkrVpjQsy9l6D2bvw5Aw");
 
-
-
 	setHeaderSize();
 
 	Parse.Cloud.run('getLeaderboard', {}, {
@@ -123,15 +121,21 @@ $(document).ready(function() {
 			
 			for (var i = 0; i < levelsArray.length; i++)
 			{
-				var element = "<li>" + levelsArray[i]["name"] + ": minimum score of " + levelsArray[i]["minScore"] + " and a reach of " + levelsArray[i]["reach"] + " people";
-				element = element + "<ul>";
-				for (var j = 0; j < levelsArray[i]["userArray"].length; j++)
+				if (levelsArray[i]["userArray"].length != 0)
 				{
-					element = element + "<li>" + levelsArray[i]["userArray"][j]["username"] + ": score of " + levelsArray[i]["userArray"][j]["score"] 
-					+ " and highest propagated ripple with " + levelsArray[i]["userArray"][j]["highestPropagated"] + " spreads</li>";
-				} 
-				element = element + "</ul></li>";
-				$("#levels").append(element);
+					var element = "<div class='level' style='background-color:#fff; border-radius:25px;'><div class='inner'><p class='levelText' align='center'>"+levelsArray[i]["name"]+"</p><p align='center' class='explanation'>minimum score of " + levelsArray[i]["minScore"] + " and a reach of " + levelsArray[i]["reach"] + " people</p><table class='table active table-striped'><thead><tr style='font-weight:bold;'><th>User</th><th>Score</th><th>Largest Ripple</th></tr></thead>";
+
+
+					for (var j = 0; j < levelsArray[i]["userArray"].length; j++)
+					{
+						element = element + "<tr><td>" + levelsArray[i]["userArray"][j]["username"] + "</td><td>" + levelsArray[i]["userArray"][j]["score"]
+						+"</td><td>" + levelsArray[i]["userArray"][j]["highestPropagated"] + "</td></tr>";
+					} 
+					element = element + "</table></div></<div>";
+					$("#levels").append(element);
+
+					setHeaderSize();
+				}
 			}
 			
 		},
@@ -157,7 +161,7 @@ function setHeaderSize()
 
 			$('.ripple').css({"background":"#eee"});
 			$('body').css({"background":"#eee"});
-			$('.innerRipple').css({"background":"#fff", "margin-top":"20px"});
+			$('.level').css({"background-color":"fff","border-radius":"25px"});
 
 			if ($(window).width() < 700) 
 			{
@@ -169,21 +173,16 @@ function setHeaderSize()
 				// social media
 				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"8px"});
 				$('.socialMediaBtn').css({"width": "15px"});
+				$('.table').css({"font-size":"13px"});
 
-				//ios + android image
-				$(".ios").css({"width":"100px", "float":"left"});
-				$('.android').css({"width":"90px", "float":"right"});
-				$('.explanation').css({"margin-top":"100px","font-size":"14px"});
-				$('.actions').css({"width":"90%", "margin-top":"30px"});
-				
-				// all other content
-				$('#ripple_text').css({"font-size":"18px", "padding-bottom":"20px"});
-				$(".ripple").css({"width":"100%", "margin":"0 auto"});
-				$(".innerRipple").css({"width":"60%", "padding": "15px"});
-				$(".metadata").css({"font-size":"12px", "padding-left": "8px", "height": "10px"});
-				$(".mapIntro").css({"margin-top":"40px", "margin-bottom":"5px", "font-size":"15px"});
-				$('#ripple_num_propagated').css({"height":"20px", "font-size":"12px", "padding":"2px 0px 0px 4px"});
-				$("#map-canvas").css("height", 300);
+				//$("tr").css({"font-family":"'Roboto', sans-serif"});
+				$('.explanation').css({"margin-top":"18px", "margin-bottom":"50px","font-size":"14px", "font-family":"'Roboto', sans-serif"});
+				$('.levelText').css({"font-size":"40px","font-family":"'Roboto', sans-serif"});
+				$('.level').css({"margin":"0 auto","padding":"10px", "margin":"20px"});
+				$('.inner').css({'width':'95%', 'margin':'0 auto'});
+
+				$('.inner').css({"width":"90%"});
+				$('.headerTxt').css({"font-size":"40px"});
 
 
 				$("footer a").css("font-size", "10px");	
@@ -201,20 +200,16 @@ function setHeaderSize()
 				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"40px"});
 				$('.socialMediaBtn').css({"width": "40px"});
 
-				//ios + android image
-				$(".ios").css({"width":"180px", "float":"left"});
-				$('.android').css({"width":"160px", "float":"right"});
-				$('.explanation').css({"margin-top":"100px","font-size":"20px"});
-				$('.actions').css({"width":"60%", "margin-top":"30px"});
-				
-				// all other content
-				$('#ripple_text').css({"font-size":"25px", "padding-bottom":"50px"});
-				$(".ripple").css({"width":"60%", "margin":"0 auto"});
-				$(".innerRipple").css({"width":"50%", "padding": "30px"});
-				$(".metadata").css({"font-size":"16px", "padding-left": "8px"});
-				$(".mapIntro").css({"margin-top":"50px", "margin-bottom":"20px", "font-size":"25px"});
-				$('#ripple_num_propagated').css({"height":"35px", "font-size":"16px", "padding":"8px"});
-				$("#map-canvas").css("height", 500);
+				//$("tr").css({"font-family":"'Roboto', sans-serif"});
+				$('.table').css({"font-size":"22px"});
+				$('.explanation').css({"margin-top":"18px", "margin-bottom":"80px","font-size":"18px", "font-family":"'Roboto', sans-serif"});
+				$('.levelText').css({"font-size":"50px","font-family":"'Roboto', sans-serif"});
+				$('.level').css({"margin":"0 auto","padding":"50px", "margin":"50px"});
+				$('.inner').css({'width':'90%', 'margin':'0 auto'});
+
+				$('.inner').css({"width":"60%"});
+				$('.headerTxt').css({"font-size":"70px"});
+
 
 
 				$("footer a").css("font-size", "15px");				
