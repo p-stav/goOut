@@ -59,37 +59,46 @@
 	
 		
 	<!--header-->
-	<div class="topHeader" style="background-color:#0867ab; padding-bottom:5px;">
-		<div class = "picText" style="background-color:#0867ab;">
-			<div style="width:45%;float:left;">
-				<img class="rippleImg" id="rippleImg" src="rippleHeaderLogo.png" style="float:left; margin:12px;" width="100px;">
-				<p class="headerText" style="color:#fff;">Ripple<span style="font-size:10px;"> &#153</span></p>	
-			</div>
+	<nav class="navbar navbar-default topHeader" style="background-color:#0867ab; margin-bottom:0px; border:0px;">
+  		<div class="container-fluid" style="background-color:#0867ab; padding-bottom:5px;">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
 
-			<div class="socialMedia">
-				<a href="https://twitter.com/RippleMeThis"><img class="socialMediaBtn" href src="http://i.imgur.com/h7oyTeL.png?1" ></a>
+			  <div class="navbar-header" style="background-color:#0867ab;">
+      			<a class="navbar-brand" href="http://getRipple.io"><img class="rippleImg" id="rippleImg" src="rippleBlueBcknd.png" style="float:left;" width="100px;"></a>
+				<!--<p class="headerText" style="color:#fff;">Ripple<span style="font-size:10px;"> &#153</span></p>-->
+			  </div>
+		    </div>
 
-				<a href="https://www.facebook.com/exploreRipple"><img class="socialMediaBtn" href src="http://i.imgur.com/CtfEYps.png?1"></a>
 
-				<a href="http://instagram.com/ripple.app"><img class="socialMediaBtn" href src="http://i.imgur.com/w90mpS8.png?1" ></a>
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right socialMedia">
+					<li><a style="color:#fff;" class="topPadding" href="https://medium.com/@RippleMeThis">blog</a></li>
+					<li><a style="color:#fff;" class="topPadding" href="leaderboard.html">leaderboard</a></li>
+					<li><a href="https://twitter.com/RippleMeThis"><img class="socialMediaBtn" href src="http://i.imgur.com/h7oyTeL.png?1" ></a></li>
+					<li><a href="https://www.facebook.com/exploreRipple"><img class="socialMediaBtn" href src="http://i.imgur.com/CtfEYps.png?1"></a></li>
+					<li><a href="http://instagram.com/ripple.app"><img class="socialMediaBtn" href src="http://i.imgur.com/w90mpS8.png?1" ></a></li>
+				</ul>
 			</div>
 		</div>
-	</div>
+	</nav>
 
 	<div class="header" style="height:150px;">
 		<div class="floats" style="height:400px;">
 			<div class="explanation">
 				<div class="words" style="width:100%">
-					<p class="downloadActionBarSpan" style="color:#ffc432;">Explore your World</p>
+					<p class="downloadActionBarSpan" style="color:#ffc432;">Share your story</p>
 					
-					<p class="downloadActionBarSubtext">Start a ripple. Then follow it as people spread it across the world. You don't need friends or followers to get your message out there.<br/><br/> No boundaries. No noise. Just ripples.
+					<p class="downloadActionBarSubtext">Capture your best moments. Then watch them spread to people across the world. <br/><br/> Get your message out there.<br/><br/> 
 					</p>
 
 					<p class="howitworks"><a  style="color:#ffc432;" href="howitworks.html">How it works</a></p>
-
-					<p class="howitworks"><a style="color:#ffc432;" href="animation.html">What happens if...</a></p>
-
-					<p class="howitworks"><a style="color:#ffc432;" href="leaderboard.html">Mirror mirror on the wall, who is the ripplemost of them all?</a></p>
 
 				</div>
 				<div class="actions"> 
@@ -124,9 +133,9 @@
 			
 			
 		</div>
-		<div class="photoCredit">
+		<!--<div class="photoCredit">
 			<p style="color:#999; font-family:sans-serif;">photo rippled by gracie rouse: "Wonderful weekend in Moab, Utah!"</p>
-		</div>
+		</div>-->
 	</div>
 
 	
@@ -139,26 +148,25 @@
 				<tr>
 					<td><a href="http://www.geekwire.com/2015/ripple/"><img class="featuredImg" id="geekwire" src="geekwire.png" width="40%"></a></td>
 
-					<td><a href="http://www.raywenderlich.com/94330/readers-app-reviews-january-2015"><img class="featuredImg" id="rayw" src="raywenderlich.png"></a></td>
+					<td><a href="http://bostinno.streetwise.co/2015/07/15/ripple-harvard-grad-launches-free-app-to-spread-content/"><img class="featuredImg" id="rayw" src="bostinno.png" width="100%"></a></td>
 
-					<td><a href="http://www.tuaw.com/2015/01/17/spread-kind-messages-far-and-wide-with-the-ripple-effect/"><img class="featuredImg" id="tuaw" src="tuaw.png" width="20%"></a></td>
+					<td><a href="http://www.tuaw.com/2015/01/17/spread-kind-messages-far-and-wide-with-the-ripple-effect/"><img class="featuredImg" id="tuaw" src="tuaw.png" width="0%"></a></td>
 				</tr>
 			</table>
 		</div>
 	</div>
 
-	<br/><br/><br/><br/><br/><br/><br/>
-	<h2>Trending Ripples</h2>
+	<div class="trendingHeader" align="center" style="font-style:'Roboto', sans-serif; font-size:40px; padding-top:50px">Trending Ripples</div>
 
 	
 <!-- Ripple One -->
 	<div id="ripple_div1" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
-		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+		<div class="innerRipple" id="innerRipple1" style="width:60%; margin:0 auto; border-radius:25px;">
 			<p class="rippleText" id="ripple_text1" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
 			<img id="ripple_image1" style="margin:0 auto; display:block;" width="100%">
 
-			<div id="ripple_num_propagated1" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			<div class="ripple_num_propagated" id="ripple_num_propagated1" style="margin:0 auto; background:#055a93; color:#fff;"></div>
 			
 			<br/><br/>
 			
@@ -176,11 +184,11 @@
 <!-- Ripple Two -->
 	<div id="ripple_div2" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
-		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+		<div class="innerRipple" id="innerRipple2" style="width:60%; margin:0 auto; border-radius:25px;">
 			<p class="rippleText" id="ripple_text2" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
 			<img id="ripple_image2" style="margin:0 auto; display:block;" width="100%">
 
-			<div id="ripple_num_propagated2" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			<div class="ripple_num_propagated" id="ripple_num_propagated2" style="margin:0 auto; background:#055a93; color:#fff;"></div>
 			
 			<br/><br/>
 			
@@ -198,11 +206,11 @@
 <!-- Ripple Three -->
 	<div id="ripple_div3" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
-		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+		<div class="innerRipple" id="innerRipple3" style="width:60%; margin:0 auto; border-radius:25px;">
 			<p class="rippleText"  id="ripple_text3" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
 			<img id="ripple_image3" style="margin:0 auto; display:block;" width="100%">
 
-			<div id="ripple_num_propagated3" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			<div class="ripple_num_propagated" id="ripple_num_propagated3" style="margin:0 auto; background:#055a93; color:#fff;"></div>
 			
 			<br/><br/>
 			
@@ -220,11 +228,11 @@
 	<!-- Ripple Four -->
 	<div id="ripple_div4" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
-		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+		<div class="innerRipple" id="innerRipple4" style="width:60%; margin:0 auto; border-radius:25px;">
 			<p class="rippleText" id="ripple_text4" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
 			<img id="ripple_image4" style="margin:0 auto; display:block;" width="100%">
 
-			<div id="ripple_num_propagated4" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			<div class="ripple_num_propagated" id="ripple_num_propagated4" style="margin:0 auto; background:#055a93; color:#fff;"></div>
 			
 			<br/><br/>
 			
@@ -243,11 +251,11 @@
 <!-- Ripple Five -->
 	<div id="ripple_div5" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
-		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+		<div class="innerRipple" id="innerRipple5" style="width:60%; margin:0 auto; border-radius:25px;">
 			<p class="rippleText" id="ripple_text5" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
 			<img id="ripple_image5" style="margin:0 auto; display:block;" width="100%">
 
-			<div id="ripple_num_propagated5" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			<div class="ripple_num_propagated" id="ripple_num_propagated5" style="margin:0 auto; background:#055a93; color:#fff;"></div>
 			
 			<br/><br/>
 			
@@ -267,11 +275,11 @@
 	<!-- Ripple 6 -->
 	<div id="ripple_div6" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
-		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+		<div class="innerRipple" id="innerRipple6" style="width:60%; margin:0 auto; border-radius:25px;">
 			<p class="rippleText" id="ripple_text6" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
 			<img id="ripple_image6" style="margin:0 auto; display:block;" width="100%">
 
-			<div id="ripple_num_propagated6" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			<div class="ripple_num_propagated" id="ripple_num_propagated6" style="margin:0 auto; background:#055a93; color:#fff;"></div>
 			
 			<br/><br/>
 			
@@ -290,11 +298,11 @@
 	<!-- Ripple 7 -->
 	<div id="ripple_div7" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
-		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+		<div class="innerRipple" id="innerRipple7" style="width:60%; margin:0 auto; border-radius:25px;">
 			<p class="rippleText" id="ripple_text7" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
 			<img id="ripple_image7" style="margin:0 auto; display:block;" width="100%">
 
-			<div id="ripple_num_propagated7" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			<div class="ripple_num_propagated" id="ripple_num_propagated7" style="margin:0 auto; background:#055a93; color:#fff;"></div>
 			
 			<br/><br/>
 			
@@ -313,11 +321,11 @@
 	<!-- Ripple 8 -->
 	<div id="ripple_div8" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
-		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+		<div class="innerRipple" id="innerRipple8" style="width:60%; margin:0 auto; border-radius:25px;">
 			<p class="rippleText" id="ripple_text8" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
 			<img id="ripple_image8" style="margin:0 auto; display:block;" width="100%">
 
-			<div id="ripple_num_propagated8" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			<div class="ripple_num_propagated" id="ripple_num_propagated8" style="margin:0 auto; background:#055a93; color:#fff;"></div>
 			
 			<br/><br/>
 			
@@ -336,11 +344,11 @@
 	<!-- Ripple 9 -->
 	<div id="ripple_div9" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
-		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+		<div class="innerRipple" id="innerRipple9" style="width:60%; margin:0 auto; border-radius:25px;">
 			<p class="rippleText" id="ripple_text9" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
 			<img id="ripple_image9" style="margin:0 auto; display:block;" width="100%">
 
-			<div id="ripple_num_propagated9" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			<div class="ripple_num_propagated" id="ripple_num_propagated9" style="margin:0 auto; background:#055a93; color:#fff;"></div>
 			
 			<br/><br/>
 			
@@ -359,11 +367,11 @@
 	<!-- Ripple 10 -->
 	<div id="ripple_div10" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
-		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+		<div class="innerRipple" id="innerRipple10" style="width:60%; margin:0 auto; border-radius:25px;">
 			<p class="rippleText" id="ripple_text10" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
 			<img id="ripple_image10" style="margin:0 auto; display:block;" width="100%">
 
-			<div id="ripple_num_propagated10" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			<div class="ripple_num_propagated" id="ripple_num_propagated10" style="margin:0 auto; background:#055a93; color:#fff;"></div>
 			
 			<br/><br/>
 			
@@ -372,9 +380,6 @@
 				<div id="ripple_created_at10" style="float:right; color:#777"></div>	
 			</div>
 		</div>
-
-			<br/>
-			<br/>
 	</div>
 
 
@@ -384,15 +389,15 @@
 		<nav>
 			<ul style="font-size:10px;">
 				<li>
-					<a style="color:#ffc432;" href="https://medium.com/@RippleMeThis">blog</a>
+					<a style="color:#ffc432;" href="outreach.html">press</a>
+				</li>
+
+				<li>
+					<a style="color:#ffc432;" href="animation.html">simulator</a>
 				</li>
 
 				<li>
 					<a style="color:#ffc432;" href="contact.html">contact</a>
-				</li>
-
-				<li>
-					<a style="color:#ffc432;" href="careers.html">careers</a>
 				</li>
 				<li>
 					<a style="color:#ffc432;" href="ripple_terms.html">terms</a>
@@ -422,13 +427,13 @@
 
 		Parse.Cloud.run('getTopRipples', {}, {
 			success: function(topRipples) {
-				for (var i = 0; i < 5; i++)
+				for (var i = 0; i < 10; i++)
 				{
 					var ripple = topRipples[i];
 					var rippleNumber = (i+1).toString();
 
 					
-					$('#ripple_div' + rippleNumber).attr('onclick', "location.href='http://www.getripple.io/ripple.html?id=" + ripple["rippleId"] + "'");
+					$('#innerRipple' + rippleNumber).attr('onclick', "location.href='http://www.getripple.io/ripple.html?id=" + ripple["rippleId"] + "'");
 
 					$("#ripple_text" + rippleNumber).text(ripple["text"]);
 
@@ -472,18 +477,21 @@
 		function setHeaderSize()
 		{
 			$('.ripple').css({"background":"#eee"});
+			$('.trendingHeader').css({"background":"#eee"});
 			$('.innerRipple').css({"background":"#fff", "margin-top":"20px","cursor":"pointer"});
+			$(".navbar").css("background-color","#0867ab");
 
 			if ($(window).width() > 1000) 
 			{
 				// header stuff
-				$('.header').css( "height",700);
-				$('.picText').css( "height", 120);
-				$('.headerText').css("padding-top","25px");
+				$('.header').css( "height",800);
+				//$('.picText').css({"width":"500px"});
+				$('.headerText').css({"margin-left":"110px"});
+				$(".rippleImg").css({"width":"150px"});
 
 				// footer and feater
-				$("footer").css("margin-top", "100px");
 				$(".featureBarTitle").css({"font-size":"18px"});
+
 				$("footer nav ul li ").css("margin-right", "100px");
 				$("footer a").css("font-size", "18px");
 
@@ -494,13 +502,13 @@
 				$('.android').css({"width":"230px","margin":"0 auto", "display":"block", "float":"none"});
 
 
-				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"40px"});
-				$('.socialMediaBtn').css({"width": "40px"});
+				$('.socialMedia').css({"margin-right":"10px", "margin-top":"10px"});
+				$('.socialMediaBtn').css({"width": "30px"});
+				$(".topPadding").css({"margin-top":"5px"});
 
 				$('.floatLeft').css({"float":"left", "width":"28%", "margin":"20px 0px 0px 20px", "padding-top":"30px"});
 			
-	
-				$('.header').css({"backgroundImage": "url(moab.jpg)", "background-repeat":"no-repeat", "background-position":"40% 30%", "background-size":"110%"});
+				$('.header').css({"backgroundImage": "url(coverImage.jpg)", "background-repeat":"no-repeat", "background-position":"40% 50%", "background-size":"110%"});
 				$('.downloadActionBarSpan').css({"font-size":"70px", "color":"#ffc432", "margin-top":"50px", "padding-left":"40px"});
 				$('.downloadActionBarSubtext').css({"padding":"30px 40px 0px 40px", "text-align":"left"});
 				$(".howitworks").css({"padding":"20px 40px 0px 40px","font-size":"26px"});
@@ -511,17 +519,18 @@
 				$('.trendingText').css("font-size", "30px");
 				$(".ripple").css({"width":"100%", "margin":"0 auto"});
 				$(".innerRipple").css({"width":"45%", "padding": "30px"});
-				$('.ripple_text').css({"margin-bottom":"10px", "font-size":"18px"});
-				$('.metadata').css({"font-size":"13px"});
+				$('.rippleText').css({"margin-bottom":"10px", "font-size":"22px"});
+				$('.metadata').css({"font-size":"15px"});
+				$(".ripple_num_propagated").css({"padding-left":"10px", "font-size":"15px"});
 
 			}
 
 			else if ($(window).width() > 700) 
 			{
-				$('.header').css( "height",1000);
-				$('.picText').css( "height", 70);
+				$('.header').css( "height",1100);
+				$('.topHeader').css( "height", 80);
 				$('.headerText').css({"padding-top":"22px", "font-size":"20px"});
-				$(".rippleImg").css({"width":"55px"});
+				$(".rippleImg").css({"width":"150px"});
 
 				//ios + android image
 				$(".ios").css({"width":"180px", "margin":"0 auto","display":"block", "float":"left", "margin-bottom":"20px"});
@@ -546,17 +555,28 @@
 				$('.downloadActionBar').css({"padding-top":"90px"});
 			
 
-				$('.header').css({"backgroundImage": "url(moab.jpg)", "background-repeat":"no-repeat", "background-position":"20% 90%", "background-size":"200%"});
+				$('.header').css({"backgroundImage": "url(coverImage.jpg)", "background-repeat":"no-repeat", "background-position":"15% 50%", "background-size":"200%"});
 				$('.photoCredit').css({"margin-top":"630px", "margin-left":"5px"});
+
+
+				// trending ripples
+				$('.trendingRipples').css("padding-top", "50px");
+				$('.trendingText').css("font-size", "30px");
+				$(".ripple").css({"width":"100%", "margin":"0 auto"});
+				$(".innerRipple").css({"width":"70%", "padding": "30px"});
+				$('.rippleText').css({"margin-bottom":"10px", "font-size":"22px"});
+				$('.metadata').css({"font-size":"15px"});
+				$(".ripple_num_propagated").css({"padding-left":"10px", "font-size":"15px"});
+
+				$(".navbar-toggle").css("margin","30px 10px 20px 0px");
 			}
 
 
 			else
 			{
 				$('.header').css( "height",710);
-				$('.picText').css( "height", 35);
-				$('.headerText').css({"padding-top":"22px", "font-size":"12px"});
-				$(".rippleImg").css({"width":"40px"});
+				//$('.headerText').css({"padding-top":"22px", "font-size":"12px"});
+				$(".rippleImg").css({"width":"100px"});
 
 				//ios + android image
 				$(".ios").css({"width":"100px", "margin":"0 auto","display":"block", "float":"left", "margin-bottom":"20px"});
@@ -581,8 +601,21 @@
 				$('.downloadActionBar').css({"padding-top":"90px"});
 			
 
-				$('.header').css({"backgroundImage": "url(moab.jpg)", "background-repeat":"no-repeat", "background-position":"30% 0%", "background-size":"350%"});
+				$('.header').css({"backgroundImage": "url(coverImage.jpg)", "background-repeat":"no-repeat", "background-position":"30% 0%", "background-size":"350%"});
 				$('.photoCredit').css({"margin-top":"320px", "margin-left":"5px"});
+
+
+				// trending ripples
+				$('.trendingRipples').css("padding-top", "50px");
+				$('.trendingText').css("font-size", "30px");
+				$(".ripple").css({"width":"100%", "margin":"0 auto"});
+				$(".innerRipple").css({"width":"95%", "padding": "30px"});
+				$('.rippleText').css({"margin-bottom":"10px", "font-size":"22px"});
+				$('.metadata').css({"font-size":"15px"});
+				$(".ripple_num_propagated").css({"padding-left":"10px", "font-size":"15px"});
+
+
+				$(".navbar-toggle").css("margin-top","15px");
 
 			}
 		}
