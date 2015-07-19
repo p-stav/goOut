@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta property="og:image" content="http://i.imgur.com/J0TxmUd.png">
+	<meta property="og:title" content="Ripple">
+	<meta property="og:url" content="www.getripple.io">
+
+	<!--Google Maps and Google Places APIs-->
+
+	<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>-->
+
+	<!-- bootstrap -->
+	<link type="text/css" href="main.css" rel="stylesheet"/>
+	<link rel="shortcut icon" href="rippleHeaderLogo.png">
+	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="//www.parsecdn.com/js/parse-1.3.5.min.js"></script>
+	<script src="http://timeago.yarp.com/jquery.timeago.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+	<!--load google fonts!-->
+	<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+
+	
+
+	<title>Ripple</title>
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-49651565-1', 'getkefi.com');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+
+<body style="font-weight:100;">
+	
+		
+	<!--header-->
+	<nav class="navbar navbar-default topHeader" style="background-color:#0867ab; margin-bottom:0px; border:0px;">
+  		<div class="container-fluid" style="background-color:#0867ab; padding-bottom:5px;">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+
+			  <div class="navbar-header" style="background-color:#0867ab;">
+      			<a class="navbar-brand" href="http://getRipple.io"><img class="rippleImg" id="rippleImg" src="rippleBlueBcknd.png" style="float:left;" width="100px;"></a>
+				<!--<p class="headerText" style="color:#fff;">Ripple<span style="font-size:10px;"> &#153</span></p>-->
+			  </div>
+		    </div>
+
+
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right socialMedia">
+					<li><a style="color:#fff;" class="topPadding" href="https://medium.com/@RippleMeThis">blog</a></li>
+					<li><a style="color:#fff;" class="topPadding" href="leaderboard.html">leaderboard</a></li>
+					<li><a href="https://twitter.com/RippleMeThis"><img class="socialMediaBtn" href src="http://i.imgur.com/h7oyTeL.png?1" ></a></li>
+					<li><a href="https://www.facebook.com/exploreRipple"><img class="socialMediaBtn" href src="http://i.imgur.com/CtfEYps.png?1"></a></li>
+					<li><a href="http://instagram.com/ripple.app"><img class="socialMediaBtn" href src="http://i.imgur.com/w90mpS8.png?1" ></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- User profile -->
+	<p id="usernameText"" align="center" class="headerTxt" style="font-family:'Roboto',sans-serif; margin:50px 0px 30px 0px; font-size:60px;"></p>
+	<p id="levelText" class="levelText" align="center" style="font-size: 30px; font-family: Roboto, sans-serif;"></p>
+	<p id="scoreText" align="center"  style="margin-top: 18px; margin-bottom: 40px; font-size: 18px; font-family: Roboto, sans-serif;"></p>
+	<p id="highestPropagatedText" align="center"  style="margin-top: 18px; margin-bottom: 20px; font-size: 18px; font-family: Roboto, sans-serif;"></p>
+		
+	<!-- Ripple -->
+	<div id="rippleDiv" class="ripple" style="padding:10px 5px 20px 5px; margin-top:0px;">
+
+		<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
+			<p class="rippleText" id="rippleText" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
+			<img id="rippleImage" style="margin:0 auto; display:block;" width="100%">
+
+			<div id="rippleNumPropagated" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			
+			<br/><br/>
+			
+			<div class="metadata">
+				<div style="color:#777; float:left;"><span style="color:#055a93;"><b id="rippleCreator"></b></span>&nbsp; &nbsp;<span id="rippleLocation"></span></div>
+				<div id="rippleCreatedAt" style="float:right; color:#777"></div>	
+			</div>
+		</div>
+
+			<br/>
+			<br/>
+			
+	</div>
+		
+		
+	<!-- foooter -->
+	<footer>
+		<nav>
+			<ul style="font-size:10px;">
+				<li>
+					<a style="color:#ffc432;" href="outreach.html">press</a>
+				</li>
+
+				<li>
+					<a style="color:#ffc432;" href="animation.html">simulator</a>
+				</li>
+
+				<li>
+					<a style="color:#ffc432;" href="contact.html">contact</a>
+				</li>
+				<li>
+					<a style="color:#ffc432;" href="ripple_terms.html">terms</a>
+				</li>
+				<li>
+					<a style="color:#ffc432;" href="ripple_privacy.html">privacy</a>
+				</li>
+			</ul>
+		</nav>
+	</footer>
+
+
+	<!--script-->
+	<script>
+		
+		function getParameterByName(name) {
+			name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+			results = regex.exec(location.search);
+			return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+	
+		$(document).ready(function() {
+			Parse.initialize("NYPXQtFR0BBY0TEbfcpgn61l2IGHJXQkrY1bu8PM", "5CS8buPIcMHVrSIeJuzPNkrVpjQsy9l6D2bvw5Aw");
+
+			setHeaderSize();
+
+			// Get user information
+			var username = getParameterByName('user');
+			var User = Parse.User;
+			var query = new Parse.Query(User);
+			query.equalTo("username", username);
+			query.first({
+				success: function(user) {
+					// Render the user profile
+					$("#usernameText").text(username);
+					$("#levelText").text(user.get("reachLevel"));
+					$("#scoreText").text("has " + user.get("score") + " points");
+					if (user.get("highestPropagated") > 0)
+						$("#highestPropagatedText").text("best ripple was spread " + user.get("highestPropagated") + " times:");
+					else
+						$("#highestPropagatedText").text(username + " hasn't started any ripples yet");
+					
+					var Ripple = Parse.Object.extend("Ripple");
+					var bestRippleQuery = new Parse.Query(Ripple);
+					bestRippleQuery.equalTo("creatorName", username);
+					bestRippleQuery.descending("numPropagated");
+					bestRippleQuery.first({
+						success: function(ripple) {
+							
+							
+							$('#rippleDiv').attr('onclick', "location.href='http://www.getripple.io/ripple.html?id=" + ripple.id + "'");
+			
+							$("#rippleText").text(ripple.get("text"));
+			
+						    if (ripple.get("image"))
+						    	$("#rippleImage").attr("src", ripple.get("image").url());
+			
+						    else
+						    {
+						    	$('#rippleText').css("border", "1px solid #ccc");
+						    	$('#rippleText').css("padding","10px");
+						    }
+			
+						    $("#rippleNumPropagated").text("spread " + ripple.get("numPropagated") + " times");
+						    $("#rippleCreator").text(ripple.get("creatorName"));
+			
+						    if (ripple.get("city"))
+						    {
+						    	if (ripple.get("state"))
+						    		$("#rippleLocation").text(ripple.get("city") + ", " + ripple.get("state"));
+						    	else
+						    		$("#rippleLocation").text(ripple.get("city"));
+						    }
+						    
+						    $("#rippleCreatedAt").text($.timeago(ripple.createdAt));
+						},
+						error: function(object,error) {
+							// Remove the Ripple div as the user doesn't have any ripples
+							
+						}
+					})
+				},
+			error: function(object, error) {
+			    // The object was not retrieved successfully.
+			    // error is a Parse.Error with an error code and message.
+			    alert('Error. We probably couldn\' find anyone with that username');
+			}
+			});
+			
+
+
+
+
+			
+		
+		});
+
+		$( window ).resize(function() {
+			setHeaderSize();
+		});
+
+		function setHeaderSize()
+		{
+			//$('.ripple').css({"background":"#eee"});
+			$('.trendingHeader').css({"background":"#eee"});
+			$('.innerRipple').css({"background":"#fff", "margin-top":"0px","cursor":"pointer"});
+			$(".navbar").css("background-color","#0867ab");
+
+			if ($(window).width() > 1000) 
+			{
+				// header stuff
+				$('.header').css( "height",800);
+
+				//$('.picText').css({"width":"500px"});
+				$('.headerText').css({"margin-left":"110px"});
+				$(".rippleImg").css({"width":"150px"});
+
+				// footer and feater
+				$(".featureBarTitle").css({"font-size":"18px"});
+
+				$("footer nav ul li ").css("margin-right", "100px");
+				$("footer a").css("font-size", "18px");
+
+				// ios, android, and social media
+				$('.explanation').css({"float":"right", "margin":"0 auto", "width":"70%"});
+				$('.actions').css({"margin":"100px 0px 0px 40px"});
+				$(".ios").css({"width":"260px", "display":"block", "float":"left"});
+				$('.android').css({"width":"230px","margin":"0 auto", "display":"block", "float":"none"});
+
+
+				$('.socialMedia').css({"margin-right":"10px", "margin-top":"10px"});
+				$('.socialMediaBtn').css({"width": "30px"});
+				$(".topPadding").css({"margin-top":"5px"});
+
+				$('.floatLeft').css({"float":"left", "width":"28%", "margin":"20px 0px 0px 20px", "padding-top":"30px"});
+			
+				$('.header').css({"backgroundImage": "url(coverImage.jpg)", "background-repeat":"no-repeat", "background-position":"40% 50%", "background-size":"110%"});
+				$('.downloadActionBarSpan').css({"font-size":"70px", "color":"#ffc432", "margin-top":"50px", "padding-left":"40px"});
+				$('.downloadActionBarSubtext').css({"padding":"30px 40px 0px 40px", "text-align":"left"});
+				$(".howitworks").css({"padding":"20px 40px 0px 40px","font-size":"26px"});
+				$('.photoCredit').css({"margin-top":"325px", "margin-left":"20px", "font-size":"11px"});
+
+				// trending ripples
+				$('.trendingRipples').css("padding-top", "50px");
+				$('.trendingText').css("font-size", "30px");
+				$(".ripple").css({"width":"100%", "margin":"0 auto"});
+				$(".innerRipple").css({"width":"45%", "padding": "10px"});
+				$('.rippleText').css({"margin-bottom":"10px", "font-size":"22px"});
+				$('.metadata').css({"font-size":"15px"});
+				$(".ripple_num_propagated").css({"padding-left":"10px", "font-size":"15px"});
+
+			}
+
+			else if ($(window).width() > 700) 
+			{
+				$('.header').css( "height",1100);
+				$('.topHeader').css( "height", 80);
+				$('.headerText').css({"padding-top":"22px", "font-size":"20px"});
+				$(".rippleImg").css({"width":"150px"});
+
+				//ios + android image
+				$(".ios").css({"width":"180px", "margin":"0 auto","display":"block", "float":"left", "margin-bottom":"20px"});
+				$('.android').css({"width":"155px","margin":"0 auto","float":"right", "display":"block"});
+				
+				
+				// social media
+				$('.actions').css({"margin":"0 auto", "width":"70%", "padding-top":"20px"});
+				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"24px"});
+				$('.socialMediaBtn').css({"width":"30px"});
+
+				// explanation
+				$('.explanation').css({"float":"none", "margin":"0 auto", "width":"70%"});
+				$('.downloadActionBarSpan').css({"font-size":"50px", "padding-top":"20px", "text-align":"center"});
+				$('.downloadActionBarSubtext').css({"padding":"10px 40px 0px 40px", "text-align":"center", "font-size":"18px"});
+				$(".howitworks").css({"font-size":"18px", "text-align":"center"});
+
+
+				$('.photoCredit').css({"margin-top":"325px", "margin-left":"20px", "font-size":"11px"});
+
+				$('.floatLeft').css({"float":"none", "width":"45%", "margin":"0 auto", "padding-top":"90px"});
+				$('.downloadActionBar').css({"padding-top":"90px"});
+			
+
+				$('.header').css({"backgroundImage": "url(coverImage.jpg)", "background-repeat":"no-repeat", "background-position":"15% 50%", "background-size":"200%"});
+				$('.photoCredit').css({"margin-top":"630px", "margin-left":"5px"});
+
+
+				// trending ripples
+				$('.trendingRipples').css("padding-top", "50px");
+				$('.trendingText').css("font-size", "30px");
+				$(".ripple").css({"width":"100%", "margin":"0 auto"});
+				$(".innerRipple").css({"width":"70%", "padding": "30px"});
+				$('.rippleText').css({"margin-bottom":"10px", "font-size":"22px"});
+				$('.metadata').css({"font-size":"15px"});
+				$(".ripple_num_propagated").css({"padding-left":"10px", "font-size":"15px"});
+
+				$(".navbar-toggle").css("margin","30px 10px 20px 0px");
+			}
+
+
+			else
+			{
+				$('.header').css( "height",710);
+				//$('.headerText').css({"padding-top":"22px", "font-size":"12px"});
+				$(".rippleImg").css({"width":"100px"});
+
+				//ios + android image
+				$(".ios").css({"width":"100px", "margin":"0 auto","display":"block", "float":"left", "margin-bottom":"20px"});
+				$('.android').css({"width":"85px","margin":"0 auto","float":"right", "display":"block"});
+				
+				
+				// social media
+				$('.actions').css({"margin":"0 auto", "width":"70%", "padding-top":"10px"});
+				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"15px"});
+				$('.socialMediaBtn').css({"width":"20px"});
+
+				// explanation
+				$('.explanation').css({"float":"none", "margin":"0 auto", "width":"100%"});
+				$('.downloadActionBarSpan').css({"font-size":"22px", "color":"#fff", "padding-top":"15px", "text-align":"center"});
+				$('.downloadActionBarSubtext').css({"padding":"10px 40px 0px 40px", "text-align":"center"});
+				$(".howitworks").css({"font-size":"14px", "text-align":"center"});
+
+
+				$('.photoCredit').css({"margin-top":"325px", "margin-left":"20px", "font-size":"11px"});
+
+				$('.floatLeft').css({"float":"none", "width":"260px", "margin":"0 auto", "padding-top":"0px"});
+				$('.downloadActionBar').css({"padding-top":"90px"});
+			
+
+				$('.header').css({"backgroundImage": "url(coverImage.jpg)", "background-repeat":"no-repeat", "background-position":"30% 0%", "background-size":"180%"});
+				$('.photoCredit').css({"margin-top":"320px", "margin-left":"5px"});
+
+
+				// trending ripples
+				$('.trendingRipples').css("padding-top", "50px");
+				$('.trendingText').css("font-size", "30px");
+				$(".ripple").css({"width":"100%", "margin":"0 auto"});
+				$(".innerRipple").css({"width":"95%", "padding": "30px"});
+				$('.rippleText').css({"margin-bottom":"10px", "font-size":"22px"});
+				$('.metadata').css({"font-size":"12px"});
+				$(".ripple_num_propagated").css({"padding-left":"10px", "font-size":"15px"});
+
+
+				$(".navbar-toggle").css("margin-top","15px");
+
+			}
+		}
+	</script>
+</body>
+</html>
+
+
+
