@@ -52,7 +52,7 @@ function isUserPending(user) {
 	}
 }
 
-var numSpreads = 50;
+var numSpreads = 30;
 
 function spreadRipple() {
 	if (spreadCounter >= numSpreads) {
