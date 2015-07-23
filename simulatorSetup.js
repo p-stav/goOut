@@ -19,7 +19,7 @@ var spreadInterval;
 var startCounter = 0;
 var spreadCounter = 0;
 
-var numRipples = 2;
+var numRipples = 1;
 
 function startRipple() {
 	if (startCounter >= numRipples) {
