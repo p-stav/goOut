@@ -210,7 +210,7 @@
 {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  color:#fff;
+  color:#000;
   font-size: 27px;
 }
 
@@ -399,7 +399,7 @@
   {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    color:#fff;
+    color:#000;
   }
 
   #androidSubtext {
@@ -587,7 +587,7 @@
   {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    color:#fff;
+    color:#000;
     font-size: 13px;
   }
 

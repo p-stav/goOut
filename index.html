@@ -79,8 +79,8 @@
 
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right socialMedia">
-					<li><a style="color:#fff;" class="topPadding" href="https://medium.com/@RippleMeThis">blog</a></li>
-					<li><a style="color:#fff;" class="topPadding" href="leaderboard.html">leaderboard</a></li>
+					<li><a style="color:#fff;" class="topPadding" href="poseidon.html">About Us</a></li>
+					<li><a style="color:#fff;" class="topPadding" href="https://medium.com/@RippleMeThis">Blog</a></li>
 					<li><a href="https://twitter.com/RippleMeThis"><img class="socialMediaBtn" href src="http://i.imgur.com/h7oyTeL.png?1" ></a></li>
 					<li><a href="https://www.facebook.com/exploreRipple"><img class="socialMediaBtn" href src="http://i.imgur.com/CtfEYps.png?1"></a></li>
 					<li><a href="http://instagram.com/ripple.app"><img class="socialMediaBtn" href src="http://i.imgur.com/w90mpS8.png?1" ></a></li>
@@ -93,13 +93,13 @@
 		<div class="floats" style="height:400px;">
 			<div class="explanation">
 				<div class="words" style="width:100%">
-					<p class="downloadActionBarSpan" style="color:#ffc432;">Free your thoughts, photos, and art</p>
+					<p class="downloadActionBarSpan" style="color:#0867ab;"><b>Free your thoughts, photos, and art</b></p>
 					
-					<p class="downloadActionBarSubtext">You love all kinds of creativity. <br/><br/>We’re on a mission to ripple the best of it to people around the world.<br/><br/> 
+					<p class="downloadActionBarSubtext">You love all kinds of creativity.<br/>We’re on a mission to ripple the best of it to people around the world.<br/><br/> 
 					</p>
 
-					<p class="howitworks"><a  style="color:#ffc432;" href="howitworks.html">How it works</a></p>
-					<p class="howitworks"><a  style="color:#ffc432;" href="spotted.html">The <b>#spotted</b> competition!</a></p>
+					<p class="howitworks"><a style="color:#0867ab;" href="howitworks.html">How it works</a></p>
+					<p class="howitworks"><a style="color:#0867ab;"  href="spotted.html">The <b>#spotted</b> competition!</a></p>
 
 				</div>
 				<div class="actions"> 
@@ -110,7 +110,7 @@
 
 			<div class="floatLeft">
 				<div class='carouselHolder'>
-					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="width:70%; margin:0 auto;">
+					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="width:60%; margin:0 auto;">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner" role="listbox">
 							<div class="item active">
@@ -135,7 +135,7 @@
 			
 		</div>
 		<div class="photoCredit">
-			<p style="color:#999; font-family:sans-serif;">photo rippled by hufflepuff: "View on my way home"</p>
+			<p style="color:#555; font-family:sans-serif;">photo rippled by ellsBells: "Balloon Mania"</p>
 		</div>
 	</div>
 
@@ -389,7 +389,7 @@
 		<nav>
 			<ul style="font-size:10px;">
 				<li>
-					<a style="color:#ffc432;" href="poseidon.html">press</a>
+					<a style="color:#ffc432;" href="leaderboard.html">leaderboard</a>
 				</li>
 
 				<li>
@@ -481,6 +481,8 @@
 			$('.innerRipple').css({"background":"#fff", "margin-top":"20px","cursor":"pointer"});
 			$(".navbar").css("background-color","#0867ab");
 
+			// $('.carousel img').css({"width":"100%"});
+
 			if ($(window).width() > 1000) 
 			{
 				// header stuff
@@ -489,6 +491,7 @@
 				//$('.picText').css({"width":"500px"});
 				$('.headerText').css({"margin-left":"110px"});
 				$(".rippleImg").css({"width":"150px"});
+				$('.carousel').css("width","75%");
 
 				// footer and feater
 				$(".featureBarTitle").css({"font-size":"18px"});
@@ -497,7 +500,7 @@
 				$("footer a").css("font-size", "18px");
 
 				// ios, android, and social media
-				$('.explanation').css({"float":"right", "margin":"0 auto", "width":"70%"});
+				$('.explanation').css({"float":"right", "margin":"0 auto", "width":"65%"});
 				$('.actions').css({"margin":"100px 0px 0px 40px"});
 				$(".ios").css({"width":"260px", "display":"block", "float":"left"});
 				$('.android').css({"width":"230px","margin":"0 auto", "display":"block", "float":"none"});
@@ -507,13 +510,13 @@
 				$('.socialMediaBtn').css({"width": "30px"});
 				$(".topPadding").css({"margin-top":"5px"});
 
-				$('.floatLeft').css({"float":"left", "width":"28%", "margin":"20px 0px 0px 20px", "padding-top":"30px"});
+				$('.floatLeft').css({"float":"left", "width":"30%", "margin":"20px 0px 0px 20px", "padding-top":"30px"});
 			
-				$('.header').css({"backgroundImage": "url(coverImage.jpg)", "background-repeat":"no-repeat", "background-position":"40% 50%", "background-size":"110%"});
-				$('.downloadActionBarSpan').css({"font-size":"50px", "color":"#ffc432", "margin-top":"90px", "padding-left":"40px"});
+				$('.header').css({"backgroundImage": "url(ellsBells.jpg)", "background-repeat":"no-repeat", "background-position":"0% 0%", "background-size":"150%"});
+				$('.downloadActionBarSpan').css({"font-size":"50px", "color":"#0867ab", "margin-top":"90px", "padding-left":"40px"});
 				$('.downloadActionBarSubtext').css({"padding":"30px 40px 0px 40px", "text-align":"left"});
 				$(".howitworks").css({"padding":"20px 40px 0px 40px","font-size":"26px"});
-				$('.photoCredit').css({"margin-top":"325px", "margin-left":"20px", "font-size":"11px"});
+				$('.photoCredit').css({"margin-top":"380px", "margin-left":"20px", "font-size":"11px"});
 
 				// trending ripples
 				$('.trendingRipples').css("padding-top", "50px");
@@ -532,6 +535,7 @@
 				$('.topHeader').css( "height", 80);
 				$('.headerText').css({"padding-top":"22px", "font-size":"20px"});
 				$(".rippleImg").css({"width":"150px"});
+				$('.carousel').css("width","80%");
 
 				//ios + android image
 				$(".ios").css({"width":"180px", "margin":"0 auto","display":"block", "float":"left", "margin-bottom":"20px"});
@@ -545,7 +549,7 @@
 
 				// explanation
 				$('.explanation').css({"float":"none", "margin":"0 auto", "width":"70%"});
-				$('.downloadActionBarSpan').css({"font-size":"30px", "color":"#ffc432", "padding-top":"20px", "text-align":"center"});
+				$('.downloadActionBarSpan').css({"font-size":"30px", "color":"#0867ab", "padding-top":"20px", "text-align":"center"});
 				$('.downloadActionBarSubtext').css({"padding":"10px 40px 0px 40px", "text-align":"center", "font-size":"18px"});
 				$(".howitworks").css({"font-size":"18px", "text-align":"center"});
 
@@ -556,8 +560,8 @@
 				$('.downloadActionBar').css({"padding-top":"90px"});
 			
 
-				$('.header').css({"backgroundImage": "url(coverImage.jpg)", "background-repeat":"no-repeat", "background-position":"15% 50%", "background-size":"200%"});
-				$('.photoCredit').css({"margin-top":"630px", "margin-left":"5px"});
+				$('.header').css({"backgroundImage": "url(ellsBells.jpg)", "background-repeat":"no-repeat", "background-position":"15% 50%", "background-size":"250%"});
+				$('.photoCredit').css({"margin-top":"650px", "margin-left":"5px"});
 
 
 				// trending ripples
@@ -575,13 +579,14 @@
 
 			else
 			{
-				$('.header').css( "height",710);
+				$('.header').css( "height",750);
 				//$('.headerText').css({"padding-top":"22px", "font-size":"12px"});
 				$(".rippleImg").css({"width":"100px"});
 
 				//ios + android image
 				$(".ios").css({"width":"100px", "margin":"0 auto","display":"block", "float":"left", "margin-bottom":"20px"});
 				$('.android').css({"width":"85px","margin":"0 auto","float":"right", "display":"block"});
+				$('.carousel').css("width","80%");
 				
 				
 				// social media
@@ -591,7 +596,7 @@
 
 				// explanation
 				$('.explanation').css({"float":"none", "margin":"0 auto", "width":"100%"});
-				$('.downloadActionBarSpan').css({"font-size":"20px",  "color":"#ffc432", "padding-top":"15px", "text-align":"center"});
+				$('.downloadActionBarSpan').css({"font-size":"20px",  "color":"#0867ab", "padding-top":"15px", "text-align":"center"});
 				$('.downloadActionBarSubtext').css({"padding":"10px 40px 0px 40px", "text-align":"center"});
 				$(".howitworks").css({"font-size":"14px", "text-align":"center"});
 
@@ -602,8 +607,8 @@
 				$('.downloadActionBar').css({"padding-top":"90px"});
 			
 
-				$('.header').css({"backgroundImage": "url(coverImage.jpg)", "background-repeat":"no-repeat", "background-position":"30% 0%", "background-size":"180%"});
-				$('.photoCredit').css({"margin-top":"280px", "margin-left":"5px"});
+				$('.header').css({"backgroundImage": "url(ellsBells.jpg)", "background-repeat":"no-repeat", "background-position":"30% 0%", "background-size":"400%"});
+				$('.photoCredit').css({"margin-top":"330px", "margin-left":"5px"});
 
 
 				// trending ripples
