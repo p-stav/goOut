@@ -71,7 +71,7 @@
 		      </button>
 
 			  <div class="navbar-header" style="background-color:#0867ab;">
-      			<a class="navbar-brand" href="http://getRipple.io"><img class="rippleImg" id="rippleImg" src="rippleBlueBcknd.png" style="float:left;" width="100px;"></a>
+      			<a class="navbar-branding" href="http://getRipple.io"><img class="rippleImg" id="rippleImg" src="rippleBlueBcknd.png" style="float:left;" width="100px;"></a>
 				<!--<p class="headerText" style="color:#fff;">Ripple<span style="font-size:10px;"> &#153</span></p>-->
 			  </div>
 		    </div>
@@ -482,6 +482,11 @@
 			$(".navbar").css("background-color","#0867ab");
 
 			// $('.carousel img').css({"width":"100%"});
+			if ($(window).width() > 1470) 
+			{
+				$('.carousel-inner').css("width","80%");	
+			}
+
 
 			if ($(window).width() > 1000) 
 			{
@@ -490,7 +495,7 @@
 
 				//$('.picText').css({"width":"500px"});
 				$('.headerText').css({"margin-left":"110px"});
-				$(".rippleImg").css({"width":"150px"});
+				$(".rippleImg").css({"width":"150px", "padding-top":"5px"});
 				$('.carousel').css("width","75%");
 
 				// footer and feater
@@ -534,7 +539,7 @@
 				$('.header').css( "height",1100);
 				$('.topHeader').css( "height", 80);
 				$('.headerText').css({"padding-top":"22px", "font-size":"20px"});
-				$(".rippleImg").css({"width":"150px"});
+				$(".rippleImg").css({"width":"150px", "padding-top":"12px"});
 				$('.carousel').css("width","80%");
 
 				//ios + android image
@@ -581,7 +586,7 @@
 			{
 				$('.header').css( "height",750);
 				//$('.headerText').css({"padding-top":"22px", "font-size":"12px"});
-				$(".rippleImg").css({"width":"100px"});
+				$(".rippleImg").css({"width":"100px", "padding-top":"8px"});
 
 				//ios + android image
 				$(".ios").css({"width":"100px", "margin":"0 auto","display":"block", "float":"left", "margin-bottom":"20px"});
