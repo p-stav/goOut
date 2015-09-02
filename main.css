@@ -189,6 +189,9 @@
     width:20%;
   }
 
+ #cnbc {
+    width:25%;
+  }
   .picText {
     margin: 0 auto;
     width:100%;
@@ -369,13 +372,16 @@
   }
 
   #rayw {
-    width:22%
+    width:30%
   }
 
   #tuaw {
     width:40%;
   }
 
+  #cnbc {
+    width:40%;
+  }
   .picText {
     margin: 0 auto;
     width:100%;
@@ -556,11 +562,15 @@
   }
 
   #rayw {
-    width:22%
+    width:35%
   }
 
   #tuaw {
-    width:40%;
+    width:30%;
+  }
+
+  #cnbc {
+    width: 40%;
   }
 
   .picText {
