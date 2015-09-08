@@ -79,10 +79,6 @@
 				<p align="center" class="contactUs"><br/>wellRippleMeThis@gmail.com<br/><br/><a href="https://twitter.com/rippleMeThis">@rippleMeThis</a></p>
 
 			<br/>
-			<!--<div class="centerTxt" align="center" width="100%" style="color:#0867ab;">
-				 Our Team
-			</div>-->
-
 	</div>
 
 	<!--<style>
@@ -121,7 +117,7 @@
 
 
 	<!-- foooter -->
-	<footer>
+	<footer class="footer">
 		<nav>
 			<ul style="font-size:10px;">
 				<li>
@@ -168,7 +164,7 @@ $(document).ready(function() {
 			$('.formIframe').css({"width":$(window).width(),"height":'1500px'});
 
 			$("footer nav ul li ").css("font-family", "'Roboto', sans-serif");
-			$("footer nav ul li ").css("margin-left", "10px");
+			$("footer").css({"position":"fixed","bottom":"0"});
 
 			$('.ripple').css({"background":"#eee"});
 			$('.innerRipple').css({"background":"#fff", "margin-top":"20px"});
@@ -190,10 +186,10 @@ $(document).ready(function() {
 				$('.phoneImg').css("width","50%");
 				$('.phoneImg1').css("width","90%");
 				$('.section').css({"height":"150px"});
-				$("footer a").css("font-size", "15px");	
 				$(".centerTxt").css({"padding":"20px 10px 20px 10px", "text-align":"center", "width":"100%"});
 				$('.contactUs').css({"font-size":"18px"});
 				$("footer a").css("font-size", "9px");
+				$("footer nav ul li ").css("margin-left", "1px");
 				$('.img').css("margin-top", 10);	
 			}
 
@@ -213,10 +209,11 @@ $(document).ready(function() {
 				$('.explanation').css({"padding":"60px 50px 0px 50px", "font-size":"24px"});
 				$('.jumbo').css("font-size", 60);
 				$('.section').css({"height":"300px"});
-				$("footer a").css("font-size", "15px");	
 				$('.text').css({"margin-top":"25px"});
 				$('.contactUs').css({"font-size":"20px"});
 				$('.img').css("margin-top", 10);
+				$("footer a").css("font-size", "18px");
+				$("footer nav ul li ").css("margin-left", "10px");
 			}
 		}
 		</script>

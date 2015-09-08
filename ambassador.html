@@ -96,6 +96,35 @@
 
 	<iframe class="formIframe" src="https://docs.google.com/forms/d/1EPMtCNOim9YfGxSuNLezzoSCZYa40tNBe01zDPkTPWM/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
 
+	<!-- foooter -->
+	<footer class="footer">
+		<nav>
+			<ul style="font-size:10px; font-family:'Roboto',sans-serif;">
+				<li>
+					<a style="color:#ffc432;" href="leaderboard.html">leaderboard</a>
+				</li>
+
+				<li>
+					<a style="color:#ffc432;" href="ambassador.html">ambassador</a>
+				</li>
+
+				<li>
+					<a style="color:#ffc432;" href="contact.html">contact</a>
+				</li>
+				<li>
+					<a style="color:#ffc432;" href="ripple_terms.html">terms</a>
+				</li>
+				<li>
+					<a style="color:#ffc432;" href="ripple_privacy.html">privacy</a>
+				</li>
+			</ul>
+		</nav>
+	</footer>
+</body>
+
+	
+
+
 	<script>
 	
 		$(document).ready(function() {
@@ -111,23 +140,30 @@
 			// set logo height and width
 			$('.header').css("background-color", "#055a93");
 			var carouselHeight = $(window).height() * 0.5;
+
 			$('.header').css( "height", carouselHeight);
 			$('.header').css("width", $(window).width());
 			$('.formIframe').css("width", $(window).width());
 			$('.formIframe').css("height", '1500px');
 
+			$("footer nav ul li ").css("font-family", "'Roboto', sans-serif");
+			$("footer nav ul li ").css("margin-left", "10px");
+
 			if ($(window).width() < 500) 
 			{
 				$(".centerText").css("font-size", "50px");
 				$(".centerSubtext").css("font-size", "20px");
+				$("footer a").css("font-size", "11px");	
 
 			}
 			else
 			{
 				$(".centerText").css("font-size", "80px");
-				$(".centerSubtext").css("font-size", "40px");	
+				$(".centerSubtext").css("font-size", "40px");
+				$("footer a").css("font-size", "18px");		
+
 			}
 		}
-	</script>
-</body>
+	</script>	
+
 </html>
