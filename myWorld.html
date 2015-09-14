@@ -82,7 +82,7 @@
 	
 	
 
-		<p  align="center"	style=" font-size:25px; padding:20px 70px 0px 70px;">
+		<p  class="subtext" align="center"	style="padding:20px 70px 0px 70px;">
 			What's your world like? Is it populated by ancient trees and colorful critters, or do massive buildings dominate your skyline? Do you like to watch watercolor sunsets, or would you rather go bungee jumping in Australia? Share your world with the <span style="color:#0867ab"><b>#MyWorld</b></span> tag this September.
 		</p>
 	</div>
@@ -97,7 +97,6 @@
 
 			<div class="explanation">
 			
-				<br/>
 				<br/>
 			<b>How to participate:</b><br/><br>
 			<ol>
@@ -125,19 +124,18 @@
 		
 		<br/>
 	</div>
-		<br/>
-		<br/>
-	
-	<div class="header" >
-		<p  align="center"	style=" font-size:25px; padding:0px 40px 0px 40px;">
+	<br/><br/>
+
+	<div class="subtext" >
+		<p  align="center"	style="padding:0px 40px 0px 40px;">
+				------<br/>
 				The top 3 users at the end of the competition will be rewarded!<br/>
 				<br/>
-					<span class="subtext"><b>.</b></span>
-					1st Place: <span class="subtext" style="color:#0867ab"><b>$50</b></span> gift card of your choice and a feature in the next Ripple blog post
-					<br/>
-					2nd Place: <span class="subtext" style="color:#0867ab"><b>$25</b></span> gift card of your choice and a feature in the next Ripple blog post
-					<br/>
-					3rd Place: <span class="subtext" style="color:#0867ab"><b>$10</b></span> gift card of your choice and a feature in the next Ripple blog post
+				1st Place: <span style="color:#0867ab"><b>$50</b></span> gift card of your choice and a feature in the next Ripple blog post
+				<br/>
+				2nd Place: <span style="color:#0867ab"><b>$25</b></span> gift card of your choice and a feature in the next Ripple blog post
+				<br/>
+				3rd Place: <span style="color:#0867ab"><b>$10</b></span> gift card of your choice and a feature in the next Ripple blog post
 	</div>
 
 	<div style="margin-top:100px;">
@@ -184,6 +182,8 @@
 				$('.spottedImage').css({"float":"none", "margin":"0 auto", "width":"80%","display":"block"});
 				$('.pageContainer').css({"width":"95%", "font-size":"18px"});
 				$('.subtext').css("font-size","15px");
+				//$(".reward").css({"font-size":"15px"});
+
 				$('.explanation').css({"width":"98%","float":"left"});
 				
 				
@@ -192,14 +192,16 @@
 			else
 			{
 				$(".header").css({"margin-bottom":"50px"});
+				$(".headerText").css({"font-size":"50px"});
 
-				$(".headerText").css({"font-size":"80px"});
 				$(".subHeaderText").css({"font-size":"18px"});
-				//$('.header').css({"background-image":"url('http://i.imgur.com/M5GYPlm.jpg')", "background-size":"100%", "background-position":"50% 0%"});
 
-				$('.spottedImage').css({"height":800,"float":"left"});
+
+				$('.spottedImage').css({"height":800,"float":"left", "width":"35%"});
 				$('.pageContainer').css({"width":"90%","height":800, "font-size":"30px"});
 				$('.subtext').css("font-size","20px");
+				//$(".reward").css({"font-size":"20px"});
+
 				$('.explanation').css({"width":"60%","float":"right"});
 			}
 		}
