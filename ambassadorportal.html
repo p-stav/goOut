@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta property="og:image" content="http://www.getripple.io/rippleHeaderLogoSmall.png">
+	<meta property="og:title" content="Ripple Ambassador Program">
+	<meta property="og:url" content="www.getkefi.com">
+
+	<!--Google Maps and Google Places APIs-->
+
+	<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&key=AIzaSyAWf1WnMo_4s35yeXZ-kZyF-QZ7m5MwqP0"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>-->
+
+	<!-- bootstrap -->
+	<!-- bootstrap -->
+	<link type="text/css" href="main.css" rel="stylesheet"/>
+	<link rel="shortcut icon" href="rippleHeaderLogo.png">
+	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+	<!--load google fonts!-->
+	<link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+
+	
+
+	<title>Ripple Ambassadors</title>
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-49651565-1', 'getkefi.com');
+	  ga('send', 'pageview');
+
+	</script>
+</head>
+
+<body>
+	<!--header-->
+	<div style="background-color: #0867ab;">
+		
+		
+			<p style="padding-top: 5px" align="center"><a href="http://www.getripple.io"><img src="http://i.imgur.com/kDtwHBS.png" width="10%"></a>
+			<p class="centerText" align="center" style="color:#fff; font-size:50px; font-family: 'Roboto', sans-serif;">Ripple Ambassador</p>
+			<p class = "centerSubtext" align="center" style="color:#ffc432; font-size:30px;font-family: 'Roboto', sans-serif;">Start the wave</p>
+		
+	</div>
+
+
+	<div class="ambassadorExplanation" align="center">
+		
+		<span style="font-size:25px">
+			<p><b>Welcome to Ripple</b></p></br>
+
+			We're <b>stoked</b> that you decided to join our team!<br/><br/>
+	
+		
+		</span>
+		
+
+		<span style="font-size:25px">
+		 Introducing the <b>Ambassador squad:</b></br>
+		 INCLUDE BIOS HERE</br></br>
+		 <b>Connect</b> with your teammates here:</br>
+		 INSERT AMBASSADOR CHAT TOOL</br></br>
+		 <b>Track</b> your referrals here:</br>
+		 INSERT LEADERBOARD WITH REFERRAL NUMBERS</br>
+		 MAYBE ADD LIVE REFERRAL FEED</br></br>
+		 </span>
+		</br>
+
+	</div>
+
+	<!-- footer -->
+	<footer class="footer">
+		<nav>
+			<ul style="font-size:10px; font-family:'Roboto',sans-serif;">
+				<li>
+					<a style="color:#ffc432;" href="leaderboard.html">leaderboard</a>
+				</li>
+
+				<li>
+					<a style="color:#ffc432;" href="ambassador.html">ambassador</a>
+				</li>
+
+				<li>
+					<a style="color:#ffc432;" href="contact.html">contact</a>
+				</li>
+				<li>
+					<a style="color:#ffc432;" href="ripple_terms.html">terms</a>
+				</li>
+				<li>
+					<a style="color:#ffc432;" href="ripple_privacy.html">privacy</a>
+				</li>
+			</ul>
+		</nav>
+	</footer>
+</body>
+
+	
+
+
+	<script>
+	
+		$(document).ready(function() {
+			setHeaderSize();			
+		});
+
+		$( window ).resize(function() {
+			setHeaderSize();
+		});
+
+		function setHeaderSize()
+		{
+			// set logo height and width
+			$('.header').css("background-color", "#055a93");
+			var carouselHeight = $(window).height() * 0.5;
+
+			$('.header').css( "height", carouselHeight);
+			$('.header').css("width", $(window).width());
+			$('.formIframe').css("width", $(window).width());
+			$('.formIframe').css("height", '1500px');
+
+			$("footer nav ul li ").css("font-family", "'Roboto', sans-serif");
+			$("footer nav ul li ").css("margin-left", "10px");
+
+			if ($(window).width() < 500) 
+			{
+				$(".centerText").css("font-size", "50px");
+				$(".centerSubtext").css("font-size", "20px");
+				$("footer a").css("font-size", "11px");	
+
+			}
+			else
+			{
+				$(".centerText").css("font-size", "80px");
+				$(".centerSubtext").css("font-size", "40px");
+				$("footer a").css("font-size", "18px");		
+
+			}
+		}
+	</script>	
+
+</html>
