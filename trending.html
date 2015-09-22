@@ -336,7 +336,7 @@ $(document).ready(function() {
 
 	setHeaderSize();
 
-	Parse.Cloud.run('getTopRipples', {}, {
+	Parse.Cloud.run('getTopRipplesForWebsite', {}, {
 		success: function(topRipples) {
 			for (var i = 0; i < 10; i++)
 			{
