@@ -23,6 +23,10 @@
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
 	<script src="http://timeago.yarp.com/jquery.timeago.js"></script>
+	<!--simulator files -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+	<script src="Model.js"></script>
+	<script src="simulatorSetup.js"></script>
 
 
 
@@ -79,17 +83,29 @@
 	</div>
 
 
-	<div class="intro" style="width:85%; padding-bottom:px; margin: 0 auto" align=>
-			<p align="center" style="font-size:50px;">Ripple<br/></p>
-			<span style="font-size:35px">Our platform targets 2 weaknesses with current social media:</span><br/><br/>
-			<ol>
-				<li><p>Exposure</p>
+	<div class="explanation" style="width:75%; font-family:'Roboto'; padding-bottom:px; margin: 0 auto; font-weight:100"align=>
+			<!--<p align="center" style="font-size:50px;color:#0867ab">Ripple</br></br></p>-->
+			<p class="headline" align="center" style="margin-top:10px;">Ripple | explore your world</p></br>
+			<p align="">At Ripple, we see the world as an ever-changing place made up of passionate people, beautiful landscapes, and vibrant cultures. Everyone should be able to experience its diversity anytime, anywhere, and connect with new people. That’s why we help people share and discover the worlds we live in. </p></br>
+
+	<hr size="10" style="border-top: 1px solid #0867ab;"></br>
+
+			<p class="opener" align="center">'The Ripple Effect'</p><br/>
+			
+			<p>Ripplers post and receive messages and pictures, and can spread them to a number of people geographically nearby. Those who receive the post — or “ripple” — can spread it to others nearby, and so on. Ripples spread so long as people continue to spread them, and are not biased in whom they are sent to. <!-- Because ripples only travel far and wide via a random set of diverse people, they are more likely to appeal to the majority of our users.</p>--></br>
+
+			<div class="simulator" style="width:100%; margin:0 auto;" align="center"></div></br>
+	<hr size="10" style="border-top: 1px solid #0867ab;"></br>
+
+			<p class="opener" align="center">Ripple targets 2 weaknesses in social media:</p><br/><br/>
+			
+			<p class="factor">Exposure</p>
 					
-					<p style="font-size:28px;">It's difficult to reach new audiences.<br/>
-						<span style="font-size:22px;">Current social media platforms restrict people’s reaches to clusters of friends and followers, or people close by. Ripple enables users to break out of these restrictive networks by spreading their content to new people nearby and friends around the world. Both segments of this network can spread content to even more people near them; this method of sharing helps ripples travel across our unbounded global network. Furthermore, our map feature allows users to visualize how their posts spread.</span>
+					<p class="problem">It's difficult to reach new audiences.<br/>
+						<p>Ripple doesn't restrict your network. Instead, Ripplers spread their content to new people nearby and friends around the world. Both segments of this network can spread content to even more people near them; this means posts spread to new people in different new communities. Furthermore, our map feature allows users to visualize how their posts spread.</p>
 					</p>
-				</li>
-		 	</ol>
+				
+		 	
 	</div>
 
 
@@ -127,80 +143,79 @@
 		</br></br>
 
 		
-		<div style="margin:30 auto; border-radius:25px;" id="map-canvas" align="center" ></div></br></br>
+		<div style="margin:30 auto; border-radius:25px;" id="map-canvas" align="center" ></div>
 
 	</div>
 
+		<div class="explanation" style="width:75%; font-family:'Roboto'; padding-bottom:0px; margin: 0 auto;font-weight:100">
+					<p class="caseStudy" align="center"><i>Drew rippled a picture of himself doing a backflip in Utah, and people near him spread it. His follower in Germany decided to spread it to people around her too. Drew’s picture began to travel throughout the US and Europe simultaneously. Eventually, it rippled around the entire world.</i></p></br></br>	
 
-		<div class="explanation" style="width:85%; font-family:'Roboto'; padding-bottom:px; margin: 0 auto" align=>
-					<p style="font-size:19px; width:10%, text-align:center"> <i>Drew rippled a picture of himself doing a backflip in Utah, and people near him spread it. His follower in Germany decided to spread it to people around her too. Drew’s picture began to travel throughout the US and Europe simultaneously. Eventually, it rippled around the entire world.</i></p>
-				</li>
-
-				<li style="margin-top:80px;">
-					<p>Content Relevance</p>
-					<p style="font-size:28px; margin-bottom:80px;">Social media networks force users to sift through irrelevant content to find "the good stuff."<br/><span style="font-size:22px;">On Ripple, content only travels so far and so long as it is relevant. If a user spreads a post, its score goes up. We allow users to spread all posts, but we display the content with the higher scores first. Since posts reach people outside a user’s personal network, Ripplers are constantly sharing and discovering ripples from across the globe. Ripplers also have slightly different feeds based on friends, location, and time, so each user experiences the worlds we live in differently.</p>
+				<p class="factor">Content Relevance</p>
+					<p class="problem">Social media networks force users to sift through irrelevant content</p>
+					<p>On Ripple, content only travels so far and so long as it is relevant. If a user spreads a post, its score goes up. We allow users to spread all posts, but we display the content with the higher scores first. Since posts reach people outside a user’s personal network, Ripplers are constantly sharing and discovering ripples from across the globe. Ripplers also have slightly different feeds based on friends, location, and time, so each user experiences the worlds we live in differently.</p>
 					<!--<br/>Likes, retweets, upvotes, etc are untelling measurements of impact.-->
-				</li>
-			</ol>
+				
 		</div>
 
+	</div></br>
+
+<hr size="10" style="border-top: 1px solid #0867ab;"></br>
+
+
+	<div class="explanation" style="width:75%; font-family:'Roboto'; padding-bottom:px; margin: 0 auto;font-weight:100" align=>
+			<p class="opener"align="center">People Love Ripple Because:</p></br>
+		
+			<ul>
+				<li>It helps them expose their content to new communities all over the world.</li>
+				<li>It feeds them personalized content based on who they follow, location, and time.</li>
+				<li>It lets them visualize how content spreads.</li>
+			</ul>
+			
 	</div>
 
-<!-- <hr size="10" style="border-top: 1px solid #0867ab;">-->
-
-
-	<div class="explanation2" style="width:85%;padding-bottom:px; margin: 0 auto" align=>
-			<p align="center" style="font-size:50px">We present: Ripple</p></br>
-		<p style="font-size:25px;" align="">At Ripple, we see the world as an ever-changing place made up of passionate people, beautiful landscapes, and vibrant cultures. Everyone should be able to experience its diversity anytime, anywhere, and connect with new people. That’s why we help people share and discover the worlds we live in. </p>
-	<br/>
-
-			<p style="font-size:20px">People love our app because:<br/>
-			<ol>
-				<li>
-					<p style="font-size:18px;">It helps them expose their content to new communities all over the world. </p>
-				</li><li>
-
-						<p style="font-size:18px;">It feeds them personalized content based on their followers, locations, and time. </p>
-				</li><li>
-						<p style="font-size:18px;">It lets them visualize how content spreads.</p>
-				</li>
-						
-				
-			</ol>
-			<br>
-			<p style="font-size:20px">With Ripple:<br/>
-			<ol>
-				<li>
-					<p style="font-size:18px;">Start a post, or "ripple," to reach audiences around the world </p>
-				</li><li>
-
-						<p style="font-size:18px;">Spread posts you like to new people near you </p>
-				</li><li>
-						<p style="font-size:18px;">Receive only relevant content that's spread to you</p>
-				</li><li>
-					<p style="font-size:18px;">Check your map to see where and how your ripples spread </p>
-				</li><li>
-
-						<p style="font-size:18px;">Explore and spread trending ripples </p>
-				</li><li>
-						<p style="font-size:18px;">Follow people to see and spread their ripples</p>
-				</li><li>
-						<p style="font-size:18px;">Reach more people as you earn points</p>
-				</li>
-						
-				
-			</ol>
-	</div>
-
-		<div class="screenshots" style=" padding-bottom:20px" align="center" >
+		<div class="screenshots" style=" padding:20px" align="center" >
 			<img src="http://i.imgur.com/dQ4OhZB.jpg?1" width="20%">
 			<img src="http://i.imgur.com/Oq096KN.jpg" width="20%">
 			<img src="http://i.imgur.com/2UIGuQd.jpg?1"width="20%">
 			<img src="http://i.imgur.com/0FfYlgF.jpg"width="20%">
 		</div>
+	</br>
+
+	<!-- <div class="explanation" style="width:75%; font-family:'Roboto'; padding-bottom:px; margin: 0 auto;font-weight:100" align=>
+			
+			<p>With Ripple:</p><br/>
+			<ul>
+				<li>Start a post, or "ripple," to reach audiences around the world </li>
+				<li>Spread posts you like to new people near you </li>
+				<li>Receive only relevant content that's spread to you</li>
+				<li>Check your map to see where and how your ripples spread</li>
+				<li>Explore and spread trending ripples</li>
+				<li>Follow people to see and spread their ripples</li>
+				<li>Reach more people as you earn points</li>
+						
+				
+			</ul>
+			<p class="explanation" style="color=#0867ab;font-size:30px"><a href="http://www.getripple.io/howitworks.html">Learn More</a></p>
+	</div></br>-->
+
+
+		<div class="featuredBar">
+			<p class ="featureBarTitle" align="center">As seen on:</p>
+			<table class="featuredTable">
+				<tr>
+					<td><a href="http://www.geekwire.com/2015/ripple/" target="_blank"><img class="featuredImg" id="geekwire" src="geekwire.png" width="20%"></a></td>
+
+					<td><a href="http://www.cnbc.com/2015/08/21/the-social-media-start-up-for-the-little-guys.html" target="_blank"><img class="featuredImg" id="cnbc" src="cnbc-logo-grayscale.png" width="40%"></a></td>
+
+					<td><a href="http://bostinno.streetwise.co/2015/07/15/ripple-harvard-grad-launches-free-app-to-spread-content/" target="_blank"><img class="featuredImg" id="rayw" src="bostinno.png" width="100%"></a></td>
+
+			
+				</tr>
+			</table>
+		</div>
 
 <!-- trending ripples -->
-	<div class="trendingRipples" style="background-color:#eee;">
+	<div class="trendingRipples" style="background-color:#eee;font-weight:100">
 		<div class="trendingText" style="font-family:'Roboto', sans-serif;">
 			<p class="topRippleTxt" align="center" style="color:#0867ab">Trending Ripples:</p>
 		</div>	
@@ -339,7 +354,25 @@
 			</div>
 
 		</div>-->
+
+<style>
+/*style for simulator */
+rect {
+ fill: none;
+ pointer-events: all;
+ stroke-width:5;
+ border-radius: 25px;
+}
+
+circle {
+ fill: blue;
+ stroke-width: 2.5px;
+}
+</style>
+
 <script>
+
+
 
 function getParameterByName(name) {
 	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -617,6 +650,10 @@ $(document).ready(function() {
 		});	
 });
 
+
+
+
+
 $( window ).resize(function() {
 	setHeaderSize();
 });
@@ -650,8 +687,14 @@ function setHeaderSize()
 				//ios + android image
 				$(".ios").css({"width":"100px", "float":"left"});
 				$('.android').css({"width":"90px", "float":"right"});
-				$('.explanation').css({"margin-top":"30px","font-size":"16px"});
-				$('.actions').css({"width":"70%", "margin-top":"30px"});
+				$('.intro').css({"margin-top":"40px","font-size":"18px","height":"auto", "border":0});
+				$('.explanation').css({"margin-top":"0px","font-size":"14px","margin-bottom":"40px"});
+				$(".caseStudy").css("font-size","14px");
+				$('.opener').css({"font-size":"25px", "margin-top":"10px"});
+				$('.factor').css({"font-size":"28px"});
+				$('.problem').css({"font-size":"px"});
+				$('.actions').css({"width":"55%", "margin-top":"30px"});
+				$('.screenshots').css({"width":"100%"});
 				
 				// all other content
 				$('#ripple_text').css({"font-size":"18px", "padding":"10px 0px 20px 0px","text-align":"left"});
@@ -701,10 +744,15 @@ function setHeaderSize()
 				$(".ios").css({"width":"180px", "float":"left"});
 				$('.android').css({"width":"160px", "float":"right"});
 				$('.intro').css({"margin-top":"40px","font-size":"30px","height":"auto", "border":0});
-				$('.explanation').css({"margin-top":"40px","font-size":"30px"});
-				$('.explanation2').css({"margin-top":"40px","font-size":"25px"});
+				$('.explanation').css({"margin-top":"0px","font-size":"20px","margin-bottom":"40px"});
+				$(".caseStudy").css("font-size","16px");
+				$('.opener').css({"font-size":"40px", "margin-top":"10px"});
+				$(".headline").css({"font-size":"60px"});
+				$('.factor').css({"font-size":"35px"});
+				$('.problem').css({"font-size":"35px"});
 				$('.actions').css({"width":"55%", "margin-top":"30px"});
 				$('.screenshots').css({});
+			
 				
 				
 				// all other content
@@ -745,7 +793,80 @@ function setHeaderSize()
 			}
 		}
 
-	
+			// simulation
+		var width = 800,
+		height = 300;
+
+		var i = 0;
+		var inSimulatorView = true;
+
+		var svg = d3.select(".simulator").append("svg")
+		   .attr("width", width)
+		   .attr("height", height);
+
+		svg.append("rect")
+		   .attr("width", width)
+		   .attr("height", height);
+
+
+
+		function addUserCircle(username) {
+		svg.insert("circle", "rect")
+		.attr("cx", width / 2.0 + (Math.random() - 0.5) * width / 1.1)
+		.attr("cy", height / 2.0 + (Math.random() - 0.5) * height / 1.1)
+		.attr("r", 5)
+		.attr("id", "user_" + username);
+		}
+
+		function addSpreadLine(sender, receiver, hexColor) {
+		var senderCircle = $("#user_" + sender);
+		var receiverCircle = $("#user_" + receiver);
+
+
+		svg.insert("line", "rect")
+		.attr("x1", senderCircle.attr("cx"))
+		.attr("y1", senderCircle.attr("cy"))
+		.attr("x2", senderCircle.attr("cx"))
+		.attr("y2", senderCircle.attr("cy"))
+		.attr("stroke-width", 2)
+		.attr("stroke", hexColor)
+		 .transition()
+		 .duration(2000)
+		 .attr("x2", receiverCircle.attr("cx"))
+		.attr("y2", receiverCircle.attr("cy"))
+		 .transition()
+		 .duration(10000)
+		 .attr("stroke-width", 0.5)
+		 .style("stroke-opacity", 0.5);
+		}
+
+		for (var i = 0; i < 300; i++) {
+		var username = "user_" + i.toString();
+		var user = new User(username);
+		addUserCircle(user.name);
+		}
+
+
+
+		function restartSimulation()
+		{
+		$("svg").empty();
+
+		startCounter = 0;
+		spreadCounter = 0;
+		users = [];
+		ripples = [];
+		// create users
+		for (var i = 0; i < 300; i++) {
+		var username = "user_" + i.toString();
+		var user = new User(username);
+		addUserCircle(user.name);
+		}
+
+		//users = [];
+		// ripples = [];
+		startInterval = setInterval(startRipple, 500);
+		}
 
    
 		</script>

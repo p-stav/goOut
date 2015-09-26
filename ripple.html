@@ -24,6 +24,8 @@
 	<script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
 	<script src="http://timeago.yarp.com/jquery.timeago.js"></script>
 
+
+
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -37,6 +39,10 @@
 	<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
 
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+
+	<!--Styling for spread and dismiss buttons-->
+	
+
 
 
 	<title>Ripple</title>
@@ -55,17 +61,17 @@
 
 <body>
 	<!--header-->
-	<div class="topHeader" style="background-color:#0867ab; padding-bottom:5px;">
+	<div class="topHeader" style="background-color:#0867ab; padding-bottom:5px;" >
 		<div class = "picText" style="background-color:#0867ab;">
 			<div style="width:45%;float:left;">
-				<a href="http://getRipple.io"><img class="rippleImg" id="rippleImg" src="rippleBlueBcknd.png" style="float:left;" width="100px;"></a>
+				<a href="http://getRipple.io"><img class="rippleImg" id="rippleImg" src="rippleBlueBcknd.png" style="float:left;" width="100px"></a>
 				<p class="headerText" style="color:#fff;"></p>	
 			</div>
 
 			<div class="socialMedia">
-				<a href="https://twitter.com/RippleMeThis"><img class="socialMediaBtn" href src="http://i.imgur.com/h7oyTeL.png?1" ></a>
+				<span style="padding-right: 15px"><a href="https://twitter.com/RippleMeThis"><img class="socialMediaBtn" href src="http://i.imgur.com/h7oyTeL.png?1" ></a></span>
 
-				<a href="https://www.facebook.com/exploreRipple"><img class="socialMediaBtn" href src="http://i.imgur.com/CtfEYps.png?1" ></a>
+				<span style="padding-right: 15px"><a href="https://www.facebook.com/exploreRipple"><img class="socialMediaBtn" href src="http://i.imgur.com/CtfEYps.png?1" ></a></span>
 
 				<a href="http://instagram.com/ripple.app"><img class="socialMediaBtn" href src="http://i.imgur.com/w90mpS8.png?1" ></a>
 			</div>
@@ -73,25 +79,91 @@
 	</div>
 
 
-	<div class="mainRipple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
-		<div class="mainInnerRipple" style="width:60%; margin:0 auto; border-radius:25px; background-color:#fff;">
-			<p id="ripple_text" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
-			<img id="ripple_image" style="margin:0 auto; display:block;" width="100%">
+	<!--<p class="checkitout" style="font-size: 25px; color:#0867ab; text-align:center; padding-top:40px">
+			<i>Check out where my post has traveled!</i>
+	</p>-->
 
-			<div id="ripple_num_propagated" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+	<div class="mainRipple" style="margin:0px 30px 0px 30px;" align="center">
+
+		
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="0" role="dialog" aria-labelledby="myModalLabel">
+  		<div class="modal-dialog" role="document">
+   		 <div class="modal-content" style="font-family:sans-serif; color:#1258a0; background-color:#eee">
+
+     	 <!--<div class="modal-header">
+      	  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       	 <span class="modal-title" id="myModalLabel"><i>How far will your Ripple go?</i></span>
+      	</div>-->
+      		<div class="modal-body"border-radius="5px">
+      		<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-right:3px"><span aria-hidden="true">&times;</span></button>
+        	<div class="modal-text" >
+        		<b>Think this is cool?</b></br>
+        		<span id="modal-subtext">It's even better when it's your post traveling across the world.</span>      
+			</div>
 			
-			<br/><br/>
+			</div>
+			<div class="modal-footer">
+      			 <a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="ios" src="Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>&nbsp; &nbsp;
+				<a href="https://play.google.com/store/apps/details?id=com.KefiLabs.Ripple"> <img class="android" alt="Get it on Google Play" src="http://i.imgur.com/pWic5cg.png?1"></a>
+      		</div>
+
+      
+   		 </div>
+ 		 </div>
+		</div>
+		
+
+
+		<div class="mainInnerRipple" id="InnerRipple" style="width:40%; margin:40px 10px 0px 0px; border-radius:25px; background-color:#fff;">
+
+
+			<img id="ripple_image" style="margin:0 auto; display:block;" width="100%">
+			<div id="ripple_num_propagated" style="margin:0 auto; background:#055a93; color:#fff;"></div>
+			<p id="ripple_text" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
+
+			
+			
+			</br>
 			
 			<div class="metadata">
-				<div style="color:#777; float:left;"><span style="color:#055a93;"><b id="ripple_creator"></b></span>&nbsp; &nbsp;<span id="ripple_location"></span></div>
-				<div id="ripple_created_at" style="float:right; color:#777"></div>	
+			
+				<div style="color:#777; float:left;"><span style="color:#055a93;"><b id="ripple_creator"></b></span>&nbsp; &nbsp;<span id="ripple_location"></span>
+				</div>
+				<div id="ripple_created_at" style="float:right; color:#777">
+				</div>	
 			</div>
+
+		</br>
+
+
+			<hr>
+
+			<!-- Button trigger modal -->
+		<button type="button" class="button" data-toggle="modal" data-target="#myModal" font-color="#0867ab">dismiss<img src="http://i.imgur.com/ZjvprCy.png?1" width="40%">
+  
+		</button>
+
+		<button type="button" class="button" data-toggle="modal" data-target="#myModal"><img src="http://i.imgur.com/JQop1FA.png" width="40%">spread
+  
+		</button>
+		
+				
+			<!--<div class="buttons" style="margin:10px">
+				<div style="background-color:#fff; width:70%"><a href="www.getripple.io">dismiss<img src="http://i.imgur.com/ZjvprCy.png?1" width="25%"></a>
+				
+				<span style="padding-left:10px"><a href="www.getripple.io"><img src="http://i.imgur.com/JQop1FA.png" width="25%">spread</a>
+				</div>
+
+		    </div>-->
+		
 		</div>
 
-		<br/><br/>
+		</br></br>
 
-		<div class="comments">
+		<!--<div class="comments">
 			<h3 align="center">Comments</h3>
 			<div style="margin:0 auto" id="commentDiv">
 				<table id="commentTable">
@@ -99,18 +171,20 @@
 				</table>
 				<hr style="border-top:1px solid #fff;" size="10">
 					<!--<ul id="commentList">
-					</ul>-->
+					</ul>
 			</div>
-		</div>
+		</div>-->
 
-		<p class="mapIntro" style="color:#055a93;" align="center">Where did this ripple travel?</p>
+		<!-- <p class="mapIntro" style="color:#055a93;" align="center">Where did this ripple travel?</p> -->
 
-		<div style="margin:0 auto; border-radius:25px;" id="map-canvas"></div>
+		<div style="margin:30 auto; border-radius:25px;" id="map-canvas" align="center" ></div></br></br>
 
 
 
-		<div class="explanation" style="width:100%; font-family:'Roboto'; padding:10px; padding-bottom:10px; margin: 0 auto; wid">
-			<p align="center"><a href="http://getRipple.io">Ripple</a> spreads the most engaging messages around the world. Share your story and watch it spread. <br/><br/><a href="http://getRipple.io/howitworks.html">See how it works</a></p>
+	<!--<p style="font-size: 20px; text-align:center;">Also see <a href=""><b><i>Trending</i></b></a> Ripples</p>-->
+
+	<div class="explanation" style="width:100%; font-family:'Roboto'; padding-bottom:50px; margin: 0 auto; align=center; font-weight:100">
+			<p align="center">Ready to share and discover more? <!--only on<a href="http://getRipple.io">Ripple</a>--><br/><br/><a href="http://getRipple.io/howitworks.html">See how it works</a></p>
 			
 			<div class="actions" style="margin:0 auto; width:100%;"> 
 				<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8"><img class="ios" src="Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>&nbsp; &nbsp;
@@ -118,28 +192,27 @@
 			</div>
 
 		</div>
+</div>
 
-			<br/>
-			<br/>
 
-	</div>
-
-	<hr size="1" style="border-top:1px solid #000;">
+	<!--<hr size="1" style="border-top:1px solid #000;">-->
 
 
 	<!-- trending ripples -->
-	<div class="trendingRipples" style="background-color:#eee;">
+	<div class="trendingRipples" style="background-color:#eee; font-weight:100">
 		<div class="trendingText" style="font-family:'Roboto', sans-serif;">
-			<p class="topRippleTxt" align="center">Top Ripples:</p>
+			<p class="topRippleTxt" align="center" style="color:#0867ab">Trending Ripples:</p>
 		</div>	
 
 		<div id="ripple_div1" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
 			<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
-				<p class="ripple_text" id="ripple_text1" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
+				
 				<img id="ripple_image1" style="margin:0 auto; display:block;" width="100%">
 
-				<div id="ripple_num_propagated1" style="padding-left:5px; background:#055a93; color:#fff;"></div>
+				<div id="ripple_num_propagated1" style="padding:5px 5px 5px 8px; background:#055a93; color:#fff; height:30px"></div>
+
+				<p class="ripple_text" id="ripple_text1" style="width:100; margin: 0auto; font-family:sans-serif; font-weight:100; padding-top:10px" ></p>
 				
 				<br/><br/>
 				
@@ -152,16 +225,18 @@
 				<br/>
 				<br/>
 				
-		</div>
+		</div> 
 
-		<!-- Ripple Two -->
+		<!--<Ripple Two -->
 		<div id="ripple_div2" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
 			<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
-				<p class="ripple_text" id="ripple_text2" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
+				
 				<img id="ripple_image2" style="margin:0 auto; display:block;" width="100%">
 
-				<div id="ripple_num_propagated2" style="padding-left:5px; background:#055a93; color:#fff;"></div>
+				<div id="ripple_num_propagated2" style="padding:5px 5px 5px 8px; background:#055a93; color:#fff; height:30px"></div>
+
+				<p class="ripple_text" id="ripple_text2" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100; padding-top:10px" ></p>
 				
 				<br/><br/>
 				
@@ -174,16 +249,18 @@
 				<br/>
 				<br/>
 				
-		</div>
+		</div> 
 
-		<!-- Ripple Three -->
+		<!--<Ripple Three -->
 		<div id="ripple_div3" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
 			<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
-				<p class="ripple_text" id="ripple_text3" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
+				
 				<img id="ripple_image3" style="margin:0 auto; display:block;" width="100%">
 
-				<div id="ripple_num_propagated3" style="padding-left:5px; background:#055a93; color:#fff;"></div>
+				<div id="ripple_num_propagated3" style="padding:5px 5px 5px 8px; background:#055a93; color:#fff;height:30px"></div>
+
+				<p class="ripple_text" id="ripple_text3" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100; padding-top:10px"></p>
 				
 				<br/><br/>
 				
@@ -202,10 +279,12 @@
 		<div id="ripple_div4" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
 			<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
-				<p class="ripple_text" id="ripple_text4" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
+				
 				<img id="ripple_image4" style="margin:0 auto; display:block;" width="100%">
 
-				<div id="ripple_num_propagated4" style="padding-left:5px; background:#055a93; color:#fff;"></div>
+				<div id="ripple_num_propagated4" style="padding:5px 5px 5px 8px; background:#055a93; color:#fff;height:30px"></div>
+
+				<p class="ripple_text" id="ripple_text4" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100; padding-top:10px" ></p>
 				
 				<br/><br/>
 				
@@ -218,17 +297,19 @@
 				<br/>
 				<br/>
 				
-		</div>
+		</div> 
 
 
 		<!-- Ripple Five -->
 		<div id="ripple_div5" class="ripple" style="padding:10px 5px 20px 5px; margin-top:80px;">
 
 			<div class="innerRipple" style="width:60%; margin:0 auto; border-radius:25px;">
-				<p class="ripple_text" id="ripple_text5" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100;" ></p>
+				
 				<img id="ripple_image5" style="margin:0 auto; display:block;" width="100%">
 
-				<div id="ripple_num_propagated5" style="padding-left:5px; background:#055a93; color:#fff;"></div>
+				<div id="ripple_num_propagated5" style="padding:5px 5px 5px 8px; background:#055a93; color:#fff;height:30px"></div>
+
+				<p class="ripple_text" id="ripple_text5" style="width:100; margin:0 auto; font-family:sans-serif; font-weight:100; padding-top:10px" ></p>
 				
 				<br/><br/>
 				
@@ -242,7 +323,7 @@
 				<br/>
 				
 		</div>
-	</div>
+	</div> 
 
 
 	<!-- foooter -->
@@ -311,7 +392,7 @@ function drawLine(latitude, longitude, miniRipple, map) {
 function initialize(latitude, longitude, graph) {
   // Create the map.
   var mapOptions = {
-    zoom: 4,
+    zoom: 2,
     center: new google.maps.LatLng(latitude, longitude),
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
@@ -320,7 +401,7 @@ function initialize(latitude, longitude, graph) {
       mapOptions);
 
   // Add the lines ------------------
-  var frontier = [];
+  /*var frontier = [];
 
   for (var i = 0; i < graph.length; i++)
   {
@@ -346,7 +427,7 @@ function initialize(latitude, longitude, graph) {
   			{
   				frontier.push(nextMiniRipple);
   				nextMiniRipple.depth = miniRipple.depth + 1;
-  				// TODO: if nextMiniRipple.deth > max -> Increase
+  				//TODO: if nextMiniRipple.deth > max -> Increase
   				drawLine(miniRipple["geoPoint"].latitude, miniRipple["geoPoint"].longitude, nextMiniRipple, map);
 
   				break;
@@ -354,7 +435,7 @@ function initialize(latitude, longitude, graph) {
   		}
   	}
   	frontier.splice(0,1);
-  }
+  } */
 
 
   // Construct the circle for each value in citymap.
@@ -420,12 +501,20 @@ $(document).ready(function() {
 			    $("#ripple_text").text(ripple.get("text"));
 
 			    if (ripple.get("image"))
+			    {
 			    	$("#ripple_image").attr("src", ripple.get("image").url());
+
+			    	//set heights
+			    	var image_height = $("#ripple_image").width() * ripple.get("imageHeight")/ripple.get("imageWidth");
+			 	   $("#map-canvas").css("height", 263 + image_height);
+			 	   //alert(ripple.get("imageHeight")/ripple.get("imageWidth"));
+				}
 
 			    else
 			    {
 			    	$('#ripple_text').css("border", "1px solid #ccc");
 			    	$('#ripple_text').css("padding","10px");
+			    	$("#map-canvas").css("height", 50 + $(".mainInnerRipple").height());
 			    }
 
 			    $("#ripple_num_propagated").text("spread " + ripple.get("numPropagated") + " times");
@@ -443,6 +532,7 @@ $(document).ready(function() {
 
 			    var geoPoint = ripple.get("startLocation");
 
+
 			    Parse.Cloud.run('getMiniRipplesGraph', { rippleId: rippleId }, {
 				  success: function(graph) {
 				    google.maps.event.addDomListener(window, 'load', initialize(geoPoint.latitude, geoPoint.longitude, graph));
@@ -451,7 +541,7 @@ $(document).ready(function() {
 				  }
 				});	
 
-			    Parse.Cloud.run('getCommentsForRipple', { rippleId: rippleId }, {
+			    /*Parse.Cloud.run('getCommentsForRipple', { rippleId: rippleId }, {
 			    	success: function(commentList) {
 
 			    		if (commentList.length == 0)
@@ -484,7 +574,7 @@ $(document).ready(function() {
 			    	error: function(error) {
 
 			    	}
-			    });
+			    });*/
 
 
 
@@ -494,7 +584,7 @@ $(document).ready(function() {
 			    // error is a Parse.Error with an error code and message.
 			    alert('error');
 			}
-		})	;	
+		})	;
 
 		// get trending ripples
 		Parse.Cloud.run('getTopRipplesForWebsite', {}, {
@@ -552,9 +642,7 @@ function setHeaderSize()
 			$("footer nav ul li ").css("margin-left", "10px");
 
 			$('.ripple').css({"background":"#eee"});
-			$('body').css({"background":"#eee"});
-			$('.innerRipple').css({"background":"#fff", "margin-top":"20px"});
-
+			$('body').css({"background":"#fafafa", "background-size":"100%"});
 			$('.innerRipple').css({"background":"#fff", "margin-top":"20px","cursor":"pointer"});
 			$('.mainRipple').css("word-wrap","break-word");
 
@@ -565,28 +653,34 @@ function setHeaderSize()
 				$('.picText').css( "height", 20);
 				$('.headerText').css("padding-top","10px");
 				$(".rippleImg").css({"width":"80px", "margin":"5px"});
+				$('body').css({"background":"#fafafa", "background-size":"300%"});
 
 				// social media
-				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"8px"});
+				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"10px"});
 				$('.socialMediaBtn').css({"width": "15px"});
 
 				//ios + android image
 				$(".ios").css({"width":"100px", "float":"left"});
 				$('.android').css({"width":"90px", "float":"right"});
-				$('.explanation').css({"margin-top":"100px","font-size":"14px"});
-				$('.actions').css({"width":"90%", "margin-top":"30px"});
+				$('.explanation').css({"margin-top":"30px","font-size":"16px"});
+				$('.actions').css({"width":"70%", "margin-top":"30px"});
 				
 				// all other content
-				$('#ripple_text').css({"font-size":"18px", "padding-bottom":"20px"});
-				$(".mainRipple").css({"width":"100%", "margin":"0 auto"});
-				$(".mainInnerRipple").css({"width":"99%", "padding": "15px"});
+				$('#ripple_text').css({"font-size":"18px", "padding":"10px 0px 20px 0px","text-align":"left"});
+				$(".mainRipple").css({"width":"100%", "margin-left":"2px", "padding":"0px 15px 0px 15px"});
+				$(".mainInnerRipple").css({"width":"99%", "padding": "15px","margin":"20 auto"});
 
-				$(".metadata").css({"font-size":"12px", "padding-left": "8px", "height": "10px"});
-				$(".mapIntro").css({"margin-top":"40px", "margin-bottom":"5px", "font-size":"15px"});
-				$('#ripple_num_propagated').css({"height":"20px", "font-size":"12px", "padding":"2px 0px 0px 4px"});
-				$("#map-canvas").css("height", 300);
+				$(".metadata").css({"font-size":"14px", "padding-left": "4px", "height": "10px"});
+				$(".mapIntro").css({"margin-top":"0px", "margin-bottom":"5px", "font-size":"15px"});
+				$('#ripple_num_propagated').css({"height":"25px", "font-size":"12px", "padding":"4px 0px 0px 6px","text-align":"left"});
+				$('.buttons').css({"width":"70%"});
+				$('.checkitout').css({"font-size":"14px","width":"100%","text-align":"center"});
+				$(".button").css({"background-color":"#fff", "border":"0","color":"#0867ab"});
+				$(".modal-text").css({"background-color":"#fff", "height":"300px","border-radius":5,"background-image":'url(http://i.imgur.com/r27qQNa.jpg)', "background-size":"cover", "padding-top":"120px"})
 
-				$(".topRippleTxt").css("font-size",30);
+
+
+				$(".topRippleTxt").css("font-size",20);
 				$("footer a").css("font-size", "10px");	
 
 				$('#commentTable').css({"width":"100%"});	
@@ -594,44 +688,56 @@ function setHeaderSize()
 				$('.commentText').css({"font-size":"14px", "margin":"0px"});
 
 				// trending ripples
-				$('.trendingRipples').css("padding-top", "50px");
+				$('.trendingRipples').css("padding-top", "");
 				$('.trendingText').css("font-size", "30px");
 				$(".ripple").css({"width":"100%", "margin":"0 auto"});
-				$(".innerRipple").css({"width":"95%", "padding": "30px"});
+				$(".innerRipple").css({"width":"95%", "padding": "15px"});
 				$('.ripple_text').css({"margin-bottom":"10px", "font-size":"15px"});
 				$('.metadata').css({"font-size":"10px"});
 			}
 
 			else
 			{
-
+				
 				// header stuff
-				$('.picText').css( "height", 120);
+				$('.picText').css( "height", 70);
 				$('.headerText').css("padding-top","25px");
-				$(".rippleImg").css({"width":"250px", "margin":"12px"});
+				$(".rippleImg").css({"width":"170px", "padding":"5px 5px 10px 15px"});
+				
 
 				// social media
-				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"40px"});
-				$('.socialMediaBtn').css({"width": "40px"});
+				$('.socialMedia').css({"float":"right","margin-right":"40px","margin-top":"20px"});
+				$('.socialMediaBtn').css({"width": "30px"});
 
 				//ios + android image
 				$(".ios").css({"width":"180px", "float":"left"});
 				$('.android').css({"width":"160px", "float":"right"});
-				$('.explanation').css({"margin-top":"100px","font-size":"20px"});
-				$('.actions').css({"width":"60%", "margin-top":"30px"});
+				$('.explanation').css({"margin-top":"40px","font-size":"30px"});
+				$('.actions').css({"width":"55%", "margin-top":"30px"});
 				
 				// all other content
-				$('#ripple_text').css({"font-size":"25px", "padding-bottom":"50px"});
-				$(".mainRipple").css({"width":"60%", "margin":"0 auto"});
-				$(".mainInnerRipple").css({"width":"80%", "padding": "30px"});
-				$(".metadata").css({"font-size":"16px", "padding-left": "8px"});
+				$('#ripple_text').css({"font-size":"18px", "padding-bottom":"10px", "padding-top":"10px","text-align":"left"});
+				$(".mainRipple").css({"width":"90%", "margin":"0 auto"});
+				$(".mainInnerRipple").css({"width":"35%", "padding": "25px", "float":"left"});
+				$(".metadata").css({"font-size":"16px"});
 				$(".mapIntro").css({"margin-top":"50px", "margin-bottom":"20px", "font-size":"25px"});
-				$('#ripple_num_propagated').css({"height":"35px", "font-size":"16px", "padding":"8px"});
-				$("#map-canvas").css("height", 500);
+				$('#ripple_num_propagated').css({"height":"30px", "font-size":"14px", "padding":"5px 8px 10px 8px","text-align":"left"});
 
+				$(".button").css({"background-color":"#fff", "border":"0","color":"#0867ab"});
+				$(".modal-header").css({"background-color":"#fff", "border":"0", "border-radius":5,});
+				$(".modal-title").css({"font-size":"40px"});
+				$(".modal-text").css({"background-color":"#fff", "height":"550px","font-size":"40px","border-radius":5,"padding-top":"250px","background-image":'url(http://i.imgur.com/r27qQNa.jpg)', "background-size":"cover"})
+				//$(".modal-footer").css({"border":})
+				$('#modal-subtext').css({"font-size":"20px"})
+				$('#modal-footer').css({"border":"0"})
+					
+								
+				
+				
+				
 
 				$("footer a").css("font-size", "15px");	
-				$(".topRippleTxt").css("font-size",50);
+				$(".topRippleTxt").css("font-size",30);
 
 				$('#commentTable').css({"width":"100%"});	
 				$('.comments').css({"width":"70%","margin":"0 auto", "font-size":"11px"});		
@@ -640,12 +746,16 @@ function setHeaderSize()
 				// trending ripples
 				$('.trendingRipples').css("padding-top", "50px");
 				$('.trendingText').css("font-size", "30px");
-				$(".ripple").css({"width":"80%", "margin":"0 auto"});
+				$(".ripple").css({"width":"85%", "margin":"0 auto"});
 				$(".innerRipple").css({"width":"60%", "padding": "30px"});
-				$('.ripple_text').css({"margin-bottom":"10px", "font-size":"16px"});
+				$('.ripple_text').css({"margin-bottom":"6px", "font-size":"18px"});
 				$('.metadata').css({"font-size":"12px"});
 			}
 		}
+
+	
+
+   
 		</script>
 	</body>
 	</html>
