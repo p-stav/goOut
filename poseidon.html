@@ -65,22 +65,37 @@
 
 	<body align=>
 		<!--header-->
-		<div class="topHeader" style="background-color:#0867ab; padding-bottom:5px;" >
-			<div class = "picText" style="background-color:#0867ab;">
-				<div style="width:45%;float:left;">
-					<a href="http://getRipple.io"><img class="rippleImg" id="rippleImg" src="rippleBlueBcknd.png" style="float:left;" width="100px"></a>
-					<p class="headerText" style="color:#fff;"></p>	
-				</div>
+		<!--header-->
+		<nav class="navbar navbar-default topHeader" style="background-color:#007bff; margin-bottom:0px; border:0px;">
+	  		<div class="container-fluid" style="background-color:#007bff; padding-bottom:5px;">
+			    <!-- Brand and toggle get grouped for better mobile display -->
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
 
-				<div class="socialMedia">
-					<span style="padding-right: 15px"><a href="https://twitter.com/RippleMeThis"><img class="socialMediaBtn" href src="http://i.imgur.com/h7oyTeL.png?1" ></a></span>
+				  <div class="navbar-header" style="background-color:#007bff">
+	      			<a class="navbar-branding" href="http://getRipple.io"><img class="rippleImg" id="rippleImg" src="http://i.imgur.com/BiYVl43.png" style="float:left;"></a>
+					<!--<p class="headerText" style="color:#fff;">Ripple<span style="font-size:10px;"> &#153</span></p>-->
+				  </div>
+			    </div>
 
-					<span style="padding-right: 15px"><a href="https://www.facebook.com/exploreRipple"><img class="socialMediaBtn" href src="http://i.imgur.com/CtfEYps.png?1" ></a></span>
 
-					<a href="http://instagram.com/ripple.app"><img class="socialMediaBtn" href src="http://i.imgur.com/w90mpS8.png?1" ></a>
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right socialMedia">
+						<li><a style="color:#fff;" class="topPadding" href="poseidon.html">About</a></li>
+						<li><a style="color:#fff;" class="topPadding" href="https://medium.com/@RippleMeThis" target="_blank">Blog</a></li>
+						<li><a href="https://twitter.com/RippleMeThis" target="_blank"><img class="socialMediaBtn" href src="http://i.imgur.com/h7oyTeL.png?1" ></a></li>
+						<li><a href="https://www.facebook.com/exploreRipple" target="_blank"><img class="socialMediaBtn" href src="http://i.imgur.com/CtfEYps.png?1" ></a></li>
+						<li><a href="http://instagram.com/ripple.app" target="_blank"><img class="socialMediaBtn" href src="http://i.imgur.com/w90mpS8.png?1" ></a></li>
+					</ul>
 				</div>
 			</div>
-		</div>
+		</nav>
+
 
 
 		<div class="explanation" style="width:75%; font-family:'Roboto'; padding-bottom:px; margin: 0 auto; font-weight:100"align=>
@@ -744,7 +759,7 @@
 					// header stuff
 					$('.picText').css( "height", 20);
 					$('.headerText').css("padding-top","10px");
-					$(".rippleImg").css({"width":"80px", "margin":"5px"});
+					$(".rippleImg").css({"width":"50px", "padding":"5px 0px 0px 5px"});
 					$('body').css({"background":"#fafafa", "background-size":"300%"});
 
 					// social media
@@ -794,6 +809,7 @@
 					$(".innerRipple").css({"width":"95%", "padding": "15px"});
 					$('.ripple_text').css({"margin-bottom":"10px", "font-size":"15px"});
 					$('.metadata').css({"font-size":"10px"});
+					$(".headline").css({"font-size":"30px"});
 				}
 
 				else
@@ -802,7 +818,7 @@
 					// header stuff
 					$('.picText').css( "height", 70);
 					$('.headerText').css("padding-top","25px");
-					$(".rippleImg").css({"width":"170px", "padding":"5px 5px 10px 15px"});
+					$(".rippleImg").css({"width":"80px", "padding-left":"5px 5px 0px 5px"});
 					
 
 					// social media
