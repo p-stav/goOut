@@ -101,7 +101,7 @@
 			</div>
 		</nav>
 
-	<p align="center" class="headerTxt" style="font-family:'Roboto',sans-serif; color:#007bff">Leaderboard</p>
+	<p align="center" class="headerTxt" style="font-family:'Roboto',sans-serif; color:#007bff"><b>Leaderboard</b></p>
 
 	<div id="leaderboard">
 		<div id="levels">
@@ -208,7 +208,7 @@ function setHeaderSize()
 			if ($(window).width() < 700) 
 			{
 				// header stuff
-				$('.picText').css( "height", 20);
+				$('.picText').css( "height", 10);
 				$('.headerText').css("padding-top","10px");
 				$(".rippleImg").css({"width":"45px", "margin":"5px"});
 
@@ -224,8 +224,9 @@ function setHeaderSize()
 				$('.inner').css({'width':'95%', 'margin':'0 auto'});
 
 				$('.inner').css({"width":"90%"});
-				$('.headerTxt').css({"font-size":"30px","margin":"30px 0px 30px 0px"});
-				$(".navbar-toggle").css("margin-top","15px");
+				$('.headerTxt').css({"font-size":"30px",  "color":"#2B84DB", "padding-top":"20px", "text-align":"center"});
+				
+				$(".navbar-toggle").css("margin-top","8px");
 
 
 				$("footer a").css("font-size", "11px");	
