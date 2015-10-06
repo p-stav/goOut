@@ -115,7 +115,7 @@
 		<hr size="10" style="border-top: 1px solid #0867ab;">
 
 				<p class="opener" align="center">What is Ripple?</p><br>
-				<p>Ripple is a geolocation based social app where you can reach people beyond any boundary or social cluster. When you post, or start a "ripple," people can continue to spread the ripple if they like it. <b>Eventually, the best ripples travel to people around the world, and you can see where ripples have spread on a map.</b>
+				<p>Ripple is a geolocation based social app where you can reach people beyond any boundary or social cluster. <br><br>When you post, or start a "ripple," people can continue to spread the ripple if they like it. <br><br><b>Eventually, the best ripples travel to people around the world, and you can see where ripples have spread on a map.</b>
 
 
 		
@@ -169,10 +169,10 @@
 
 
 		<div class="screenshots" style=" padding:20px" align="center" >
-				<img src="http://i.imgur.com/dQ4OhZB.jpg?1" width="24%">
-				<img src="http://i.imgur.com/Oq096KN.jpg" width="24%">
-				<img src="http://i.imgur.com/2UIGuQd.jpg?1" width="24%">
-				<img src="http://i.imgur.com/0FfYlgF.jpg" width="24%">
+				<img class="screenshotWidth" src="http://i.imgur.com/dQ4OhZB.jpg?1" >
+				<img class="screenshotWidth"src="http://i.imgur.com/Oq096KN.jpg">
+				<img class="screenshotWidth" src="http://i.imgur.com/2UIGuQd.jpg?1" >
+				<img class="screenshotWidth" src="http://i.imgur.com/0FfYlgF.jpg">
 		</div>
 
 
@@ -817,10 +817,14 @@
 					$('.ripple_text').css({"margin-bottom":"10px", "font-size":"15px"});
 					$('.metadata').css({"font-size":"10px"});
 					$(".headline").css({"font-size":"30px"});
+
+					$('.screenshotWidth').css( {"width":"49%", "margin-top":"10px"});
+									
 				}
 
 				else
 				{
+					
 					
 					// header stuff
 					$('.picText').css( "height", 70);
@@ -865,7 +869,8 @@
 					//$(".modal-footer").css({"border":})
 					$('#modal-subtext').css({"font-size":"20px"})
 					$('#modal-footer').css({"border":"0"})
-						
+					
+					$('.screenshotWidth').css( {"width":"24%"});
 									
 					
 					
