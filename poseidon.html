@@ -63,7 +63,7 @@
 			</script>
 		</head>
 
-		<body align=>
+		<body style="font-weight:100;">
 			<!--header-->
 			<!--header-->
 			<nav class="navbar navbar-default topHeader" style="background-color:#007bff; margin-bottom:0px; border:0px;font-weight:100">
@@ -433,6 +433,33 @@
 				</div>
 			</div> 
 
+			<footer>
+				<nav>
+					<ul>
+						<li>
+							<a style="color:#ffc432;" href="leaderboard.html">leaderboard</a>
+						</li>
+
+						<li>
+							<a style="color:#ffc432;" href="ambassador.html">ambassador</a>
+						</li>
+
+						<li>
+							<a style="color:#ffc432;" href="contact.html">contact</a>
+						</li>
+						<li>
+							<a style="color:#ffc432;" href="ripple_terms.html">terms</a>
+						</li>
+						<li>
+							<a style="color:#ffc432;" href="ripple_privacy.html">privacy</a>
+						</li>
+						<li>
+							<a style="color:#ffc432;" href="faq.html">faq</a>
+						</li>
+					</ul>
+				</nav>
+			</footer>
+
 
 
 			
@@ -755,8 +782,8 @@
 					// set logo height and width
 					$('.formIframe').css({"width":$(window).width(),"height":'1500px'});
 
-					$("footer nav ul li ").css("font-family", "'Roboto', sans-serif");
-					$("footer nav ul li ").css("margin-left", "10px");
+					//$("footer nav ul li ").css("font-family", "'Roboto', sans-serif");
+					//$("footer nav ul li ").css("margin-left", "10px");
 
 					$('.ripple').css({"background":"#eee"});
 					$('body').css({"background":"#fafafa", "background-size":"100%"});
@@ -808,7 +835,7 @@
 
 
 						$(".topRippleTxt").css("font-size",20);
-						$("footer a").css("font-size", "10px");	
+						$("footer a").css("font-size", "9px");	
 
 						$('#commentTable').css({"width":"100%"});	
 						$('.comments').css({"width":"90%","margin":"0 auto", "font-size":"11px"});		
@@ -829,7 +856,10 @@
 
 					else
 					{
-						
+
+						//$("footer nav ul li ").css("margin-right", "100px");
+						$("footer a").css("font-size", "20px");
+
 						$(".topPadding").css({"margin-top":"5px"});
 						// header stuff
 						$('.picText').css( "height", 70);
@@ -881,7 +911,7 @@
 						
 						
 
-						$("footer a").css("font-size", "15px");	
+						
 						$(".topRippleTxt").css("font-size",30);
 
 						$('#commentTable').css({"width":"100%"});	
