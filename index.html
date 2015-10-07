@@ -115,8 +115,8 @@
 				<br>
 
 				<div class="floatLeft">
-					<div class='carouselHolder'>
-						<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="width:60%; margin:0 auto;">
+					<div>
+						<div data-ride="carousel" style="width:250px; margin:0 auto;">
 							<!-- Wrapper for slides -->
 							<div class="carousel-inner" role="listbox">
 								<div class="item active">
@@ -504,14 +504,14 @@
 				// $('.carousel img').css({"width":"100%"});
 				if ($(window).width() > 1470) 
 				{
-					$('.carousel-inner').css("width","80%");	
+					//$('.carousel-inner').css("width","80%");	
 				}
 
 
 				if ($(window).width() > 1000) 
 				{
 					// header stuff
-					$('.header').css( "height",800);
+					$('.header').css( "height",600);
 
 					//$('.picText').css({"width":"500px"});
 					$('.headerText').css({"margin-left":"110px"});
@@ -525,8 +525,8 @@
 					$("footer a").css("font-size", "18px");
 
 					// ios, android, and social media
-					$('.explanation').css({"float":"right", "margin":"0 auto", "width":"65%"});
-					$('.actions').css({"margin":"100px 0px 0px 40px"});
+					$('.explanation').css({"float":"right", "margin":"0 auto", "width":"70%"});
+					$('.actions').css({"margin":"25px 0px 0px 40px"});
 					$(".ios").css({"width":"230px", "height":"76px", "display":"block", "float":"left"});
 					$('.android').css({"width":"230px", "height":"76px", "padding-left":"10px", "float":"none"});
 
@@ -535,13 +535,13 @@
 					$('.socialMediaBtn').css({"width": "30px"});
 					$(".topPadding").css({"margin-top":"5px"});
 
-					$('.floatLeft').css({"float":"left", "width":"30%", "margin":"20px 0px 0px 20px", "padding-top":"30px"});
+					$('.floatLeft').css({"float":"left", "width":"25%", "margin":"20px 0px 0px 25px"});
 				
 					$('.header').css({"backgroundImage": "url(ellsBells.jpg)", "background-repeat":"no-repeat", "background-position":"0% 35%", "background-size":"150%"});
-					$('.downloadActionBarSpan').css({"font-size":"40px", "color":"#2B84DB", "margin-top":"60px", "padding-left":"40px"});
+					$('.downloadActionBarSpan').css({"font-size":"40px", "color":"#2B84DB", "margin-top":"40px", "padding-left":"40px"});
 					$('.downloadActionBarSubtext').css({"padding":"30px 40px 0px 40px", "text-align":"left"});
-					$(".howitworks").css({"padding":"20px 40px 0px 40px","font-size":"26px"});
-					$('.photoCredit').css({"margin-top":"380px", "margin-left":"20px", "font-size":"11px"});
+					$(".howitworks").css({"padding":"10px 40px 0px 40px","font-size":"26px"});
+					$('.photoCredit').css({"margin-top":"180px", "margin-left":"20px", "font-size":"13px"});
 
 					// trending ripples
 					$('.trendingRipples').css("padding-top", "50px");
@@ -557,7 +557,7 @@
 				else if ($(window).width() > 700) 
 				{
 					$(".topPadding").css({"margin-top":"5px"});
-					$('.header').css( "height",1100);
+					$('.header').css( "height",950);
 					$('.topHeader').css( "height", 80);
 					$('.headerText').css({"padding-top":"22px", "font-size":"20px"});
 					$(".rippleImg").css({"width":"70px", "padding-top":"12px"});
@@ -587,14 +587,13 @@
 					$(".howitworks").css({"font-size":"18px", "text-align":"center"});
 
 
-					$('.photoCredit').css({"margin-top":"325px", "margin-left":"20px", "font-size":"11px"});
+					$('.photoCredit').css({"margin-top":"525px", "margin-left":"20px", "font-size":"13px"});
 
 					$('.floatLeft').css({"float":"none", "width":"45%", "margin":"0 auto", "padding-top":"30px"});
 					$('.downloadActionBar').css({"padding-top":"90px"});
 				
 
 					$('.header').css({"backgroundImage": "url(ellsBells.jpg)", "background-repeat":"no-repeat", "background-position":"20% 50%", "background-size":"250%"});
-					$('.photoCredit').css({"margin-top":"650px", "margin-left":"5px"});
 
 
 					// trending ripples
@@ -612,18 +611,21 @@
 
 				else
 				{
-					$('.header').css( "height",800);
+					$('.header').css( "height",900);
 					//$('.headerText').css({"padding-top":"22px", "font-size":"12px"});
 					$(".rippleImg").css({"width":"50px", "padding":"5px 0px 0px 5px"});
 
 					//ios + android image
-					$(".ios").css({"width":"150px","height":"50px", "margin":"0 auto","display":"block", "float":"", "margin-bottom":"20px"});
-					$('.android').css({"width":"150px", "height":"50px", "margin":"0 auto","float":"", "display":"block"});
-					$('.carousel').css("width","80%");
+					$('.actions').css({"margin":"0 auto", "width":"290px", "padding-top":"20px"});
+					$(".ios").css({"width":"140px", "height":"50px", "display":"inline",});
+					$('.android').css({"width":"140px", "display":"inline","height":"50px", "padding-left":"0px", "float":""});
+					//$(".ios").css({"width":"150px","height":"50px", "margin":"0 auto","display":"block", "float":"", "margin-bottom":"20px"});
+					//$('.android').css({"width":"150px", "height":"50px", "margin":"0 auto","float":"", "display":"block"});
+					
 					
 					
 					// social media
-					$('.actions').css({"margin":"0 auto", "width":"70%", "padding-top":"10px"});
+					//$('.actions').css({"margin":"0 auto", "width":"70%", "padding-top":"10px"});
 					$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"15px"});
 					$('.socialMediaBtn').css({"width":"20px"});
 
@@ -634,12 +636,12 @@
 					$(".howitworks").css({"font-size":"15px", "text-align":"center"});
 
 
-					$('.floatLeft').css({"float":"none", "width":"215px", "margin":"0 auto", "padding-top":"0px"});
+					$('.floatLeft').css({"float":"", "width":"255px", "margin":"0 auto", "padding-top":"0px"});
 					$('.downloadActionBar').css({"padding-top":"60px"});
 				
 
-					$('.header').css({"backgroundImage": "url(ellsBells.jpg)", "background-repeat":"no-repeat", "background-position":"0% 0%", "background-size":"400%"});
-					$('.photoCredit').css({"margin-top":"375px", "margin-left":"5px"});
+					$('.header').css({"backgroundImage": "url(ellsBells.jpg)", "background-repeat":"no-repeat", "background-position":"0% 0%", "background-size":"500%"});
+					$('.photoCredit').css({"margin-top":"475px", "margin-left":"5px", "font-size":"11px"});
 
 
 					// trending ripples
