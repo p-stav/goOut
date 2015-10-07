@@ -34,7 +34,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 	<!--load google fonts!-->
-	<link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
 
 	
 
@@ -62,7 +62,7 @@
 			<p class = "centerSubtext" align="center" style="color:#ffc432; font-size:30px;font-family: 'Roboto', sans-serif;">Start the wave</p>
 		
 	</div>-->
-	<nav class="navbar navbar-default topHeader" style="background-color:#007bff; margin-bottom:0px; border:0px;">
+	<nav class="navbar navbar-default topHeader" style="background-color:#007bff; margin-bottom:0px; border:0px; font-weight:100">
   		<div class="container-fluid" style="background-color:#007bff; padding-bottom:0px;">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
@@ -82,7 +82,7 @@
 
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right socialMedia">
-					<li><a style="color:#fff;" class="topPadding" href="poseidon.html">About Us</a></li>
+					<li><a style="color:#fff;" class="topPadding" href="poseidon.html">About</a></li>
 					<li><a style="color:#fff;" class="topPadding" href="https://medium.com/@RippleMeThis" target="_blank">Blog</a></li>
 					<li><a href="https://twitter.com/RippleMeThis" target="_blank"><img class="socialMediaBtn" href src="http://i.imgur.com/h7oyTeL.png?1" ></a></li>
 					<li><a href="https://www.facebook.com/exploreRipple" target="_blank"><img class="socialMediaBtn" href src="http://i.imgur.com/CtfEYps.png?1" ></a></li>
@@ -92,7 +92,7 @@
 		</div>
 	</nav>
 
-	<div class="headline">
+	<div class="headline" style="font-color:#007bff;font-weight:100">
 	<p  style="font-color:#007bff"><b>Be An Ambassador!</b></p>
 	<p class="slogan" style="color:#f3a335"><i>Start the wave</i></p>
 	</div>
@@ -145,6 +145,9 @@
 				<li>
 					<a style="color:#ffc432;" href="ripple_privacy.html">privacy</a>
 				</li>
+				<li>
+					<a style="color:#ffc432;" href="faq.html">faq</a>
+				</li>
 			</ul>
 		</nav>
 	</footer>
@@ -180,7 +183,7 @@ function setHeaderSize()
 			$('.header').css("width", $(window).width());
 			$('.formIframe').css("width", $(window).width());
 			$('.formIframe').css("height", '1500px');
-			$('body').css({"background":"#eee"});
+			$('body').css({"background":"#fafafa"});
 
 			$("footer nav ul li ").css("font-family", "'Roboto', sans-serif");
 			$("footer nav ul li ").css("margin-left", "10px");
@@ -195,7 +198,7 @@ function setHeaderSize()
 				$(".rippleImg").css({"width":"45px", "margin":"5px"});
 				$(".h3").css({"font-size":"20px"});
 				$(".legal").css({"font-size":"14px"});
-				$(".headline").css({"font-size":"30px","font-family":"'Roboto', sans-serif","text-align":"center","color":"#007bff", "margin-top":"30px","font-weight":"100"});
+				$(".headline").css({"font-size":"30px","font-family":"'Roboto', sans-serif","text-align":"center","color":"#007bff", "margin-top":"30px",});
 				$(".slogan").css({"font-size":"15px","font-family":"'Roboto', sans-serif","text-align":"center"});
 				$(".ambassadorExplanation").css({"font-size":"15px","font-family":"'Roboto', sans-serif",});
 
@@ -229,7 +232,7 @@ function setHeaderSize()
 				$('.headerText').css("padding-top","25px");
 				$(".rippleImg").css({"width":"85px", "padding":"0px 5px 0px 0px"});
 				$(".container-fluid").css({"height":85});
-				$(".headline").css({"font-size":"40px","font-family":"'Roboto', sans-serif","text-align":"center","color":"#007bff", "margin-top":"60px","font-weight":"100"});
+				$(".headline").css({"font-size":"40px","text-align":"center","color":"#007bff", "margin-top":"60px"});
 				$(".slogan").css({"font-size":"30px","font-family":"'Roboto', sans-serif","text-align":"center"});
 				$(".perks").css({"text-align":"left"});
 				$(".ambassadorExplanation").css({"font-size":"24px","font-family":"'Roboto', sans-serif",});

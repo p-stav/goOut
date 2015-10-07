@@ -18,7 +18,7 @@
 
 	<!-- bootstrap -->
 	<link type="text/css" href="main.css" rel="stylesheet"/>
-	<link rel="shortcut icon" href="http://www.getripple.io/rippleHeaderLogo.png">
+	<link rel="shortcut icon" href="http://i.imgur.com/o6FYVyO.png">
 	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
@@ -55,25 +55,40 @@
 
 <body style="font-family:'Roboto', sans-serif;">
 	<!--header-->
-	<div class="topHeader" style="background-color:#0867ab; padding-bottom:5px;">
-		<div class = "picText" style="background-color:#0867ab;">
-			<div style="width:45%;float:left;">
-				<a href="http://getRipple.io"><img class="rippleImg" id="rippleImg" src="rippleBlueBcknd.png" style="float:left;" width="100px;"></a>
-				<p class="headerText" style="color:#fff;"></p>	
+	<nav class="navbar navbar-default topHeader" style="background-color:#007bff; margin-bottom:0px; border:0px;font-weight:100">
+	  		<div class="container-fluid" style="background-color:#007bff; padding-bottom:5px;">
+			    <!-- Brand and toggle get grouped for better mobile display -->
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+
+				  <div class="navbar-header" style="background-color:#007bff">
+	      			<a class="navbar-branding" href="http://getRipple.io"><img class="rippleImg" id="rippleImg" src="http://i.imgur.com/BiYVl43.png" style="float:left;"></a>
+					<!--<p class="headerText" style="color:#fff;">Ripple<span style="font-size:10px;"> &#153</span></p>-->
+				  </div>
+			    </div>
+
+
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right socialMedia">
+						<li><a style="color:#fff;" class="topPadding" href="poseidon.html">About</a></li>
+						<li><a style="color:#fff;" class="topPadding" href="https://medium.com/@RippleMeThis" target="_blank">Blog</a></li>
+						<li><a href="https://twitter.com/RippleMeThis" target="_blank"><img class="socialMediaBtn" href src="http://i.imgur.com/h7oyTeL.png?1" ></a></li>
+						<li><a href="https://www.facebook.com/exploreRipple" target="_blank"><img class="socialMediaBtn" href src="http://i.imgur.com/CtfEYps.png?1" ></a></li>
+						<li><a href="http://instagram.com/ripple.app" target="_blank"><img class="socialMediaBtn" href src="http://i.imgur.com/w90mpS8.png?1" ></a></li>
+					</ul>
+				</div>
 			</div>
+		</nav>
 
-			<div class="socialMedia">
-				<a href="https://twitter.com/RippleMeThis"><img class="socialMediaBtn" href src="http://i.imgur.com/h7oyTeL.png?1" ></a>
 
-				<a href="https://www.facebook.com/exploreRipple"><img class="socialMediaBtn" href src="http://i.imgur.com/CtfEYps.png?1" ></a>
-
-				<a href="http://instagram.com/ripple.app"><img class="socialMediaBtn" href src="http://i.imgur.com/w90mpS8.png?1" ></a>
-			</div>
-		</div>
-	</div>
 
 	<div class="jumbo">
-			<div class="centerTxt" align="center" width="100%" style="color:#0867ab;">How Ripple works</div>
+			<div class="centerTxt" align="center" width="100%" style="color:#077bff;" font-weight="100"><b>How Ripple works</b></div>
 	</div>
 
 
@@ -108,24 +123,29 @@
 	<!-- foooter -->
 		<footer>
 			<nav>
-				<ul style="font-size:10px;">
-					<li>
-						<a href="careers.html">careers</a>
-					</li>
-					<li>
-						<a href="https://medium.com/@RippleMeThis">blog</a>
-					</li>
-					<li>
-						<a href="ambassador.html">ambassador</a>
-					</li>
-					<li>
-						<a href="ripple_terms.html">terms</a>
-					</li>
-					<li>
-						<a href="ripple_privacy.html">privacy</a>
-					</li>
-				</ul>
-			</nav>
+			<ul style="font-size:10px;">
+				<li>
+					<a style="color:#ffc432;" href="leaderboard.html">leaderboard</a>
+				</li>
+
+				<li>
+					<a style="color:#ffc432;" href="ambassador.html">ambassador</a>
+				</li>
+
+				<li>
+					<a style="color:#ffc432;" href="contact.html">contact</a>
+				</li>
+				<li>
+					<a style="color:#ffc432;" href="ripple_terms.html">terms</a>
+				</li>
+				<li>
+					<a style="color:#ffc432;" href="ripple_privacy.html">privacy</a>
+				</li>
+				<li>
+					<a style="color:#ffc432;" href="faq.html">faq</a>
+				</li>
+			</ul>
+		</nav>
 		</footer>
 
 <script>
@@ -163,9 +183,11 @@ $(document).ready(function() {
 				$('.picText').css( "height", 20);
 				$('.headerText').css("padding-top","10px");
 				$(".rippleImg").css({"width":"80px", "margin":"5px"});
+				$('body').css({"background":"#fafafa", "background-size":"300%"});
 
-				// social media
-				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"8px"});
+
+			// social media
+				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"10px"});
 				$('.socialMediaBtn').css({"width": "15px"});
 
 				$('.explanation').css({"padding":"20px 0px 20px 0px", "font-size":"14px"});
@@ -173,7 +195,7 @@ $(document).ready(function() {
 				$('.phoneImg').css("width","50%");
 				$('.phoneImg1').css("width","90%");
 				$('.section').css({"padding-bottom":"60px"});
-				$("footer a").css("font-size", "15px");	
+				$("footer a").css("font-size", "10px");	
 				$(".centerTxt").css({"padding":"20px 10px 20px 10px", "text-align":"center", "width":"100%"});
 				$("footer a").css("font-size", "9px");	
 			}
@@ -182,22 +204,24 @@ $(document).ready(function() {
 			{
 
 				// header stuff
-				$('.picText').css( "height", 120);
+				$('.picText').css( "height", 70);
 				$('.headerText').css("padding-top","25px");
-				$(".rippleImg").css({"width":"250px", "margin":"12px"});
+				$(".rippleImg").css({"width":"80px", "padding-left":"5px 5px 0px 5px"});
+				$('.downloadActionBarSpan').css({"font-size":"40px", "color":"#2B84DB", "margin-top":"60px", "padding-left":"40px"});
 
 				// social media
-				$('.socialMedia').css({"float":"right","margin-right":"22px", "margin-top":"40px"});
-				$('.socialMediaBtn').css({"width": "40px"});
+				$('.socialMedia').css({"margin-right":"10px", "margin-top":"10px"});
+				$('.socialMediaBtn').css({"width": "30px"});
+				$(".topPadding").css({"margin-top":"5px"});
 
 
 				$('.explanation').css({"padding":"60px 50px 0px 50px", "font-size":"24px"});
-				$('.jumbo').css("font-size", 60);
+				$('.jumbo').css("font-size", 40);
 				$('.phoneImg').css("width","20%");
 				$('.phoneImg1').css("width","40%");
 				$('.section').css({"padding-bottom":"130px"});
 				$("footer a").css("font-size", "15px");	
-				$(".centerTxt").css({"padding":"20px 0px 20px 0px"});			
+				$(".centerTxt").css({"padding":"50px 0px 20px 0px"});			
 			}
 		}
 		</script>
