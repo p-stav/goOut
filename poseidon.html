@@ -66,7 +66,7 @@
 	<body align=>
 		<!--header-->
 		<!--header-->
-		<nav class="navbar navbar-default topHeader" style="background-color:#007bff; margin-bottom:0px; border:0px;">
+		<nav class="navbar navbar-default topHeader" style="background-color:#007bff; margin-bottom:0px; border:0px;font-weight:100">
 	  		<div class="container-fluid" style="background-color:#007bff; padding-bottom:5px;">
 			    <!-- Brand and toggle get grouped for better mobile display -->
 			    <div class="navbar-header">
@@ -175,6 +175,11 @@
 				<img class="screenshotWidth" src="http://i.imgur.com/0FfYlgF.jpg">
 		</div>
 
+		<div class="actions" align="center"> 
+				<a href="https://itunes.apple.com/us/app/ripple-spread-your-thoughts/id946792245?ls=1&mt=8" target="_blank"><img class="ios" src="Download_on_the_App_Store_Badge_US-UK_135x40.png"></a>
+				<a href="https://play.google.com/store/apps/details?id=com.KefiLabs.Ripple" target="_blank"> <img class="android" alt="Get it on Google Play" src="http://i.imgur.com/pWic5cg.png?1" /></a>
+		</div>
+
 
 		
 
@@ -216,7 +221,7 @@
 
 			-->
 				
-				<!-- <p align="left">Ripplers post and receive messages and pictures, and can spread them to friends and people geographically nearby. <br><br>(PIC 1)Those who receive the post — or “ripple” — can spread it to others near them, and so on. <br><br> (PIC2)Ripples spread so long as people continue to spread them, so that the most relevant content spreads around the world. <!-- Because ripples only travel far and wide via a random set of diverse people, they are more likely to appeal to the majority of our users.</p>--></br></br></br></br>
+				<!-- <p align="left">Ripplers post and receive messages and pictures, and can spread them to friends and people geographically nearby. <br><br>(PIC 1)Those who receive the post — or “ripple” — can spread it to others near them, and so on. <br><br> (PIC2)Ripples spread so long as people continue to spread them, so that the most relevant content spreads around the world. <!-- Because ripples only travel far and wide via a random set of diverse people, they are more likely to appeal to the majority of our users.</p>--></br></br>
 
 				<!--<ul>
 					<li>It helps them expose their content to new communities all over the world.</li>
@@ -704,7 +709,7 @@
 						var rippleNumber = (i+1).toString();
 
 						
-						$('#ripple_div' + rippleNumber).attr('onclick', "location.href='http://www.getripple.io/poseidon.html?id=" + ripple["rippleId"] + "'");
+						$('#ripple_div' + rippleNumber).attr('onclick', "location.href='http://www.getripple.io/ripple.html?id=" + ripple["rippleId"] + "'");
 
 						$("#ripple_text" + rippleNumber).text(ripple["text"]);
 
@@ -772,15 +777,15 @@
 					$('.socialMediaBtn').css({"width": "15px"});
 
 					//ios + android image
-					$(".ios").css({"width":"100px", "float":"left"});
-					$('.android').css({"width":"90px", "float":"right"});
+					$(".ios").css({"width":"100px"});
+					$('.android').css({"width":"90px"});
 					$('.intro').css({"margin-top":"40px","font-size":"18px","height":"auto", "border":0});
 					$('.explanation').css({"margin-top":"0px","font-size":"15px","margin-bottom":"40px"});
 					$(".caseStudy").css("font-size","14px");
 					$('.opener').css({"font-size":"25px", "margin-top":"10px"});
 					$('.factor').css({"font-size":"20px"});
 					$('.problem').css({"font-size":"px"});
-					$('.actions').css({"width":"55%", "margin-top":"30px"});
+					$('.actions').css({"width":"100%", "margin-top":"40px"});
 					$('.screenshots').css({"width":"100%"});
 
 					$('.downloadActionBarSpan').css({"font-size":"30px",  "color":"#2B84DB", "padding-top":"15px", "text-align":"center"});
@@ -833,12 +838,12 @@
 					$('.downloadActionBarSpan').css({"font-size":"40px", "color":"#2B84DB", "margin-top":"60px", "padding-left":"40px"});
 
 					// social media
-					$('.socialMedia').css({"float":"right","margin-right":"40px","margin-top":"15px"});
+					$('.socialMedia').css({"margin-right":"10px", "margin-top":"10px"});
 					$('.socialMediaBtn').css({"width": "30px"});
 
 					//ios + android image
-					$(".ios").css({"width":"180px", "float":"left"});
-					$('.android').css({"width":"160px", "float":"right"});
+					$(".ios").css({"width":"185px"});
+					$('.android').css({"width":"170px",});
 					$('.intro').css({"margin-top":"40px","font-size":"30px","height":"auto", "border":0});
 					$('.explanation').css({"margin-top":"0px","font-size":"24px","margin-bottom":"40px"});
 					$(".caseStudy").css("font-size","16px");
@@ -846,7 +851,7 @@
 					$(".headline").css({"font-size":"60px"});
 					$('.factor').css({"font-size":"30px"});
 					$('.problem').css({"font-size":"35px"});
-					$('.actions').css({"width":"55%", "margin-top":"30px"});
+					$('.actions').css({"width":"100%", "margin-top":"60px"});
 					$('.floats').css({"width":"80%", "margin":"0 auto", "display":"block","height":"500px","text-align":"left"});
 					$('.floatleft').css({"float":"left","width":"40%"});				
 					$('.floatright').css({"float":"right","width":"40%"});
