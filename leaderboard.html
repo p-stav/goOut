@@ -157,13 +157,16 @@ $(document).ready(function() {
 			{
 				if (levelsArray[i]["userArray"].length != 0)
 				{
-					var element = "<div class='level' style='background-color:#fff; border-radius:25px;'><div class='inner'><p class='levelText' align='center'>"+levelsArray[i]["name"]+"</p><p align='center' class='explanation'>minimum score of " + levelsArray[i]["minScore"] + " and a reach of " + levelsArray[i]["reach"] + " people</p><table class='table active table-striped'><thead><tr style='font-weight:bold;'><th>User</th><th>Score</th><th>Largest Ripple</th></tr></thead>";
+					var element = "<div class='level' style='background-color:#fff; border-radius:25px;'><div class='inner'><p class='levelText' align='center'>"+levelsArray[i]["name"]+"</p><p align='center' class='explanation'>minimum score of " + levelsArray[i]["minScore"] + " and a reach of " + levelsArray[i]["reach"] + " people</p><table class='table active table-striped'><thead><tr style='font-weight:bold;'><th>User</th><th>Score</th></tr></thead>";
+					//<th>Largest Ripple</th></tr></thead>";
 
 
 					for (var j = 0; j < levelsArray[i]["userArray"].length; j++)
 					{
 						element = element + "<tr><td>" + levelsArray[i]["userArray"][j]["username"] + "</td><td>" + levelsArray[i]["userArray"][j]["score"]
-						+"</td><td>" + levelsArray[i]["userArray"][j]["highestPropagated"] + "</td></tr>";
+						+"</td><tr>";
+
+						//+ levelsArray[i]["userArray"][j]["highestPropagated"] + "</td></tr>";
 					} 
 					element = element + "</table></div></<div>";
 					$("#levels").append(element);
